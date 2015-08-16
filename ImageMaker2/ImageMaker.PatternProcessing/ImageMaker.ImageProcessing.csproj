@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D97626B4-643E-4B4E-AB84-E626C45D38CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ImageMaker.PatternProcessing</RootNamespace>
+    <AssemblyName>ImageMaker.PatternProcessing</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Monads, Version=1.1.5.0, Culture=neutral, PublicKeyToken=c45ad03d718dd7fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Monads.1.1.5.0\lib\net40\Monads.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dto\ImageDto.cs" />
+    <Compile Include="ImageProcessingResult.cs" />
+    <Compile Include="ImageProcessors\CompositionModelProcessor.cs" />
+    <Compile Include="ImageProcessors\CompositionModelProcessorFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimerData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageMaker.Camera\ImageMaker.Camera.csproj">
+      <Project>{d8f34933-b340-49df-842f-c03ea94c329d}</Project>
+      <Name>ImageMaker.Camera</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.CommonView\ImageMaker.CommonView.csproj">
+      <Project>{162ae272-45ec-4db5-b820-d1559152ed45}</Project>
+      <Name>ImageMaker.CommonView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Common\ImageMaker.CommonData.csproj">
+      <Project>{a464c7a6-84f3-4a44-8133-13eafefd8e24}</Project>
+      <Name>ImageMaker.CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Data\ImageMaker.Data.csproj">
+      <Project>{a4ea6759-eac9-4238-acff-6801448a6541}</Project>
+      <Name>ImageMaker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Entities\ImageMaker.Entities.csproj">
+      <Project>{C4C143FD-D585-436B-9F3A-30BB04880D75}</Project>
+      <Name>ImageMaker.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.SDKData\ImageMaker.SDKData.csproj">
+      <Project>{1679c88b-2e63-41c0-8672-f1ba1ead5378}</Project>
+      <Name>ImageMaker.SDKData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

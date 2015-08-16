@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util='http://schemas.microsoft.com/wix/UtilExtension'
+     xmlns:ui='http://schemas.microsoft.com/wix/UIExtension'>
+	<Product Id="3326BD59-C901-41D7-A0B3-9D4C42F4BAA6" 
+           Name="Test Product" Language="1033" Version="1.0.0.0" Manufacturer="s" UpgradeCode="36ff05cb-e805-4963-ae15-94915817f8ea">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <Property Id="InstallDir" Value="someDefaultValue" />
+
+     <Binary Id="ImageMaker.RegisterServices.CA.dll"
+             SourceFile="..\ImageMaker.RegisterServices\bin\$(var.Configuration)\ImageMaker.RegisterServices.CA.dll"
+           />
+    
+    <CustomAction Id="SetPath"
+              Property="ShortcutLocationChanger"
+              Value="Location=[INSTALLFOLDER]\Admin\"/>
+
+    <CustomAction Id="ShortcutLocationChanger"
+               Return="check"
+                  Impersonate="no"
+                Execute="deferred"
+                BinaryKey="ImageMaker.RegisterServices.CA.dll"
+                DllEntry="ChangeShortcutLocation">
+      
+    </CustomAction>
+    
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="MainFeature" Title="MainFeature" Level="1">
+      <ComponentGroupRef Id="MainGroup" />
+		</Feature>
+  
+    <Feature Id="AdminFeature" Title="AdminFeature" Level="1">
+      <ComponentGroupRef Id="AdminGroup" />
+		</Feature>
+  
+    <Feature Id="ServiceFeature" Title="ServiceFeature" Level="1">
+			<ComponentGroupRef Id="OtherComponents" />
+		</Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+    
+  <InstallExecuteSequence>
+    <Custom Action="SetPath" Before="ShortcutLocationChanger">
+      NOT Installed AND NOT REMOVE
+    </Custom>
+    <Custom Action="ShortcutLocationChanger" Before="InstallFinalize">
+      NOT Installed AND NOT REMOVE
+    </Custom>
+  </InstallExecuteSequence>
+  
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="ImageMaker">
+          <Directory Id="Admin" Name="Admin" />
+          <Directory Id="Main" Name="Main" />
+        </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="OtherComponents" Directory="INSTALLFOLDER">
+      <Component Id='InstagramService' Guid='2575CFDC-5F26-4D81-BCD3-81F4209B7CAD'>
+        <File Id='InstagramService.exe.config' Name='InstagramService.exe.config'
+              Source='..\ImageMaker.InstagramMonitoring\bin\$(var.Configuration)\ImageMaker.InstagramMonitoring.exe.config'
+              DiskId='1' KeyPath='no' />
+        
+        <File Id='InstagramService.exe' Name='InstagramService.exe' 
+              Source='..\ImageMaker.InstagramMonitoring\bin\$(var.Configuration)\ImageMaker.InstagramMonitoring.exe' 
+              DiskId='1' KeyPath='yes' />
+        
+        <ServiceInstall Id="InstagramService" Type="ownProcess" Name="InstagramService" DisplayName="InstagramService"
+                Description="InstagramService" Start="auto" Account="LocalSystem" ErrorControl="normal">
+          
+            <util:PermissionEx  User="Everyone" ServicePauseContinue="yes" ServiceQueryStatus="yes"
+                    ServiceStop="yes" ServiceUserDefinedControl="yes" />                                
+        </ServiceInstall>
+        
+        <ServiceControl Id="InstagramService" Stop="both" Remove="both" Name="InstagramService" Wait="no" />                                
+      </Component>
+      
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+	</Fragment>
+</Wix>

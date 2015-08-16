@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="ImageMaker.View.Controls.CameraCtl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:ImageMaker.View.Converters"
+             xmlns:viewModels="clr-namespace:ImageMaker.ViewModels.ViewModels;assembly=ImageMaker.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:CameraViewModel}"
+             d:DesignHeight="500" d:DesignWidth="700"
+             Background="{StaticResource BackgroundBrush}">
+    <UserControl.Resources>
+        <converters:LiveViewImageConverter x:Key="LiveViewImageConverter"  />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />                                           
+        
+    </UserControl.Resources>
+    <Border Padding="15">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1">
+                <!--<Button Width="100" Content="Начать" Command="{Binding Path=OpenSessionCommand}" />-->
+                <!--<Button Width="100" Content="Предпросмотр" Command="{Binding Path=StartLiveViewCommand}" />-->
+                <Button  Content="Сделать фото" Command="{Binding Path=TakePictureCommand}" />
+                <!--<Button Width="100"  Content="Обновить" Command="{Binding Path=RefreshCameraCommand}" />-->
+                <!--<Button Width="100"  Content="Закончить" Command="{Binding Path=CloseSessionCommand}" />-->
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Width="50" Content="&lt;&lt;&lt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[0]}"/>
+                    <Button Width="50" Content="&lt;&lt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[1]}"/>
+                    <Button Width="50" Content="&lt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[2]}"/>
+                    <Button Width="50" Content="&gt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[3]}"/>
+                    <Button Width="50" Content="&gt;&gt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[4]}"/>
+                    <Button Width="50" Content="&gt;&gt;&gt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[5]}"/>
+                </StackPanel>-->
+                <Grid>
+                    <Image>
+                        <Image.Source>
+                            <MultiBinding Converter="{StaticResource LiveViewImageConverter}">
+                                <Binding Path="LiveViewImageStream" />
+                                <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Source"/>
+                                <Binding Path="Width" />
+                                <Binding Path="Height" />
+                            </MultiBinding>
+                        </Image.Source>
+                    </Image>
+                    <Border 
+                        Visibility="{Binding TakingPicture, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Width="640" Height="480" Background="Transparent" Opacity="0.6">
+                        <Grid>
+                            <Grid VerticalAlignment="Top" HorizontalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Path
+                                    x:Name="leftPath"
+                                    Fill="Red" Stroke="Red" StrokeThickness="1" Data="M 0,25 L 25,0 L 25,25 Z" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <Path.Style>
+                                        <Style TargetType="{x:Type Path}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                    <Path.Triggers>
+                                        <EventTrigger RoutedEvent="Window.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard RepeatBehavior="Forever">
+                                                    <DoubleAnimation Storyboard.TargetName="leftPath" 
+                                                        Storyboard.TargetProperty="Opacity" From="1" To="0.5" 
+                                                        Duration="0:0:1" BeginTime="0:0:0" AutoReverse="True"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Path.Triggers>
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="225" CenterX="25" CenterY="25"/>
+                                            <TranslateTransform X="50" Y="-10" />
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path 
+                                    x:Name="rightPath" 
+                                    Fill="Red" Stroke="Red" StrokeThickness="1" Data="M 0,25 L 25,0 L 25,25 Z" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <Path.Style>
+                                        <Style TargetType="{x:Type Path}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                    <Path.Triggers>
+                                        <EventTrigger RoutedEvent="Window.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard RepeatBehavior="Forever">
+                                                    <DoubleAnimation Storyboard.TargetName="rightPath" 
+                                                        Storyboard.TargetProperty="Opacity" From="1" To="0.5" 
+                                                        Duration="0:0:1" BeginTime="0:0:0" AutoReverse="True"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Path.Triggers>
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="225" CenterX="25" CenterY="25"/>
+                                            <TranslateTransform X="-70" Y="-10"/>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <TextBlock Foreground="White" FontSize="30" Grid.Row="1">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Text" Value="Посмотрите в камеру" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                    <Setter Property="Text" Value="Приготовьтесь!" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                            
+                            <TextBlock 
+                                Text="{Binding Path=Counter}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="80" Foreground="White">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    
+                </Grid>
+                
+            </StackPanel>
+            <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  Content="&lt; Назад" Command="{Binding Path=GoBackCommand}"/>
+        </Grid>
+    </Border>
+    
+</UserControl>

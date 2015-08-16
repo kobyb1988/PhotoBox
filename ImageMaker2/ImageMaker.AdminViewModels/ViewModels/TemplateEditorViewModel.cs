@@ -1,0 +1,228 @@
+﻿using System;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Windows.Controls;
+using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.AdminViewModels.Helpers;
+using ImageMaker.AdminViewModels.ViewModels.Enums;
+using ImageMaker.AdminViewModels.ViewModels.Images;
+using ImageMaker.CommonViewModels.Services;
+using ImageMaker.CommonViewModels.ViewModels;
+using ImageMaker.CommonViewModels.ViewModels.Images;
+using ImageMaker.CommonViewModels.ViewModels.Navigation;
+
+namespace ImageMaker.AdminViewModels.ViewModels
+{
+    public class TemplateEditorViewModel : BaseViewModel
+    {
+        internal static Lazy<StackStorage> Stack = new Lazy<StackStorage>();
+ 
+        private readonly IViewModelNavigator _navigator;
+        private readonly IDialogService _dialogService;
+        private RelayCommand _addImageCommand;
+        private RelayCommand _removeImageCommand;
+        private ISelectable _selectedObject;
+        private RelayCommand _goBackCommand;
+        private RelayCommand _undoCommand;
+        private RelayCommand _redoCommand;
+        private RelayCommand<ISelectable> _selectObjectCommand;
+
+        private readonly CheckableTemplateViewModel _originalObject;
+        private RelayCommand _saveCommand;
+        private bool _canRemoveImage;
+
+
+        public TemplateEditorViewModel(
+            IViewModelNavigator navigator, 
+            IDialogService dialogService, 
+            CheckableTemplateViewModel template)
+        {
+            _navigator = navigator;
+            _dialogService = dialogService;
+            _originalObject = template;
+            Template = _originalObject.Copy();
+            Init();
+        }
+
+        void Init()
+        {
+            foreach (var child in Template.Children)
+            {
+                child.SelectionChanged += ItemOnSelectionChanged;
+            }
+
+            Template.Children.CollectionChanged += (sender, args) =>
+            {
+                switch (args.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        foreach (var item in args.NewItems.OfType<ISelectable>())
+                        {
+                            item.SelectionChanged += ItemOnSelectionChanged;
+                        }
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        foreach (var item in args.OldItems.OfType<ISelectable>())
+                        {
+                            item.SelectionChanged -= ItemOnSelectionChanged;
+                        }
+
+                        if (Template.Children.Count == 0)
+                        {
+                            SelectedObject = null;
+                        }
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        SelectedObject = null;
+                        break;
+                }
+            };
+        }
+
+        private void ItemOnSelectionChanged(ISelectable item)
+        {
+            SelectedObject = item.IsSelected ? item : null;
+        }
+
+        public ISelectable SelectedObject
+        {
+            get { return _selectedObject; }
+            set
+            {
+                if (_selectedObject == value)
+                    return;
+
+                _selectedObject = value;
+
+                _canRemoveImage = _selectedObject is TemplateImageViewModel;
+                UpdateCommands();
+
+                RaisePropertyChanged();
+            }
+        }
+
+        public CheckableTemplateViewModel Template { get; private set; }
+
+        public RelayCommand AddImageCommand
+        {
+            get { return _addImageCommand ?? (_addImageCommand = new RelayCommand(AddImage)); }
+        }
+
+        public RelayCommand RemoveImageCommand
+        {
+            get { return _removeImageCommand ?? (_removeImageCommand = new RelayCommand(RemoveImage, () => _canRemoveImage)); }
+        }
+
+        public RelayCommand GoBackCommand
+        {
+            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
+        }
+
+        public RelayCommand UndoCommand
+        {
+            get { return _undoCommand ?? (_undoCommand = new RelayCommand(Undo, () => Stack.IsValueCreated && Stack.Value.CanUndo)); }
+        }
+
+        public RelayCommand RedoCommand
+        {
+            get { return _redoCommand ?? (_redoCommand = new RelayCommand(Redo, () => Stack.IsValueCreated && Stack.Value.CanRedo)); }
+        }
+
+        public RelayCommand SaveCommand
+        {
+            get { return _saveCommand ?? (_saveCommand = new RelayCommand(Save, () => Stack.IsValueCreated && Stack.Value.CanUndo)); }
+        }
+
+        private void Save()
+        {
+            if (Template.State != ItemState.Added)
+                Template.State = ItemState.Updated;
+
+            Template.CopyTo(_originalObject);
+
+            Stack.Value.Clear();
+            UpdateCommands();
+        }
+
+        private void UpdateCommands()
+        {
+            RemoveImageCommand.RaiseCanExecuteChanged();
+            SaveCommand.RaiseCanExecuteChanged();
+            RedoCommand.RaiseCanExecuteChanged();
+            UndoCommand.RaiseCanExecuteChanged();
+        }
+
+        public RelayCommand<ISelectable> SelectObjectCommand
+        {
+            get { return _selectObjectCommand ?? (_selectObjectCommand = new RelayCommand<ISelectable>(SelectObject)); }
+        }
+
+        private void SelectObject(ISelectable obj)
+        {
+            if (obj == null)
+            {
+                if (SelectedObject != null)
+                {
+                    SelectedObject.IsSelected = false;
+                }
+
+                return;
+            }
+
+            if (SelectedObject != null && SelectedObject != obj)
+            {
+                TemplateImageViewModel oldOne = (TemplateImageViewModel) SelectedObject;
+                TemplateImageViewModel newOne = (TemplateImageViewModel) obj;
+
+                Stack.Value.Chain(oldOne).Add(newOne);
+                oldOne.SetSelected(false);
+                newOne.SetSelected(true);
+                return;
+            }
+
+            obj.IsSelected = !obj.IsSelected;
+        }
+
+        private void Redo()
+        {
+            Stack.Value.Redo();
+        }
+
+        private void Undo()
+        {
+            Stack.Value.Undo();
+        }
+
+        private void GoBack()
+        {
+            if (Stack.IsValueCreated && Stack.Value.CanUndo)
+            {
+                bool result = _dialogService.ShowConfirmationDialog("При переходе все изменения будут потеряны. Продолжить?");
+                if (!result)
+                    return;
+
+                Stack.Value.Reset();
+                _originalObject.State = ItemState.Unchanged;
+            }
+
+            if (Stack.IsValueCreated)
+                Stack.Value.Clear();
+
+            _navigator.NavigateBack(this);
+        }
+
+        private void RemoveImage()
+        {
+            var image = (TemplateImageViewModel) SelectedObject;
+            Stack.Value.Chain(image).Add(Template);
+            image.SetSelected(false);
+            Template.Children.Remove(image);
+        }
+
+        private void AddImage()
+        {
+            Stack.Value.Do(Template);
+            Template.AddNewChild();
+        }
+    }
+}

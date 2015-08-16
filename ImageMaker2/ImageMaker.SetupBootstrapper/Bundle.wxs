@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util='http://schemas.microsoft.com/wix/UtilExtension'
+     xmlns:dep="http://schemas.microsoft.com/wix/DependencyExtension">
+	<Bundle Name="ImageMaker.SetupBootstrapper" Version="1.0.0.0" Manufacturer="efef" UpgradeCode="08376a8c-b63f-42f7-8853-1039ffa31e37">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+    <?define SqlWebLink = http://download.microsoft.com/download/5/2/9/529FEF7B-2EFB-439E-A2D1-A1533227CD69/SQLEXPR_x86_ENU.exe ?>
+
+    <?define InstanceName = "MSSQLSERVER" ?>
+    <?define InstanceNameExpress = "SQLEXPRESS" ?>
+
+
+    <util:RegistrySearch
+      Id="SqlInstanceFound"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceName)"
+      Result="exists" Variable="SqlInstanceFound" />
+
+    <util:RegistrySearch
+      Id="SqlInstanceFoundExpress"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceNameExpress)"
+      Result="exists" Variable="SqlInstanceFoundExpress" />
+
+
+    <util:RegistrySearch
+      Id="SqlInstanceFoundx64"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceName)" Win64="yes"
+      Result="exists" Variable="SqlInstanceFoundx64" />
+
+    <util:RegistrySearch
+      Id="SqlInstanceFoundx64Express"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceNameExpress)" Win64="yes"
+      Result="exists" Variable="SqlInstanceFoundx64Express" />
+    
+		<Chain>
+			<!-- TODO: Define the list of chained packages. -->
+      <ExePackage Id="Sql2012Express"
+        DisplayName="SQL Server 2012 Express"
+        Cache="no"
+        Compressed="no"
+        PerMachine="yes"
+        Permanent="no"
+        Vital="yes"
+        Name="Redist\SQLEXPR_x64_ENU.exe"
+        SourceFile="..\CustomPackages\SQLEXPR_x64_ENU.exe"
+        DownloadUrl="$(var.SqlWebLink)"
+        InstallCommand="/ACTION=Install /INSTANCENAME=$(var.InstanceNameExpress) /FEATURES=SQL /TCPENABLED=1 /SQLSVCACCOUNT=&quot;NT AUTHORITY\NETWORK SERVICE&quot; /SQLSVCSTARTUPTYPE=Manual /SQLSYSADMINACCOUNTS=BUILTIN\Administrators /ADDCURRENTUSERASSQLADMIN=FALSE /Q /HIDECONSOLE /SkipRules=RebootRequiredCheck /IAcceptSQLServerLicenseTerms"
+        
+        InstallCondition="Not SqlInstanceFound AND Not SqlInstanceFoundExpress AND Not SqlInstanceFoundx64 AND Not SqlInstanceFoundx64Express AND VersionNT64"
+        DetectCondition="SqlInstanceFound"
+        >
+        <ExitCode Value ="3010" Behavior="forceReboot" />
+        <dep:Provides DisplayName="Net2 SQL Server 2012 Express" Key="SQLServer2012Express,$(var.InstanceNameExpress)" Version="11.0.3000.0" />
+      </ExePackage>
+
+      <RollbackBoundary />
+      
+      <MsiPackage Id="MainPackage" SourceFile="..\ImageMaker.Setup\bin\$(var.Configuration)\ImageMaker.Setup.msi" DisplayInternalUI="yes" Compressed="yes" Vital="yes" Cache="no"/>
+      
+			<!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+		</Chain>
+	</Bundle>
+</Wix>

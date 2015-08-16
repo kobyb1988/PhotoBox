@@ -1,0 +1,17 @@
+﻿<Window x:Class="ImageMaker.AdminView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviors="clr-namespace:ImageMaker.CommonView.Behaviors;assembly=ImageMaker.CommonView"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        Title="Главное окно" MinHeight="600" MinWidth="500" Content="{Binding Path=CurrentContent}"
+        >
+    <i:Interaction.Behaviors>
+        <behaviors:WindowClosingBehavior />
+        <behaviors:WindowContainerBehavior />
+    </i:Interaction.Behaviors>
+</Window>

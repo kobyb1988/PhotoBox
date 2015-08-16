@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4109E8E-572C-40AF-A52B-FB4AAF611C10}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ImageMaker.CommonViewModels</RootNamespace>
+    <AssemblyName>ImageMaker.CommonViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.1.1.35049, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.1.1.35049, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.1.1.35053, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Monads, Version=1.1.5.0, Culture=neutral, PublicKeyToken=c45ad03d718dd7fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Monads.1.1.5.0\lib\net40\Monads.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoMapper\MappingEngineConfiguration.cs" />
+    <Compile Include="Behaviors\ICloseable.cs" />
+    <Compile Include="Behaviors\IWindowContainer.cs" />
+    <Compile Include="Behaviors\ShowWindowEventArgs.cs" />
+    <Compile Include="Messenger\ContentChangedMessage.cs" />
+    <Compile Include="Messenger\IMessenger.cs" />
+    <Compile Include="Messenger\MessageFactory.cs" />
+    <Compile Include="Messenger\MVVMLightMessenger.cs" />
+    <Compile Include="Messenger\ShowChildWindowMessage.cs" />
+    <Compile Include="Messenger\WindowStateMessage.cs" />
+    <Compile Include="Ninject\NinjectBaseModule.cs" />
+    <Compile Include="Ninject\NinjectBootstrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\SettingsProvider.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="TemplateImageData.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\ConfirmDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogBase.cs" />
+    <Compile Include="ViewModels\Dialogs\InfoDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\ResultBaseViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\ResultDialogViewModel.cs" />
+    <Compile Include="ViewModels\Factories\ChildrenViewModelsFactory.cs" />
+    <Compile Include="ViewModels\Factories\ConfirmDialogViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\InfoDialogViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\IViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\ResultDialogViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\ViewModelBaseFactory.cs" />
+    <Compile Include="ViewModels\Images\ImageViewModel.cs" />
+    <Compile Include="ViewModels\Settings\AppSettingsDto.cs" />
+    <Compile Include="ViewModels\Settings\CameraSettingsDto.cs" />
+    <Compile Include="ViewModels\Validation\ICustomValidationRule.cs" />
+    <Compile Include="ViewModels\Navigation\IViewModelNavigator.cs" />
+    <Compile Include="ViewModels\Navigation\ViewModelNavigator.cs" />
+    <Compile Include="ViewModels\Validation\ValidateableViewModel.cs" />
+    <Compile Include="ViewModels\Validation\ValidatedProperty.cs" />
+    <Compile Include="ViewModels\Validation\ValidationRule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageMaker.Common\ImageMaker.CommonData.csproj">
+      <Project>{a464c7a6-84f3-4a44-8133-13eafefd8e24}</Project>
+      <Name>ImageMaker.CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Data\ImageMaker.Data.csproj">
+      <Project>{A4EA6759-EAC9-4238-ACFF-6801448A6541}</Project>
+      <Name>ImageMaker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Entities\ImageMaker.Entities.csproj">
+      <Project>{C4C143FD-D585-436B-9F3A-30BB04880D75}</Project>
+      <Name>ImageMaker.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.SDKData\ImageMaker.SDKData.csproj">
+      <Project>{1679C88B-2E63-41C0-8672-F1BA1EAD5378}</Project>
+      <Name>ImageMaker.SDKData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

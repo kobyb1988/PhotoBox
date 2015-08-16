@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util='http://schemas.microsoft.com/wix/UtilExtension'
+     xmlns:dep="http://schemas.microsoft.com/wix/DependencyExtension"
+     >
+	<Fragment>
+    <!--<?define ServerInstall="SomeCondition" ?>-->
+
+    <?define SqlWebLink = http://download.microsoft.com/download/5/2/9/529FEF7B-2EFB-439E-A2D1-A1533227CD69/SQLEXPR_x86_ENU.exe ?>
+
+     <?define InstanceName = "MSSQLSERVER" ?>
+    <?define InstanceNameExpress = "SQLEXPRESS" ?>
+    
+    
+    <util:RegistrySearch
+      Id="SqlInstanceFound"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceName)"
+      Result="exists" Variable="SqlInstanceFound" />
+
+    <util:RegistrySearch
+      Id="SqlInstanceFoundExpress"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceNameExpress)"
+      Result="exists" Variable="SqlInstanceFoundExpress" />
+
+    
+    <util:RegistrySearch
+      Id="SqlInstanceFoundx64"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceName)" Win64="yes"
+      Result="exists" Variable="SqlInstanceFoundx64" />
+
+    <util:RegistrySearch
+      Id="SqlInstanceFoundx64Express"
+      Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\Instance
+Names\SQL" Value="$(var.InstanceNameExpress)" Win64="yes"
+      Result="exists" Variable="SqlInstanceFoundx64Express" />
+      <!--
+    SQL Server 2012 Express - Install new instance
+    http://msdn.microsoft.com/en-us/library/ms144259.aspx
+    SQL Server Express requires WIndows Installer 4.5
+    RepairCommand="/ACTION=Repair /INSTANCENAME=$(var.InstanceName) /Q /HIDECONSOLE"
+  -->
+    <PackageGroup Id="SqlExpress">
+      <ExePackage Id="Sql2012Express"
+        DisplayName="SQL Server 2012 Express"
+        Cache="yes"
+        Compressed="no"
+        PerMachine="yes"
+        Permanent="no"
+        Vital="yes"
+        Name="Redist\SQLEXPR_x64_ENU.exe"
+        SourceFile="..\CustomPackages\SQLEXPR_x64_ENU.exe"
+        DownloadUrl="$(var.SqlWebLink)"
+        InstallCommand="/ACTION=Install /INSTANCENAME=$(var.InstanceNameExpress) /FEATURES=SQL /TCPENABLED=1 /SQLSVCACCOUNT=&quot;NT AUTHORITY\NETWORK SERVICE&quot; /SQLSVCSTARTUPTYPE=Manual /SQLSYSADMINACCOUNTS=BUILTIN\Administrators /ADDCURRENTUSERASSQLADMIN=FALSE /Q /HIDECONSOLE /SkipRules=RebootRequiredCheck /IAcceptSQLServerLicenseTerms"
+        UninstallCommand="/Action=Uninstall /INSTANCENAME=$(var.InstanceNameExpress) /FEATURES=SQL /Q /HIDECONSOLE"
+                  InstallCondition="Not SqlInstanceFound AND Not
+SqlInstanceFoundExpress AND Not SqlInstanceFoundx64 AND Not
+SqlInstanceFoundx64Express  AND VersionNT64"
+        DetectCondition="SqlInstanceFound"
+        >
+        <ExitCode Value ="3010" Behavior="forceReboot" />
+        <dep:Provides DisplayName="Net2 SQL Server 2012 Express" Key="SQLServer2012Express,$(var.InstanceNameExpress)" Version="11.0.3000.0" />
+      </ExePackage>
+
+      <!--
+    SQL Server 2012 Express - Upgrade existing pre-SQL 2012 instance
+  -->
+      <ExePackage Id="Sql2012ExpressUpgrade"
+        DisplayName="SQL Server 2012 Express Upgrade"
+        Cache="no"
+        Compressed="no"
+        PerMachine="yes"
+        Permanent="yes"
+        Vital="yes"
+        Name="Redist\SQLEXPR_x86_ENU.exe"
+        SourceFile="..\CustomPackages\SQLEXPR_x86_ENU.exe"
+        DownloadUrl="$(var.SqlWebLink)"
+        InstallCommand="/ACTION=Upgrade /INSTANCENAME=$(var.InstanceName) /Q /HIDECONSOLE /SkipRules=RebootRequiredCheck /IAcceptSQLServerLicenseTerms"
+        DetectCondition="NOT (SqlInstanceFound AND (SqlVersion &lt; v11.0.0.0))"
+                  InstallCondition="NOT (SqlInstanceFound AND (SqlVersion &lt; v11.0.0.0))"
+        >
+        <ExitCode Value ="3010" Behavior="forceReboot" />
+      </ExePackage>
+
+      <!--
+    SQL Server 2012 SP1 Express - Upgrade existing SQL 2012 instance to SP1
+  -->
+      <ExePackage Id="Sql2012ExpressEditionUpgrade"
+        DisplayName="SQL Server 2012 SP1 Express Patch"
+        Cache="no"
+        Compressed="no"
+        PerMachine="yes"
+        Permanent="yes"
+        Vital="yes"
+        Name="Redist\SQLEXPR_x86_ENU.exe"
+        SourceFile="..\CustomPackages\SQLEXPR_x86_ENU.exe"
+        DownloadUrl="$(var.SqlWebLink)"
+        InstallCommand="/ACTION=Patch /INSTANCENAME=$(var.InstanceName) /Q /HIDECONSOLE /SkipRules=RebootRequiredCheck /IAcceptSQLServerLicenseTerms"
+        DetectCondition="NOT (SqlInstanceFound AND (SqlVersion &gt; v11.0.0.0) AND (SqlVersion &lt; v11.0.3000.0))"
+                  InstallCondition="NOT (SqlInstanceFound AND (SqlVersion &gt; v11.0.0.0) AND (SqlVersion &lt; v11.0.3000.0))"
+        >
+        <ExitCode Value ="3010" Behavior="forceReboot" />
+      </ExePackage>
+    </PackageGroup>
+	</Fragment>
+</Wix>

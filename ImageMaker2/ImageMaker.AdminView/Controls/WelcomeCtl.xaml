@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="ImageMaker.AdminView.Controls.WelcomeCtl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:WelcomeViewModel}"
+             d:DesignHeight="700" d:DesignWidth="300"
+             Background="{StaticResource BackgroundBrush}">
+    <Border Padding="15">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.33*"/>
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.75*"/>
+                    <RowDefinition Height="1.75*"/>
+                    <RowDefinition Height="1.75*"/>
+                    <RowDefinition Height="1.75*"/>
+                </Grid.RowDefinitions>
+                
+                <Viewbox Margin="5">
+                    <Image 
+                       Source="pack://application:,,,/ImageMaker.CommonView;component/Resources/camera_title.png">
+                    </Image>
+                </Viewbox>
+                <TextBlock Text="АДМИНПАНЕЛЬ" Foreground="{StaticResource DarkGrayBrush}" FontSize="15" Grid.Row="1" HorizontalAlignment="Center"/>
+                <Button Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Content="Настройка интерфейса" Command="{Binding Path=ManageAppSettingsCommand}"/>
+                <Button Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                    Content="Настройка камеры" Command="{Binding Path=ManageCameraSettingsCommand}"/>
+                <Button Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Content="Настройка шаблонов" Command="{Binding Path=ManageTemplatesCommand}"/>
+                <Button Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Content="Настройка композиций" Command="{Binding Path=ManageCompositionsCommand}"/>
+            </Grid>
+        </Grid>
+        
+    </Border>
+</UserControl>

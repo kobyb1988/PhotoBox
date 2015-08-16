@@ -1,0 +1,286 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:ImageMaker.Themes.Converters"
+                    xmlns:local="clr-namespace:ImageMaker.Themes.CustomControls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:TextToUpperConverter x:Key="TextToUpperConverter" />
+
+    <Style TargetType="{x:Type Button}" x:Key="BaseBtnStyle">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Padding" Value="35,15" />
+        <Setter Property="Tag" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        CornerRadius="6"
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+
+                        <Grid >
+                            <Rectangle Fill="{TemplateBinding BorderBrush}" Visibility="Collapsed" x:Name="tempRect" />
+                            <Rectangle IsHitTestVisible="False" Fill="#FFFFFF" 
+                                       Opacity="0"
+                                       x:Name="overlay" />
+                            <ContentPresenter 
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                <ContentPresenter.ContentTemplate>
+                                    <DataTemplate>
+                                        <TextBox 
+                                            Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Padding, Mode=OneWay}" 
+                                            IsHitTestVisible="False"
+                                            TextWrapping="Wrap"
+                                            
+                                            Background="Transparent"
+                                            Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground, Mode=OneWay}" 
+                                            BorderBrush="Transparent">
+                                            <!--Text="{Binding Mode=OneWay, Path=., Converter={StaticResource TextToUpperConverter}, ConverterParameter={TemplateBinding Tag}}"-->
+                                            <TextBox.Text>
+                                                <MultiBinding Converter="{StaticResource TextToUpperConverter}">
+                                                    <Binding Path="."/>
+                                                    <Binding Path="Tag" RelativeSource="{RelativeSource AncestorType=Button}"/>
+                                                </MultiBinding>
+                                            </TextBox.Text>
+                                            <TextBox.Style>
+                                                <Style TargetType="{x:Type TextBox}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        Background="{TemplateBinding Background}">
+                                                                    <ScrollViewer x:Name="PART_ContentHost" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                    </DataTemplate>
+                                </ContentPresenter.ContentTemplate>
+                            </ContentPresenter>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="overlay" Property="UIElement.Opacity" Value="0.2" />
+                            
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="DarkGray" />
+                            <Setter Property="BorderBrush" Value="DarkGray"/>
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{Binding ElementName=tempRect, Path=Fill}" />
+                        </MultiTrigger>-->
+                        <!--<Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{Binding ElementName=tempRect, Path=Fill}" />
+                        </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type local:CustomButton}" x:Key="BaseCustomBtnStyle">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Padding" Value="35,15" />
+        <Setter Property="Tag" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CustomButton}">
+                    <Border 
+                        CornerRadius="6"
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+
+                        <Grid >
+                            <Rectangle IsHitTestVisible="False" Fill="{TemplateBinding OverlayBrush}" 
+                                        RadiusX="5"
+                                       RadiusY="5"
+                                       Opacity="0"
+                                       x:Name="overlay" />
+                            <ContentPresenter 
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                <ContentPresenter.ContentTemplate>
+                                    <DataTemplate>
+                                        <TextBox 
+                                            FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=FontSize, Mode=OneWay}"
+                                            Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Padding, Mode=OneWay}" 
+                                            IsHitTestVisible="False"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Background="Transparent"
+                                            Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground, Mode=OneWay}" 
+                                            BorderBrush="Transparent">
+                                            <TextBox.Text>
+                                                <MultiBinding Converter="{StaticResource TextToUpperConverter}">
+                                                    <Binding Path="."/>
+                                                    <Binding Path="Tag" RelativeSource="{RelativeSource AncestorType=Button}"/>
+                                                </MultiBinding>
+                                            </TextBox.Text>
+                                            <TextBox.Style>
+                                                <Style TargetType="{x:Type TextBox}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        Background="{TemplateBinding Background}">
+                                                                    <ScrollViewer x:Name="PART_ContentHost" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                    </DataTemplate>
+                                </ContentPresenter.ContentTemplate>
+                            </ContentPresenter>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="overlay" Property="UIElement.Opacity" Value="0.5" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type Label}" x:Key="BaseLabelStyle">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="Tag" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border 
+                        CornerRadius="6"
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+
+                        <Grid >
+                            <!--<Rectangle IsHitTestVisible="False" Fill="#FFFFFF" 
+                                       Opacity="0"
+                                       x:Name="overlay" />-->
+                            <ContentPresenter 
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                <ContentPresenter.ContentTemplate>
+                                    <DataTemplate>
+                                        <TextBox 
+                                            IsReadOnly="True"
+                                            Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Label}, Path=Padding, Mode=OneWay}" 
+                                            IsHitTestVisible="False"
+                                            TextWrapping="Wrap"
+                                            Background="Transparent"
+                                            Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Label}, Path=Foreground, Mode=OneWay}" 
+                                            BorderBrush="Transparent">
+                                            <TextBox.Text>
+                                                <MultiBinding Converter="{StaticResource TextToUpperConverter}">
+                                                    <Binding Path="."/>
+                                                    <Binding Path="Tag" RelativeSource="{RelativeSource AncestorType=Label}"/>
+                                                </MultiBinding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                    </DataTemplate>
+                                </ContentPresenter.ContentTemplate>
+                            </ContentPresenter>
+                        </Grid>
+
+                    </Border>
+                    <!--<ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="overlay" Property="UIElement.Opacity" Value="0.2" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>-->
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:CustomButton}" 
+           x:Key="LightGrayBtnStyle"
+           BasedOn="{StaticResource BaseCustomBtnStyle}">
+        <Setter Property="OverlayBrush" Value="{StaticResource DarkGrayBrush}" />
+        <Setter Property="Tag" Value="False" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Foreground" Value="{StaticResource DarkGrayBrush}" />
+    </Style>
+
+    <Style TargetType="{x:Type Button}" 
+           x:Key="OrangeBtnStyle"
+           BasedOn="{StaticResource BaseBtnStyle}">
+        <Setter Property="Background" Value="{StaticResource OrangeBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource OrangeBrushPressed}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+    </Style>
+
+    <Style TargetType="{x:Type Button}" 
+           x:Key="BlueBtnStyle"
+           BasedOn="{StaticResource BaseBtnStyle}">
+        <Setter Property="Background" Value="{StaticResource BlueBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueBrushPressed}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+    </Style>
+
+    <Style TargetType="{x:Type Button}" 
+           x:Key="RedBtnStyle"
+           BasedOn="{StaticResource BaseBtnStyle}">
+        <Setter Property="Background" Value="{StaticResource RedBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource RedBrushPressed}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+    </Style>
+
+    <Style TargetType="{x:Type Button}" 
+           x:Key="GreenBtnStyle"
+           BasedOn="{StaticResource BaseBtnStyle}">
+        <Setter Property="Background" Value="{StaticResource GreenBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource GreenBrushPressed}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+    </Style>
+    
+    <Style TargetType="{x:Type Label}" 
+           x:Key="BlueLabelStyle"
+           BasedOn="{StaticResource BaseLabelStyle}">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource BlueBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueBrushPressed}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+</ResourceDictionary>

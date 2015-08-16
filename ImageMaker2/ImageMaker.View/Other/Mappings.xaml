@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:ImageMaker.View.Controls"
+                    xmlns:viewModels1="clr-namespace:ImageMaker.ViewModels.ViewModels;assembly=ImageMaker.ViewModels"
+                    xmlns:dialogs="clr-namespace:ImageMaker.CommonViewModels.ViewModels.Dialogs;assembly=ImageMaker.CommonViewModels"
+                    xmlns:dialogs2="clr-namespace:ImageMaker.CommonViewModels.ViewModels.Dialogs;assembly=ImageMaker.CommonViewModels"
+                    xmlns:dialogs3="clr-namespace:ImageMaker.CommonView.Controls.Dialogs;assembly=ImageMaker.CommonView">
+    
+    <DataTemplate DataType="{x:Type viewModels1:WelcomeViewModel}">
+        <controls:WelcomeCtl />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels1:SelectPatternViewModel}">
+        <controls:SelectPatternCtl />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels1:CameraViewModel}">
+        <controls:CameraCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels1:CameraResultViewModel}">
+        <controls:CameraResultCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels1:ImportPatternsViewModel}">
+        <controls:ImportPatternsCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels1:SelectActivityViewModel}">
+        <controls:SelectActivityCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels1:PrinterActivityViewerViewModel}">
+        <controls:PrinterActivityViewerCtl />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type dialogs:ConfirmDialogViewModel}">
+        <dialogs3:ConfirmDialogCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogs2:InfoDialogViewModel}">
+        <dialogs3:InfoDialogCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels1:InstagramExplorerViewModel}">
+        <controls:InstagramExplorerCtl />
+    </DataTemplate>
+</ResourceDictionary>
