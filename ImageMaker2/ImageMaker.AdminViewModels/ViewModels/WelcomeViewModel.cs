@@ -8,19 +8,18 @@ namespace ImageMaker.AdminViewModels.ViewModels
     public class WelcomeViewModel : BaseViewModel
     {
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _welcomeViewModelChildFactory;
         private RelayCommand _manageTemplatesCommand;
         private RelayCommand _manageCompositionsCommand;
         private RelayCommand _manageAppSettingsCommand;
         private RelayCommand _manageCameraSettingsCommand;
+        private RelayCommand _manageThemesCommand;
+        private RelayCommand _showStatsCommand;
 
         public WelcomeViewModel(
-            IViewModelNavigator navigator,
-            IChildrenViewModelsFactory welcomeViewModelChildFactory
+            IViewModelNavigator navigator
             )
         {
             _navigator = navigator;
-            _welcomeViewModelChildFactory = welcomeViewModelChildFactory;
         }
 
         public RelayCommand ManageAppSettingsCommand
@@ -35,7 +34,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void OpenCameraSettingsExplorer()
         {
-            _navigator.NavigateForward(this, _welcomeViewModelChildFactory.GetChild<CameraSettingsExplorerViewModel>(null));
+            _navigator.NavigateForward<CameraSettingsExplorerViewModel>(this, null);
         }
 
         public RelayCommand ManageTemplatesCommand
@@ -48,19 +47,39 @@ namespace ImageMaker.AdminViewModels.ViewModels
             get { return _manageCompositionsCommand ?? (_manageCompositionsCommand = new RelayCommand(OpenCompositionsExplorer)); }
         }
 
+        public RelayCommand ManageThemesCommand
+        {
+            get { return _manageThemesCommand ?? (_manageThemesCommand = new RelayCommand(ManageThemes)); }
+        }
+
+        public RelayCommand ShowStatsCommand
+        {
+            get { return _showStatsCommand ?? (_showStatsCommand = new RelayCommand(ShowStats)); }
+        }
+
+        private void ShowStats()
+        {
+            _navigator.NavigateForward<CameraSettingsExplorerViewModel>(this, null);
+        }
+
+        private void ManageThemes()
+        {
+            _navigator.NavigateForward<ThemeManagerViewModel>(this, null);
+        }
+
         private void OpenSettingsExplorer()
         {
-            _navigator.NavigateForward(this, _welcomeViewModelChildFactory.GetChild<AppSettingsExplorerViewModel>(null));
+            _navigator.NavigateForward<AppSettingsExplorerViewModel>(this, null);
         }
 
         private void OpenCompositionsExplorer()
         {
-            _navigator.NavigateForward(this, _welcomeViewModelChildFactory.GetChild<CompositionsExplorerViewModel>(null));
+            _navigator.NavigateForward<CompositionsExplorerViewModel>(this, null);
         }
 
         private void OpenTemplateExplorer()
         {
-            _navigator.NavigateForward(this, _welcomeViewModelChildFactory.GetChild<TemplateExplorerViewModel>(null));
+            _navigator.NavigateForward<TemplateExplorerViewModel>(this, null);
         }
     }
 }

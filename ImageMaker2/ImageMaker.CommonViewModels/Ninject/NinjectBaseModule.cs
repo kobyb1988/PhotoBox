@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ImageMaker.Common.Helpers;
 using ImageMaker.CommonViewModels.Messenger;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
@@ -17,13 +18,12 @@ namespace ImageMaker.CommonViewModels.Ninject
             //Bind<IMappingEngine>()
             //    .ToMethod(x => MappingEngineConfigurator.CreateEngine(new BasicProfile()));
 
+            Bind<CommunicationManager>().ToSelf();
             Bind<MessageFactory>().ToSelf();
             Bind<IMessenger>().To<MvvmLightMessenger>().InSingletonScope();
-            Bind<IViewModelNavigator>().To<ViewModelNavigator>().InSingletonScope();
-
+            Bind<IHashBuilder>().To<HashBuilder>();
+            Bind<ViewModelStorage>().ToSelf().InSingletonScope();
             Bind<IDialogService>().To<DialogService>();
-            
-
         }
     }
 }

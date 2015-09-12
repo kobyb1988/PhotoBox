@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.Entities;
 using ImageMaker.PatternProcessing;
 using ImageMaker.PatternProcessing.ImageProcessors;
@@ -16,41 +16,35 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
     public class WelcomeViewModelFactory : ViewModelBaseFactory<WelcomeViewModel>
     {
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _welcomeViewModelChildFactory;
 
         public WelcomeViewModelFactory(
-            IViewModelNavigator navigator, 
-            IChildrenViewModelsFactory welcomeViewModelChildFactory)
+            IViewModelNavigator navigator)
         {
             _navigator = navigator;
-            _welcomeViewModelChildFactory = welcomeViewModelChildFactory;
         }
 
         protected override WelcomeViewModel GetViewModel(object param)
         {
-            return new WelcomeViewModel(_navigator, _welcomeViewModelChildFactory);
+            return new WelcomeViewModel(_navigator);
         }
     }
 
     public class SelectPatternViewModelFactory : ViewModelBaseFactory<SelectPatternViewModel>
     {
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
         private readonly PatternViewModelProvider _patternViewModelProvider;
 
         public SelectPatternViewModelFactory(
             IViewModelNavigator navigator, 
-            IChildrenViewModelsFactory childrenViewModelsFactory, 
             PatternViewModelProvider patternViewModelProvider)
         {
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
             _patternViewModelProvider = patternViewModelProvider;
         }
 
         protected override SelectPatternViewModel GetViewModel(object param)
         {
-            return new SelectPatternViewModel(_navigator, _childrenViewModelsFactory, _patternViewModelProvider);
+            return new SelectPatternViewModel(_navigator, _patternViewModelProvider);
         }
     }
 
@@ -58,7 +52,6 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
     {
         private readonly SettingsProvider _settings;
         private readonly IDialogService _dialogService;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
         private readonly IViewModelNavigator _navigator;
         private readonly IMappingEngine _mappingEngine;
         private readonly CompositionModelProcessorFactory _imageProcessorFactory;
@@ -66,7 +59,6 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
         public CameraViewModelFactory(
             SettingsProvider settings,
             IDialogService dialogService,
-            IChildrenViewModelsFactory childrenViewModelsFactory, 
             IViewModelNavigator navigator, 
             IMappingEngine mappingEngine,
             CompositionModelProcessorFactory imageProcessorFactory
@@ -74,7 +66,6 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
         {
             _settings = settings;
             _dialogService = dialogService;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
             _navigator = navigator;
             _mappingEngine = mappingEngine;
             _imageProcessorFactory = imageProcessorFactory;
@@ -85,7 +76,7 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
             //PatternData data = new PatternData() { Name = string.Empty, Id = 0, PatternType = PatternType.Simple, Data = new byte[] {0}};
             Composition composition = _mappingEngine.Map<Composition>(param);
             CompositionModelProcessor processor = _imageProcessorFactory.Create(composition);
-            return new CameraViewModel(_settings, _dialogService, _childrenViewModelsFactory, _navigator, processor);
+            return new CameraViewModel(_settings, _dialogService, _navigator, processor);
         }
     }
 
@@ -112,21 +103,18 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
     {
         private readonly SettingsProvider _settingsProvider;
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
 
         public SelectActivityViewModelFactory(
             SettingsProvider settingsProvider, 
-            IViewModelNavigator navigator, 
-            IChildrenViewModelsFactory childrenViewModelsFactory)
+            IViewModelNavigator navigator)
         {
             _settingsProvider = settingsProvider;
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
         }
 
         protected override SelectActivityViewModel GetViewModel(object param)
         {
-            return new SelectActivityViewModel(_settingsProvider, _navigator, _childrenViewModelsFactory);
+            return new SelectActivityViewModel(_settingsProvider, _navigator);
         }
     }
 
@@ -171,10 +159,7 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
 
     public class PrinterActivityViewerViewModelFactory : ViewModelBaseFactory<PrinterActivityViewerViewModel>
     {
-        private readonly IViewModelNavigator _navigator;
-        private readonly PrinterMessageProvider _printerMessageProvider;
-        private readonly SettingsProvider _settingsProvider;
-        private readonly ImagePrinter _imagePrinter;
+        private readonly Lazy<PrinterActivityViewerViewModel> _printerActivityViewModel; 
 
         public PrinterActivityViewerViewModelFactory(
             IViewModelNavigator navigator,
@@ -182,15 +167,13 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
             SettingsProvider settingsProvider,
             ImagePrinter imagePrinter)
         {
-            _navigator = navigator;
-            _printerMessageProvider = printerMessageProvider;
-            _settingsProvider = settingsProvider;
-            _imagePrinter = imagePrinter;
+            _printerActivityViewModel = new Lazy<PrinterActivityViewerViewModel>(() =>
+                new PrinterActivityViewerViewModel(navigator, printerMessageProvider, imagePrinter, settingsProvider));
         }
 
         protected override PrinterActivityViewerViewModel GetViewModel(object param)
         {
-            return new PrinterActivityViewerViewModel(_navigator, _printerMessageProvider, _imagePrinter, _settingsProvider);
+            return _printerActivityViewModel.Value;
         }
     }
 }

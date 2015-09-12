@@ -1,28 +1,33 @@
-﻿using System.Collections.Generic;
-using ImageMaker.Common.Extensions;
-using ImageMaker.CommonViewModels.Messenger;
+﻿using ImageMaker.CommonViewModels.Messenger;
+using ImageMaker.CommonViewModels.ViewModels.Factories;
 
 namespace ImageMaker.CommonViewModels.ViewModels.Navigation
 {
     public class ViewModelNavigator : IViewModelNavigator
     {
         private readonly IMessenger _messenger;
-        private readonly LinkedList<BaseViewModel> _navigationOrder;
+        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
+        private readonly ViewModelStorage _storage;
 
-        public ViewModelNavigator(IMessenger messenger)
+        public ViewModelNavigator(
+            IMessenger messenger, 
+            IChildrenViewModelsFactory childrenViewModelsFactory,
+            ViewModelStorage storage
+            )
         {
-            _navigationOrder = new LinkedList<BaseViewModel>();
             _messenger = messenger;
+            _childrenViewModelsFactory = childrenViewModelsFactory;
+            _storage = storage;
         }
 
         public void NavigateBack(BaseViewModel viewModel)
         {
-            var listNode = _navigationOrder.TryGet(viewModel);
+            var previous = _storage.Previous(viewModel);
 
-            if (listNode.Previous == null)
+            if (previous == null)
                 return;
 
-            RaiseContentChanged(listNode.Previous.Value);
+            RaiseContentChanged(previous);
         }
 
         private void RaiseContentChanged(BaseViewModel content)
@@ -34,25 +39,29 @@ namespace ImageMaker.CommonViewModels.ViewModels.Navigation
 
         public void NavigateForward(BaseViewModel from, BaseViewModel to)
         {
-            var listNode = _navigationOrder.TryGet(from);
-            LinkedListNode<BaseViewModel> node = null;
-            if (listNode.Next != null)
-            {
-                listNode.Next.Value = to;
-                node = listNode.Next;
-            }
-            else
-            {
-                node = _navigationOrder.AddAfter(listNode, to);    
-            }
-            
-            RaiseContentChanged(node.Value);
+            var next = _storage.Next(from, to);
+            RaiseContentChanged(next);
         }
 
         public void NavigateForward(BaseViewModel to)
         {
-            var firstNode = _navigationOrder.AddFirst(to);
-            RaiseContentChanged(firstNode.Value);
+            var firstNode = _storage.Next(to);
+            RaiseContentChanged(firstNode);
+        }
+
+        public void NavigateForward<TViewModelTo>(BaseViewModel from, object param)
+            where TViewModelTo : BaseViewModel
+        {
+            BaseViewModel to = _childrenViewModelsFactory.GetChild<TViewModelTo>(param);
+            var next = _storage.Next(from, to);
+            RaiseContentChanged(next);
+        }
+
+        public void NavigateForward<TViewModelTo>(object param) where TViewModelTo : BaseViewModel
+        {
+            BaseViewModel to = _childrenViewModelsFactory.GetChild<TViewModelTo>(param);
+            var firstNode = _storage.Next(to);
+            RaiseContentChanged(firstNode);
         }
     }
 }

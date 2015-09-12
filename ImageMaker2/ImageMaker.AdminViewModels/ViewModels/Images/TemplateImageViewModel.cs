@@ -1,18 +1,24 @@
 ﻿using System;
 using ImageMaker.AdminViewModels.Helpers;
+using ImageMaker.Common.Extensions;
+using ImageMaker.CommonViewModels.DragDrop;
 using ImageMaker.CommonViewModels.ViewModels;
 
 namespace ImageMaker.AdminViewModels.ViewModels.Images
 {
-    public class TemplateImageViewModel : BaseViewModel, ICopyable<TemplateImageViewModel>, ISelectable
+    public class TemplateImageViewModel : BaseViewModel, ICopyable<TemplateImageViewModel>, ISelectable, IResizable, IDragable
     {
+        private double _parentWidth;
+        private double _parentHeight;
+
         private double _x;
         private double _y;
         private double _width;
         private double _height;
         private bool _isSelected;
 
-        public TemplateImageViewModel(double x, double y, double width, double height, int id)
+        public TemplateImageViewModel(double x, double y, double width, double height, int id, double parentWidth, double parentHeight) 
+            : this(parentWidth, parentHeight)
         {
             Id = id;
             _x = x;
@@ -21,8 +27,10 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             _height = height;
         }
 
-        public TemplateImageViewModel()
+        public TemplateImageViewModel(double parentWidth, double parentHeight)
         {
+            _parentHeight = parentHeight;
+            _parentWidth = parentWidth;
             _x = 0;
             _y = 0;
             _width = 0.1;
@@ -121,13 +129,18 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public TemplateImageViewModel Copy()
         {
-            var viewModel = new TemplateImageViewModel(X, Y, Width, Height, Id);
-            viewModel._isSelected = IsSelected;
+            var viewModel = new TemplateImageViewModel(X, Y, Width, Height, Id, _parentWidth, _parentHeight)
+                            {
+                                _isSelected = IsSelected
+                            };
+
             return viewModel;
         }
 
         public void CopyTo(TemplateImageViewModel to)
         {
+            to._parentHeight = _parentHeight;
+            to._parentWidth = _parentWidth;
             to._x = X;
             to._y = Y;
             to._width = Width;
@@ -154,11 +167,69 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         }
 
         public event Action<ISelectable> SelectionChanged;
+
         public void SetSelected(bool status)
         {
             _isSelected = status;
             RaiseSelectionChanged();
             RaisePropertyChanged(() => IsSelected);
+        }
+
+
+        public void Resize(double deltaX, double deltaY, double offsetX, double offsetY)
+        {
+            X += (offsetX / _parentWidth).TwoDigits();
+            Y += (offsetY / _parentHeight).TwoDigits();
+
+            Width += (deltaX / _parentWidth).TwoDigits();
+            Height += (deltaY / _parentHeight).TwoDigits();
+        }
+
+        public Type DataType { get { return typeof(TemplateImageViewModel); } }
+
+        public void Update(double x, double y)
+        {
+            X = (x / _parentWidth).TwoDigits() - Width/2;
+            Y = (y / _parentHeight).TwoDigits() - Height/2;
+        }
+    }
+
+    public class TemplateImageViewModelExt : TemplateImageViewModel
+    {
+        private int _z;
+        private byte[] _image;
+
+        public TemplateImageViewModelExt() : base(0, 0)
+        {
+            
+        }
+
+        public TemplateImageViewModelExt(double x, double y, double width, double height, int id, double parentWidth, double parentHeight)
+            : base(x, y, width, height, id, parentWidth, parentHeight)
+        {
+        }
+
+        public TemplateImageViewModelExt(double parentWidth, double parentHeight) : base(parentWidth, parentHeight)
+        {
+        }
+
+        public int Z
+        {
+            get { return _z; }
+            set
+            {
+                if (_z == value)
+                    return;
+
+                _z = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public byte[] Image
+        {
+            get { return _image; }
+            set { _image = value; }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Monads;
 using AutoMapper;
 using ImageMaker.AdminViewModels.ViewModels;
 using ImageMaker.AdminViewModels.ViewModels.Images;
+using ImageMaker.Common.Dto;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.Entities;
@@ -15,6 +16,14 @@ namespace ImageMaker.AdminViewModels.AutoMapper
         {
             CreateMap<CameraSettingsExplorerViewModel, CameraSettingsDto>();
             CreateMap<AppSettingsExplorerViewModel, AppSettingsDto>();
+            CreateMap<ThemeManagerViewModel, ThemeSettingsDto>()
+                .ForMember(x => x.BackgroundImage, x => x.MapFrom(d => d.MainWindowImage.With(c => c.Data)))
+                .ForMember(x => x.MainBackgroundColor, x => x.MapFrom(d => d.MainWindowBackgroundColor))
+                .ForMember(x => x.MainBorderColor, x => x.MapFrom(d => d.MainWindowBorderColor))
+                .ForMember(x => x.MainForegroundColor, x => x.MapFrom(d => d.MainWindowForegroundColor))
+                .ForMember(x => x.OtherBackgroundColor, x => x.MapFrom(d => d.OtherWindowsBackgroundColor))
+                .ForMember(x => x.OtherBorderColor, x => x.MapFrom(d => d.OtherWindowsBorderColor))
+                .ForMember(x => x.OtherForegroundColor, x => x.MapFrom(d => d.OtherWindowsForegroundColor));
 
             CreateMap<Template, TemplateViewModel>()
                 .ConvertUsing(FromTemplate);
@@ -33,7 +42,9 @@ namespace ImageMaker.AdminViewModels.AutoMapper
         {
             return new TemplateViewModel(template.Name, (uint) template.Width, (uint) template.Height, template.Id,
                 template.Images.Select(c =>
-                    new TemplateImageViewModel( c.X, c.Y,  c.Width, c.Height, c.Id)));
+                    new TemplateImageViewModel( c.X, c.Y,  c.Width, c.Height, c.Id, template.Width, template.Height)), 
+                    template.Background.With(FromImage), 
+                    template.Overlay.With(FromImage));
         }
 
         private ImageViewModel FromImage(Image image)
@@ -57,6 +68,9 @@ namespace ImageMaker.AdminViewModels.AutoMapper
 
         private Template FromTemplateViewModel(TemplateViewModel template)
         {
+            var background = FromImageViewModel(template.Background);
+            var overlay = FromImageViewModel(template.Overlay);
+
             return new Template()
             {
                 Id = template.Id,
@@ -70,7 +84,12 @@ namespace ImageMaker.AdminViewModels.AutoMapper
                     X =  c.X,
                     Y =  c.Y,
                     Id = c.Id
-                }).ToList()
+                }).ToList(),
+
+                Background = background,
+                BackgroundId = background.Return(x => x.Id, (int?)null),
+                Overlay = overlay,
+                OverlayId = overlay.Return(x => x.Id, (int?)null),
             };
         }
 

@@ -173,7 +173,7 @@
                                         </LinearGradientBrush>
                                     </Border.Background>
                                     <StackPanel>
-                                        <Calendar x:Name="PART_Calendar" BorderThickness="0" DisplayDate="2015-07-09"/>
+                                        <Calendar  x:Name="PART_Calendar" BorderThickness="0" DisplayDate="2015-07-09"/>
                                         <xctk:TimePicker x:Name="PART_TimeUpDown" AllowSpin="{TemplateBinding TimePickerAllowSpin}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" ClipValueToMinMax="{Binding ClipValueToMinMax, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" FormatString="{TemplateBinding TimeFormatString}" Format="{TemplateBinding TimeFormat}" Kind="{Binding Kind, RelativeSource={RelativeSource TemplatedParent}}" Maximum="{Binding Maximum, RelativeSource={RelativeSource TemplatedParent}}" Minimum="{Binding Minimum, RelativeSource={RelativeSource TemplatedParent}}" ShowButtonSpinner="{TemplateBinding TimePickerShowButtonSpinner}" Visibility="{TemplateBinding TimePickerVisibility}" Value="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}" WatermarkTemplate="{TemplateBinding TimeWatermarkTemplate}" Watermark="{TemplateBinding TimeWatermark}"/>
                                     </StackPanel>
                                 </Border>

@@ -70,6 +70,7 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -95,10 +96,12 @@
     <Compile Include="Providers\TemplateViewModelProvider.cs" />
     <Compile Include="ViewModels\AppSettingsExplorerViewModel.cs" />
     <Compile Include="ViewModels\CameraSettingsExplorerViewModel.cs" />
+    <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\CompositionsEditorViewModel.cs" />
     <Compile Include="ViewModels\CompositionsExplorerViewModel.cs" />
     <Compile Include="ViewModels\Enums\ItemState.cs" />
     <Compile Include="ViewModels\Factories\ViewModelFactory.cs" />
+    <Compile Include="ViewModels\ImageLoadService.cs" />
     <Compile Include="ViewModels\Images\CheckableCompositionViewModel.cs" />
     <Compile Include="ViewModels\Images\CheckableTemplateViewModel.cs" />
     <Compile Include="ViewModels\Images\CompositionViewModel.cs" />
@@ -108,8 +111,11 @@
     <Compile Include="ViewModels\Images\TemplateViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ObjectNameViewModel.cs" />
+    <Compile Include="ViewModels\PasswordPromptViewModel.cs" />
+    <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\TemplateEditorViewModel.cs" />
     <Compile Include="ViewModels\TemplateExplorerViewModel.cs" />
+    <Compile Include="ViewModels\ThemeManagerViewModel.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

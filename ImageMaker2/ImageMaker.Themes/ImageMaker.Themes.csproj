@@ -148,6 +148,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ThemeManager.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -164,6 +165,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageMaker.Common\ImageMaker.CommonData.csproj">
+      <Project>{A464C7A6-84F3-4A44-8133-13EAFEFD8E24}</Project>
+      <Name>ImageMaker.CommonData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

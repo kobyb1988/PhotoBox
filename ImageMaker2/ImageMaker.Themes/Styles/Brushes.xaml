@@ -1,6 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:themes="clr-namespace:ImageMaker.Themes">
 
+    <!--<SolidColorBrush x:Key="OrangeBrush" Color="{Binding Path=(themes:ThemeManager.BackgroundColor), UpdateSourceTrigger=PropertyChanged}" />-->
+    
     <SolidColorBrush x:Key="OrangeBrush" Color="#f4ad49" />
     <SolidColorBrush x:Key="OrangeBrushPressed" Color="#c4924c" />
     <!--<SolidColorBrush x:Key="BackgroundBrush" Color="#e9d5b7" />-->

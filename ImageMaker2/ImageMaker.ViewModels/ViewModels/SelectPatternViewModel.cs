@@ -18,7 +18,6 @@ namespace ImageMaker.ViewModels.ViewModels
     public class SelectPatternViewModel : BaseViewModel
     {
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
         private readonly PatternViewModelProvider _patternViewModelProvider;
         private ObservableCollection<CompositionViewModel> _patterns;
         private RelayCommand<CompositionViewModel> _selectPatternCommand;
@@ -28,12 +27,10 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public SelectPatternViewModel(
             IViewModelNavigator navigator,
-            IChildrenViewModelsFactory childrenViewModelsFactory,
             PatternViewModelProvider patternViewModelProvider
             )
         {
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
             _patternViewModelProvider = patternViewModelProvider;
         }
 
@@ -95,7 +92,7 @@ namespace ImageMaker.ViewModels.ViewModels
         void SelectPattern(CompositionViewModel pattern)
         {
             //todo
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<CameraViewModel>(pattern));
+            _navigator.NavigateForward<CameraViewModel>(this, pattern);
         }
     }
 }

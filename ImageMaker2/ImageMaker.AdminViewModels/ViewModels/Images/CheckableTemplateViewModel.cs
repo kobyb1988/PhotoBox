@@ -11,7 +11,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         private ItemState _state;
 
         public CheckableTemplateViewModel(TemplateViewModel viewModel)
-            : base(viewModel.Name, viewModel.Width, viewModel.Height, viewModel.Id, viewModel.Children)
+            : base(viewModel.Name, viewModel.Width, viewModel.Height, viewModel.Id, viewModel.Children, viewModel.Background, viewModel.Overlay)
         {
         }
 
@@ -21,8 +21,15 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             State = state;
         }
 
-        public CheckableTemplateViewModel(string name, uint width, uint height, int id, IEnumerable<TemplateImageViewModel> children)
-            : base(name, width, height, id, children)
+        public CheckableTemplateViewModel(
+            string name, 
+            uint width, 
+            uint height, 
+            int id, 
+            IEnumerable<TemplateImageViewModel> children, 
+            ImageViewModel background, 
+            ImageViewModel overlay)
+            : base(name, width, height, id, children, background, overlay)
         {
             State = ItemState.Added;
         }
@@ -49,7 +56,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public CheckableTemplateViewModel Copy()
         {
-            return new TemplateViewModel(Name, Width, Height, Id, Children).ToCheckable(State);
+            return new TemplateViewModel(Name, Width, Height, Id, Children, Background, Overlay).ToCheckable(State);
         }
 
         public void CopyTo(CheckableTemplateViewModel to)
@@ -57,6 +64,9 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             to._width = Width;
             to._height = Height;
             to.Id = Id;
+
+            to.Background = Background;
+            to.Overlay = Overlay;
 
             to.State = State;
 

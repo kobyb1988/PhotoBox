@@ -26,7 +26,6 @@ namespace ImageMaker.AdminViewModels.ViewModels
     {
         private readonly IDialogService _dialogService;
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
         private readonly TemplateProviderFactory _providerFactory;
         private RelayCommand _addComposition;
         private RelayCommand _removeCompositionsCommand;
@@ -40,12 +39,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public CompositionsExplorerViewModel(
             IDialogService dialogService,
             IViewModelNavigator navigator, 
-            IChildrenViewModelsFactory childrenViewModelsFactory,
             TemplateProviderFactory providerFactory)
         {
             _dialogService = dialogService;
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
             _providerFactory = providerFactory;
         }
 
@@ -222,7 +219,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void UpdateCompositions()
         {
             _updatedComposition = SelectedComposition;
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<CompositionsEditorViewModel>(_updatedComposition));
+            _navigator.NavigateForward<CompositionsEditorViewModel>(this, _updatedComposition);
         }
 
         private void Save()
@@ -274,7 +271,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             _updatedComposition = CheckableCompositionViewModel.CreateEmpty(name, SelectedTemplate);
 
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<CompositionsEditorViewModel>(_updatedComposition));
+            _navigator.NavigateForward<CompositionsEditorViewModel>(this, _updatedComposition);
         }
 
         public bool IsBusyLoading

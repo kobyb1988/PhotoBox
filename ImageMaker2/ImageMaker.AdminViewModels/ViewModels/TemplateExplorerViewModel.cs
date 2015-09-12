@@ -21,7 +21,6 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private readonly IDialogService _dialogService;
         private readonly TemplateViewModelProvider _viewModelProvider;
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
         private RelayCommand _addTemplateCommand;
         private RelayCommand _goBackCommand;
         private RelayCommand<FilterEventArgs> _filterCommand;
@@ -35,13 +34,11 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public TemplateExplorerViewModel(
             IDialogService dialogService,
             TemplateViewModelProvider viewModelProvider,
-            IViewModelNavigator navigator, 
-            IChildrenViewModelsFactory childrenViewModelsFactory)
+            IViewModelNavigator navigator)
         {
             _dialogService = dialogService;
             _viewModelProvider = viewModelProvider;
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
         }
 
         public bool IsBusyLoading
@@ -176,7 +173,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void UpdateTemplate()
         {
             _updatedTemplate = SelectedTemplate;
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<TemplateEditorViewModel>(_updatedTemplate));
+            _navigator.NavigateForward<TemplateEditorViewModel>(this, _updatedTemplate);
         }
 
         public RelayCommand GoBackCommand
@@ -227,9 +224,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             string name = viewModel.Name;
 
-            _updatedTemplate = new CheckableTemplateViewModel(name, 500, 500, 0, Enumerable.Empty<TemplateImageViewModel>());
+            _updatedTemplate = new CheckableTemplateViewModel(name, 500, 500, 0, Enumerable.Empty<TemplateImageViewModel>(), null, null);
 
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<TemplateEditorViewModel>(_updatedTemplate));
+            _navigator.NavigateForward<TemplateEditorViewModel>(this, _updatedTemplate);
         }
     }
 }

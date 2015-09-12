@@ -95,6 +95,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ColorSelectionCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CompositionsEditorCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +111,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\PasswordPromptCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StatsCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TemplateEditorCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CameraSettingsExplorerCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ThemeManagerCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,6 +150,9 @@
     <Compile Include="Controls\AppSettingsExplorerCtl.xaml.cs">
       <DependentUpon>AppSettingsExplorerCtl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ColorSelectionCtl.xaml.cs">
+      <DependentUpon>ColorSelectionCtl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CompositionsEditorCtl.xaml.cs">
       <DependentUpon>CompositionsEditorCtl.xaml</DependentUpon>
     </Compile>
@@ -143,6 +162,12 @@
     <Compile Include="Controls\ObjectNameCtl.xaml.cs">
       <DependentUpon>ObjectNameCtl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PasswordPromptCtl.xaml.cs">
+      <DependentUpon>PasswordPromptCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatsCtl.xaml.cs">
+      <DependentUpon>StatsCtl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TemplateEditorCtl.xaml.cs">
       <DependentUpon>TemplateEditorCtl.xaml</DependentUpon>
     </Compile>
@@ -151,6 +176,9 @@
     </Compile>
     <Compile Include="Controls\CameraSettingsExplorerCtl.xaml.cs">
       <DependentUpon>CameraSettingsExplorerCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ThemeManagerCtl.xaml.cs">
+      <DependentUpon>ThemeManagerCtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WelcomeCtl.xaml.cs">
       <DependentUpon>WelcomeCtl.xaml</DependentUpon>
@@ -219,9 +247,13 @@
       <Name>ImageMaker.Themes</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)Scripts\*.*" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)Scripts\*.*" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I
+xcopy "$(SolutionDir)ImageMaker.AdminView\bin\Debug\*.*" "$(SolutionDir)Bin" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,10 +2,14 @@
 {
     public class ImageViewModel : BaseViewModel
     {
-        public ImageViewModel(int id, string name, byte[] data)
+        public ImageViewModel(int id, string name, byte[] data) : this(data)
         {
             Name = name;
             Id = id;
+        }
+
+        public ImageViewModel(byte[] data)
+        {
             Data = data;
         }
 

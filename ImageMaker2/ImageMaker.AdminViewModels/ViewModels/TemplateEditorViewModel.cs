@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Windows.Controls;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Helpers;
 using ImageMaker.AdminViewModels.ViewModels.Enums;
@@ -19,6 +18,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
  
         private readonly IViewModelNavigator _navigator;
         private readonly IDialogService _dialogService;
+        private readonly ImageLoadService _imageLoadService;
         private RelayCommand _addImageCommand;
         private RelayCommand _removeImageCommand;
         private ISelectable _selectedObject;
@@ -30,15 +30,26 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private readonly CheckableTemplateViewModel _originalObject;
         private RelayCommand _saveCommand;
         private bool _canRemoveImage;
+        private RelayCommand _addBackgroundCommand;
+        private RelayCommand _addOverlayCommand;
+        private RelayCommand _removeBackgroundCommand;
+        private RelayCommand _removeOverlayCommand;
+        private bool _canRemoveBackground;
+        private bool _canRemoveOverlay;
+        private double _overlayOpacity;
 
 
         public TemplateEditorViewModel(
             IViewModelNavigator navigator, 
             IDialogService dialogService, 
+            ImageLoadService imageLoadService,
             CheckableTemplateViewModel template)
         {
+            OverlayOpacity = 1.0;
+
             _navigator = navigator;
             _dialogService = dialogService;
+            _imageLoadService = imageLoadService;
             _originalObject = template;
             Template = _originalObject.Copy();
             Init();
@@ -82,6 +93,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void ItemOnSelectionChanged(ISelectable item)
         {
             SelectedObject = item.IsSelected ? item : null;
+        }
+
+        public double OverlayOpacity
+        {
+            get { return _overlayOpacity; }
+            set
+            {
+                if (_overlayOpacity == value)
+                    return;
+
+                _overlayOpacity = value;
+                RaisePropertyChanged();
+            }
         }
 
         public ISelectable SelectedObject
@@ -133,6 +157,75 @@ namespace ImageMaker.AdminViewModels.ViewModels
             get { return _saveCommand ?? (_saveCommand = new RelayCommand(Save, () => Stack.IsValueCreated && Stack.Value.CanUndo)); }
         }
 
+        public RelayCommand AddBackgroundCommand
+        {
+            get { return _addBackgroundCommand ?? (_addBackgroundCommand = new RelayCommand(AddBackground)); }
+        }
+
+        public RelayCommand RemoveBackgroundCommand
+        {
+            get { return _removeBackgroundCommand ?? (_removeBackgroundCommand = new RelayCommand(RemoveBackground, () => _canRemoveBackground)); }
+        }
+
+        private void RemoveOverlay()
+        {
+            Stack.Value.Do(Template);
+
+            Template.Overlay = null;
+            _canRemoveOverlay = false;
+            
+            UpdateCommands();
+        }
+
+        private void RemoveBackground()
+        {
+            Stack.Value.Do(Template);
+
+            Template.Background = null;
+            _canRemoveBackground = false;
+            
+            UpdateCommands();
+        }
+
+        public RelayCommand RemoveOverlayCommand
+        {
+            get { return _removeOverlayCommand ?? (_removeOverlayCommand = new RelayCommand(RemoveOverlay, () => _canRemoveOverlay)); }
+        }
+
+        private void AddOverlay()
+        {
+            ImageViewModel overlay = _imageLoadService.TryLoadImage();
+            if (overlay == null)
+                return;
+
+            Stack.Value.Do(Template);
+
+            Template.Overlay = overlay;
+            _canRemoveOverlay = true;
+
+            UpdateCommands();
+        }
+
+        private void AddBackground()
+        {
+            ImageViewModel background = _imageLoadService.TryLoadImage();
+            if (background == null)
+                return;
+
+            Stack.Value.Do(Template);
+
+            Template.Background = background;
+            _canRemoveBackground = true;
+            
+            UpdateCommands();
+        }
+
+        public RelayCommand AddOverlayCommand
+        {
+            get { return _addOverlayCommand ?? (_addOverlayCommand = new RelayCommand(AddOverlay)); }
+        }
+
+
         private void Save()
         {
             if (Template.State != ItemState.Added)
@@ -150,6 +243,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
             SaveCommand.RaiseCanExecuteChanged();
             RedoCommand.RaiseCanExecuteChanged();
             UndoCommand.RaiseCanExecuteChanged();
+
+            RemoveBackgroundCommand.RaiseCanExecuteChanged();
+            RemoveOverlayCommand.RaiseCanExecuteChanged();
         }
 
         public RelayCommand<ISelectable> SelectObjectCommand

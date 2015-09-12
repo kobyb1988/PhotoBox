@@ -77,8 +77,12 @@
   <ItemGroup>
     <Compile Include="AutoMapper\MappingEngineConfiguration.cs" />
     <Compile Include="Behaviors\ICloseable.cs" />
+    <Compile Include="Behaviors\IPassword.cs" />
     <Compile Include="Behaviors\IWindowContainer.cs" />
     <Compile Include="Behaviors\ShowWindowEventArgs.cs" />
+    <Compile Include="DragDrop\IDragable.cs" />
+    <Compile Include="DragDrop\IDropable.cs" />
+    <Compile Include="DragDrop\IResizable.cs" />
     <Compile Include="Messenger\ContentChangedMessage.cs" />
     <Compile Include="Messenger\IMessenger.cs" />
     <Compile Include="Messenger\MessageFactory.cs" />
@@ -89,6 +93,7 @@
     <Compile Include="Ninject\NinjectBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\SettingsProvider.cs" />
+    <Compile Include="Services\CommunicationManager.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="TemplateImageData.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -104,6 +109,7 @@
     <Compile Include="ViewModels\Factories\ResultDialogViewModelFactory.cs" />
     <Compile Include="ViewModels\Factories\ViewModelBaseFactory.cs" />
     <Compile Include="ViewModels\Images\ImageViewModel.cs" />
+    <Compile Include="ViewModels\Navigation\ViewModelStorage.cs" />
     <Compile Include="ViewModels\Settings\AppSettingsDto.cs" />
     <Compile Include="ViewModels\Settings\CameraSettingsDto.cs" />
     <Compile Include="ViewModels\Validation\ICustomValidationRule.cs" />
@@ -114,6 +120,14 @@
     <Compile Include="ViewModels\Validation\ValidationRule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageMaker.AppClient\ImageMaker.AppClient.csproj">
+      <Project>{DE8E8D60-19C9-49D9-AFF4-68A6AD700C3A}</Project>
+      <Name>ImageMaker.AppClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.AppServer\ImageMaker.AppServer.csproj">
+      <Project>{D95B7AB7-680F-41DB-9FE1-07BE15F97B41}</Project>
+      <Name>ImageMaker.AppServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageMaker.Common\ImageMaker.CommonData.csproj">
       <Project>{a464c7a6-84f3-4a44-8133-13eafefd8e24}</Project>
       <Name>ImageMaker.CommonData</Name>

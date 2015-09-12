@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ImageMaker.AdminViewModels.Helpers;
 using ImageMaker.AdminViewModels.Providers;
 using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.Providers;
@@ -12,19 +13,16 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
     public class WelcomeViewModelFactory : ViewModelBaseFactory<WelcomeViewModel>
     {
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _welcomeViewModelChildFactory;
 
         public WelcomeViewModelFactory(
-            IViewModelNavigator navigator,
-            IChildrenViewModelsFactory welcomeViewModelChildFactory)
+            IViewModelNavigator navigator)
         {
             _navigator = navigator;
-            _welcomeViewModelChildFactory = welcomeViewModelChildFactory;
         }
 
         protected override WelcomeViewModel GetViewModel(object param)
         {
-            return new WelcomeViewModel(_navigator, _welcomeViewModelChildFactory);
+            return new WelcomeViewModel(_navigator);
         }
     }
 
@@ -32,18 +30,21 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
     {
         private readonly IViewModelNavigator _navigator;
         private readonly IDialogService _dialogService;
+        private readonly ImageLoadService _imageLoadService;
 
         public TemplateEditorViewModelFactory(
             IViewModelNavigator navigator,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            ImageLoadService imageLoadService)
         {
             _navigator = navigator;
             _dialogService = dialogService;
+            _imageLoadService = imageLoadService;
         }
 
         protected override TemplateEditorViewModel GetViewModel(object param)
         {
-            return new TemplateEditorViewModel(_navigator, _dialogService, (CheckableTemplateViewModel) param);
+            return new TemplateEditorViewModel(_navigator, _dialogService, _imageLoadService, (CheckableTemplateViewModel) param);
         }
     }
 
@@ -71,23 +72,20 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
         private readonly IDialogService _dialogService;
         private readonly TemplateViewModelProvider _viewModelProvider;
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
 
         public TemplateExplorerViewModelFactory(
             IDialogService dialogService,
             TemplateViewModelProvider viewModelProvider,
-            IViewModelNavigator navigator,
-            IChildrenViewModelsFactory childrenViewModelsFactory)
+            IViewModelNavigator navigator)
         {
             _dialogService = dialogService;
             _viewModelProvider = viewModelProvider;
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
         }
 
         protected override TemplateExplorerViewModel GetViewModel(object param)
         {
-            return new TemplateExplorerViewModel(_dialogService, _viewModelProvider, _navigator, _childrenViewModelsFactory);
+            return new TemplateExplorerViewModel(_dialogService, _viewModelProvider, _navigator);
         }
     }
     
@@ -96,23 +94,21 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
         private readonly IDialogService _dialogService;
         private readonly TemplateProviderFactory _viewModelProvider;
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
 
         public CompositionsExplorerViewModelFactory(
             IDialogService dialogService,
             TemplateProviderFactory viewModelProvider,
-            IViewModelNavigator navigator,
-            IChildrenViewModelsFactory childrenViewModelsFactory)
+            IViewModelNavigator navigator
+            )
         {
             _dialogService = dialogService;
             _viewModelProvider = viewModelProvider;
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
         }
 
         protected override CompositionsExplorerViewModel GetViewModel(object param)
         {
-            return new CompositionsExplorerViewModel(_dialogService, _navigator, _childrenViewModelsFactory, _viewModelProvider);
+            return new CompositionsExplorerViewModel(_dialogService, _navigator, _viewModelProvider);
         }
     }
 
@@ -163,6 +159,75 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
         protected override CameraSettingsExplorerViewModel GetViewModel(object param)
         {
             return new CameraSettingsExplorerViewModel(_navigator, _settingsProvider, _mappingEngine);
+        }
+    }
+
+    public class PasswordPromptViewModelFactory : ViewModelBaseFactory<PasswordPromptViewModel>
+    {
+        private readonly SettingsProvider _settingsProvider;
+        private readonly IViewModelNavigator _navigator;
+        private readonly IDialogService _dialogService;
+
+        public PasswordPromptViewModelFactory(
+            SettingsProvider settingsProvider,
+            IViewModelNavigator navigator,
+            IDialogService dialogService
+            )
+        {
+            _settingsProvider = settingsProvider;
+            _navigator = navigator;
+            _dialogService = dialogService;
+        }
+
+        protected override PasswordPromptViewModel GetViewModel(object param)
+        {
+            return new PasswordPromptViewModel(_settingsProvider, _navigator, _dialogService);
+        }
+    }
+
+    public class ThemeManagerViewModelFactory : ViewModelBaseFactory<ThemeManagerViewModel>
+    {
+        private readonly IViewModelNavigator _navigator;
+        private readonly IDialogService _dialogService;
+        private readonly ImageLoadService _imageLoadService;
+        private readonly SettingsProvider _settingsProvider;
+        private readonly IMappingEngine _mappingEngine;
+
+        public ThemeManagerViewModelFactory(
+            IViewModelNavigator navigator,
+            IDialogService dialogService,
+            ImageLoadService imageLoadService,
+            SettingsProvider settingsProvider,
+            IMappingEngine mappingEngine
+            )
+        {
+            _navigator = navigator;
+            _dialogService = dialogService;
+            _imageLoadService = imageLoadService;
+            _settingsProvider = settingsProvider;
+            _mappingEngine = mappingEngine;
+        }
+
+        protected override ThemeManagerViewModel GetViewModel(object param)
+        {
+            return new ThemeManagerViewModel(_navigator, _dialogService, _settingsProvider, _mappingEngine, _imageLoadService);
+        }
+    }
+
+    public class StatsViewModelFactory : ViewModelBaseFactory<StatsViewModel>
+    {
+        private readonly IViewModelNavigator _navigator;
+
+        public StatsViewModelFactory(
+            IViewModelNavigator navigator
+            )
+        {
+            _navigator = navigator;
+        }
+
+        protected override StatsViewModel GetViewModel(object param)
+        {
+            return new StatsViewModel(_navigator);
         }
     }
 }

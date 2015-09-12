@@ -44,12 +44,19 @@ namespace ImageMaker.Data.Repositories
 
         public IEnumerable<Template> GetTemplates()
         {
-            return QueryAll<Template>().Include(x => x.Images).ToList();
+            return QueryAll<Template>()
+                .Include(x => x.Images)
+                .Include(x => x.Background.Data)
+                .Include(x => x.Overlay.Data).ToList();
         }
 
         public async Task<IEnumerable<Template>> GetTemplatesAsync()
         {
-            return await QueryAll<Template>().Include(x => x.Images).ToListAsync();
+            return await QueryAll<Template>()
+                .Include(x => x.Images)
+                .Include(x => x.Overlay.Data)
+                .Include(x => x.Background.Data)
+                .ToListAsync();
         }
 
         public IEnumerable<Composition> GetCompositions()
@@ -73,13 +80,14 @@ namespace ImageMaker.Data.Repositories
 
         public void RemoveTemplates(IEnumerable<Template> templates)
         {
-            var compositions = templates.Select(x => x.Id)
-                .Join(QueryAll<Composition>().Include(x => x.Template), x => x, x => x.TemplateId, (x, y) => y)
-                .ToList();
+            Remove(templates.Select(x => x.Id).Join(QueryAll<Template>(), x => x, x => x.Id, (x, y) => y));
+            //var compositions = templates.Select(x => x.Id)
+            //    .Join(QueryAll<Composition>().Include(x => x.Template), x => x, x => x.TemplateId, (x, y) => y)
+            //    .ToList();
 
-            var templatesDb = compositions.Select(x => x.Template).Distinct();
-            Remove(compositions);
-            Remove(templatesDb);
+            //var templatesDb = compositions.Select(x => x.Template).Distinct();
+            //Remove(compositions);
+            //Remove(templatesDb);
         }
 
         public void UpdateTemplates(IEnumerable<Template> templates)
@@ -90,6 +98,12 @@ namespace ImageMaker.Data.Repositories
             {
                 pair.Old.Height = pair.New.Height;
                 pair.Old.Width = pair.New.Width;
+
+                if (pair.Old.BackgroundId != pair.New.BackgroundId)
+                    pair.Old.Background = pair.New.Background;
+
+                if (pair.Old.OverlayId != pair.New.OverlayId)
+                    pair.Old.Overlay = pair.New.Overlay;
 
                 var removed = pair.Old.Images.Except(pair.New.Images, comparer);
                 var added = pair.New.Images.Where(x => x.Id == 0);

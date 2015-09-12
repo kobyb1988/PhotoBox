@@ -6,13 +6,13 @@ namespace ImageMaker.CommonViewModels.ViewModels.Dialogs
     public abstract class DialogBase : BaseViewModel, ICloseable
     {
         public event EventHandler<bool> StateChanged;
-        public event Action RequestClose;
+        public event Action<WindowState> RequestWindowVisibilityChanged;
 
         protected void Close()
         {
-            var handler = RequestClose;
+            var handler = RequestWindowVisibilityChanged;
             if (handler != null)
-                handler();
+                handler(WindowState.Closed);
         }
 
         public abstract string Title { get; }

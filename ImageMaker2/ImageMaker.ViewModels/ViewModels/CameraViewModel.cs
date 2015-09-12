@@ -23,7 +23,6 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private readonly SettingsProvider _settingsProvider;
         private readonly IDialogService _dialogService;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
         private readonly IViewModelNavigator _navigator;
         private readonly CompositionModelProcessor _imageProcessor;
 
@@ -45,14 +44,12 @@ namespace ImageMaker.ViewModels.ViewModels
         public CameraViewModel(
             SettingsProvider settingsProvider,
             IDialogService dialogService,
-            IChildrenViewModelsFactory childrenViewModelsFactory,
             IViewModelNavigator navigator,
             CompositionModelProcessor imageProcessor
             )
         {
             _settingsProvider = settingsProvider;
             _dialogService = dialogService;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
             _navigator = navigator;
             _imageProcessor = imageProcessor;
 
@@ -154,8 +151,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
                     SetWindowStatus(true);
 
-                    BaseViewModel child = _childrenViewModelsFactory.GetChild<CameraResultViewModel>(task.Result);
-                    _navigator.NavigateForward(this, child);
+                    _navigator.NavigateForward<CameraResultViewModel>(this, task.Result);
                 }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 

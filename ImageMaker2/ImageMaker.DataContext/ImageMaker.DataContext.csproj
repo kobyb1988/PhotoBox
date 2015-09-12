@@ -62,6 +62,18 @@
     <Compile Include="Migrations\201506071514171_Users.Designer.cs">
       <DependentUpon>201506071514171_Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508260741327_UserPassword.cs" />
+    <Compile Include="Migrations\201508260741327_UserPassword.Designer.cs">
+      <DependentUpon>201508260741327_UserPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509110940043_Templates.cs" />
+    <Compile Include="Migrations\201509110940043_Templates.Designer.cs">
+      <DependentUpon>201509110940043_Templates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509121950526_ThemeSettings.cs" />
+    <Compile Include="Migrations\201509121950526_ThemeSettings.Designer.cs">
+      <DependentUpon>201509121950526_ThemeSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ImageContextConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +100,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506071514171_Users.resx">
       <DependentUpon>201506071514171_Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508260741327_UserPassword.resx">
+      <DependentUpon>201508260741327_UserPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509110940043_Templates.resx">
+      <DependentUpon>201509110940043_Templates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509121950526_ThemeSettings.resx">
+      <DependentUpon>201509121950526_ThemeSettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,7 +13,6 @@ namespace ImageMaker.ViewModels.ViewModels
     {
         private readonly SettingsProvider _settingsProvider;
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _childrenViewModelsFactory;
 
         private RelayCommand _importPatternsCommand;
         private RelayCommand _proceedToPatternSelectionCommand;
@@ -23,13 +22,10 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public SelectActivityViewModel(
             SettingsProvider settingsProvider,
-            IViewModelNavigator navigator,
-            IChildrenViewModelsFactory childrenViewModelsFactory)
+            IViewModelNavigator navigator)
         {
             _settingsProvider = settingsProvider;
             _navigator = navigator;
-            _childrenViewModelsFactory = childrenViewModelsFactory;
-            _printerActivityViewModel = new Lazy<BaseViewModel>(() => _childrenViewModelsFactory.GetChild<PrinterActivityViewerViewModel>(null));
         }
 
         public override void Initialize()
@@ -74,31 +70,30 @@ namespace ImageMaker.ViewModels.ViewModels
             get { return _instagramSurfCommand ?? (_instagramSurfCommand = new RelayCommand(InstagramSurf)); }
         }
 
+
         public RelayCommand CheckPrintingStatusCommand
         {
             get { return _checkPrintingStatusCommand ?? (_checkPrintingStatusCommand = new RelayCommand(CheckPrintingStatus)); }
         }
 
-        private readonly Lazy<BaseViewModel> _printerActivityViewModel;
- 
         private void CheckPrintingStatus()
         {
-            _navigator.NavigateForward(this, _printerActivityViewModel.Value);
+            _navigator.NavigateForward<PrinterActivityViewerViewModel>(this, null);
         }
 
         private void InstagramSurf()
         {
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<InstagramExplorerViewModel>(null));
+            _navigator.NavigateForward<InstagramExplorerViewModel>(this, null);
         }
 
         private void ProceedToPatternSelection()
         {
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<SelectPatternViewModel>(null));
+            _navigator.NavigateForward<SelectPatternViewModel>(this, null);
         }
 
         private void ImportPatterns()
         {
-            _navigator.NavigateForward(this, _childrenViewModelsFactory.GetChild<ImportPatternsViewModel>(null));
+            _navigator.NavigateForward<ImportPatternsViewModel>(this, null);
         }
     }
 }

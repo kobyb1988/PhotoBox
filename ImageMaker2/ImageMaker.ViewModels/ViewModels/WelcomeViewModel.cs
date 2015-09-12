@@ -9,15 +9,12 @@ namespace ImageMaker.ViewModels.ViewModels
     public class WelcomeViewModel : BaseViewModel
     {
         private readonly IViewModelNavigator _navigator;
-        private readonly IChildrenViewModelsFactory _viewModelFactory;
         private RelayCommand _beginCommand;
 
         public WelcomeViewModel(
-            IViewModelNavigator navigator,
-            IChildrenViewModelsFactory viewModelFactory)
+            IViewModelNavigator navigator)
         {
             _navigator = navigator;
-            _viewModelFactory = viewModelFactory;
         }
 
         public RelayCommand BeginCommand
@@ -27,7 +24,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void Begin()
         {
-            _navigator.NavigateForward(this, _viewModelFactory.GetChild<SelectActivityViewModel>(null));
+            _navigator.NavigateForward<SelectActivityViewModel>(this, null);
         }
     }
 }

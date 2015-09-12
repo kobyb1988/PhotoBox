@@ -1,20 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ImageMaker.CommonViewModels.DragDrop;
 using ImageMaker.CommonViewModels.ViewModels;
+using ImageMaker.CommonViewModels.ViewModels.Images;
 
 namespace ImageMaker.AdminViewModels.ViewModels.Images
 {
-    public class TemplateViewModel : BaseViewModel, ISelectable
+    public class TemplateViewModel : BaseViewModel, ISelectable, IDropable
     {
         protected uint _width;
         protected uint _height;
+
         private ObservableCollection<TemplateImageViewModel> _children;
         private bool _isSelected;
         private string _name;
 
-        public TemplateViewModel(string name, uint width, uint height, int id, IEnumerable<TemplateImageViewModel> children)
+        private ImageViewModel _background;
+        private ImageViewModel _overlay;
+
+        public TemplateViewModel(
+            string name, 
+            uint width, 
+            uint height, 
+            int id, 
+            IEnumerable<TemplateImageViewModel> children,
+            ImageViewModel background,
+            ImageViewModel overlay)
         {
+            Background = background;
+            Overlay = overlay;
+
             Name = name;
             Id = id;
             _width = width;
@@ -39,7 +55,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public void AddNewChild()
         {
-            Children.Add(new TemplateImageViewModel());   
+            Children.Add(new TemplateImageViewModel(Width, Height));   
         }
 
         public int Id { get; protected set; }
@@ -99,5 +115,31 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             RaisePropertyChanged(() => IsSelected);
         }
 
+        public Type DataType { get { return typeof (TemplateImageViewModel); } }
+
+        public void Drop(object data)
+        {
+            return;
+        }
+
+        public ImageViewModel Background
+        {
+            get { return _background; }
+            set
+            {
+                _background = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ImageViewModel Overlay
+        {
+            get { return _overlay; }
+            set
+            {
+                _overlay = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

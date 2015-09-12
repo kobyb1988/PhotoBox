@@ -1,5 +1,8 @@
 ﻿using System.Windows;
+using ImageMaker.Common.Dto;
 using ImageMaker.CommonViewModels.Ninject;
+using ImageMaker.CommonViewModels.Providers;
+using ImageMaker.Themes;
 using ImageMaker.ViewModels.Ninject;
 using ImageMaker.ViewModels.ViewModels;
 using Ninject;
@@ -21,8 +24,13 @@ namespace ImageMaker.View
         private void InitApp()
         {
             var kernel = NinjectBootstrapper.GetKernel(new MainModule(), new NinjectBaseModule());
+            var settings = kernel.Get<SettingsProvider>();
+            ThemeSettingsDto theme = settings.GetThemeSettings();
+            if (theme != null)
+                ThemeManager.LoadTheme(theme);
+
             MainViewModel mainViewModel = kernel.Get<MainViewModel>();
-            MainWindow = new MainWindow() { DataContext = mainViewModel };
+            MainWindow = new MainWindow() {DataContext = mainViewModel};
             MainWindow.Closed += (o, args) => mainViewModel.Dispose();
             MainWindow.Show();
         }

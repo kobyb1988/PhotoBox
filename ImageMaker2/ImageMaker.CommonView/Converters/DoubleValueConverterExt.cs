@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -34,8 +35,8 @@ namespace ImageMaker.CommonView.Converters
             double maxVal = 0;
             double result = DefVal;
 
-            if (double.TryParse(values[0].ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out val)
-                && double.TryParse(values[1].ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out maxVal))
+            if (double.TryParse(values[0].ToString(), NumberStyles.Any, Thread.CurrentThread.CurrentUICulture, out val)
+                && double.TryParse(values[1].ToString(), NumberStyles.Any, Thread.CurrentThread.CurrentUICulture, out maxVal))
             {
                 MaxVal = maxVal;
                 result = val < 1 && val > 0
@@ -47,14 +48,16 @@ namespace ImageMaker.CommonView.Converters
             if (targetType == typeof (double))
                 return (result * maxVal).TwoDigits();
 
-            return result.ToString(CultureInfo.InvariantCulture);
+            return result.ToString(Thread.CurrentThread.CurrentUICulture);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             double val = 0;
-            if (value == null || !double.TryParse(value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out val) || val >= 1 || val <= 0)
-                return new object[] { Binding.DoNothing, Binding.DoNothing };
+            if (value == null ||
+                !double.TryParse(value.ToString(), NumberStyles.Any, Thread.CurrentThread.CurrentUICulture, out val) ||
+                val >= 1 || val <= 0)
+                return new object[] {Binding.DoNothing, Binding.DoNothing};
             
             return new object[] { (val).TwoDigits() };
         }

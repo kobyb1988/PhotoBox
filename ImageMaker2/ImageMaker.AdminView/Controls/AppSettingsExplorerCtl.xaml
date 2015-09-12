@@ -8,6 +8,9 @@
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:AppSettingsExplorerViewModel}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Calendar}"></Style>
+    </UserControl.Resources>
     <Border Padding="15" Background="{StaticResource BackgroundBrush}" >
         <Grid>
             <Grid.RowDefinitions>
@@ -63,7 +66,7 @@
                 <Label Grid.Column="0" Grid.Row="2" Content="Хэштег: " HorizontalAlignment="Right"/>
                 <Label Grid.Column="0" Grid.Row="3" Content="Устройство печати: " HorizontalAlignment="Right"/>
                 <Label Grid.Column="0" Grid.Row="4" Content="Показывать кнопку печати: " HorizontalAlignment="Right"/>
-                <xctk:DateTimePicker Grid.Column="1" Grid.Row="0" TimeFormat="ShortTime" 
+                <xctk:DateTimePicker Grid.Column="1" Grid.Row="0" TimeFormat="ShortTime"
                                      Format="ShortTime" Value="{Binding Path=DateStart, UpdateSourceTrigger=LostFocus}" Margin="5"
                                      Style="{StaticResource DateTimePickerStyle}"/>
                 <xctk:DateTimePicker Grid.Column="1" Grid.Row="1" TimeFormat="ShortTime" 

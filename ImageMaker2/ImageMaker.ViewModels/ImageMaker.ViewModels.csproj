@@ -108,6 +108,14 @@
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageMaker.AppClient\ImageMaker.AppClient.csproj">
+      <Project>{DE8E8D60-19C9-49D9-AFF4-68A6AD700C3A}</Project>
+      <Name>ImageMaker.AppClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.AppServer\ImageMaker.AppServer.csproj">
+      <Project>{D95B7AB7-680F-41DB-9FE1-07BE15F97B41}</Project>
+      <Name>ImageMaker.AppServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageMaker.CommonViewModels\ImageMaker.CommonViewModels.csproj">
       <Project>{f4109e8e-572c-40af-a52b-fb4aaf611c10}</Project>
       <Name>ImageMaker.CommonViewModels</Name>

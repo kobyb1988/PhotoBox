@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using ImageMaker.AdminViewModels.Ninject;
@@ -20,6 +22,9 @@ namespace ImageMaker.AdminView
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
+
             Dispatcher.UnhandledException += (sender, args) => MessageBox.Show(args.Exception.ToString());
             InitApp();
         }

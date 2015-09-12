@@ -6,6 +6,13 @@ namespace ImageMaker.CommonViewModels.Behaviors
     {
         event EventHandler<bool> StateChanged;
 
-        event Action RequestClose;
+        event Action<WindowState> RequestWindowVisibilityChanged;
+    }
+
+    public enum WindowState
+    {
+        Closed = 0,
+        Hidden = 1,
+        Visible = 2
     }
 }

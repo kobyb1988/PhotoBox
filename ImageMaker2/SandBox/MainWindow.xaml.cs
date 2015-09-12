@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ImageMaker.Themes;
 
 namespace SandBox
 {
@@ -31,5 +32,10 @@ namespace SandBox
         }
 
         public ICollectionView CollectionView { get; set; }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            ThemeManager.Change(Color.FromArgb(255, 0, 255, 255));
+        }
     }
 }

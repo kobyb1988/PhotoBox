@@ -38,6 +38,16 @@ namespace ImageMaker.DataContext.Contexts
                 .HasForeignKey(x => x.TemplateId)
                 .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<Template>()
+                .HasOptional(x => x.Background)
+                .WithMany()
+                .HasForeignKey(x => x.BackgroundId);
+
+            modelBuilder.Entity<Template>()
+                .HasOptional(x => x.Overlay)
+                .WithMany()
+                .HasForeignKey(x => x.OverlayId);
+
             modelBuilder.Entity<TemplateImage>().HasKey(x => x.Id);
 
             modelBuilder.Entity<Composition>()

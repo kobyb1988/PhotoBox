@@ -17,5 +17,9 @@ namespace ImageMaker.Entities
         public byte[] AppSettings { get; set; }
 
         public byte[] CameraSettings { get; set; }
+
+        public byte[] ThemeSettings { get; set; }
+
+        public string Password { get; set; }
     }
 }

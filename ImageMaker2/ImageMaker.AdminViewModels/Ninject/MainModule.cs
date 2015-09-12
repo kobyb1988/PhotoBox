@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
+using System.Linq;
 using AutoMapper;
 using ImageMaker.AdminViewModels.AutoMapper;
 using ImageMaker.AdminViewModels.Providers;
@@ -9,9 +9,8 @@ using ImageMaker.CommonViewModels.AutoMapper;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels.Factories;
-using ImageMaker.Data;
+using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.Data.Repositories;
-using ImageMaker.Entities;
 using ImageMaker.Utils.Services;
 using Ninject;
 using Ninject.Modules;
@@ -48,60 +47,100 @@ namespace ImageMaker.AdminViewModels.Ninject
             Bind<TemplateEditorViewModel>().ToSelf();
             Bind<TemplateEditorViewModelFactory>().ToSelf();
 
-            Bind<IChildrenViewModelsFactory>().ToMethod(x =>
-            {
-                var children = new List<IViewModelFactory>
-                {
-                    x.Kernel.Get<InfoDialogViewModelFactory>(),
-                    x.Kernel.Get<ConfirmDialogViewModelFactory>(),
-                    x.Kernel.Get<ResultDialogViewModelFactory>(),
-                };
+            Bind<IChildrenViewModelsFactory>()
+                .ToMethod(
+                    x =>
+                    {
+                        var children = new List<IViewModelFactory>
+                                       {
+                                           x.Kernel.Get<InfoDialogViewModelFactory>(),
+                                           x.Kernel.Get<ConfirmDialogViewModelFactory>(),
+                                           x.Kernel.Get<ResultDialogViewModelFactory>(),
+                                       };
 
-                return new ChildrenViewModelsFactory(children);
-            }).WhenInjectedExactlyInto<DialogService>();
+                        return new ChildrenViewModelsFactory(children);
+                    })
+                .WhenInjectedExactlyInto<DialogService>();
 
-            Bind<IChildrenViewModelsFactory>().ToMethod(x =>
-            {
-                var children = new List<IViewModelFactory>
-                {
-                    x.Kernel.Get<WelcomeViewModelFactory>()
-                };
+            Bind<IViewModelNavigator>().To<ViewModelNavigator>()
+                .WithConstructorArgument(typeof(IChildrenViewModelsFactory),
+                    x => new ChildrenViewModelsFactory(Enumerable.Empty<IViewModelFactory>()));
 
-                return new ChildrenViewModelsFactory(children);
-            }).WhenInjectedExactlyInto<MainViewModel>();
+            Bind<IViewModelNavigator>()
+                .To<ViewModelNavigator>()
+                .WhenInjectedExactlyInto<MainViewModel>()
+                .WithConstructorArgument(typeof(IChildrenViewModelsFactory),
+                    x =>
+                    {
+                        var children = new List<IViewModelFactory>
+                                       {
+                                             x.Kernel.Get<WelcomeViewModelFactory>() //temporary
+                                           //x.Kernel.Get<PasswordPromptViewModelFactory>()
+                                       };
 
-            Bind<IChildrenViewModelsFactory>().ToMethod(x =>
-            {
-                var children = new List<IViewModelFactory>
-                {
-                    x.Kernel.Get<TemplateExplorerViewModelFactory>(),
-                    x.Kernel.Get<AppSettingsExplorerViewModelFactory>(),
-                    x.Kernel.Get<CameraSettingsExplorerViewModelFactory>(),
-                    x.Kernel.Get<CompositionsExplorerViewModelFactory>(),
-                };
+                        return new ChildrenViewModelsFactory(children);
+                    });
 
-                return new ChildrenViewModelsFactory(children);
-            }).WhenInjectedExactlyInto<WelcomeViewModelFactory>();
+            Bind<IViewModelNavigator>()
+                .To<ViewModelNavigator>()
+                .WhenInjectedExactlyInto<PasswordPromptViewModelFactory>()
+                .WithConstructorArgument(typeof(IChildrenViewModelsFactory),
+                    x =>
+                    {
+                        var children = new List<IViewModelFactory>
+                                       {
+                                           x.Kernel.Get<WelcomeViewModelFactory>()
+                                       };
 
-            Bind<IChildrenViewModelsFactory>().ToMethod(x =>
-            {
-                var children = new List<IViewModelFactory>
-                {
-                    x.Kernel.Get<TemplateEditorViewModelFactory>()
-                };
+                        return new ChildrenViewModelsFactory(children);
+                    });
 
-                return new ChildrenViewModelsFactory(children);
-            }).WhenInjectedExactlyInto<TemplateExplorerViewModelFactory>();
+            Bind<IViewModelNavigator>()
+                .To<ViewModelNavigator>()
+                .WhenInjectedExactlyInto<WelcomeViewModelFactory>()
+                .WithConstructorArgument(typeof (IChildrenViewModelsFactory),
+                    x =>
+                    {
+                        var children = new List<IViewModelFactory>
+                                       {
+                                           x.Kernel.Get<TemplateExplorerViewModelFactory>(),
+                                           x.Kernel.Get<AppSettingsExplorerViewModelFactory>(),
+                                           x.Kernel.Get<CameraSettingsExplorerViewModelFactory>(),
+                                           x.Kernel.Get<CompositionsExplorerViewModelFactory>(),
+                                           x.Kernel.Get<ThemeManagerViewModelFactory>(),
+                                           x.Kernel.Get<StatsViewModelFactory>(),
+                                       };
 
-            Bind<IChildrenViewModelsFactory>().ToMethod(x =>
-            {
-                var children = new List<IViewModelFactory>
-                {
-                    x.Kernel.Get<CompositionsEditorViewModelFactory>()
-                };
+                        return new ChildrenViewModelsFactory(children);
+                    });
 
-                return new ChildrenViewModelsFactory(children);
-            }).WhenInjectedExactlyInto<CompositionsExplorerViewModelFactory>();
+            Bind<IViewModelNavigator>()
+                .To<ViewModelNavigator>()
+                .WhenInjectedExactlyInto<TemplateExplorerViewModelFactory>()
+                .WithConstructorArgument(typeof (IChildrenViewModelsFactory),
+                    x =>
+                    {
+                        var children = new List<IViewModelFactory>
+                                       {
+                                           x.Kernel.Get<TemplateEditorViewModelFactory>()
+                                       };
+
+                        return new ChildrenViewModelsFactory(children);
+                    });
+
+            Bind<IViewModelNavigator>()
+                .To<ViewModelNavigator>()
+                .WhenInjectedExactlyInto<CompositionsExplorerViewModelFactory>()
+                .WithConstructorArgument(typeof(IChildrenViewModelsFactory),
+                    x =>
+                    {
+                        var children = new List<IViewModelFactory>
+                                       {
+                                           x.Kernel.Get<CompositionsEditorViewModelFactory>()
+                                       };
+
+                        return new ChildrenViewModelsFactory(children);
+                    });
         }
     }
 }

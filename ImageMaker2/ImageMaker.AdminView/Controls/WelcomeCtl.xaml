@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
+             xmlns:adminView="clr-namespace:ImageMaker.AdminView"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:WelcomeViewModel}"
              d:DesignHeight="700" d:DesignWidth="300"
@@ -19,6 +20,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.75*"/>
+                    <RowDefinition Height="1.75*"/>
+                    <RowDefinition Height="1.75*"/>
                     <RowDefinition Height="1.75*"/>
                     <RowDefinition Height="1.75*"/>
                     <RowDefinition Height="1.75*"/>
@@ -39,6 +43,13 @@
                     Content="Настройка шаблонов" Command="{Binding Path=ManageTemplatesCommand}"/>
                 <Button Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                     Content="Настройка композиций" Command="{Binding Path=ManageCompositionsCommand}"/>
+                <Button Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Content="Редактор тем" Command="{Binding Path=ManageThemesCommand}"/>
+                <Button Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Content="Статистика" Command="{Binding Path=ShowStatsCommand}"/>
+                <Button Grid.Row="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Content="Запустить основной модуль" 
+                        Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
             </Grid>
         </Grid>
         

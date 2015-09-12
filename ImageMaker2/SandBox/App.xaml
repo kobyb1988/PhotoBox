@@ -5,8 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ImageMaker.Themes;component/Styles/BasicStyles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ImageMaker.CommonView;component/Styles/DataPagerStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ImageMaker.CommonView;component/Styles/CommonStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

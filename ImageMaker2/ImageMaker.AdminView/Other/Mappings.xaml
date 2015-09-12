@@ -9,6 +9,10 @@
         <controls:WelcomeCtl />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type viewModels:PasswordPromptViewModel}">
+        <controls:PasswordPromptCtl />
+    </DataTemplate>
+    
     <DataTemplate DataType="{x:Type viewModels:TemplateEditorViewModel}">
         <controls:TemplateEditorCtl />
     </DataTemplate>
@@ -17,6 +21,10 @@
         <controls:TemplateExplorerCtl />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type viewModels:ThemeManagerViewModel}">
+        <controls:ThemeManagerCtl />
+    </DataTemplate>
+    
     <DataTemplate DataType="{x:Type viewModels:CompositionsExplorerViewModel}">
         <controls:CompositionsExplorerCtl />
     </DataTemplate>
@@ -31,6 +39,10 @@
 
     <DataTemplate DataType="{x:Type viewModels:CameraSettingsExplorerViewModel}">
         <controls:CameraSettingsExplorerCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:StatsViewModel}">
+        <controls:StatsCtl />
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type dialogs:ConfirmDialogViewModel}">
@@ -47,6 +59,10 @@
 
     <DataTemplate DataType="{x:Type viewModels:ObjectNameViewModel}">
         <controls:ObjectNameCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:ColorPickerViewModel}">
+        <controls:ColorSelectionCtl />
     </DataTemplate>
     
 </ResourceDictionary>
