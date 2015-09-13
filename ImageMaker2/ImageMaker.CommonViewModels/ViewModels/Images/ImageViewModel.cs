@@ -1,6 +1,6 @@
 ﻿namespace ImageMaker.CommonViewModels.ViewModels.Images
 {
-    public class ImageViewModel : BaseViewModel
+    public class ImageViewModel 
     {
         public ImageViewModel(int id, string name, byte[] data) : this(data)
         {

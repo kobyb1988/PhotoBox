@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Monads;
 using AutoMapper;
-using AutoMapper.Mappers;
 using ImageMaker.CommonViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.Entities;
 using ImageMaker.MessageQueueing.Dto;
-using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.ViewModels.ViewModels.Images;
-using ImageMaker.ViewModels.ViewModels.Patterns;
-using CompositionViewModel = ImageMaker.ViewModels.ViewModels.Images.CompositionViewModel;
 
 namespace ImageMaker.ViewModels.AutoMapper
 {
@@ -19,20 +14,26 @@ namespace ImageMaker.ViewModels.AutoMapper
     {
         protected override void Configure()
         {
-            CreateMap<Composition, CompositionViewModel>()
-                .ConvertUsing(x => new CompositionViewModel(x.Id, x.TemplateId, x.Name, FromTemplate(x.Template), FromImage(x.Background), FromImage(x.Overlay)));
+            //CreateMap<Composition, CompositionViewModel>()
+            //    .ConvertUsing(x => new CompositionViewModel(x.Id, x.TemplateId, x.Name, FromTemplate(x.Template), FromImage(x.Background), FromImage(x.Overlay)));
 
-            CreateMap<CompositionViewModel, Composition>()
-                .ConvertUsing(FromCompositionViewModel);
+            CreateMap<Template, TemplateViewModel>()
+                .ConvertUsing(x => new TemplateViewModel(x.Id, x.Name, FromTemplate(x), FromImage(x.Background), FromImage(x.Overlay)));
 
-            CreateMap<PatternData, PatternDataViewModel>()
-                .ConstructUsing(x => new PatternDataViewModel(x.Name, (int) x.PatternType, x.Data))
-                .ReverseMap()
-                .ForMember(x => x.PatternType, x => x.MapFrom(c => (PatternType) c.PatternType));
+            CreateMap<TemplateViewModel, Template>()
+                .ConvertUsing(FromTemplateViewModel);
 
-            CreateMap<Pattern, PatternViewModel>()
-                .ConstructUsing(x => new PatternViewModel(x.Name, (int) x.PatternType))
-                .ReverseMap();
+            CreateMap<ImageViewModel, Image>()
+                .ConvertUsing(ImageFromImageViewModel);
+
+            //CreateMap<PatternData, PatternDataViewModel>()
+            //    .ConstructUsing(x => new PatternDataViewModel(x.Name, (int) x.PatternType, x.Data))
+            //    .ReverseMap()
+            //    .ForMember(x => x.PatternType, x => x.MapFrom(c => (PatternType) c.PatternType));
+
+            //CreateMap<Pattern, PatternViewModel>()
+            //    .ConstructUsing(x => new PatternViewModel(x.Name, (int) x.PatternType))
+            //    .ReverseMap();
 
             CreateMap<InstagramMessageDto, InstagramImageViewModel>()
                 .ConvertUsing(x => new InstagramImageViewModel(x.Data, x.Width, x.Height, x.Name));
@@ -44,12 +45,21 @@ namespace ImageMaker.ViewModels.AutoMapper
                     new TemplateImageData() { X = c.X,  Y = c.Y, Width = c.Width, Height = c.Height});
         }
 
-        private ImageViewModel FromImage(Image image)
+        private ImageViewModel FromImage(FileData image)
         {
-            return image.Return(x => new ImageViewModel(x.Id, x.Name, x.Data.Data), null);
+            return image.Return(x => new ImageViewModel(x.Id, "", x.Data), null);
         }
 
-        private Image FromImageViewModel(ImageViewModel image)
+        private FileData FromImageViewModel(ImageViewModel image)
+        {
+            return image.Return(x => new FileData()
+            {
+                Id = x.Id,
+                Data = x.Data
+            }, null);
+        }
+
+        private Image ImageFromImageViewModel(ImageViewModel image)
         {
             return image.Return(x => new Image()
             {
@@ -63,21 +73,20 @@ namespace ImageMaker.ViewModels.AutoMapper
             }, null);
         }
 
-        private Composition FromCompositionViewModel(CompositionViewModel composition)
+        private Template FromTemplateViewModel(TemplateViewModel template)
         {
-            var background = FromImageViewModel(composition.Background);
-            var overlay = FromImageViewModel(composition.Overlay);
+            var background = FromImageViewModel(template.Background);
+            var overlay = FromImageViewModel(template.Overlay);
 
-            return new Composition()
+            return new Template()
             {
-                Name = composition.Name,
-                Id = composition.Id,
+                Name = template.Name,
+                Id = template.Id,
                 Background = background,
                 BackgroundId = background.Return(x => x.Id, (int?)null),
                 Overlay = overlay,
                 OverlayId = overlay.Return(x => x.Id, (int?)null),
-                Template = new Template() { Images = composition.TemplateImages.Select(x => new TemplateImage() { Height = x.Height, Width = x.Width, X = x.X, Y = x.Y }).ToList()},
-                TemplateId = composition.TemplateId
+                Images = template.TemplateImages.Select(x => new TemplateImage() { Height = x.Height, Width = x.Width, X = x.X, Y = x.Y }).ToList(),
             };
         }
     }

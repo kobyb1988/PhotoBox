@@ -31,11 +31,11 @@ namespace ImageMaker.AdminViewModels.AutoMapper
             CreateMap<TemplateViewModel, Template>()
                 .ConvertUsing(FromTemplateViewModel);
 
-            CreateMap<Composition, CompositionViewModel>()
-                .ConvertUsing(x => new CompositionViewModel(x.Name, x.Id, FromTemplate(x.Template), FromImage(x.Background), FromImage(x.Overlay)));
+            //CreateMap<Composition, CompositionViewModel>()
+            //    .ConvertUsing(x => new CompositionViewModel(x.Name, x.Id, FromTemplate(x.Template), FromImage(x.Background), FromImage(x.Overlay)));
 
-            CreateMap<CompositionViewModel, Composition>()
-                .ConvertUsing(FromCompositionViewModel);
+            //CreateMap<CompositionViewModel, Composition>()
+            //    .ConvertUsing(FromCompositionViewModel);
         }
 
         private TemplateViewModel FromTemplate(Template template)
@@ -47,24 +47,39 @@ namespace ImageMaker.AdminViewModels.AutoMapper
                     template.Overlay.With(FromImage));
         }
 
-        private ImageViewModel FromImage(Image image)
+        private ImageViewModel FromImage(FileData image)
         {
-            return image.Return(x => new ImageViewModel(x.Id, x.Name, x.Data.Data), null);
+            return image.Return(x => new ImageViewModel(x.Id, "", x.Data), null);
         }
 
-        private Image FromImageViewModel(ImageViewModel image)
+        //private ImageViewModel FromImage(Image image)
+        //{
+        //    return image.Return(x => new ImageViewModel(x.Id, x.Name, x.Data.Data), null);
+        //}
+
+        //private Image FromImageViewModel(ImageViewModel image)
+        //{
+        //    return image.Return(x => new Image()
+        //    {
+        //        Id = x.Id,
+        //        Name = x.Name,
+        //        Data = new FileData()
+        //        {
+        //            Id = x.Id,
+        //            Data = x.Data
+        //        }
+        //    }, null);
+        //}
+
+        private FileData FromImageViewModel(ImageViewModel image)
         {
-            return image.Return(x => new Image()
+            return image.Return(x => new FileData()
             {
                 Id = x.Id,
-                Name = x.Name,
-                Data = new FileData()
-                {
-                    Id = x.Id,
-                    Data = x.Data
-                }
+                Data = x.Data
             }, null);
         }
+
 
         private Template FromTemplateViewModel(TemplateViewModel template)
         {
@@ -93,21 +108,21 @@ namespace ImageMaker.AdminViewModels.AutoMapper
             };
         }
 
-        private Composition FromCompositionViewModel(CompositionViewModel composition)
-        {
-            var background = FromImageViewModel(composition.Background);
-            var overlay = FromImageViewModel(composition.Overlay);
+        //private Composition FromCompositionViewModel(CompositionViewModel composition)
+        //{
+        //    var background = FromImageViewModel(composition.Background);
+        //    var overlay = FromImageViewModel(composition.Overlay);
 
-            return new Composition()
-            {
-                Name = composition.Name,
-                Id = composition.Id,
-                Background = background,
-                BackgroundId = background.Return(x => x.Id, (int?) null),
-                Overlay = overlay,
-                OverlayId = overlay.Return(x => x.Id, (int?) null),
-                TemplateId = composition.Template.Id
-            };
-        }
+        //    return new Composition()
+        //    {
+        //        Name = composition.Name,
+        //        Id = composition.Id,
+        //        Background = background,
+        //        BackgroundId = background.Return(x => x.Id, (int?) null),
+        //        Overlay = overlay,
+        //        OverlayId = overlay.Return(x => x.Id, (int?) null),
+        //        TemplateId = composition.Template.Id
+        //    };
+        //}
     }
 }

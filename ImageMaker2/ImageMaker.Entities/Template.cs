@@ -18,9 +18,14 @@ namespace ImageMaker.Entities
 
         public int Height { get; set; }
 
-        public virtual Image Background { get; set; }
+        //public virtual Image Background { get; set; }
 
-        public virtual Image Overlay { get; set; }
+        //public virtual Image Overlay { get; set; }
+
+        public virtual FileData Background { get; set; }
+
+        public virtual FileData Overlay { get; set; }
+
 
         public int? BackgroundId { get; set; }
 

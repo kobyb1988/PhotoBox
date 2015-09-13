@@ -26,7 +26,7 @@
                     <RowDefinition Height="1.75*"/>
                     <RowDefinition Height="1.75*"/>
                     <RowDefinition Height="1.75*"/>
-                    <RowDefinition Height="1.75*"/>
+                    <!--<RowDefinition Height="1.75*"/>-->
                 </Grid.RowDefinitions>
                 
                 <Viewbox Margin="5">
@@ -41,13 +41,13 @@
                     Content="Настройка камеры" Command="{Binding Path=ManageCameraSettingsCommand}"/>
                 <Button Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                     Content="Настройка шаблонов" Command="{Binding Path=ManageTemplatesCommand}"/>
+                <!--<Button Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Content="Настройка композиций" Command="{Binding Path=ManageCompositionsCommand}"/>-->
                 <Button Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                    Content="Настройка композиций" Command="{Binding Path=ManageCompositionsCommand}"/>
-                <Button Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                     Content="Редактор тем" Command="{Binding Path=ManageThemesCommand}"/>
-                <Button Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                <Button Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                     Content="Статистика" Command="{Binding Path=ShowStatsCommand}"/>
-                <Button Grid.Row="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                <Button Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                     Content="Запустить основной модуль" 
                         Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
             </Grid>

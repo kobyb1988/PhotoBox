@@ -19,14 +19,14 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 {
     public class CompositionModelProcessor
     {
-        private readonly Composition _pattern;
+        private readonly Template _pattern;
         private readonly ImageProcessor _imageProcessor;
 
         public event EventHandler<ImageDto> ImageChanged;
         public event EventHandler<int> TimerElapsed;
         public event EventHandler<CameraEventBase> CameraErrorEvent;
 
-        public CompositionModelProcessor(Composition pattern, ImageProcessor imageProcessor)
+        public CompositionModelProcessor(Template pattern, ImageProcessor imageProcessor)
         {
             _pattern = pattern;
             _imageProcessor = imageProcessor;
@@ -76,7 +76,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         {
             List<byte[]> pictures = new List<byte[]>();
 
-            for (int i = 0; i < _pattern.Template.Images.Count; i++)
+            for (int i = 0; i < _pattern.Images.Count; i++)
             {
                 RaiseTimerElapsed(4);
                 await Task.Delay(TimeSpan.FromSeconds(2));
@@ -106,8 +106,8 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             bool hasBackground = _pattern.Background != null;
             bool hasOverlay = _pattern.Overlay != null;
 
-            MemoryStream backgroundStream = hasBackground ? new MemoryStream(_pattern.Background.Data.Data) : null;
-            MemoryStream overlayStream = hasOverlay ? new MemoryStream(_pattern.Overlay.Data.Data) : null;
+            MemoryStream backgroundStream = hasBackground ? new MemoryStream(_pattern.Background.Data) : null;
+            MemoryStream overlayStream = hasOverlay ? new MemoryStream(_pattern.Overlay.Data) : null;
             Image backgroundImage = backgroundStream.Return(Image.FromStream, null);
             Image overlayImage = overlayStream.Return(Image.FromStream, null);
 
@@ -128,7 +128,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                         new Rectangle(0, 0, width, height),
                         new Rectangle(0, 0, x.Width, x.Height), GraphicsUnit.Pixel));
 
-                    List<TemplateImage> templates = _pattern.Template.Images.ToList();
+                    List<TemplateImage> templates = _pattern.Images.ToList();
 
                     for (int i = 0; i < images.Count; i++)
                     {

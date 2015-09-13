@@ -83,6 +83,10 @@
       <Project>{A4EA6759-EAC9-4238-ACFF-6801448A6541}</Project>
       <Name>ImageMaker.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Entities\ImageMaker.Entities.csproj">
+      <Project>{C4C143FD-D585-436B-9F3A-30BB04880D75}</Project>
+      <Name>ImageMaker.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageMaker.MessageQueueing\ImageMaker.MessageQueueing.csproj">
       <Project>{2bf0867e-b87f-4a10-b13c-18ea156a2c4c}</Project>
       <Name>ImageMaker.MessageQueueing</Name>
@@ -99,6 +103,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />

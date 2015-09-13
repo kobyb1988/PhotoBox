@@ -4,13 +4,13 @@ namespace ImageMaker.PatternProcessing
 {
     public class CompositionProcessingResult
     {
-        public CompositionProcessingResult(Composition pattern, byte[] result)
+        public CompositionProcessingResult(Template pattern, byte[] result)
         {
             SelectedComposition = pattern;
             ImageResult = result;
         }
 
-        public Composition SelectedComposition { get; private set; }
+        public Template SelectedComposition { get; private set; }
 
         public byte[] ImageResult { get; private set; }
     }

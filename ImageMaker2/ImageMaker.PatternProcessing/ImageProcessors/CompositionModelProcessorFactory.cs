@@ -12,7 +12,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             _imageProcessor = imageProcessor;
         }
 
-        public CompositionModelProcessor Create(Composition composition)
+        public CompositionModelProcessor Create(Template composition)
         {
             return new CompositionModelProcessor(composition, _imageProcessor);
         }

@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
-using ImageMaker.Data;
 using ImageMaker.Data.Repositories;
 using ImageMaker.ViewModels.ViewModels.Images;
-using ImageMaker.ViewModels.ViewModels.Patterns;
 
 namespace ImageMaker.ViewModels.Providers
 {
@@ -21,15 +18,26 @@ namespace ImageMaker.ViewModels.Providers
             _mappingEngine = mappingEngine;
         }
 
-        public IEnumerable<CompositionViewModel> GetPatterns()
+        public IEnumerable<TemplateViewModel> GetPatterns()
         {
-            return _imageDataProvider.GetCompositions().Select(_mappingEngine.Map<CompositionViewModel>);
+            return _imageDataProvider.GetCompositions().Select(_mappingEngine.Map<TemplateViewModel>);
         }
 
-        public async Task<IEnumerable<CompositionViewModel>> GetPatternsAsync()
+        public async Task<IEnumerable<TemplateViewModel>> GetPatternsAsync()
         {
             var result = await _imageDataProvider.GetCompositionsAsync();
-            return result.Select(_mappingEngine.Map<CompositionViewModel>);
+            return result.Select(_mappingEngine.Map<TemplateViewModel>);
         } 
+
+        //public IEnumerable<CompositionViewModel> GetPatterns()
+        //{
+        //    return _imageDataProvider.GetCompositions().Select(_mappingEngine.Map<CompositionViewModel>);
+        //}
+
+        //public async Task<IEnumerable<CompositionViewModel>> GetPatternsAsync()
+        //{
+        //    var result = await _imageDataProvider.GetCompositionsAsync();
+        //    return result.Select(_mappingEngine.Map<CompositionViewModel>);
+        //} 
     }
 }

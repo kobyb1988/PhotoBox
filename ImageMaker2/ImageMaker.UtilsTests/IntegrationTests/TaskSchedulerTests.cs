@@ -26,7 +26,7 @@ namespace ImageMaker.UtilsTests.IntegrationTests
 
             var scheduler = new SchedulerService();
             scheduler.StartInstagramMonitoring(DateTime.Now + TimeSpan.FromSeconds(3));
-
+            
             timer.Start();
 
             source.Task.Wait();

@@ -2,12 +2,9 @@
 using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Xml.Linq;
 using AutoMapper;
 using ImageMaker.MessageQueueing.Dto;
 using ImageMaker.MessageQueueing.MessageQueueing;
-using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.ViewModels.ViewModels.Images;
 
 namespace ImageMaker.ViewModels.Providers

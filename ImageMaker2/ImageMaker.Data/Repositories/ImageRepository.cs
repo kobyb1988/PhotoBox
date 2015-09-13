@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using ImageMaker.DataContext;
 using ImageMaker.DataContext.Contexts;
 using ImageMaker.Entities;
 
@@ -13,6 +10,19 @@ namespace ImageMaker.Data.Repositories
 {
     public interface IImageRepository
     {
+        Session GetActiveSession();
+
+        IEnumerable<Session> GetAllSessions();
+        
+        IEnumerable<Image> GetAllImages();
+
+        IEnumerable<Image> GetAllImages(int sessionId);
+
+        void AddImage(Image image);
+
+        void AddImages(IEnumerable<Image> images);
+
+
         IEnumerable<Template> GetTemplates();
 
         Task<IEnumerable<Template>> GetTemplatesAsync();
@@ -42,52 +52,84 @@ namespace ImageMaker.Data.Repositories
         {
         }
 
+        public Session GetActiveSession()
+        {
+            return this.GetSingle<Session>(x => !x.EndTime.HasValue);
+        }
+
+        public IEnumerable<Session> GetAllSessions()
+        {
+            return QueryAll<Session>()
+                .Include(x => x.Images)
+                .ToList();
+        }
+
+        public IEnumerable<Image> GetAllImages()
+        {
+            return QueryAll<Image>()
+                .Include(x => x.Session)
+                .ToList();
+        }
+
+        public IEnumerable<Image> GetAllImages(int sessionId)
+        {
+            return QueryAll<Image>()
+                .Include(x => x.Session)
+                .Where(x => x.SessionId == sessionId)
+                .ToList();
+        }
+
+        public void AddImage(Image image)
+        {
+            Add(image);
+        }
+
+        public void AddImages(IEnumerable<Image> images)
+        {
+            Add(images);
+        }
+
         public IEnumerable<Template> GetTemplates()
         {
             return QueryAll<Template>()
                 .Include(x => x.Images)
-                .Include(x => x.Background.Data)
-                .Include(x => x.Overlay.Data).ToList();
+                .Include(x => x.Background)
+                .Include(x => x.Overlay).ToList();
         }
 
         public async Task<IEnumerable<Template>> GetTemplatesAsync()
         {
             return await QueryAll<Template>()
                 .Include(x => x.Images)
-                .Include(x => x.Overlay.Data)
-                .Include(x => x.Background.Data)
+                .Include(x => x.Overlay)
+                .Include(x => x.Background)
                 .ToListAsync();
         }
 
         public IEnumerable<Composition> GetCompositions()
         {
-            return QueryAll<Composition>()
-                    .Include(x => x.Template.Images)
-                    .Include(x => x.Overlay.Data)
-                    .Include(x => x.Background.Data)
-                    .ToList();
+            return null;
+            //return QueryAll<Composition>()
+            //        .Include(x => x.Template.Images)
+            //        .Include(x => x.Overlay.Data)
+            //        .Include(x => x.Background.Data)
+            //        .ToList();
         }
 
 
         public async Task<IEnumerable<Composition>> GetCompositionsAsync()
         {
-            return await QueryAll<Composition>()
-                    .Include(x => x.Template.Images)
-                    .Include(x => x.Overlay.Data)
-                    .Include(x => x.Background.Data)
-                    .ToListAsync();
+            return null;
+            //return await QueryAll<Composition>()
+            //        .Include(x => x.Template.Images)
+            //        .Include(x => x.Overlay.Data)
+            //        .Include(x => x.Background.Data)
+            //        .ToListAsync();
         }
 
         public void RemoveTemplates(IEnumerable<Template> templates)
         {
             Remove(templates.Select(x => x.Id).Join(QueryAll<Template>(), x => x, x => x.Id, (x, y) => y));
-            //var compositions = templates.Select(x => x.Id)
-            //    .Join(QueryAll<Composition>().Include(x => x.Template), x => x, x => x.TemplateId, (x, y) => y)
-            //    .ToList();
-
-            //var templatesDb = compositions.Select(x => x.Template).Distinct();
-            //Remove(compositions);
-            //Remove(templatesDb);
         }
 
         public void UpdateTemplates(IEnumerable<Template> templates)
@@ -124,21 +166,21 @@ namespace ImageMaker.Data.Repositories
 
         public void UpdateCompositions(IEnumerable<Composition> compositions)
         {
-            foreach (
-                var pair in
-                    compositions.Join(QueryAll<Composition>(), x => x.Id, x => x.Id, (x, y) => new {New = x, Old = y}))
-            {
-                if (pair.Old.BackgroundId != pair.New.BackgroundId)
-                    pair.Old.Background = pair.New.Background;
+            //foreach (
+            //    var pair in
+            //        compositions.Join(QueryAll<Composition>(), x => x.Id, x => x.Id, (x, y) => new {New = x, Old = y}))
+            //{
+            //    if (pair.Old.BackgroundId != pair.New.BackgroundId)
+            //        pair.Old.Background = pair.New.Background;
 
-                if (pair.Old.OverlayId != pair.New.OverlayId)
-                    pair.Old.Overlay = pair.New.Overlay;
+            //    if (pair.Old.OverlayId != pair.New.OverlayId)
+            //        pair.Old.Overlay = pair.New.Overlay;
 
-                if (pair.Old.TemplateId != pair.New.TemplateId)
-                    pair.Old.Template = pair.New.Template;
-            }
+            //    if (pair.Old.TemplateId != pair.New.TemplateId)
+            //        pair.Old.Template = pair.New.Template;
+            //}
 
-            Commit();
+            //Commit();
         }
 
         public void RemoveCompositions(IEnumerable<Composition> compositions)

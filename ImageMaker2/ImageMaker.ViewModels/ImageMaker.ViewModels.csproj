@@ -90,6 +90,7 @@
     <Compile Include="ViewModels\CameraViewModel.cs" />
     <Compile Include="ViewModels\Images\CompositionViewModel.cs" />
     <Compile Include="ViewModels\Images\InstagramImageViewModel.cs" />
+    <Compile Include="ViewModels\Images\TemplateViewModel.cs" />
     <Compile Include="ViewModels\ImportPatternsViewModel.cs" />
     <Compile Include="ViewModels\InstagramExplorerViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs">

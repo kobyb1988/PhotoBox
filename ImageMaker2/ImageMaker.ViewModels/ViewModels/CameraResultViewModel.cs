@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Providers;
+using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
+using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.PatternProcessing;
@@ -12,16 +14,19 @@ namespace ImageMaker.ViewModels.ViewModels
     {
         private readonly IViewModelNavigator _navigator;
         private readonly ImagePrinter _printer;
+        private readonly ImageService _imageService;
         private readonly string _printerName;
 
         public CameraResultViewModel(
             IViewModelNavigator navigator, 
             ImagePrinter printer, 
             SettingsProvider settingsProvider,
+            ImageService imageService,
             CompositionProcessingResult result)
         {
             _navigator = navigator;
             _printer = printer;
+            _imageService = imageService;
             Image = result.ImageResult;
             _copiesCount = 1;
             AppSettingsDto appSettings = settingsProvider.GetAppSettings();
@@ -68,6 +73,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private void Print()
         {
             _printer.Print(Image, _printerName, CopiesCount);
+            _imageService.SaveImage(new ImageViewModel(Image));
         }
     }
 }

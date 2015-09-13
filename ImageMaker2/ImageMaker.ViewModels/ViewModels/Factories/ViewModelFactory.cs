@@ -74,7 +74,7 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
         protected override CameraViewModel GetViewModel(object param)
         {
             //PatternData data = new PatternData() { Name = string.Empty, Id = 0, PatternType = PatternType.Simple, Data = new byte[] {0}};
-            Composition composition = _mappingEngine.Map<Composition>(param);
+            Template composition = _mappingEngine.Map<Template>(param);
             CompositionModelProcessor processor = _imageProcessorFactory.Create(composition);
             return new CameraViewModel(_settings, _dialogService, _navigator, processor);
         }
@@ -85,17 +85,23 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
         private readonly IViewModelNavigator _navigator;
         private readonly ImagePrinter _printer;
         private readonly SettingsProvider _settingsProvider;
+        private readonly ImageService _imageService;
 
-        public CameraResultViewModelFactory(IViewModelNavigator navigator, ImagePrinter printer, SettingsProvider settingsProvider)
+        public CameraResultViewModelFactory(
+            IViewModelNavigator navigator,
+            ImagePrinter printer, 
+            SettingsProvider settingsProvider,
+            ImageService imageService)
         {
             _navigator = navigator;
             _printer = printer;
             _settingsProvider = settingsProvider;
+            _imageService = imageService;
         }
 
         protected override CameraResultViewModel GetViewModel(object param)
         {
-            return new CameraResultViewModel(_navigator, _printer, _settingsProvider, (CompositionProcessingResult)param);
+            return new CameraResultViewModel(_navigator, _printer, _settingsProvider, _imageService, (CompositionProcessingResult)param);
         }
     }
 

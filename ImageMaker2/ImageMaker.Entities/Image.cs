@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImageMaker.Entities
 {
@@ -14,8 +9,14 @@ namespace ImageMaker.Entities
 
         public string Name { get; set; }
 
+        public string Path { get; set; }
+
         public virtual FileData Data { get; set; }
 
         public int FileDataId { get; set; }
+
+        public virtual Session Session { get; set; }
+
+        public int SessionId { get; set; }
     }
 }

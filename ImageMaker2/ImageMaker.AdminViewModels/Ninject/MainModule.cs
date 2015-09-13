@@ -44,6 +44,7 @@ namespace ImageMaker.AdminViewModels.Ninject
             Bind<TemplateExplorerViewModel>().ToSelf();
             Bind<TemplateExplorerViewModelFactory>().ToSelf();
 
+            Bind<StatsViewModelFactory>().ToSelf();
             Bind<TemplateEditorViewModel>().ToSelf();
             Bind<TemplateEditorViewModelFactory>().ToSelf();
 

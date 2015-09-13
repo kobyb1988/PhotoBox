@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ImageMaker.CommonViewModels.AutoMapper;
 using ImageMaker.CommonViewModels.Providers;
+using ImageMaker.CommonViewModels.Services;
 using ImageMaker.Data.Repositories;
 using ImageMaker.MessageQueueing.MessageQueueing;
 using ImageMaker.Utils.Services;
@@ -22,6 +23,7 @@ namespace InstagramImagePrinter.Ninject
             Bind<IMappingEngine>()
                .ToMethod(x => MappingEngineConfiguration.CreateEngine(new MainProfile()));
 
+            Bind<ImageService>().ToSelf();
             Bind<MessageAdapter>().ToSelf();
             Bind<ImageContextFactory>().ToSelf();
             Bind<IUserRepository>().To<UserRepository>();

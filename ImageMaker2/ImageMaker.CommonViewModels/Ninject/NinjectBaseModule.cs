@@ -18,6 +18,8 @@ namespace ImageMaker.CommonViewModels.Ninject
             //Bind<IMappingEngine>()
             //    .ToMethod(x => MappingEngineConfigurator.CreateEngine(new BasicProfile()));
 
+            Bind<ImageService>().ToSelf();
+
             Bind<CommunicationManager>().ToSelf();
             Bind<MessageFactory>().ToSelf();
             Bind<IMessenger>().To<MvvmLightMessenger>().InSingletonScope();

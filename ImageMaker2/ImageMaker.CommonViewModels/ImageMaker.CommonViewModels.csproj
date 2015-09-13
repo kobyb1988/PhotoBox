@@ -95,6 +95,7 @@
     <Compile Include="Providers\SettingsProvider.cs" />
     <Compile Include="Services\CommunicationManager.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\ImageService.cs" />
     <Compile Include="TemplateImageData.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\ConfirmDialogViewModel.cs" />
@@ -146,7 +147,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
