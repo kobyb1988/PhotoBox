@@ -19,8 +19,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private readonly ImagePrinter _imagePrinter;
         private RelayCommand _saveSettings;
         private RelayCommand _goBackCommand;
-        private DateTime _dateStart;
-        private DateTime _dateEnd;
+        private TimeSpan _dateStart;
+        private TimeSpan _dateEnd;
         private bool _showPrinterOnStartup;
         private string _hashTag;
         private string _printerName;
@@ -56,16 +56,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
             if (settings == null)
             {
                 HashTag = string.Empty;
-                DateStart = DateTime.Now;
-                DateEnd = new DateTime(TimeSpan.FromMinutes(30).Add(TimeSpan.FromTicks(DateStart.Ticks)).Ticks);
+                DateStart = TimeSpan.FromHours(DateTime.Now.Hour);
+                DateEnd = TimeSpan.FromHours(DateTime.Now.Hour).Add(TimeSpan.FromMinutes(5));
                 ShowPrinterOnStartup = false;
                 return;
             }
 
             PrinterName = settings.PrinterName;
             HashTag = settings.HashTag;
-            DateStart = settings.DateStart;
-            DateEnd = settings.DateEnd;
+
+            var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(DateStart);
+
+            DateStart = TimeSpan.FromHours(settings.DateStart.Hour);
+            DateEnd = TimeSpan.FromHours(settings.DateEnd.Hour);
             ShowPrinterOnStartup = settings.ShowPrinterOnStartup;
         }
 
@@ -74,7 +77,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _navigator.NavigateBack(this);
         }
 
-        public DateTime DateStart
+        public TimeSpan DateStart
         {
             get { return _dateStart; }
             set
@@ -113,7 +116,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             }
         }
 
-        public DateTime DateEnd
+        public TimeSpan DateEnd
         {
             get { return _dateEnd; }
             set
@@ -147,7 +150,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void Save()
         {
             _settingsProvider.SaveAppSettings(_mappingEngine.Map<AppSettingsDto>(this));
-            _schedulerService.StartInstagramMonitoring(DateStart);
+            var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(DateStart);
+            _schedulerService.StartInstagramMonitoring(dt);
         }
     }
 }

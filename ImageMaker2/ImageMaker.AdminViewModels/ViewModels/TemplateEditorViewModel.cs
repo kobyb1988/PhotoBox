@@ -92,7 +92,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void ItemOnSelectionChanged(ISelectable item)
         {
-            SelectedObject = item.IsSelected ? item : null;
+            if (SelectedObject == item && !item.IsSelected)
+            {
+                UnselectCurrent();
+            }
+
+            //SelectedObject = item.IsSelected ? item : null;
+        }
+
+        private void UnselectCurrent()
+        {
+            _selectedObject = null;
+            _canRemoveImage = false;
+            RaisePropertyChanged(() => SelectedObject);
         }
 
         public double OverlayOpacity
@@ -115,6 +127,25 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_selectedObject == value)
                     return;
+
+                TemplateImageViewModel oldOne = (TemplateImageViewModel)_selectedObject;
+                TemplateImageViewModel newOne = (TemplateImageViewModel) value;
+
+                if (oldOne != null)
+                {
+                    if (newOne != null)
+                    {
+                        Stack.Value.Chain(oldOne).Add(newOne);
+
+                        oldOne.SetSelected(false);
+                        newOne.SetSelected(true);
+                    }
+                }
+                else
+                {
+                    if (newOne != null)
+                        newOne.IsSelected = true;
+                }
 
                 _selectedObject = value;
 
@@ -312,6 +343,13 @@ namespace ImageMaker.AdminViewModels.ViewModels
             var image = (TemplateImageViewModel) SelectedObject;
             Stack.Value.Chain(image).Add(Template);
             image.SetSelected(false);
+            
+            UnselectCurrent();
+
+            int index = Template.Children.IndexOf(image);
+            for (int i = index + 1; i <= Template.Children.Count - 1; i++)
+                Template.Children.ElementAt(i).Index--;
+
             Template.Children.Remove(image);
         }
 

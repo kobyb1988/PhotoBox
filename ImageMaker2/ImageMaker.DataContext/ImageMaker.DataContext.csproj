@@ -50,37 +50,9 @@
   <ItemGroup>
     <Compile Include="Contexts\ImageContext.cs" />
     <Compile Include="Contexts\PatternContext.cs" />
-    <Compile Include="Migrations\201506020713417_Initial.cs" />
-    <Compile Include="Migrations\201506020713417_Initial.Designer.cs">
-      <DependentUpon>201506020713417_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506050606269_DataTypes.cs" />
-    <Compile Include="Migrations\201506050606269_DataTypes.Designer.cs">
-      <DependentUpon>201506050606269_DataTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506071514171_Users.cs" />
-    <Compile Include="Migrations\201506071514171_Users.Designer.cs">
-      <DependentUpon>201506071514171_Users.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508260741327_UserPassword.cs" />
-    <Compile Include="Migrations\201508260741327_UserPassword.Designer.cs">
-      <DependentUpon>201508260741327_UserPassword.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509110940043_Templates.cs" />
-    <Compile Include="Migrations\201509110940043_Templates.Designer.cs">
-      <DependentUpon>201509110940043_Templates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509121950526_ThemeSettings.cs" />
-    <Compile Include="Migrations\201509121950526_ThemeSettings.Designer.cs">
-      <DependentUpon>201509121950526_ThemeSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509122221015_TemplatesImages.cs" />
-    <Compile Include="Migrations\201509122221015_TemplatesImages.Designer.cs">
-      <DependentUpon>201509122221015_TemplatesImages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509122239045_SessionEndTime.cs" />
-    <Compile Include="Migrations\201509122239045_SessionEndTime.Designer.cs">
-      <DependentUpon>201509122239045_SessionEndTime.cs</DependentUpon>
+    <Compile Include="Migrations\201509171049091_Init.cs" />
+    <Compile Include="Migrations\201509171049091_Init.Designer.cs">
+      <DependentUpon>201509171049091_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ImageContextConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,29 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506020713417_Initial.resx">
-      <DependentUpon>201506020713417_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506050606269_DataTypes.resx">
-      <DependentUpon>201506050606269_DataTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506071514171_Users.resx">
-      <DependentUpon>201506071514171_Users.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508260741327_UserPassword.resx">
-      <DependentUpon>201508260741327_UserPassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509110940043_Templates.resx">
-      <DependentUpon>201509110940043_Templates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509121950526_ThemeSettings.resx">
-      <DependentUpon>201509121950526_ThemeSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509122221015_TemplatesImages.resx">
-      <DependentUpon>201509122221015_TemplatesImages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509122239045_SessionEndTime.resx">
-      <DependentUpon>201509122239045_SessionEndTime.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201509171049091_Init.resx">
+      <DependentUpon>201509171049091_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

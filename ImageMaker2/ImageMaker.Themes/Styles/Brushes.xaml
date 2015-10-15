@@ -3,6 +3,10 @@
                     xmlns:themes="clr-namespace:ImageMaker.Themes">
 
     <!--<SolidColorBrush x:Key="OrangeBrush" Color="{Binding Path=(themes:ThemeManager.BackgroundColor), UpdateSourceTrigger=PropertyChanged}" />-->
+    <SolidColorBrush x:Key="DefBrush" Color="#43beb5" />
+    <SolidColorBrush x:Key="DefBrushLight" Color="#4ecdc4" />
+    
+    <SolidColorBrush x:Key="DefBrushPressed" Color="#0a97b9" />
     
     <SolidColorBrush x:Key="OrangeBrush" Color="#f4ad49" />
     <SolidColorBrush x:Key="OrangeBrushPressed" Color="#c4924c" />

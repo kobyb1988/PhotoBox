@@ -13,18 +13,21 @@ using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.SDKData.Enums;
 using ImageMaker.SDKData.Events;
+using ImageMaker.SDKData.Structs;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
     public class CameraViewModel : BaseViewModel
     {
-        private const int CDefWidth = 640;
-        private const int CDefHeight = 480;
+        private const int CDefWidth = 2048;
+        private const int CDefHeight = 1536;
 
         private readonly SettingsProvider _settingsProvider;
         private readonly IDialogService _dialogService;
         private readonly IViewModelNavigator _navigator;
         private readonly CompositionModelProcessor _imageProcessor;
+        private int _width;
+        private int _height;
 
         private RelayCommand _goBackCommand;
         private RelayCommand _openSessionCommand;
@@ -210,10 +213,6 @@ namespace ImageMaker.ViewModels.ViewModels
             _navigator.NavigateBack(this);
         }
 
-        private void SetFocus(uint focus)
-        {
-            _imageProcessor.SetFocus(focus);
-        }
 
         public int Counter
         {
@@ -268,14 +267,26 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
+        public RelayCommand TakePictureCommand
+        {
+            get { return _takePictureCommand ?? (_takePictureCommand = new RelayCommand(TakePicture, () => _sessionOpened && !TakingPicture)); }
+        }
+
+        #region unused
+
+
+        private void SetFocus(uint focus)
+        {
+            _imageProcessor.SetFocus(focus);
+        }
+
         private IList<uint> _focusPoints;
-        private int _width;
-        private int _height;
+       
 
         public IList<uint> FocusPoints
         {
             get { return _focusPoints ?? (_focusPoints = Enum.GetValues(typeof(LiveViewDriveLens)).OfType<uint>().ToList()); }
-        } 
+        }
 
         public RelayCommand<uint> SetFocusCommand
         {
@@ -306,15 +317,11 @@ namespace ImageMaker.ViewModels.ViewModels
             get { return _refreshCameraCommand ?? (_refreshCameraCommand = new RelayCommand(RefreshCamera, () => _sessionOpened && !TakingPicture)); }
         }
 
-        public RelayCommand TakePictureCommand
-        {
-            get { return _takePictureCommand ?? (_takePictureCommand = new RelayCommand(TakePicture, () => _sessionOpened && !TakingPicture)); }
-        }
-
         public RelayCommand StartLiveViewCommand
         {
             get { return _startLiveViewCommand ?? (_startLiveViewCommand = new RelayCommand(StartLiveView, () => _sessionOpened && !TakingPicture)); }
         }
 
+        #endregion
     }
 }

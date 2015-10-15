@@ -75,7 +75,7 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
 
             Point mouseCoordinates = Extensions.GetMouseCoordinates();
             var box = RelativeElement as Viewbox;
-            double factor = box.GetScaleFactor();
+            Point factor = box.GetScaleFactor();
 
             //Debug.WriteLine("initial x: {0}; y: {1}", mouseCoordinates.X, mouseCoordinates.Y);
             Point mousePosition = this.AssociatedObject.PointFromScreen(mouseCoordinates);
@@ -166,12 +166,12 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
         /// Call when the mouse cursor position changes.
         /// </summary>
         /// <param name="position">Adorner's new position relative to AdornerLayer origin</param>
-        public void SetMousePosition(Point position, double factor)
+        public void SetMousePosition(Point position, Point factor)
         {
             Debug.WriteLine("x: {0}; y: {1}", position.X, position.Y);
             Debug.WriteLine("x: {0}; y: {1}", position.X, position.Y);
-            this._adornerOffset.X = (position.X * factor) - this._adornerOrigin.X - (_child.Width * factor) / 2;
-            this._adornerOffset.Y = (position.Y * factor) - this._adornerOrigin.Y - (_child.Height * factor) / 2;
+            this._adornerOffset.X = (position.X * factor.X) - this._adornerOrigin.X - (_child.Width * factor.X) / 2;
+            this._adornerOffset.Y = (position.Y * factor.Y) - this._adornerOrigin.Y - (_child.Height * factor.Y) / 2;
 
             UpdatePosition();
         }
@@ -221,16 +221,16 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
 
     public static class ViewBoxExtensions
     {
-        public static double GetScaleFactor(this Viewbox viewbox)
+        public static Point GetScaleFactor(this Viewbox viewbox)
         {
             if (viewbox.Child == null ||
                 (viewbox.Child is FrameworkElement) == false)
             {
-                return double.NaN;
+                return new Point(double.NaN, double.NaN);
             }
 
             FrameworkElement child = viewbox.Child as FrameworkElement;
-            return viewbox.ActualWidth / child.ActualWidth;
+            return new Point(viewbox.ActualWidth / child.ActualWidth, viewbox.ActualHeight / child.ActualHeight);
         }
     }
 }

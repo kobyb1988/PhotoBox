@@ -9,16 +9,229 @@
              xmlns:images="clr-namespace:ImageMaker.ViewModels.ViewModels.Images;assembly=ImageMaker.ViewModels"
              xmlns:spinningWheel="clr-namespace:Hammer.SpinningWheel;assembly=Hammer.SpinningWheel"
              xmlns:controls1="clr-namespace:ImageMaker.CommonView.Controls;assembly=ImageMaker.CommonView"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels1:SelectPatternViewModel}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
         <converters1:CombinedImageToViewConverter x:Key="ImageConverter" />
         <converters1:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <!--<CollectionViewSource x:Key="Compositions" Source="{Binding Path=Patterns}"/>-->
+        <CollectionViewSource x:Key="Patterns" Source="{Binding Path=Patterns}"/>
     </UserControl.Resources>
-    <Border  Background="{StaticResource  BackgroundBrush}" Padding="30">
+
+    <Viewbox Stretch="Fill">
+        <Border Padding="85,25">
+            <Border.Background>
+                <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
+            </Border.Background>
+
+            <Grid Width="900" Height="730">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.18*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.18*" />
+                </Grid.RowDefinitions>
+                <Border Background="#ffffff" CornerRadius="40" Padding="5" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/logo_1.png" Margin="20,0,0,0">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </Image.RenderTransform>
+                        </Image>
+                        <StackPanel Orientation="Horizontal" Grid.Column="2">
+                            <TextBlock Text="Шаг 1: " 
+                                       FontSize="20"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       Foreground="Red"/>
+                            <TextBlock Text="Выберите шаблон" 
+                                       FontSize="20"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border  Grid.Row="1">
+                    <Grid>
+                        <Grid.Resources>
+                            <DataTemplate x:Key="tmpl" DataType="{x:Type images:CompositionViewModel}">
+                                <ToggleButton ClickMode="Release">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="{x:Type ToggleButton}">
+                                            <Setter Property="IsChecked" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected, Mode=TwoWay}" />
+                                            <Setter Property="ToolTip" Value="{Binding Name}" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                        <Border x:Name="RootBorder"
+                                            Margin="10"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent" BorderThickness="2" 
+                                    Width="157.4" Height="157.4" >
+                                                            <Grid x:Name="rootGrid" >
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="7*"/>
+                                                                    <RowDefinition Height="3*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="7*"/>
+                                                                    <ColumnDefinition Width="3*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Image Stretch="Fill"
+                                               Grid.ColumnSpan="2" 
+                                               Grid.RowSpan="2">
+                                                                    <Image.Source>
+                                                                        <MultiBinding Converter="{StaticResource ImageConverter}" UpdateSourceTrigger="PropertyChanged">
+                                                                            <Binding Path="TemplateImages"/>
+                                                                            <Binding Path="Overlay.Data"/>
+                                                                            <Binding Path="Background.Data"/>
+                                                                        </MultiBinding>
+                                                                    </Image.Source>
+                                                                </Image>
+                                                               
+                                                                <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
+                                                                <ToggleButton Grid.Row="1" Grid.Column="1" x:Name="toggle" Margin="7" 
+                                                                              IsHitTestVisible="False"
+                                                                              IsChecked="{TemplateBinding IsChecked}">
+                                                                    <ToggleButton.Style>
+                                                                        <Style TargetType="{x:Type ToggleButton}">
+                                                                            <Setter Property="Background" Value="White" />
+                                                                            <Setter Property="Padding" Value="5" />
+                                                                            <Setter Property="IsThreeState" Value="False" />
+                                                                            <Setter Property="Template">
+                                                                                <Setter.Value>
+                                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                                                        <Border>
+                                                                                            <Grid>
+                                                                                                <Ellipse Stretch="Fill" Fill="#ffffff" />
+                                                                                                <Ellipse Stretch="Fill" Fill="#4ecdc4">
+                                                                                                    <Ellipse.RenderTransform>
+                                                                                                        <ScaleTransform ScaleX="0.85" ScaleY="0.85" />
+                                                                                                    </Ellipse.RenderTransform>
+                                                                                                    <Ellipse.RenderTransformOrigin>
+                                                                                                        <Point X="0.5" Y="0.5"></Point>
+                                                                                                    </Ellipse.RenderTransformOrigin>
+                                                                                                </Ellipse>
+                                                                                                <Border Background="Transparent" BorderBrush="Transparent"
+                                                                                VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                                                                    <Path Data="M 0,0 L 11,-2 L 8,5" x:Name="Tick" Stroke="Transparent" StrokeThickness="1">
+                                                                                                        <Path.RenderTransform>
+                                                                                                            <RotateTransform Angle="135" CenterX="5.5" CenterY="1"/>
+                                                                                                        </Path.RenderTransform>
+                                                                                                    </Path>
+                                                                                                </Border>
+                                                                                            </Grid>
+
+                                                                                        </Border>
+                                                                                        <ControlTemplate.Triggers>
+                                                                                            <Trigger Property="IsChecked" Value="True">
+                                                                                                <Setter TargetName="Tick" Property="Stroke" Value="#ffffff" />
+                                                                                            </Trigger>
+                                                                                        </ControlTemplate.Triggers>
+                                                                                    </ControlTemplate>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Style>
+                                                                    </ToggleButton.Style>
+                                                                </ToggleButton>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                                                <Setter TargetName="overlay" Property="Opacity" Value="0.2" />
+                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="#4ecdc4" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter TargetName="overlay" Property="Opacity" Value="0.2" />
+                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="#4ecdc4" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
+
+
+                            </DataTemplate>
+                        </Grid.Resources>
+
+                        <ListBox Background="Transparent"
+                                     ItemTemplate="{StaticResource tmpl}"
+                                     ItemsSource="{Binding Source={StaticResource Patterns}}"
+                            BorderBrush="Transparent"
+                                 BorderThickness="0"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 SelectedItem="{Binding Path=SelectedPattern}"
+                                     SelectionMode="Single">
+                            <ListBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#00000000"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#00000000"/>
+                            </ListBox.Resources>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Setter Property="IsSelected" Value="{Binding Path=IsChecked, Mode=TwoWay}" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                        </ListBox>
+                        <spinningWheel:SpinningWheel IsSpinning="{Binding Path=IsBusyLoading}" Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Grid>
+                </Border>
+                <Border  Padding="0" Grid.Row="2">
+                    <Grid  Width="890" Height="85">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            Command="{Binding Path=GoBackCommand}"
+                            CornerRadius="40"
+                                InnerCornerRadius="40"
+                                Padding="8"
+                            Grid.Column="0"
+                            FontSize="18"
+                            HorizontalAlignment="Stretch"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+                        <customControls:DataPagerCtl Grid.Column="1" 
+                                                     ItemsView="{Binding Source={StaticResource Patterns}}" 
+                                                     PageSize="5"
+                                         PagesInRow="3"
+                                                     Background="#4ecdc4"/>
+                        <!--<Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>-->
+                        <customControls:BlueButton 
+                            Command="{Binding Path=SelectPatternCommand}"
+                            CornerRadius="40"
+                                Padding="8"
+                            FontSize="18"
+                            ShowBackButton="True"
+                            IsLeftOriented="False"
+                            HorizontalAlignment="Stretch"
+                        Grid.Column="2"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Далее"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Viewbox>
+    
+    <!--<Border  Background="{StaticResource  BackgroundBrush}" Padding="30">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
@@ -53,8 +266,6 @@
             </Border>
             
             <Grid Grid.Row="1">
-                
-                <!--<ScrollViewer>-->
                     <ListBox ItemsSource="{Binding Path=PatternsView}" BorderBrush="Transparent" SelectionMode="Single"
                              Background="{StaticResource BackgroundBrush}">
                         <ItemsControl.ItemsPanel>
@@ -98,7 +309,6 @@
                                                             </Image>
                                                         </Viewbox>
                                                     </Border>
-                                                    <!--<ContentPresenter Grid.Row="1"/>-->
                                                 </Grid>
                                             </Border>
                                         </ControlTemplate>
@@ -107,7 +317,6 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ListBox>
-                <!--</ScrollViewer>-->
                 <spinningWheel:SpinningWheel IsSpinning="{Binding Path=IsBusyLoading}" Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             </Grid>
 
@@ -123,5 +332,5 @@
             </Grid>
             
         </Grid>
-    </Border>
+    </Border>-->
 </UserControl>

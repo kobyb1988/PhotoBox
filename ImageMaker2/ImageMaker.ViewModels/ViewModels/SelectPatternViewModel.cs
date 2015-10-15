@@ -17,10 +17,12 @@ namespace ImageMaker.ViewModels.ViewModels
         private readonly IViewModelNavigator _navigator;
         private readonly PatternViewModelProvider _patternViewModelProvider;
         private ObservableCollection<TemplateViewModel> _patterns;
-        private RelayCommand<TemplateViewModel> _selectPatternCommand;
+        //private RelayCommand<TemplateViewModel> _selectPatternCommand;
+        private RelayCommand _selectPatternCommand;
         private RelayCommand _goBackCommand;
         private bool _isBusyLoading;
         private ICollectionView _patternsView;
+        private TemplateViewModel _selectedPattern;
 
         public SelectPatternViewModel(
             IViewModelNavigator navigator,
@@ -60,6 +62,20 @@ namespace ImageMaker.ViewModels.ViewModels
             get { return _patterns ?? (_patterns = new ObservableCollection<TemplateViewModel>()); }
         }
 
+        public TemplateViewModel SelectedPattern
+        {
+            get { return _selectedPattern; }
+            set
+            {
+                if (_selectedPattern == value)
+                    return;
+                
+                _selectedPattern = value;
+                RaisePropertyChanged();
+                SelectPatternCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         public bool IsBusyLoading
         {
             get { return _isBusyLoading; }
@@ -73,11 +89,19 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public RelayCommand<TemplateViewModel> SelectPatternCommand
+        //public RelayCommand<TemplateViewModel> SelectPatternCommand
+        //{
+        //    get
+        //    {
+        //        return _selectPatternCommand ?? (_selectPatternCommand = new RelayCommand<TemplateViewModel>(SelectPattern));
+        //    }
+        //}
+
+        public RelayCommand SelectPatternCommand
         {
             get
             {
-                return _selectPatternCommand ?? (_selectPatternCommand = new RelayCommand<TemplateViewModel>(SelectPattern));
+                return _selectPatternCommand ?? (_selectPatternCommand = new RelayCommand(SelectPattern, () => SelectedPattern != null));
             }
         }
 
@@ -91,10 +115,10 @@ namespace ImageMaker.ViewModels.ViewModels
             _navigator.NavigateBack(this);
         }
 
-        void SelectPattern(TemplateViewModel pattern)
+        void SelectPattern()
         {
             //todo
-            _navigator.NavigateForward<CameraViewModel>(this, pattern);
+            _navigator.NavigateForward<CameraViewModel>(this, SelectedPattern);
         }
     }
 }

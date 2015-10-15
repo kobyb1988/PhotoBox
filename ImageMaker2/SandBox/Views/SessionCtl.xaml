@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="SandBox.Views.SessionCtl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Viewbox Stretch="Fill">
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="../Resources/blur.jpg" />
+            </Border.Background>
+            <Grid Height="600" Width="650">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+                <Border Padding="45,45,45,15">
+                    <Image Source="../Resources/top.png" >
+                    </Image>
+                </Border>
+                <Border Grid.Row="1" Padding="20">
+                    <Border CornerRadius="25" Background="#eeeeee">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"/>
+                                <RowDefinition Height="0.7*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Текущая сессия" HorizontalAlignment="Center" 
+                                       Foreground="#777777"
+                                       VerticalAlignment="Center" FontSize="20"/>
+                            <TextBlock Grid.Column="1" Text="Архив сессий" 
+                                       Foreground="#AAAAAA"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                            <Border Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="25" 
+                                    Padding="10"
+                                    Background="#cccccc" Margin="10">
+                                <ItemsControl Background="Transparent">
+                                    <ItemsControl.Style>
+                                        <Style TargetType="{x:Type ItemsControl}"> 
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                                        <Border>
+                                                            <customControls:CustomScrollViewer 
+                                                                
+                                                                Style="{StaticResource BaseCustomScrollViewerStyle}">
+                                                                <customControls:CustomScrollViewer.ScrollBarStyle>
+                                                                    <Style TargetType="{x:Type ScrollBar}"
+                                                       BasedOn="{StaticResource BaseScrollBarStyle}">
+                                                                        <Setter Property="Padding" Value="0" />
+                                                                        <Setter Property="BorderThickness" Value="0"/>
+                                                                    </Style>
+                                                                </customControls:CustomScrollViewer.ScrollBarStyle>
+                                                                <ItemsPresenter />    
+                                                            </customControls:CustomScrollViewer>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ItemsControl.Style>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.Items>
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                        <TextBlock Text="fff" />
+                                    </ItemsControl.Items>
+                                </ItemsControl>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Border>
+
+                <Border  Padding="20" Grid.Row="2">
+                    <Grid  Width="600" Height="70">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            Grid.Column="1"
+                            CornerRadius="30"
+                            FontSize="15"
+                            HorizontalAlignment="Stretch"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+                        <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
+                        <customControls:BlueButton 
+                            HorizontalAlignment="Stretch"
+                            FontSize="15"
+                            CornerRadius="30"
+                        Grid.Column="3"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Печать"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Viewbox>
+</UserControl>

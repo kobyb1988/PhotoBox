@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ImageMaker.Common.Dto;
 using ImageMaker.CommonViewModels.Ninject;
 using ImageMaker.CommonViewModels.Providers;
@@ -26,8 +27,10 @@ namespace ImageMaker.View
             var kernel = NinjectBootstrapper.GetKernel(new MainModule(), new NinjectBaseModule());
             var settings = kernel.Get<SettingsProvider>();
             ThemeSettingsDto theme = settings.GetThemeSettings();
-            if (theme != null)
-                ThemeManager.LoadTheme(theme);
+            foreach (var property in typeof(ThemeSettingsDto).GetProperties())
+            {
+                this.Properties.Add(property.Name, property.GetValue(theme));
+            }
 
             MainViewModel mainViewModel = kernel.Get<MainViewModel>();
             MainWindow = new MainWindow() {DataContext = mainViewModel};

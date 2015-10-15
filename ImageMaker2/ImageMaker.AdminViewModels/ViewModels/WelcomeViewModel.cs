@@ -59,7 +59,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void ShowStats()
         {
-            _navigator.NavigateForward<CameraSettingsExplorerViewModel>(this, null);
+            _navigator.NavigateForward<StatsViewModel>(this, null);
         }
 
         private void ManageThemes()

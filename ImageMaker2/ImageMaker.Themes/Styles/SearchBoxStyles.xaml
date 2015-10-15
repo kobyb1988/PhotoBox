@@ -8,31 +8,33 @@
     </ResourceDictionary.MergedDictionaries>
     
     <Style TargetType="{x:Type Button}" x:Key="SearchBtnStyle">
-        <Setter Property="Background" Value="{StaticResource OrangeBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource OrangeBrushPressed}" />
-        <Setter Property="BorderThickness" Value="0,0,0,2" />
+        <Setter Property="BorderThickness" Value="2" />
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
-                            CornerRadius="2"
+                            CornerRadius="{TemplateBinding Tag}"
+                            Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
                             >
                         <Grid>
                             <Rectangle IsHitTestVisible="False" Fill="#FFFFFFFF" 
+                                       Stretch="Uniform"
                                        Opacity="0"
                                        x:Name="overlay" />
 
-                            <Path Stroke="#FFFFFFFF" StrokeThickness="2" 
+                            <Path Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}" 
+                                  StrokeThickness="3" 
                               Margin="5"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"
                               Data="M 0,0 7,7 A 7,7 180 1 1 21,21 A 7,7 180 1 1 7,7 Z">
                                 <Path.RenderTransform>
                                     <TransformGroup>
-                                        <RotateTransform CenterX="14" CenterY="14" Angle="180" />
-                                        <ScaleTransform ScaleX="0.6" ScaleY="0.6" />
+                                        <RotateTransform CenterX="12" CenterY="12" Angle="180" />
+                                        <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
                                     </TransformGroup>
 
                                 </Path.RenderTransform>
@@ -41,9 +43,9 @@
                         
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
+                        <!--<Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="UIElement.Opacity" TargetName="overlay" Value="0.2"/>
-                        </Trigger>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -52,31 +54,45 @@
     
     <Style TargetType="{x:Type local:SearchBoxCtl}">
         <Setter Property="BorderBrush" Value="#dad1ce"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Background" Value="#dcf5f3" />
+        <Setter Property="AlternateBrush" Value="#4ecdc4" />
+        <Setter Property="BorderBrush" Value="#556270" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="Foreground" Value="#556270" />
+        <Setter Property="FontSize" Value="30" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SearchBoxCtl}">
                     <Border Background="{TemplateBinding Background}"
-                            CornerRadius="3"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition  />
+                                <ColumnDefinition  Width="0.8*"/>
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <TextBox Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SearchText}" 
                                      x:Name="tb"
+                                     Foreground="{TemplateBinding Foreground}"
                                      Tag="{TemplateBinding Tag}"
                                      Style="{StaticResource InputStyle}"
                                      Grid.ColumnSpan="2"
-                                     HorizontalContentAlignment="Center"
+                                     Padding="10,5,5,5"
+                                     FontSize="{TemplateBinding FontSize}"
+                                     Background="Transparent"
+                                     HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      BorderBrush="Transparent"/>
-                            <Button HorizontalAlignment="Right"
+                            <Button 
+                                HorizontalAlignment="Stretch"
                                     Grid.Column="1"
-                                    Margin="3"
+                                    Margin="-2"
+                                Tag="{TemplateBinding CornerRadius}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding AlternateBrush}"
                                     Style="{StaticResource SearchBtnStyle}"
                                     Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SearchCommand}"
                                     CommandParameter="{Binding ElementName=tb, Path=Text}"/>

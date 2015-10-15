@@ -80,5 +80,32 @@ namespace ImageMaker.Themes.CustomControls
         // Using a DependencyProperty as the backing store for CommandParameter.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(object), typeof(SearchBoxCtl), new PropertyMetadata(null));
+
+
+
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(SearchBoxCtl), new PropertyMetadata(new CornerRadius(0)));
+
+
+
+        public Brush AlternateBrush
+        {
+            get { return (Brush)GetValue(AlternateBrushProperty); }
+            set { SetValue(AlternateBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AlternateBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AlternateBrushProperty =
+            DependencyProperty.Register("AlternateBrush", typeof(Brush), typeof(SearchBoxCtl), new PropertyMetadata(Brushes.Transparent));
+
+        
+        
     }
 }

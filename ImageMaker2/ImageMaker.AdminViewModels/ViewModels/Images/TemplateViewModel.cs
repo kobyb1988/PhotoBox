@@ -38,6 +38,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             foreach (var child in children)
             {
                 Children.Add(child);
+                child.Index = Children.IndexOf(child) + 1;
             }
         }
 
@@ -55,7 +56,9 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public void AddNewChild()
         {
-            Children.Add(new TemplateImageViewModel(Width, Height));   
+            var child = new TemplateImageViewModel(Width, Height);
+            Children.Add(child);
+            child.Index = Children.IndexOf(child) + 1;
         }
 
         public int Id { get; protected set; }

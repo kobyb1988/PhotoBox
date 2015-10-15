@@ -1,0 +1,75 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Styles/NewStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+  
+    <!--<Style TargetType="{x:Type Button}" BasedOn="{StaticResource OrangeBtnStyle}">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>-->
+
+    <Style TargetType="{x:Type customControls:BlueButton}" BasedOn="{StaticResource DefBtnStyle}">
+        <!--<Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />-->
+    </Style>
+
+    <Style TargetType="{x:Type customControls:ContentButton}" BasedOn="{StaticResource ContentButtonBaseStyle}">
+        <!--<Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />-->
+    </Style>
+    
+    <Style TargetType="{x:Type customControls:RoundedButton}" BasedOn="{StaticResource RoundedButtonDefStyle}">
+        <!--<Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />-->
+    </Style>
+    
+    <Style TargetType="{x:Type customControls:DataPagerCtl}" BasedOn="{StaticResource DefStyle}">
+       
+    </Style>
+    
+    <Style TargetType="{x:Type customControls:CustomComboBox}" BasedOn="{StaticResource DefComboBoxStyle}">
+        <!--<Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />-->
+    </Style>
+    
+    <!--<Style TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="5" />
+    </Style>-->
+
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+    <Style TargetType="{x:Type customControls:TimeSelector}" BasedOn="{StaticResource TimeSelectorBaseStyle}">
+        
+    </Style>
+    <!--<Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource OrangeComboBoxStyle}">
+        <Setter Property="Margin" Value="5" />
+    </Style>-->
+
+    <!--<Style TargetType="{x:Type TextBox}" x:Key="ErrorLabel">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip"
+                Value="{Binding RelativeSource={RelativeSource Self}, 
+                       Path=(Validation.Errors)[0].ErrorContent}"/>
+
+                <Setter Property="BorderThickness" Value="1.5" />
+                <Setter Property="BorderBrush" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+</ResourceDictionary>

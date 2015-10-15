@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ImageMaker.AdminViewModels.Helpers;
 using ImageMaker.AdminViewModels.Providers;
+using ImageMaker.AdminViewModels.Services;
 using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
@@ -228,6 +229,26 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
         protected override StatsViewModel GetViewModel(object param)
         {
             return new StatsViewModel(_navigator);
+        }
+    }
+
+    public class CurrentSessionViewModelFactory : ViewModelBaseFactory<CurrentSessionViewModel>
+    {
+        private readonly IViewModelNavigator _navigator;
+        private readonly SessionService _sessionService;
+
+        public CurrentSessionViewModelFactory(
+            IViewModelNavigator navigator,
+            SessionService sessionService
+            )
+        {
+            _navigator = navigator;
+            _sessionService = sessionService;
+        }
+
+        protected override CurrentSessionViewModel GetViewModel(object param)
+        {
+            return new CurrentSessionViewModel(_navigator, _sessionService);
         }
     }
 }

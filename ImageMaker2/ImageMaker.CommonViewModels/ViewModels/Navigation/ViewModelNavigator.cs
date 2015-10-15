@@ -52,8 +52,18 @@ namespace ImageMaker.CommonViewModels.ViewModels.Navigation
         public void NavigateForward<TViewModelTo>(BaseViewModel from, object param)
             where TViewModelTo : BaseViewModel
         {
-            BaseViewModel to = _childrenViewModelsFactory.GetChild<TViewModelTo>(param);
-            var next = _storage.Next(from, to);
+            BaseViewModel next = null;
+            var existing = _storage.TryRemoveExisting<TViewModelTo>(from);
+            if (existing != null)
+            {
+                next = existing;
+            }
+            else
+            {
+                BaseViewModel to = _childrenViewModelsFactory.GetChild<TViewModelTo>(param);
+                next = _storage.Next(from, to);
+            }
+            
             RaiseContentChanged(next);
         }
 

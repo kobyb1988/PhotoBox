@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
@@ -15,6 +16,8 @@ namespace ImageMaker.InstagramMonitoring
         static void Main()
         {
             ServiceBase[] ServicesToRun;
+            Debugger.Launch();
+
             ServicesToRun = new ServiceBase[] 
             { 
                 new InstagramService() 

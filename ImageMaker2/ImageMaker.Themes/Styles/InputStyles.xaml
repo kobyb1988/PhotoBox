@@ -14,11 +14,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border Background="{TemplateBinding Background}" 
+                            Padding="{TemplateBinding Padding}"
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
                         <Grid>
-                            <ScrollViewer x:Name="PART_ContentHost" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
-                            <TextBlock Text="{TemplateBinding Tag}" x:Name="Tip" Visibility="Collapsed" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Foreground="{TemplateBinding Foreground}" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="Center"/>
+                            <TextBlock Text="{TemplateBinding Tag}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       x:Name="Tip" Visibility="Collapsed" TextAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

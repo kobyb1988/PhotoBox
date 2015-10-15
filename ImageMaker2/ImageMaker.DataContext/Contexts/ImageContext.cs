@@ -81,11 +81,12 @@ namespace ImageMaker.DataContext.Contexts
             //    .WithMany()
             //    .HasForeignKey(x => x.OverlayId);
 
+            modelBuilder.Entity<FileData>().HasKey(x => x.Id);
             modelBuilder.Entity<Image>()
-                .HasKey(x => x.Id)
-                .HasRequired(x => x.Data)
-                .WithRequiredPrincipal()
-                .WillCascadeOnDelete(true);
+                .HasKey(x => x.Id);
+                //.HasRequired(x => x.Data)
+                //.WithRequiredPrincipal()
+                //.WillCascadeOnDelete(true);
 
             modelBuilder.Entity<User>()
                 .HasKey(x => x.Id);

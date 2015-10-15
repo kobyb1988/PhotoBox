@@ -13,13 +13,388 @@
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:TemplateExplorerViewModel}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
         <converters:DoubleValueConverterExt x:Key="DoubleValueConverterExt" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <CollectionViewSource Source="{Binding Path=Children}" IsLiveFilteringRequested="True" x:Key="Source">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Filter">
+                    <command:EventToCommand Command="{Binding Mode=OneWay, Path=FilterCommand}" 
+                                                                PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <CollectionViewSource.LiveFilteringProperties>
+                <system:String>State</system:String>
+            </CollectionViewSource.LiveFilteringProperties>
+        </CollectionViewSource>
     </UserControl.Resources>
-    <Border Padding="15" Background="{StaticResource BackgroundBrush}">
+    <Viewbox Stretch="Fill">
+        <Border Padding="85,25">
+            <Border.Background>
+                <ImageBrush ImageSource="../Resources/blur.jpg" />
+            </Border.Background>
+
+            <Grid Width="900" Height="730">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.16*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.45*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="../Resources/templates.png" Margin="12,0,0,0"/>
+                    <Grid  Grid.Column="2" Margin="0,0,10,0">
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource OpaqueButtonStyle}">
+                                <Setter Property="Margin" Value="3" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Button Content="" Background="#c7f464" Command="{Binding Path=AddTemplateCommand}"/>
+                            <Rectangle IsHitTestVisible="False">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="../Resources/icons.png" Viewbox=".01,0,.5,.5">
+                                        <ImageBrush.Transform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleX="0.6" ScaleY="0.6"></ScaleTransform>
+                                            </TransformGroup>
+                                        </ImageBrush.Transform>
+                                        <ImageBrush.RelativeTransform>
+                                            <TranslateTransform X="0.35" Y="0.3"></TranslateTransform>
+                                        </ImageBrush.RelativeTransform>
+                                    </ImageBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock VerticalAlignment="Bottom" Text="добавить" Foreground="#ffffff" Grid.Row="1" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Button Content="" Background="#ff6b6b" Command="{Binding Path=RemoveTemplateCommand}"/>
+                            <Rectangle IsHitTestVisible="False">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="../Resources/icons.png" Viewbox=".49,0,.5,.5">
+                                        <ImageBrush.Transform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleX="0.6" ScaleY="0.6"></ScaleTransform>
+                                            </TransformGroup>
+                                        </ImageBrush.Transform>
+                                        <ImageBrush.RelativeTransform>
+                                            <TranslateTransform X="0.35" Y="0.3"></TranslateTransform>
+                                        </ImageBrush.RelativeTransform>
+                                    </ImageBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock VerticalAlignment="Bottom" Text="удалить" Foreground="#ffffff" Grid.Row="1" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Button Content="" Background="#4ecdc4" Command="{Binding Path=UpdateTemplateCommand}"/>
+                            <Rectangle IsHitTestVisible="False">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="../Resources/icons.png" Viewbox=".01,.44,.5,.5">
+                                        <ImageBrush.Transform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleX="0.6" ScaleY="0.6"></ScaleTransform>
+                                            </TransformGroup>
+                                        </ImageBrush.Transform>
+                                        <ImageBrush.RelativeTransform>
+                                            <TranslateTransform X="0.35" Y="0.3"></TranslateTransform>
+                                        </ImageBrush.RelativeTransform>
+                                    </ImageBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock VerticalAlignment="Bottom" Text="изменить" Foreground="#ffffff" Grid.Row="1" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Border  Grid.Row="1">
+                    <Grid>
+                        <Grid.Resources>
+                           
+                            <DataTemplate x:Key="tmpl" DataType="{x:Type images:CheckableTemplateViewModel}">
+                                <ToggleButton ClickMode="Release" IsChecked="{Binding Path=IsChecked}"
+                                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.CheckCommand}">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="{x:Type ToggleButton}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                        <Border x:Name="RootBorder"
+                                            Margin="10"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent" BorderThickness="2" 
+                                    Width="157.4" Height="157.4" >
+                                                            <Grid x:Name="rootGrid" ToolTip="{Binding Path=Name}">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="7*"/>
+                                                                    <RowDefinition Height="3*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="7*"/>
+                                                                    <ColumnDefinition Width="3*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                
+                                                                <ItemsControl 
+                                                Grid.RowSpan="2"
+                                                Grid.ColumnSpan="2"
+                                                Margin="5"
+                                                ItemsSource="{Binding Path=Children}" 
+                                                          >
+                                                                    <ItemsControl.Background>
+                                                                        <ImageBrush ImageSource="{Binding Path=Background.Data, Converter={StaticResource ByteArrayToImageConverter}}" />
+                                                                    </ItemsControl.Background>
+                                                                    <ItemsControl.ItemsPanel>
+                                                                        <ItemsPanelTemplate>
+                                                                            <Canvas IsItemsHost="True" 
+                                                                Width="{Binding Width}" 
+                                                                Height="{Binding Height}">
+                                                                                <Canvas.Background>
+                                                                                    <ImageBrush ImageSource="{Binding Path=Overlay.Data, Converter={StaticResource ByteArrayToImageConverter}}" />
+                                                                                </Canvas.Background>
+                                                                            </Canvas>
+                                                                        </ItemsPanelTemplate>
+                                                                    </ItemsControl.ItemsPanel>
+                                                                    <ItemsControl.Template>
+                                                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                                                            <Border 
+                                                            Padding="{TemplateBinding Padding}"
+                                            Width="{TemplateBinding Width}"
+                                            Height="{TemplateBinding Height}"
+                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                                Background="{TemplateBinding Background}">
+                                                                                <Viewbox Stretch="Fill" >
+                                                                                    <ItemsPresenter />
+                                                                                </Viewbox>
+                                                                            </Border>
+                                                                        </ControlTemplate>
+                                                                    </ItemsControl.Template>
+                                                                    <ItemsControl.ItemContainerStyle>
+                                                                        <Style>
+                                                                            <Setter Property="Canvas.Left">
+                                                                                <Setter.Value>
+                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                        <Binding Path="X" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                        <Binding Path="DataContext.Width" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                    </MultiBinding>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                            <Setter Property="Canvas.Top">
+                                                                                <Setter.Value>
+                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                        <Binding Path="Y" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                        <Binding Path="DataContext.Height" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                    </MultiBinding>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Style>
+                                                                    </ItemsControl.ItemContainerStyle>
+                                                                    <ItemsControl.ItemTemplate>
+                                                                        <DataTemplate DataType="{x:Type images:TemplateImageViewModel}">
+                                                                            <Label>
+                                                                                <Label.Width>
+                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                        <Binding Path="Width" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                        <Binding Path="DataContext.Width" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                    </MultiBinding>
+                                                                                </Label.Width>
+                                                                                <Label.Height>
+                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                        <Binding Path="Height" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                        <Binding Path="DataContext.Height" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                    </MultiBinding>
+                                                                                </Label.Height>
+                                                                                <Label.Style>
+                                                                                    <Style TargetType="{x:Type Label}">
+                                                                                        <Setter Property="BorderBrush" Value="Black" />
+                                                                                        <Setter Property="BorderThickness" Value="2" />
+                                                                                        <Setter Property="Template">
+
+                                                                                            <Setter.Value>
+                                                                                                <ControlTemplate TargetType="{x:Type Label}">
+                                                                                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"  
+                                                Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
+                                                >
+                                                                                                        <Rectangle Fill="Gray" />
+                                                                                                    </Border>
+                                                                                                </ControlTemplate>
+                                                                                            </Setter.Value>
+                                                                                        </Setter>
+                                                                                    </Style>
+                                                                                </Label.Style>
+                                                                            </Label>
+                                                                        </DataTemplate>
+                                                                    </ItemsControl.ItemTemplate>
+                                                                </ItemsControl>
+                                                                
+                                                                <!--<Image Source="{Binding Content}" Stretch="Fill"
+                                               Grid.ColumnSpan="2" 
+                                               Grid.RowSpan="2">
+                                                                </Image>-->
+                                                                <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
+                                                                <ToggleButton Grid.Row="1" Grid.Column="1" x:Name="toggle" 
+                                                                              IsHitTestVisible="False"
+                                                                              Margin="7" IsChecked="{TemplateBinding IsChecked}">
+                                                                    <ToggleButton.Style>
+                                                                        <Style TargetType="{x:Type ToggleButton}">
+                                                                            <Setter Property="Background" Value="White" />
+                                                                            <Setter Property="Padding" Value="5" />
+                                                                            <Setter Property="IsThreeState" Value="False" />
+                                                                            <Setter Property="Template">
+                                                                                <Setter.Value>
+                                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                                                        <Border>
+                                                                                            <Grid>
+                                                                                                <Ellipse Stretch="Fill" Fill="#ffffff" />
+                                                                                                <Ellipse Stretch="Fill" Fill="#4ecdc4">
+                                                                                                    <Ellipse.RenderTransform>
+                                                                                                        <ScaleTransform ScaleX="0.85" ScaleY="0.85" />
+                                                                                                    </Ellipse.RenderTransform>
+                                                                                                    <Ellipse.RenderTransformOrigin>
+                                                                                                        <Point X="0.5" Y="0.5"></Point>
+                                                                                                    </Ellipse.RenderTransformOrigin>
+                                                                                                </Ellipse>
+                                                                                                <Border Background="Transparent" BorderBrush="Transparent"
+                                                                                VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                                                                    <Path Data="M 0,0 L 11,-2 L 8,5" x:Name="Tick" Stroke="Transparent" StrokeThickness="1">
+                                                                                                        <Path.RenderTransform>
+                                                                                                            <RotateTransform Angle="135" CenterX="5.5" CenterY="1"/>
+                                                                                                        </Path.RenderTransform>
+                                                                                                    </Path>
+                                                                                                </Border>
+                                                                                            </Grid>
+
+                                                                                        </Border>
+                                                                                        <ControlTemplate.Triggers>
+                                                                                            <Trigger Property="IsChecked" Value="True">
+                                                                                                <Setter TargetName="Tick" Property="Stroke" Value="#ffffff" />
+                                                                                            </Trigger>
+                                                                                        </ControlTemplate.Triggers>
+                                                                                    </ControlTemplate>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Style>
+                                                                    </ToggleButton.Style>
+                                                                </ToggleButton>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                                                <Setter TargetName="overlay" Property="Opacity" Value="0.2" />
+                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="#4ecdc4" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter TargetName="overlay" Property="Opacity" Value="0.2" />
+                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="#4ecdc4" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
+
+
+                            </DataTemplate>
+                        </Grid.Resources>
+
+                        <ListBox Background="Transparent"
+                                     ItemTemplate="{StaticResource tmpl}"
+                                 SelectedItem="{Binding Path=SelectedTemplate}"
+                                     ItemsSource="{Binding Source={StaticResource Source}}"
+                            BorderBrush="Transparent"
+                                 BorderThickness="0"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     SelectionMode="Single">
+                            <ListBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#00000000"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#00000000"/>
+                            </ListBox.Resources>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Setter Property="IsSelected" Value="{Binding IsChecked}" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                        </ListBox>
+                        <spinningWheel:SpinningWheel 
+                    HorizontalAlignment="Center" Radius="50" Grid.Column="0"
+                IsSpinning="{Binding Path=IsBusyLoading}" 
+                Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Grid>
+                </Border>
+                <Border  Padding="10" Grid.Row="2">
+                    <Grid  Width="700" Height="65">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.75*"/>
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition Width="0.75*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            Command="{Binding Path=GoBackCommand}"
+                            CornerRadius="30"
+                                InnerCornerRadius="30"
+                                Padding="5"
+                            Grid.Column="1"
+                            FontSize="18"
+                            HorizontalAlignment="Stretch"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+                        <customControls:DataPagerCtl Grid.Column="2" 
+                                                     ItemsView="{Binding Source={StaticResource Source}}" 
+                                                     PageSize="5"
+                                         PagesInRow="3"
+                                                     Background="#4ecdc4"/>
+                        <!--<Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>-->
+                        <customControls:BlueButton 
+                            Command="{Binding Path=SaveCommand}"
+                            CornerRadius="30"
+                                
+                            FontSize="18"
+                            HorizontalAlignment="Stretch"
+                        Grid.Column="3"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Сохранить"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Viewbox>
+    
+    <!--<Border Padding="15" Background="{StaticResource BackgroundBrush}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
@@ -273,13 +648,6 @@
                                             </ToggleButton.Style>
                                         </ToggleButton>
 
-                                        <!--<CheckBox 
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                VerticalContentAlignment="Center"
-                                                IsThreeState="False" Grid.Row="1" Content="{Binding Path=Name}"
-                                                              IsChecked="{Binding Path=IsChecked}" 
-                                                              Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.CheckCommand}"/>-->
                                     </Grid>
 
 
@@ -296,5 +664,5 @@
             </Border>
             <Button Grid.Row="2" Content="&lt; Назад" Command="{Binding Path=GoBackCommand}"  HorizontalAlignment="Left"/>
         </Grid>
-    </Border>
+    </Border>-->
 </UserControl>

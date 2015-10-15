@@ -65,11 +65,11 @@ namespace ImageMaker.ViewModels.AutoMapper
             {
                 Id = x.Id,
                 Name = x.Name,
-                Data = new FileData()
-                {
-                    Id = x.Id,
-                    Data = x.Data
-                }
+                //Data = new FileData()
+                //{
+                //    Id = x.Id,
+                //    Data = x.Data
+                //}
             }, null);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Monads;
 using System.Text;
 using System.Threading.Tasks;
 using ImageMaker.Common.Extensions;
@@ -14,6 +15,27 @@ namespace ImageMaker.CommonViewModels.ViewModels.Navigation
         public BaseViewModel Next(BaseViewModel to)
         {
             return _navigationOrder.AddFirst(to).Value;
+        }
+
+        public T TryRemoveExisting<T>(BaseViewModel from) where T : BaseViewModel
+        {
+            T existing = _navigationOrder.FirstOrDefault(x => x is T) as T;
+            LinkedListNode<BaseViewModel> oldNode = existing.With(x => _navigationOrder.Find(x));
+            if (oldNode.With(x => x.Previous).With(x => x.Value) == from)
+                return null;
+
+            if (oldNode != null)
+            {
+                oldNode = oldNode.Next;
+                while (oldNode != null)
+                {
+                    var next = oldNode.Next;
+                    _navigationOrder.Remove(oldNode);
+                    oldNode = next;
+                }
+            }
+
+            return existing;
         }
 
         public BaseViewModel Next(BaseViewModel from, BaseViewModel to)

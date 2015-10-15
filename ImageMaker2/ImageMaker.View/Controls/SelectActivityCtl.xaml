@@ -4,13 +4,86 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ImageMaker.ViewModels.ViewModels;assembly=ImageMaker.ViewModels"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:SelectActivityViewModel}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <Border  Background="{StaticResource BackgroundBrush}" Padding="30">
+
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/colors.png" 
+                        Viewbox="0.15,0.05,0.7,0.9"/>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Padding="45">
+                        <Viewbox >
+                            <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/logo.png" >
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+                                </Image.RenderTransform>
+                                <Image.RenderTransformOrigin>
+                                    <Point X="0.5" Y="0.5"></Point>
+                                </Image.RenderTransformOrigin>
+                            </Image>
+                        </Viewbox>
+                    </Border>
+                    <Viewbox Grid.Row="1" Stretch="Uniform" Margin="60,30">
+                        <Grid  Width="500" Height="350">
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type customControls:RoundedButton}" BasedOn="{StaticResource RoundedButtonDefStyle}">
+                                    <Setter Property="Margin" Value="15" />
+                                    <Setter Property="FontSize" Value="22" />
+                                    <Setter Property="CornerRadius" Value="45" />
+                                    <Setter Property="Foreground" Value="#ac634c" />
+                                </Style>
+                            </Grid.Resources>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <customControls:RoundedButton Content="Выбрать шаблон для фото" 
+                                                          Command="{Binding Path=ProceedToPatternSelectionCommand}"
+                                                          Background="{DynamicResource {x:Static themes:ThemeManager.MainBackgroundColorKey}}"/>
+                            <customControls:RoundedButton  
+                                Command="{Binding Path=InstagramSurfCommand}"
+                                Content="Загрузка фото из INSTAGRAM" Grid.Row="1"/>
+                            <TextBlock Grid.Row="2"
+                                       FontSize="22"
+                                       Text="    мгновенная обработка&#10;и печать ваших фотографий" 
+                                   Foreground="#ac634c"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+            <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/instagram.png" 
+                   Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Image.RenderTransform>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+
+    </Border>
+    
+    <!--<Border  Background="{StaticResource BackgroundBrush}" Padding="30">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -40,5 +113,5 @@
             </StackPanel>
         </Grid>
         
-    </Border>
+    </Border>-->
 </UserControl>

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Monads;
 using AutoMapper;
 using ImageMaker.AdminViewModels.ViewModels;
@@ -15,9 +17,11 @@ namespace ImageMaker.AdminViewModels.AutoMapper
         protected override void Configure()
         {
             CreateMap<CameraSettingsExplorerViewModel, CameraSettingsDto>();
-            CreateMap<AppSettingsExplorerViewModel, AppSettingsDto>();
+            CreateMap<AppSettingsExplorerViewModel, AppSettingsDto>()
+                .ForMember(x => x.DateEnd, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateEnd.Hours, c.DateEnd.Minutes, 0)))
+                .ForMember(x => x.DateStart, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateStart.Hours, c.DateStart.Minutes, 0)));
             CreateMap<ThemeManagerViewModel, ThemeSettingsDto>()
-                .ForMember(x => x.BackgroundImage, x => x.MapFrom(d => d.MainWindowImage.With(c => c.Data)))
+               // .ForMember(x => x.BackgroundImage, x => x.MapFrom(d => d.MainWindowImage.With(c => c.Data)))
                 .ForMember(x => x.MainBackgroundColor, x => x.MapFrom(d => d.MainWindowBackgroundColor))
                 .ForMember(x => x.MainBorderColor, x => x.MapFrom(d => d.MainWindowBorderColor))
                 .ForMember(x => x.MainForegroundColor, x => x.MapFrom(d => d.MainWindowForegroundColor))
@@ -31,6 +35,8 @@ namespace ImageMaker.AdminViewModels.AutoMapper
             CreateMap<TemplateViewModel, Template>()
                 .ConvertUsing(FromTemplateViewModel);
 
+            CreateMap<Image, ImageViewModel>()
+                .ConvertUsing(FromImage);
             //CreateMap<Composition, CompositionViewModel>()
             //    .ConvertUsing(x => new CompositionViewModel(x.Name, x.Id, FromTemplate(x.Template), FromImage(x.Background), FromImage(x.Overlay)));
 
@@ -50,6 +56,16 @@ namespace ImageMaker.AdminViewModels.AutoMapper
         private ImageViewModel FromImage(FileData image)
         {
             return image.Return(x => new ImageViewModel(x.Id, "", x.Data), null);
+        }
+
+        private ImageViewModel FromImage(Image image)
+        {
+            if (!File.Exists(image.Path))
+                return null;
+
+            byte[] data = File.ReadAllBytes(image.Path);
+
+            return new ImageViewModel(image.Id, image.Name, data);
         }
 
         //private ImageViewModel FromImage(Image image)
@@ -102,9 +118,9 @@ namespace ImageMaker.AdminViewModels.AutoMapper
                 }).ToList(),
 
                 Background = background,
-                BackgroundId = background.Return(x => x.Id, (int?)null),
+                //BackgroundId = background.Return(x => x.Id, (int?)null),
                 Overlay = overlay,
-                OverlayId = overlay.Return(x => x.Id, (int?)null),
+                //OverlayId = overlay.Return(x => x.Id, (int?)null),
             };
         }
 

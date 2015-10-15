@@ -25,10 +25,10 @@ namespace ImageMaker.ViewModels.ViewModels
             messenger.Register<WindowStateMessage>(this, state => RaiseStateChanged(state.State));
 
             messenger.Register<ContentChangedMessage>(this, OnContentChanged);
-            navigator.NavigateForward<WelcomeViewModel>(null);
+            navigator.NavigateForward<SelectActivityViewModel>(null);
 
             messenger.Register<CommandMessage>(this, OnOpenCommand);
-            communicationManager.Connect();
+          //  communicationManager.Connect();
         }
 
         private void OnOpenCommand(CommandMessage command)

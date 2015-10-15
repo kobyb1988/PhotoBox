@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Timers;
 using ImageMaker.Utils.Services;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace ImageMaker.UtilsTests.IntegrationTests

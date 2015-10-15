@@ -7,9 +7,65 @@
              xmlns:adminView="clr-namespace:ImageMaker.AdminView"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:WelcomeViewModel}"
-             d:DesignHeight="700" d:DesignWidth="300"
+             d:DesignHeight="700" d:DesignWidth="800"
              Background="{StaticResource BackgroundBrush}">
-    <Border Padding="15">
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="../Resources/girls.jpg" Viewbox="0.15,0.05,0.7,0.9"/>
+        </Border.Background>
+        <Grid>
+            <Rectangle>
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="../Resources/colors.png" Opacity="0.4" />
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Padding="45">
+                    <Viewbox >
+                        <Image Source="../Resources/logo.png" >
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+                            </Image.RenderTransform>
+                            <Image.RenderTransformOrigin>
+                                <Point X="0.5" Y="0.5"></Point>
+                            </Image.RenderTransformOrigin>
+                        </Image>
+                    </Viewbox>
+                </Border>
+                <Viewbox Grid.Row="1" Stretch="Uniform" Margin="60,30">
+                    <Grid  Width="400" Height="150">
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource OpaqueButtonStyle}">
+                                <Setter Property="Margin" Value="3" />
+                                <Setter Property="FontSize" Value="12" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Button Content="Настройка интерфейса:" Command="{Binding Path=ManageAppSettingsCommand}"/>
+                        <Button  Content="Настройка камеры:" Grid.Row="1" Command="{Binding Path=ManageCameraSettingsCommand}"/>
+                        <Button  Content="Настройка шаблонов:" Grid.Row="2" Command="{Binding Path=ManageTemplatesCommand}"/>
+                        <Button  Content="Редактор тем:" Grid.Column="1" Command="{Binding Path=ManageThemesCommand}"/>
+                        <Button  Content="Статистика:" Grid.Column="1" Grid.Row="1" Command="{Binding Path=ShowStatsCommand}"/>
+                        <Button  Content="Запустить основной модуль:" Grid.Column="1" Grid.Row="2" FontSize="10" 
+                                 Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
+                    </Grid>
+                </Viewbox>
+            </Grid>
+        </Grid>
+    </Border>
+    <!--<Border Padding="15">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.33*"/>
@@ -26,7 +82,7 @@
                     <RowDefinition Height="1.75*"/>
                     <RowDefinition Height="1.75*"/>
                     <RowDefinition Height="1.75*"/>
-                    <!--<RowDefinition Height="1.75*"/>-->
+                    --><!--<RowDefinition Height="1.75*"/>--><!--
                 </Grid.RowDefinitions>
                 
                 <Viewbox Margin="5">
@@ -41,8 +97,6 @@
                     Content="Настройка камеры" Command="{Binding Path=ManageCameraSettingsCommand}"/>
                 <Button Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                     Content="Настройка шаблонов" Command="{Binding Path=ManageTemplatesCommand}"/>
-                <!--<Button Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                    Content="Настройка композиций" Command="{Binding Path=ManageCompositionsCommand}"/>-->
                 <Button Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                     Content="Редактор тем" Command="{Binding Path=ManageThemesCommand}"/>
                 <Button Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
@@ -53,5 +107,5 @@
             </Grid>
         </Grid>
         
-    </Border>
+    </Border>-->
 </UserControl>

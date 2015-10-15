@@ -11,7 +11,7 @@ namespace ImageMaker.AppClient.ServiceHosting
     {
         private Client _client;
 
-        public void CreateClient(Action<Command> onCommand)
+        public virtual void CreateClient(Action<Command> onCommand)
         {
             if (_client != null)
                 return;
@@ -27,7 +27,7 @@ namespace ImageMaker.AppClient.ServiceHosting
             }
         }
 
-        public void SendCommand(Command command)
+        public virtual void SendCommand(Command command)
         {
             if (_client != null)
             {
@@ -44,7 +44,7 @@ namespace ImageMaker.AppClient.ServiceHosting
             }
         }
 
-        public void Abort()
+        public virtual void Abort()
         {
             if (_client == null)
                 return;

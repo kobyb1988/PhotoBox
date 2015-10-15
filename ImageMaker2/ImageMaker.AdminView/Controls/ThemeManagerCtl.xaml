@@ -6,13 +6,593 @@
              xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:converters="clr-namespace:ImageMaker.CommonView.Converters;assembly=ImageMaker.CommonView"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:controls="clr-namespace:ImageMaker.AdminView.Controls"
+             xmlns:images="clr-namespace:ImageMaker.CommonViewModels.ViewModels.Images;assembly=ImageMaker.CommonViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels:ThemeManagerViewModel}">
     <UserControl.Resources>
         <converters:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
     </UserControl.Resources>
-    <Border Padding="15" Background="{StaticResource BackgroundBrush}">
+
+    <Viewbox Stretch="Fill">
+        <Border Padding="30">
+            <Border.Background>
+                <ImageBrush ImageSource="../Resources/blur.jpg" />
+            </Border.Background>
+            <Grid Width="900" Height="730">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.16*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.66*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="../Resources/templates.png" Margin="12,0,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type customControls:ContentButton}" BasedOn="{StaticResource ContentButtonBaseStyle}">
+                            <Setter Property="CornerRadius" Value="40" />
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Главное окно" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="25" />
+                    <TextBlock Text="Второстепенные окна"  Grid.Column="1" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="25"/>
+                    <customControls:ContentButton Grid.Row="1" 
+                                                  
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch"
+                                                  Title="Цвет&#10;кнопок:"
+                                                  Content="{Binding Path=MainWindowBackgroundColor}">
+                        <customControls:ContentButton.IconBrush>
+                            
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.7" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1"
+                                            Command="{Binding Path=DataContext.PickColorCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}"
+                                            CommandParameter="{x:Static viewModels:ColorType.MainBackground}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="{Binding}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                                                     Fill="{TemplateBinding Background}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                                
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    
+                                    <!--<Ellipse Grid.Column="1" Stretch="Fill" Fill="{Binding Path=MainWindowBackgroundColor}" 
+                                             Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+                    </customControls:ContentButton>
+                    <customControls:ContentButton Grid.Row="2" Title="Цвет&#10;окантовки&#10;кнопок:" 
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch"
+                                                  Content="{Binding Path=MainWindowBorderColor}">
+                        <customControls:ContentButton.IconBrush>
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.7" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1"
+                                            Command="{Binding Path=DataContext.PickColorCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}"
+                                            CommandParameter="{x:Static viewModels:ColorType.MainBorder}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="{Binding}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                                                     Fill="{TemplateBinding Background}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <!--<Ellipse Grid.Column="1" Stretch="Fill" Fill="{Binding Path=MainWindowBorderColor}" 
+                                             Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+                    </customControls:ContentButton>
+                    <customControls:ContentButton Grid.Row="3" Title="Цвет&#10;текста:" 
+                                                  VerticalContentAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  Content="{Binding Path=MainWindowForegroundColor}">
+                        <customControls:ContentButton.IconBrush>
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.7" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1"
+                                            Command="{Binding Path=DataContext.PickColorCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}"
+                                            CommandParameter="{x:Static viewModels:ColorType.MainForeground}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="{Binding}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                                                     Fill="{TemplateBinding Background}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <!--<Ellipse Grid.Column="1" Stretch="Fill" Fill="{Binding Path=MainWindowForegroundColor}" 
+                                             Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+                    </customControls:ContentButton>
+                    <customControls:ContentButton Grid.Row="4" 
+                                                  Content="{Binding Path=MainWindowImage}"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch"
+                                                  Title="Фоновая&#10;картинка:">
+                        <customControls:ContentButton.IconBrush>
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0,0,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.8" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate DataType="{x:Type images:ImageViewModel}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1" 
+                                            Command="{Binding Path=DataContext.SelectImageCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}"
+                                            >
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="{Binding Path=Data, 
+                                                                        Converter={StaticResource ByteArrayToImageConverter}}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3" Fill="{TemplateBinding Background}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                                
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+
+                    </customControls:ContentButton>
+                    <customControls:ContentButton Grid.Row="1" Grid.Column="1" 
+                                                  VerticalContentAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  Title="Цвет&#10;кнопок:" Content="{Binding Path=OtherWindowsBackgroundColor}">
+                        <customControls:ContentButton.IconBrush>
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.7" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1"
+                                            Command="{Binding Path=DataContext.PickColorCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}"
+                                            CommandParameter="{x:Static viewModels:ColorType.OtherBackground}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="{Binding}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                                                     Fill="{TemplateBinding Background}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <!--<Ellipse Grid.Column="1" Stretch="Fill" Fill="{Binding Path=OtherWindowsBackgroundColor}" 
+                                             Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+                    </customControls:ContentButton>
+                    <customControls:ContentButton Grid.Row="2" Grid.Column="1" Title="Цвет&#10;окантовки&#10;кнопок:" 
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch"
+                                                  Content="{Binding Path=OtherWindowsBorderColor}">
+                        <customControls:ContentButton.IconBrush>
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.7" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1"
+                                            Command="{Binding Path=DataContext.PickColorCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}"
+                                            CommandParameter="{x:Static viewModels:ColorType.OtherBorder}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="{Binding}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                                                     Fill="{TemplateBinding Background}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <!--<Ellipse Grid.Column="1" Stretch="Fill" Fill="{Binding Path=OtherWindowsBorderColor}" 
+                                             Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+                    </customControls:ContentButton>
+                    <customControls:ContentButton Grid.Row="3" Grid.Column="1" 
+                                                  VerticalContentAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  Title="Цвет&#10;текста:" 
+                                                  Content="{Binding Path=OtherWindowsForegroundColor}">
+                        <customControls:ContentButton.IconBrush>
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.7" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1"
+                                            Command="{Binding Path=DataContext.PickColorCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}"
+                                            CommandParameter="{x:Static viewModels:ColorType.OtherForeground}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="{Binding}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                                                     Fill="{TemplateBinding Background}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <!--<Ellipse Grid.Column="1" Stretch="Fill" Fill="{Binding Path=OtherWindowsForegroundColor}" 
+                                             Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+                    </customControls:ContentButton>
+                    <customControls:ContentButton Grid.Row="4" Grid.Column="1" Title="Фоновая&#10;картинка:" 
+                                                  VerticalContentAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  Content="{Binding Path=OtherWindowsImage}">
+                        <customControls:ContentButton.IconBrush>
+                            <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0,0,0.5,0.5">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                </ImageBrush.Transform>
+                                <ImageBrush.RelativeTransform>
+                                    <TranslateTransform X="0.8" Y="0.8" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </customControls:ContentButton.IconBrush>
+                        <customControls:ContentButton.ContentTemplate>
+                            <DataTemplate DataType="{x:Type images:ImageViewModel}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="1"  
+                                            Command="{Binding Path=DataContext.SelectOtherWindowsImageCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="{Binding Path=Data, 
+                                                                        Converter={StaticResource ByteArrayToImageConverter}}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{TemplateBinding Background}">
+                                                            </Ellipse>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                </Grid>
+                            </DataTemplate>
+                        </customControls:ContentButton.ContentTemplate>
+                    </customControls:ContentButton>
+
+                    <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*" />
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:ContentButton Grid.Column="1" 
+                                                      Content="{Binding Path=BackgroundImage}"
+                                                      HorizontalContentAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"
+                                                  HorizontalAlignment="Stretch"
+                                                  Title="Заставка:">
+                            <customControls:ContentButton.IconBrush>
+                                <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0,0,0.5,0.5">
+                                    <ImageBrush.Transform>
+                                        <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
+                                    </ImageBrush.Transform>
+                                    <ImageBrush.RelativeTransform>
+                                        <TranslateTransform X="0.8" Y="0.8" />
+                                    </ImageBrush.RelativeTransform>
+                                </ImageBrush>
+                            </customControls:ContentButton.IconBrush>
+                            <customControls:ContentButton.ContentTemplate>
+                                <DataTemplate DataType="{x:Type images:ImageViewModel}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.65*"/>
+                                            <ColumnDefinition Width="0.35*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <Button Grid.Column="1"  
+                                            Command="{Binding Path=DataContext.SelectBackgroundImageCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <ImageBrush ImageSource="{Binding Path=Data, 
+                                                                        Converter={StaticResource ByteArrayToImageConverter}}" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Ellipse Stretch="Fill" Stroke="White" StrokeThickness="3"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{TemplateBinding Background}">
+                                                                </Ellipse>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </customControls:ContentButton.ContentTemplate>
+                        </customControls:ContentButton>
+                    </Grid>
+
+                </Grid>
+
+                <Border  Padding="10" Grid.Row="2">
+                    <Grid  Width="700" Height="75">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="0.35*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="0.35*"/>
+                            <ColumnDefinition Width="0.4*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            Command="{Binding Path=GoBackCommand}"
+                            CornerRadius="35"
+                                InnerCornerRadius="35"
+                                Padding="8"
+                            Grid.Column="1"
+                            FontSize="18"
+                            HorizontalAlignment="Stretch"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+
+                        <Rectangle Grid.Column="2" Width="48" Fill="#5543beb5"/>
+                        <customControls:BlueButton 
+                            Command="{Binding Path=SaveSettingsCommand}"
+                            CornerRadius="35"
+                                
+                            FontSize="18"
+                            HorizontalAlignment="Stretch"
+                        Grid.Column="3"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Сохранить"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Viewbox>
+    
+    <!--<Border Padding="15" Background="{StaticResource BackgroundBrush}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -125,5 +705,5 @@
                     Command="{Binding Path=SaveSettingsCommand}"/>
             </StackPanel>
         </Grid>
-    </Border>
+    </Border>-->
 </UserControl>

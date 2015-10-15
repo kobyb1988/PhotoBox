@@ -2,8 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/ImageMaker.Themes;component/Styles/BasicStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/ImageMaker.CommonView;component/Styles/DataPagerStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ImageMaker.Themes;component/Styles/BasicStylesNew.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/ImageMaker.Themes;component/Styles/BasicStyles.xaml" />-->
+        <!--<ResourceDictionary Source="pack://application:,,,/ImageMaker.CommonView;component/Styles/DataPagerStyles.xaml" />-->
         <!--<ResourceDictionary Source="pack://application:,,,/ImageMaker.CommonView;component/Themes/Generic.xaml" />-->
     </ResourceDictionary.MergedDictionaries>
 

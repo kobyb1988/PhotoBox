@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="SandBox.Views.CameraResultCtl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:sandBox="clr-namespace:SandBox"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="{x:Static sandBox:ResourceKeys.SomeBrush}" Color="#ffeeee" />
+    </UserControl.Resources>
+    <Viewbox Stretch="Fill">
+        <Border Padding="85,25">
+            <Border.Background>
+                <ImageBrush ImageSource="../Resources/blur.jpg" />
+            </Border.Background>
+
+            <Grid Width="900" Height="730">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.18*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.18*" />
+                </Grid.RowDefinitions>
+                <Border Background="#ffffff" CornerRadius="40" Padding="5" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="../Resources/logo_1.png" Margin="20,0,0,0">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </Image.RenderTransform>
+                        </Image>
+                        <StackPanel Orientation="Horizontal" Grid.Column="2">
+                            <TextBlock Text="Шаг 3: " 
+                                       FontSize="20"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       Foreground="Red"/>
+                            <TextBlock Text="Печать результата" 
+                                       FontSize="20"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border  Grid.Row="1" Padding="20">
+                    <Grid>
+                        <Rectangle Fill="#556270" />
+                        <TextBlock FontSize="300" Text="2" Foreground="#808994" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Border>
+                <Border  Padding="0" Grid.Row="2">
+                    <Grid  Width="890" Height="85">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            CornerRadius="40"
+                                InnerCornerRadius="40"
+                                Padding="8"
+                            Grid.Column="0"
+                            FontSize="18"
+                            HorizontalAlignment="Stretch"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+
+                        <Rectangle Grid.Column="1" Fill="#5543beb5"/>
+                        <customControls:ContentButton Grid.Column="1" 
+                                                  Content="yoba"
+                                                      CornerRadius="50"
+                                                      HorizontalAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch"
+                                                  Title="Фоновая&#10;картинка:">
+                            <customControls:ContentButton.IconBrush>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="   235" Foreground="{DynamicResource {x:Static sandBox:ResourceKeys.SomeBrush}}"/>
+                                            <!--<TextBlock Text="   235" Foreground="#ff6b6b"/>-->
+                                            <TextBlock Text="рублей"/>
+                                        </StackPanel>
+                                    </VisualBrush.Visual>
+                                    <VisualBrush.Transform>
+                                        <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
+                                    </VisualBrush.Transform>
+                                    <VisualBrush.RelativeTransform>
+                                        <TranslateTransform X="0.1" Y="0.25" />
+                                    </VisualBrush.RelativeTransform>
+                                </VisualBrush>
+                              
+                            </customControls:ContentButton.IconBrush>
+                            <customControls:ContentButton.ContentTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.65*"/>
+                                            <ColumnDefinition Width="0.35*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <customControls:CustomRepeatButton x:Name="PART_LineUpButton" 
+                                                              BorderBrush="Transparent"
+                                                          CornerRadius="50,50,0,0"
+                                      Style="{StaticResource ScrollBarCustomButton}">
+                                                <Path x:Name="ArrowTop" 
+                                                  Data="M 0,0 L 0,10 L 10,10"
+                                                  Stroke="#b4b4b4"
+                                                  StrokeThickness="2"
+                                                      Margin="0">
+                                                    <!--HorizontalAlignment="Center"  VerticalAlignment="Center">-->
+                                                    <Path.RenderTransform>
+                                                        <TransformGroup>
+                                                            <RotateTransform Angle="135" />
+                                                            <TranslateTransform Y="5" />
+                                                        </TransformGroup>
+
+                                                    </Path.RenderTransform>
+                                                    <Path.RenderTransformOrigin>
+                                                        <Point X="0.5" Y="0.5"></Point>
+                                                    </Path.RenderTransformOrigin>
+                                                </Path>
+                                            </customControls:CustomRepeatButton>
+
+                                            <Border BorderBrush="#cccccc" BorderThickness="0.05" Grid.Row="1"/>
+
+                                            <customControls:CustomRepeatButton x:Name="PART_LineDownButton" 
+                                                                      CornerRadius="50,50,0,0"
+                                                              BorderBrush="Transparent"
+                                                            
+                                       Grid.Row="2" 
+                                      Style="{StaticResource ScrollBarCustomButton}">
+                                                <RepeatButton.RenderTransform>
+                                                    <RotateTransform Angle="180" />
+                                                </RepeatButton.RenderTransform>
+                                                <RepeatButton.RenderTransformOrigin>
+                                                    <Point X="0.5" Y="0.5" />
+                                                </RepeatButton.RenderTransformOrigin>
+                                                <Path x:Name="ArrowBottom" 
+                                                  Data="M 0,0 L 0,10 L 10,10"
+                                                  Stroke="#b4b4b4"
+                                                  StrokeThickness="2"
+                                                   Margin="0" >
+                                                    <Path.RenderTransform>
+                                                        <TransformGroup>
+                                                            <RotateTransform Angle="135" />
+                                                            <TranslateTransform Y="5" X="-1"/>
+                                                        </TransformGroup>
+
+                                                    </Path.RenderTransform>
+                                                    <Path.RenderTransformOrigin>
+                                                        <Point X="0.5" Y="0.5"></Point>
+                                                    </Path.RenderTransformOrigin>
+                                                </Path>
+                                            </customControls:CustomRepeatButton>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </customControls:ContentButton.ContentTemplate>
+                            <customControls:ContentButton.RenderTransform>
+                                <ScaleTransform ScaleX="0.7"/>
+                            </customControls:ContentButton.RenderTransform>
+                            <customControls:ContentButton.RenderTransformOrigin>
+                                <Point X="0.5" Y="0.5" />
+                            </customControls:ContentButton.RenderTransformOrigin>
+                        </customControls:ContentButton>
+                        <customControls:BlueButton 
+                            CornerRadius="40"
+                                Padding="8"
+                            FontSize="18"
+                            ShowBackButton="True"
+                            IsLeftOriented="False"
+                            HorizontalAlignment="Stretch"
+                        Grid.Column="2"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Вперед"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Viewbox>
+</UserControl>

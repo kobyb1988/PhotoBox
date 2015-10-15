@@ -2,7 +2,7 @@
 {
     public abstract class ViewModelBaseFactory<TViewModel> : IViewModelFactory where TViewModel : BaseViewModel
     {
-        public BaseViewModel Get(object param)
+        public virtual BaseViewModel Get(object param)
         {
             return GetViewModel(param);
         }

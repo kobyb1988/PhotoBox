@@ -91,6 +91,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMaker.AppClient", "Ima
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMaker.CommonViewModelsTests", "ImageMaker.CommonViewModelsTests\ImageMaker.CommonViewModelsTests.csproj", "{406CF302-15ED-47BF-A929-65EAE5109C99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMaker.ViewModelsTests", "ImageMaker.ViewModelsTests\ImageMaker.ViewModelsTests.csproj", "{C6FEEEB5-9611-40E7-BC69-D4757549E79E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -401,6 +403,16 @@ Global
 		{406CF302-15ED-47BF-A929-65EAE5109C99}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{406CF302-15ED-47BF-A929-65EAE5109C99}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{406CF302-15ED-47BF-A929-65EAE5109C99}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -436,5 +448,6 @@ Global
 		{D95B7AB7-680F-41DB-9FE1-07BE15F97B41} = {2670CA76-942A-48E1-A4C8-4584710A0452}
 		{DE8E8D60-19C9-49D9-AFF4-68A6AD700C3A} = {2670CA76-942A-48E1-A4C8-4584710A0452}
 		{406CF302-15ED-47BF-A929-65EAE5109C99} = {99F7516F-7BD2-4C2E-A8B4-EA15A003D318}
+		{C6FEEEB5-9611-40E7-BC69-D4757549E79E} = {99F7516F-7BD2-4C2E-A8B4-EA15A003D318}
 	EndGlobalSection
 EndGlobal

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.AdminViewModels.Services;
 using ImageMaker.CommonViewModels.Behaviors;
 using ImageMaker.CommonViewModels.Messenger;
 using ImageMaker.CommonViewModels.Services;
@@ -14,13 +12,16 @@ namespace ImageMaker.AdminViewModels.ViewModels
 {
     public class MainViewModel : BaseViewModel, ICloseable, IWindowContainer
     {
+        private readonly SessionService _sessionService;
         private readonly CommunicationManager _communicationManager;
 
         public MainViewModel(
             IViewModelNavigator navigator,
             IMessenger messenger,
+            SessionService sessionService,
             CommunicationManager communicationManager)
         {
+            _sessionService = sessionService;
             _communicationManager = communicationManager;
             messenger.Register<ShowChildWindowMessage>(this, RaiseShowWindow);
 
@@ -32,7 +33,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
 
             messenger.Register<CommandMessage>(this, OnOpenCommand);
-           // communicationManager.Connect();
+            //communicationManager.Connect();
         }
 
         private void OnOpenCommand(CommandMessage command)
@@ -99,33 +100,27 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void ShowMain()
         {
-            Action hide = () =>
-                          {
-                              RaiseRequestClose(WindowState.Hidden);
-                              _communicationManager.SendHideCommand();
-                          };
-
-            StartMain(hide);
+            StartMain();
         }
 
         private const string CMain = @"ImageMaker.View.exe";
 
+
         private Process _process;
-        private void StartMain(Action hide)
+        private void StartMain()
         {
+            RaiseRequestClose(WindowState.Hidden);
             if (_process != null)
             {
-                hide();
+                _communicationManager.SendHideCommand();
                 return;
             }
 
-            RaiseRequestClose(WindowState.Hidden);
+            _sessionService.StartSession();
+
             _process = Process.Start(new ProcessStartInfo(CMain)
             {
             });
-
-            //Task.Delay(TimeSpan.FromSeconds(5))
-            //    .ContinueWith(t => hide(), TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         public event EventHandler<bool> StateChanged;

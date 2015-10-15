@@ -75,6 +75,10 @@
       <Project>{f4109e8e-572c-40af-a52b-fb4aaf611c10}</Project>
       <Name>ImageMaker.CommonViewModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Common\ImageMaker.CommonData.csproj">
+      <Project>{A464C7A6-84F3-4A44-8133-13EAFEFD8E24}</Project>
+      <Name>ImageMaker.CommonData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageMaker.DataContext\ImageMaker.DataContext.csproj">
       <Project>{7D53E48E-AB13-42EB-9CDF-D1DAC8429857}</Project>
       <Name>ImageMaker.DataContext</Name>

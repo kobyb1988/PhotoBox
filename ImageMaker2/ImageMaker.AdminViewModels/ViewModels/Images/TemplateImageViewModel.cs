@@ -16,6 +16,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         private double _width;
         private double _height;
         private bool _isSelected;
+        private int _index;
 
         public TemplateImageViewModel(double x, double y, double width, double height, int id, double parentWidth, double parentHeight) 
             : this(parentWidth, parentHeight)
@@ -103,6 +104,19 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             }
         }
 
+        public int Index
+        {
+            get { return _index; }
+            set
+            {
+                if (_index == value)
+                    return;
+
+                _index = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public int Id { get; private set; }
 
         private void PushState()
@@ -171,65 +185,39 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         public void SetSelected(bool status)
         {
             _isSelected = status;
-            RaiseSelectionChanged();
+            //RaiseSelectionChanged();
             RaisePropertyChanged(() => IsSelected);
         }
 
 
         public void Resize(double deltaX, double deltaY, double offsetX, double offsetY)
         {
-            X += (offsetX / _parentWidth).TwoDigits();
-            Y += (offsetY / _parentHeight).TwoDigits();
+            double testX = X + (offsetX / _parentWidth).ThreeDigits();
+            double testY = Y + (offsetY / _parentHeight).ThreeDigits();
+            double testW = Width + (deltaX / _parentWidth).ThreeDigits();
+            double testH = Height + (deltaY / _parentHeight).ThreeDigits();
 
-            Width += (deltaX / _parentWidth).TwoDigits();
-            Height += (deltaY / _parentHeight).TwoDigits();
+            if (testX < 0 || (testX + testW) > 1 || testY < 0 || (testY + testH) > 1)
+                return;
+
+            X = testX;
+            Y = testY;
+
+            Width = testW;
+            Height = testH;
         }
 
         public Type DataType { get { return typeof(TemplateImageViewModel); } }
 
         public void Update(double x, double y)
         {
-            X = (x / _parentWidth).TwoDigits() - Width/2;
-            Y = (y / _parentHeight).TwoDigits() - Height/2;
-        }
-    }
+            double testX = (x / _parentWidth).ThreeDigits() - (Width / 2).ThreeDigits();
+            double testY = (y / _parentHeight).ThreeDigits() - (Height / 2).ThreeDigits();
+            if (testX < 0 || (testX + Width) > 1 || testY < 0 || (testY + Height) > 1)
+                return;
 
-    public class TemplateImageViewModelExt : TemplateImageViewModel
-    {
-        private int _z;
-        private byte[] _image;
-
-        public TemplateImageViewModelExt() : base(0, 0)
-        {
-            
-        }
-
-        public TemplateImageViewModelExt(double x, double y, double width, double height, int id, double parentWidth, double parentHeight)
-            : base(x, y, width, height, id, parentWidth, parentHeight)
-        {
-        }
-
-        public TemplateImageViewModelExt(double parentWidth, double parentHeight) : base(parentWidth, parentHeight)
-        {
-        }
-
-        public int Z
-        {
-            get { return _z; }
-            set
-            {
-                if (_z == value)
-                    return;
-
-                _z = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public byte[] Image
-        {
-            get { return _image; }
-            set { _image = value; }
+            X = testX;
+            Y = testY;
         }
     }
 }

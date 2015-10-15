@@ -15,7 +15,7 @@ namespace ImageMaker.CommonViewModels.Services
             _imageRepository = imageRepository;
         }
 
-        public void SaveImage(ImageViewModel image)
+        public virtual void SaveImage(ImageViewModel image)
         {
             Session session = _imageRepository.GetActiveSession();
 

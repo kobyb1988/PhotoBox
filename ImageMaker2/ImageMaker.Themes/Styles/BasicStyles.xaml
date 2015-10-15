@@ -29,9 +29,9 @@
         <Setter Property="Margin" Value="5" />
     </Style>
 
-    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource OrangeComboBoxStyle}">
+    <!--<Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource OrangeComboBoxStyle}">
         <Setter Property="Margin" Value="5" />
-    </Style>
+    </Style>-->
     
     <Style TargetType="{x:Type TextBox}" x:Key="ErrorLabel">
         <Style.Triggers>

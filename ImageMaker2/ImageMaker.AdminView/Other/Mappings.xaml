@@ -44,6 +44,10 @@
     <DataTemplate DataType="{x:Type viewModels:StatsViewModel}">
         <controls:StatsCtl />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:CurrentSessionViewModel}">
+        <controls:CurrentSessionCtl />
+    </DataTemplate>
     
     <DataTemplate DataType="{x:Type dialogs:ConfirmDialogViewModel}">
         <dialogs1:ConfirmDialogCtl />

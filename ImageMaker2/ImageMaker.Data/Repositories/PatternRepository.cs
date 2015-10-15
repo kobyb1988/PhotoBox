@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using ImageMaker.DataContext;
 using ImageMaker.DataContext.Contexts;
 using ImageMaker.Entities;
@@ -56,6 +57,11 @@ namespace ImageMaker.Data.Repositories
         public TEntity GetSingle<TEntity>(Expression<Func<TEntity, bool>> selector) where TEntity : class
         {
             return Context.Set<TEntity>().FirstOrDefault(selector);
+        }
+
+        public Task<TEntity> GetSingleAsync<TEntity>(Expression<Func<TEntity, bool>> selector) where TEntity : class
+        {
+            return Context.Set<TEntity>().FirstOrDefaultAsync(selector);
         }
 
 

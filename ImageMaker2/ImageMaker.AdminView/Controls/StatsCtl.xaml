@@ -7,12 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:StatsViewModel}">
-    <Border Padding="15">
+    <Border Padding="15" Background="{StaticResource BackgroundBrush}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <Button Content="Текущая сессия" Command="{Binding Path=CurrentSessionCommand}"/>
+                <Button Content="Архив сессий"/>
+            </StackPanel>
             <Button  Grid.Row="1" Content="Назад" HorizontalAlignment="Left" 
                     Command="{Binding Path=GoBackCommand}"/>
         </Grid>

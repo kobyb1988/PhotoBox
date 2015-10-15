@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="SandBox.Views.AppSettingsCtl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Viewbox Stretch="Fill">
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="../Resources/blur.jpg" />
+            </Border.Background>
+            <Grid Height="600" Width="650">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.35*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+                <Border Padding="25">
+                    <Image Source="../Resources/top.png" >
+                    </Image>
+                </Border>
+                <Border Grid.Row="1" Padding="20">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <customControls:TimeSelector Title="Начало&#10;печати:"  
+                                                     InnerCornerRadius="38,38,0,0"
+                                                     Margin="5,5,15,10" TitleFontSize="12" CornerRadius="30"/>
+                        <customControls:TimeSelector 
+                            Grid.Row="1" 
+                            InnerCornerRadius="25,25,0,0"
+                            Title="Конец&#10;печати:" Margin="5,5,15,10" TitleFontSize="12" CornerRadius="30"/>
+                        
+                        <Border Grid.Column="1"
+                                Margin="15,5,5,10"
+                                CornerRadius="30">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Offset="0" Color="#eeeeee"/>
+                                    <GradientStop Offset="0.5" Color="#fefefe"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="0.7*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Хэштег:" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                           FontSize="12"
+                                           Foreground="#777777"/>
+                                <Border Grid.Column="1" CornerRadius="30" Background="#d7d7d7" Margin="3">
+                                    
+                                </Border>
+                            </Grid>
+                        </Border >
+                        <customControls:CustomComboBox Title="Диафрагма:" Grid.Row="1" Grid.Column="1" CornerRadius="30" Margin="15,5,5,10" TitleFontSize="12"/>
+                        <ToggleButton VerticalAlignment="Center" HorizontalAlignment="Center"
+                                  Grid.ColumnSpan="2" Grid.Row="2" Content="Показывать кнопку печати" 
+                                  Style="{StaticResource ToggleBaseStyle}" IsChecked="True"/>
+                    </Grid>
+                </Border>
+                
+                <Border  Padding="20" Grid.Row="2">
+                    <Grid  Width="500" Height="65">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            Grid.Column="1"
+                            CornerRadius="30"
+                            HorizontalAlignment="Stretch"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+                        <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
+                        <customControls:BlueButton 
+                            CornerRadius="30"
+                            HorizontalAlignment="Stretch"
+                        Grid.Column="3"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Сохранить"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Viewbox>
+</UserControl>

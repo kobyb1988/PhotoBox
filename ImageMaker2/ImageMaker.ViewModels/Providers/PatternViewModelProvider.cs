@@ -25,7 +25,7 @@ namespace ImageMaker.ViewModels.Providers
 
         public async Task<IEnumerable<TemplateViewModel>> GetPatternsAsync()
         {
-            var result = await _imageDataProvider.GetCompositionsAsync();
+            var result = await _imageDataProvider.GetTemplatesAsync();
             return result.Select(_mappingEngine.Map<TemplateViewModel>);
         } 
 

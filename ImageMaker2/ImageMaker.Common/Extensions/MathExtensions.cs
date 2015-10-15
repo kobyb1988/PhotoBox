@@ -12,5 +12,10 @@ namespace ImageMaker.Common.Extensions
         {
             return Math.Round(source, 2);
         }
+
+        public static double ThreeDigits(this double source)
+        {
+            return Math.Round(source, 3);
+        }
     }
 }

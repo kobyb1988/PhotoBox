@@ -31,6 +31,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand<ColorType> _pickColorCommand;
         private RelayCommand _selectImageCommand;
         private RelayCommand _saveSettingsCommand;
+        private ImageViewModel _otherWindowsImage;
+        private RelayCommand _selectOtherWindowsImageCommand;
+        private ImageViewModel _backgroundImage;
+        private RelayCommand _selectBackgroundImageCommand;
 
         public ThemeManagerViewModel(
             IViewModelNavigator navigator, 
@@ -77,9 +81,31 @@ namespace ImageMaker.AdminViewModels.ViewModels
             get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
         }
 
+        public RelayCommand SelectBackgroundImageCommand
+        {
+            get { return _selectBackgroundImageCommand ?? (_selectBackgroundImageCommand = new RelayCommand(SelectBackgroundImage)); }
+        }
+
+        private void SelectBackgroundImage()
+        {
+            ImageViewModel viewModel = _imageLoadService.TryLoadImage();
+            BackgroundImage = viewModel;
+        }
+
         public RelayCommand SelectImageCommand
         {
             get { return _selectImageCommand ?? (_selectImageCommand = new RelayCommand(SelectImage)); }
+        }
+
+        public RelayCommand SelectOtherWindowsImageCommand
+        {
+            get { return _selectOtherWindowsImageCommand ?? (_selectOtherWindowsImageCommand = new RelayCommand(SelectOtherWindowsImage)); }
+        }
+
+        private void SelectOtherWindowsImage()
+        {
+            ImageViewModel viewModel = _imageLoadService.TryLoadImage();
+            OtherWindowsImage = viewModel;
         }
 
         public RelayCommand SaveSettingsCommand
@@ -151,6 +177,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _navigator.NavigateBack(this);
         }
 
+        public ImageViewModel BackgroundImage
+        {
+            get { return _backgroundImage; }
+            set
+            {
+                if (_backgroundImage == value)
+                    return;
+
+                _backgroundImage = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public ImageViewModel MainWindowImage
         {
             get { return _mainWindowImage; }
@@ -160,6 +199,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
                     return;
 
                 _mainWindowImage = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ImageViewModel OtherWindowsImage
+        {
+            get { return _otherWindowsImage; }
+            set
+            {
+                if (_otherWindowsImage == value)
+                    return;
+
+                _otherWindowsImage = value;
                 RaisePropertyChanged();
             }
         }

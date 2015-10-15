@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Monads;
 using System.Threading.Tasks;
 using ImageMaker.DataContext.Contexts;
 using ImageMaker.Entities;
@@ -10,7 +11,11 @@ namespace ImageMaker.Data.Repositories
 {
     public interface IImageRepository
     {
-        Session GetActiveSession();
+        Session GetActiveSession(bool includeImages = false);
+
+        Task<Session> GetActiveSessionAsync(bool includeImages = false);
+
+        bool StartSession();
 
         IEnumerable<Session> GetAllSessions();
         
@@ -21,7 +26,6 @@ namespace ImageMaker.Data.Repositories
         void AddImage(Image image);
 
         void AddImages(IEnumerable<Image> images);
-
 
         IEnumerable<Template> GetTemplates();
 
@@ -52,9 +56,36 @@ namespace ImageMaker.Data.Repositories
         {
         }
 
-        public Session GetActiveSession()
+        public Session GetActiveSession(bool includeImages = false)
         {
+            if (includeImages)
+                return QueryAll<Session>()
+                    .Include(x => x.Images)
+                    .FirstOrDefault(x => !x.EndTime.HasValue);
+
             return this.GetSingle<Session>(x => !x.EndTime.HasValue);
+        }
+
+        public async Task<Session> GetActiveSessionAsync(bool includeImages = false)
+        {
+            if (includeImages)
+                return await QueryAll<Session>()
+                    .Include(x => x.Images)
+                    .FirstOrDefaultAsync(x => !x.EndTime.HasValue);
+
+            return await GetSingleAsync<Session>(x => !x.EndTime.HasValue);
+        }
+
+        public bool StartSession()
+        {
+            Session active = GetActiveSession();
+            if (active != null)
+                return false;
+
+            active = Context.Set<Session>().Create();
+            active.StartTime = DateTime.Now;
+            Add(active);
+            return true;
         }
 
         public IEnumerable<Session> GetAllSessions()

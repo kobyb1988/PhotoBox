@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using ImageMaker.AdminViewModels.AutoMapper;
 using ImageMaker.AdminViewModels.Providers;
+using ImageMaker.AdminViewModels.Services;
 using ImageMaker.AdminViewModels.ViewModels;
 using ImageMaker.AdminViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.AutoMapper;
@@ -24,6 +25,7 @@ namespace ImageMaker.AdminViewModels.Ninject
             Bind<IMappingEngine>()
                .ToMethod(x => MappingEngineConfiguration.CreateEngine(new MainProfile()));
 
+            Bind<SessionService>().ToSelf();
             Bind<ImagePrinter>().ToSelf();
             Bind<SettingsProvider>().ToSelf();
             Bind<TemplateViewModelProvider>().ToSelf();
@@ -75,8 +77,8 @@ namespace ImageMaker.AdminViewModels.Ninject
                     {
                         var children = new List<IViewModelFactory>
                                        {
-                                             x.Kernel.Get<WelcomeViewModelFactory>() //temporary
-                                           //x.Kernel.Get<PasswordPromptViewModelFactory>()
+                                             x.Kernel.Get<WelcomeViewModelFactory>(), //temporary
+                                           x.Kernel.Get<PasswordPromptViewModelFactory>()
                                        };
 
                         return new ChildrenViewModelsFactory(children);
@@ -124,6 +126,20 @@ namespace ImageMaker.AdminViewModels.Ninject
                         var children = new List<IViewModelFactory>
                                        {
                                            x.Kernel.Get<TemplateEditorViewModelFactory>()
+                                       };
+
+                        return new ChildrenViewModelsFactory(children);
+                    });
+
+            Bind<IViewModelNavigator>()
+                .To<ViewModelNavigator>()
+                .WhenInjectedExactlyInto<StatsViewModelFactory>()
+                .WithConstructorArgument(typeof(IChildrenViewModelsFactory),
+                    x =>
+                    {
+                        var children = new List<IViewModelFactory>
+                                       {
+                                           x.Kernel.Get<CurrentSessionViewModelFactory>()
                                        };
 
                         return new ChildrenViewModelsFactory(children);

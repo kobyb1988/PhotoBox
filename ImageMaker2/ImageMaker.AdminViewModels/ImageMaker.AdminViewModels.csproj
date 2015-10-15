@@ -94,11 +94,14 @@
     <Compile Include="Providers\CompositionsViewModelProvider.cs" />
     <Compile Include="Providers\TemplateProviderFactory.cs" />
     <Compile Include="Providers\TemplateViewModelProvider.cs" />
+    <Compile Include="Services\SessionService.cs" />
+    <Compile Include="ViewModels\AllSessionsViewModel.cs" />
     <Compile Include="ViewModels\AppSettingsExplorerViewModel.cs" />
     <Compile Include="ViewModels\CameraSettingsExplorerViewModel.cs" />
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\CompositionsEditorViewModel.cs" />
     <Compile Include="ViewModels\CompositionsExplorerViewModel.cs" />
+    <Compile Include="ViewModels\CurrentSessionViewModel.cs" />
     <Compile Include="ViewModels\Enums\ItemState.cs" />
     <Compile Include="ViewModels\Factories\ViewModelFactory.cs" />
     <Compile Include="ViewModels\ImageLoadService.cs" />

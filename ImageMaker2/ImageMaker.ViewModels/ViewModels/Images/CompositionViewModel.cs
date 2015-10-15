@@ -10,6 +10,8 @@ namespace ImageMaker.ViewModels.ViewModels.Images
 {
     public class CompositionViewModel : BaseViewModel
     {
+        private bool _isChecked;
+
         public CompositionViewModel(
             int id, 
             int templateId,
@@ -37,6 +39,19 @@ namespace ImageMaker.ViewModels.ViewModels.Images
         //public byte[] Background { get; set; }
 
         //public byte[] Overlay { get; set; }
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                if (_isChecked == value)
+                    return;
+
+                _isChecked = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public int TemplateId { get; private set; }
 

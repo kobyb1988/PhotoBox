@@ -5,16 +5,247 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:ImageMaker.View.Converters"
              xmlns:viewModels="clr-namespace:ImageMaker.ViewModels.ViewModels;assembly=ImageMaker.ViewModels"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:CameraViewModel}"
-             d:DesignHeight="500" d:DesignWidth="700"
-             Background="{StaticResource BackgroundBrush}">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
         <converters:LiveViewImageConverter x:Key="LiveViewImageConverter"  />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />                                           
-        
     </UserControl.Resources>
-    <Border Padding="15">
+
+    <Viewbox Stretch="Fill">
+        <Border Padding="85,25">
+            <Border.Background>
+                <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
+            </Border.Background>
+
+            <Grid Width="900" Height="730">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.18*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.18*" />
+                </Grid.RowDefinitions>
+                <Border Background="#ffffff" CornerRadius="40" Padding="5" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/logo_1.png" Margin="20,0,0,0">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </Image.RenderTransform>
+                        </Image>
+                        <StackPanel Orientation="Horizontal" Grid.Column="2">
+                            <TextBlock Text="Шаг 2: " 
+                                       FontSize="20"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       Foreground="Red"/>
+                            <TextBlock Text="Сделайте снимок" 
+                                       FontSize="20"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border  Grid.Row="1" Padding="20">
+                    <Grid>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <MultiBinding Converter="{StaticResource LiveViewImageConverter}">
+                                            <Binding Path="LiveViewImageStream" />
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}" Path="ImageSource"/>
+                                            <Binding Path="Width" />
+                                            <Binding Path="Height" />
+                                        </MultiBinding>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <Border 
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                        Visibility="{Binding TakingPicture, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Background="Transparent" Opacity="0.6">
+                            <Grid>
+                                <Grid VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <!--<Path
+                                    x:Name="leftPath"
+                                    Fill="Red" Stroke="Red" StrokeThickness="1" Data="M 0,25 L 25,0 L 25,25 Z" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <Path.Style>
+                                            <Style TargetType="{x:Type Path}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                        <Path.Triggers>
+                                            <EventTrigger RoutedEvent="Window.Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard RepeatBehavior="Forever">
+                                                        <DoubleAnimation Storyboard.TargetName="leftPath" 
+                                                        Storyboard.TargetProperty="Opacity" From="1" To="0.5" 
+                                                        Duration="0:0:1" BeginTime="0:0:0" AutoReverse="True"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Path.Triggers>
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="225" CenterX="25" CenterY="25"/>
+                                                <TranslateTransform X="50" Y="-10" />
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                    <Path 
+                                    x:Name="rightPath" 
+                                    Fill="Red" Stroke="Red" StrokeThickness="1" Data="M 0,25 L 25,0 L 25,25 Z" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <Path.Style>
+                                            <Style TargetType="{x:Type Path}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                        <Path.Triggers>
+                                            <EventTrigger RoutedEvent="Window.Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard RepeatBehavior="Forever">
+                                                        <DoubleAnimation Storyboard.TargetName="rightPath" 
+                                                        Storyboard.TargetProperty="Opacity" From="1" To="0.5" 
+                                                        Duration="0:0:1" BeginTime="0:0:0" AutoReverse="True"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Path.Triggers>
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="225" CenterX="25" CenterY="25"/>
+                                                <TranslateTransform X="-70" Y="-10"/>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>-->
+                                    <TextBlock Foreground="#808994" FontSize="80" Grid.Row="1">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Text" Value="Посмотрите в камеру" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                        <Setter Property="Text" Value="Приготовьтесь!" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+
+                                <TextBlock 
+                                Text="{Binding Path=Counter}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="300" Foreground="#808994">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        
+                        <!--<TextBlock FontSize="300" Text="2" Foreground="#808994" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>-->
+                    </Grid>
+                </Border>
+                <Border  Padding="0" Grid.Row="2">
+                    <Grid  Width="890" Height="85">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            Command="{Binding Path=GoBackCommand}"
+                            CornerRadius="40"
+                                InnerCornerRadius="40"
+                                Padding="8"
+                            Grid.Column="0"
+                            FontSize="18"
+                            HorizontalAlignment="Stretch"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+
+                        <Rectangle Grid.Column="1" Fill="#5543beb5"/>
+                        <Button Grid.Column="1" Command="{Binding Path=TakePictureCommand}">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="#4ecdc4" CornerRadius="40" HorizontalAlignment="Center">
+                                                    <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/take_picture.png">
+                                                        <Image.RenderTransform>
+                                                            <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
+                                                        </Image.RenderTransform>
+                                                        <Image.RenderTransformOrigin>
+                                                            <Point X="0.5" Y="0.5" />
+                                                        </Image.RenderTransformOrigin>
+                                                    </Image>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        
+                        <customControls:BlueButton 
+                            CornerRadius="40"
+                                Padding="8"
+                            FontSize="18"
+                            ShowBackButton="True"
+                            IsLeftOriented="False"
+                            HorizontalAlignment="Stretch"
+                        Grid.Column="2"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Вперед"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Viewbox>
+    
+    <!--<Border Padding="15">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*"/>
@@ -25,21 +256,21 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="1">
-                <!--<Button Width="100" Content="Начать" Command="{Binding Path=OpenSessionCommand}" />-->
-                <!--<Button Width="100" Content="Предпросмотр" Command="{Binding Path=StartLiveViewCommand}" />-->
+                --><!--<Button Width="100" Content="Начать" Command="{Binding Path=OpenSessionCommand}" />-->
+                <!--<Button Width="100" Content="Предпросмотр" Command="{Binding Path=StartLiveViewCommand}" />--><!--
                 <Button  Content="Сделать фото" Command="{Binding Path=TakePictureCommand}" />
-                <!--<Button Width="100"  Content="Обновить" Command="{Binding Path=RefreshCameraCommand}" />-->
-                <!--<Button Width="100"  Content="Закончить" Command="{Binding Path=CloseSessionCommand}" />-->
+                --><!--<Button Width="100"  Content="Обновить" Command="{Binding Path=RefreshCameraCommand}" />-->
+                <!--<Button Width="100"  Content="Закончить" Command="{Binding Path=CloseSessionCommand}" />--><!--
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left">
-                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                --><!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Width="50" Content="&lt;&lt;&lt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[0]}"/>
                     <Button Width="50" Content="&lt;&lt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[1]}"/>
                     <Button Width="50" Content="&lt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[2]}"/>
                     <Button Width="50" Content="&gt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[3]}"/>
                     <Button Width="50" Content="&gt;&gt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[4]}"/>
                     <Button Width="50" Content="&gt;&gt;&gt;" Command="{Binding Path=SetFocusCommand}" CommandParameter="{Binding Path=FocusPoints[5]}"/>
-                </StackPanel>-->
+                </StackPanel>--><!--
                 <Grid>
                     <Image>
                         <Image.Source>
@@ -168,6 +399,6 @@
             </StackPanel>
             <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  Content="&lt; Назад" Command="{Binding Path=GoBackCommand}"/>
         </Grid>
-    </Border>
+    </Border>-->
     
 </UserControl>

@@ -3,14 +3,21 @@
     
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Brushes.xaml" />
-        <ResourceDictionary Source="ComboBoxStyles.xaml" />
-        <ResourceDictionary Source="CheckBoxStyles.xaml" />
-        <ResourceDictionary Source="ScrollStyles.xaml" />
+        <ResourceDictionary Source="ComboboxStylesNew.xaml" />
+        <ResourceDictionary Source="TimeSelectorStyles.xaml" />
+        <ResourceDictionary Source="DataPagerStyles.xaml" />
+        <!--<ResourceDictionary Source="ComboBoxStyles.xaml" />-->
+        <!--<ResourceDictionary Source="CheckBoxStyles.xaml" />-->
+        <ResourceDictionary Source="CheckBoxStylesNew.xaml" />
+        <!--<ResourceDictionary Source="ScrollStyles.xaml" />-->
+        <ResourceDictionary Source="ScrollStylesNew.xaml" />
         <ResourceDictionary Source="InputStyles.xaml" />
-        <ResourceDictionary Source="ButtonStyles.xaml" />
+        <!--<ResourceDictionary Source="ButtonStyles.xaml" />-->
+        <ResourceDictionary Source="ButtonStylesNew.xaml" />
         <ResourceDictionary Source="SearchBoxStyles.xaml" />
         <ResourceDictionary Source="UpDownStyles.xaml" />
         <ResourceDictionary Source="DateTimePickerStyles.xaml" />
+        <ResourceDictionary Source="SliderStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     

@@ -24,6 +24,8 @@ namespace ImageMaker.ViewModels.ViewModels
             ImageService imageService,
             CompositionProcessingResult result)
         {
+            _maxCopies = 5;
+
             _navigator = navigator;
             _printer = printer;
             _imageService = imageService;
@@ -39,6 +41,16 @@ namespace ImageMaker.ViewModels.ViewModels
             get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
         }
 
+        public RelayCommand CompleteCommand
+        {
+            get { return _completeCommand ?? (_completeCommand = new RelayCommand(Complete)); }
+        }
+
+        private void Complete()
+        {
+            _navigator.NavigateForward<SelectActivityViewModel>(this, null);
+        }
+
         private void GoBack()
         {
             _navigator.NavigateBack(this);
@@ -48,6 +60,10 @@ namespace ImageMaker.ViewModels.ViewModels
         private RelayCommand _goBackCommand;
         private byte[] _image;
         private int _copiesCount;
+        private RelayCommand _completeCommand;
+        private RelayCommand _changeUpCommand;
+        private RelayCommand _changeDownCommand;
+        private readonly int _maxCopies;
 
         public byte[] Image
         {
@@ -64,6 +80,27 @@ namespace ImageMaker.ViewModels.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public RelayCommand ChangeDownCommand
+        {
+            get
+            {
+                return _changeDownCommand ?? (_changeDownCommand = new RelayCommand(() =>
+                                                                              {
+                                                                                  CopiesCount--;
+                                                                                  ChangeDownCommand.RaiseCanExecuteChanged();
+                                                                              }, () => CopiesCount > 1)); }
+        }
+
+        public RelayCommand ChangeUpCommand
+        {
+            get { return _changeUpCommand ?? (_changeUpCommand = new RelayCommand(() =>
+                                                                                  {
+                                                                                      CopiesCount++;
+                                                                                      ChangeUpCommand.RaiseCanExecuteChanged();
+                                                                                  }, () => CopiesCount < _maxCopies)); }
+        }
+
 
         public RelayCommand PrintImageCommand
         {

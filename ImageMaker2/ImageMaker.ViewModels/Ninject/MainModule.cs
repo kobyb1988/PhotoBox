@@ -13,7 +13,6 @@ using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.Utils.Services;
 using ImageMaker.ViewModels.AutoMapper;
 using ImageMaker.ViewModels.Providers;
-using ImageMaker.ViewModels.Services;
 using ImageMaker.ViewModels.ViewModels;
 using ImageMaker.ViewModels.ViewModels.Factories;
 using ImageMaker.WebBrowsing;
@@ -56,7 +55,6 @@ namespace ImageMaker.ViewModels.Ninject
             Bind<SelectActivityViewModelFactory>().ToSelf();
             Bind<ImportPatternsViewModelFactory>().ToSelf();
             Bind<InstagramExplorerViewModelFactory>().ToSelf();
-            Bind<ImageService>().ToSelf();
 
             Bind<IViewModelNavigator>().To<ViewModelNavigator>()
                 .WithConstructorArgument(typeof(IChildrenViewModelsFactory),
@@ -84,7 +82,8 @@ namespace ImageMaker.ViewModels.Ninject
                     {
                         var children = new List<IViewModelFactory>
                                        {
-                                           x.Kernel.Get<WelcomeViewModelFactory>(),
+                                           x.Kernel.Get<SelectActivityViewModelFactory>(),
+                                           //x.Kernel.Get<WelcomeViewModelFactory>(),
                                        };
 
                         return new ChildrenViewModelsFactory(children);

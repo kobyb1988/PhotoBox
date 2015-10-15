@@ -11,9 +11,9 @@ namespace ImageMaker.Entities
 
         public string Path { get; set; }
 
-        public virtual FileData Data { get; set; }
+        //public virtual FileData Data { get; set; }
 
-        public int FileDataId { get; set; }
+        //public int FileDataId { get; set; }
 
         public virtual Session Session { get; set; }
 

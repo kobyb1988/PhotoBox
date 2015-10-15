@@ -15,7 +15,7 @@ namespace ImageMaker.CommonViewModels.Services
             _clientFactory = clientFactory;
         }
 
-        public void Connect()
+        public virtual void Connect()
         {
             _clientFactory.CreateClient((command) =>
                                         {
@@ -25,12 +25,12 @@ namespace ImageMaker.CommonViewModels.Services
                                         });
         }
 
-        public void SendHideCommand()
+        public virtual void SendHideCommand()
         {
             _clientFactory.SendCommand(new Command());
         }
 
-        public void Abort()
+        public virtual void Abort()
         {
             _clientFactory.Abort();
         }

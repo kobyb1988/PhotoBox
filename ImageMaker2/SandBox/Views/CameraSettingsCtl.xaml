@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="SandBox.Views.CameraSettingsCtl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="../Resources/blur.jpg" />
+        </Border.Background>    
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.51*"/>
+                <RowDefinition Height="0.2*" />
+            </Grid.RowDefinitions>
+            <Border Padding="25">
+                <Viewbox>
+                    <Image Source="../Resources/top.png"></Image>
+                </Viewbox>
+            </Border>
+            <Viewbox Grid.Row="1" Stretch="Uniform">
+                <Border Padding="25,5">
+                    <Grid  Width="700" Height="250">
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type customControls:CustomComboBox}" BasedOn="{StaticResource DefComboBoxStyle}">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="CornerRadius" Value="32" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <customControls:CustomComboBox Title="Режим&#10;съемки:" Margin="5,5,15,10">
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                            <ComboBoxItem Content="wef"/>
+                        </customControls:CustomComboBox>
+                        <customControls:CustomComboBox Title="Диафрагма:" Grid.Row="1" Margin="5,5,15,10"/>
+                        <customControls:CustomComboBox Title="Экспо-&#10;коррекция:" Grid.Row="2" Margin="5,5,15,10"/>
+                        <customControls:CustomComboBox Title="ISO:" Grid.Column="1" Margin="15,5,5,10"/>
+                        <customControls:CustomComboBox Title="Баланс &#10;белого:" Grid.Column="1" Grid.Row="1" Margin="15,5,5,10"/>
+                        <customControls:CustomComboBox Title="Выдержка:" Grid.Column="1" Grid.Row="2" Margin="15,5,5,10"/>
+                    </Grid>
+                </Border>
+            </Viewbox>
+            
+            <Viewbox Grid.Row="2" Stretch="Uniform">
+                <Border  Padding="20">
+                    <Grid  Width="550" Height="65">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton 
+                            Grid.Column="1"
+                            Padding="7"
+                            HorizontalAlignment="Stretch"
+                            CornerRadius="30"
+                                               Content="Назад" 
+                                               ShowBackButton="True" 
+                                               CornerAlign="BottomLeft,TopLeft"/>
+                        <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
+                        <customControls:BlueButton 
+                            CornerRadius="30"
+                            HorizontalAlignment="Stretch"
+                        Grid.Column="3"
+                            CornerAlign="TopRight,BottomRight"
+                                               Content="Сохранить"/>
+                    </Grid>
+                </Border>
+            </Viewbox>
+        </Grid>        
+    </Border>
+</UserControl>
