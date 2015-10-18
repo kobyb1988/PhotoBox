@@ -14,6 +14,12 @@ namespace ImageMaker.WebBrowsing
         [JsonProperty("min_tag_id")]
         public string MinTagId { get; set; }
 
+        [JsonProperty("max_tag_id")]
+        public string MaxTagId { get; set; }
+
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
+
         public IEnumerable<Image> Images { get; set; }
     }
 }

@@ -75,10 +75,12 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -92,6 +94,7 @@
     <Compile Include="Ninject\MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CompositionsViewModelProvider.cs" />
+    <Compile Include="Providers\PrinterMessageProvider.cs" />
     <Compile Include="Providers\TemplateProviderFactory.cs" />
     <Compile Include="Providers\TemplateViewModelProvider.cs" />
     <Compile Include="Services\SessionService.cs" />
@@ -106,9 +109,11 @@
     <Compile Include="ViewModels\Factories\ViewModelFactory.cs" />
     <Compile Include="ViewModels\ImageLoadService.cs" />
     <Compile Include="ViewModels\Images\CheckableCompositionViewModel.cs" />
+    <Compile Include="ViewModels\Images\CheckableImageWrapper.cs" />
     <Compile Include="ViewModels\Images\CheckableTemplateViewModel.cs" />
     <Compile Include="ViewModels\Images\CompositionViewModel.cs" />
     <Compile Include="ViewModels\Images\Extensions.cs" />
+    <Compile Include="ViewModels\Images\InstagramImageViewModel.cs" />
     <Compile Include="ViewModels\Images\ISelectable.cs" />
     <Compile Include="ViewModels\Images\TemplateImageViewModel.cs" />
     <Compile Include="ViewModels\Images\TemplateViewModel.cs" />
@@ -126,6 +131,10 @@
       <Project>{f4109e8e-572c-40af-a52b-fb4aaf611c10}</Project>
       <Name>ImageMaker.CommonViewModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.CommonView\ImageMaker.CommonView.csproj">
+      <Project>{162AE272-45EC-4DB5-B820-D1559152ED45}</Project>
+      <Name>ImageMaker.CommonView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageMaker.Common\ImageMaker.CommonData.csproj">
       <Project>{A464C7A6-84F3-4A44-8133-13EAFEFD8E24}</Project>
       <Name>ImageMaker.CommonData</Name>
@@ -138,9 +147,17 @@
       <Project>{C4C143FD-D585-436B-9F3A-30BB04880D75}</Project>
       <Name>ImageMaker.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.MessageQueueing\ImageMaker.MessageQueueing.csproj">
+      <Project>{2BF0867E-B87F-4A10-B13C-18EA156A2C4C}</Project>
+      <Name>ImageMaker.MessageQueueing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageMaker.SDKData\ImageMaker.SDKData.csproj">
       <Project>{1679c88b-2e63-41c0-8672-f1ba1ead5378}</Project>
       <Name>ImageMaker.SDKData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.Themes\ImageMaker.Themes.csproj">
+      <Project>{3B2A7DB9-E79C-4913-961F-C8C82BAB9B0C}</Project>
+      <Name>ImageMaker.Themes</Name>
     </ProjectReference>
     <ProjectReference Include="..\ImageMaker.Utils\ImageMaker.Utils.csproj">
       <Project>{3f6c0346-5cf3-4b8a-93b6-5a3118617abb}</Project>

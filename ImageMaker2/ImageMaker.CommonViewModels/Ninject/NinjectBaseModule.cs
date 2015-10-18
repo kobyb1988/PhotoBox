@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ImageMaker.AppServer;
 using ImageMaker.Common.Helpers;
 using ImageMaker.CommonViewModels.Messenger;
 using ImageMaker.CommonViewModels.Services;
@@ -19,7 +20,7 @@ namespace ImageMaker.CommonViewModels.Ninject
             //    .ToMethod(x => MappingEngineConfigurator.CreateEngine(new BasicProfile()));
 
             Bind<ImageService>().ToSelf();
-
+            Bind<ICommandProcessor>().To<CommandProcessor>();
             Bind<CommunicationManager>().ToSelf();
             Bind<MessageFactory>().ToSelf();
             Bind<IMessenger>().To<MvvmLightMessenger>().InSingletonScope();

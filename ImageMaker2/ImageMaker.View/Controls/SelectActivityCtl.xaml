@@ -13,11 +13,11 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
-    <Border>
-        <Border.Background>
-            <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/colors.png" 
+    <Border Background="{DynamicResource {x:Static themes:ThemeManager.MainImageKey}}">
+        <!--<Border.Background>
+            <ImageBrush x:Key="" ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/colors.png" 
                         Viewbox="0.15,0.05,0.7,0.9"/>
-        </Border.Background>
+        </Border.Background>-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
@@ -60,9 +60,14 @@
                             </Grid.RowDefinitions>
                             <customControls:RoundedButton Content="Выбрать шаблон для фото" 
                                                           Command="{Binding Path=ProceedToPatternSelectionCommand}"
+                                                          BorderBrush="{DynamicResource {x:Static themes:ThemeManager.MainBorderColorKey}}"
+                                                          Foreground="{DynamicResource {x:Static themes:ThemeManager.MainForegroundColorKey}}"
                                                           Background="{DynamicResource {x:Static themes:ThemeManager.MainBackgroundColorKey}}"/>
                             <customControls:RoundedButton  
                                 Command="{Binding Path=InstagramSurfCommand}"
+                                BorderBrush="{DynamicResource {x:Static themes:ThemeManager.MainBorderColorKey}}"
+                                                          Foreground="{DynamicResource {x:Static themes:ThemeManager.MainForegroundColorKey}}"
+                                                          Background="{DynamicResource {x:Static themes:ThemeManager.MainBackgroundColorKey}}"
                                 Content="Загрузка фото из INSTAGRAM" Grid.Row="1"/>
                             <TextBlock Grid.Row="2"
                                        FontSize="22"

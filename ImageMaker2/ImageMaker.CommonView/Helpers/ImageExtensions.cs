@@ -11,7 +11,6 @@ namespace ImageMaker.CommonView.Helpers
     {
         public static byte[] ToBytes(this Bitmap bmp)
         {
-
             byte[] result = {};
             try
             {

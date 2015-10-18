@@ -7,6 +7,8 @@ namespace ImageMaker.CommonViewModels.Behaviors
         event EventHandler<bool> StateChanged;
 
         event Action<WindowState> RequestWindowVisibilityChanged;
+
+        void OnClose();
     }
 
     public enum WindowState

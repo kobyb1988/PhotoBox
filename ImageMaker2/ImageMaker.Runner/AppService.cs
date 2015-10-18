@@ -9,13 +9,14 @@ namespace ImageMaker.Runner
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class AppService : ICallingContract
     {
-        public void SendCommand(Command command)
+        public void SendCommand(BaseCommand command)
         {
             Server.Instance.EnumerateClients(x => x.SendCommand(command), OperationContext.Current.SessionId);
         }
 
         public void Connect()
         {
+            Console.WriteLine("Client connected: {0}", OperationContext.Current.SessionId);
             Server.Instance.AddSession(Callback, OperationContext.Current.SessionId);
         }
 

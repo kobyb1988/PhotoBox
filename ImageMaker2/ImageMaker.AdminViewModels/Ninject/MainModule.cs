@@ -77,7 +77,7 @@ namespace ImageMaker.AdminViewModels.Ninject
                     {
                         var children = new List<IViewModelFactory>
                                        {
-                                             x.Kernel.Get<WelcomeViewModelFactory>(), //temporary
+                                             //x.Kernel.Get<WelcomeViewModelFactory>(), //temporary
                                            x.Kernel.Get<PasswordPromptViewModelFactory>()
                                        };
 
@@ -111,7 +111,7 @@ namespace ImageMaker.AdminViewModels.Ninject
                                            x.Kernel.Get<CameraSettingsExplorerViewModelFactory>(),
                                            x.Kernel.Get<CompositionsExplorerViewModelFactory>(),
                                            x.Kernel.Get<ThemeManagerViewModelFactory>(),
-                                           x.Kernel.Get<StatsViewModelFactory>(),
+                                           x.Kernel.Get<CurrentSessionViewModelFactory>(),
                                        };
 
                         return new ChildrenViewModelsFactory(children);

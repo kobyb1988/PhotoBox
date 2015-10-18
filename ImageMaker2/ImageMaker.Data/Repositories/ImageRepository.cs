@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Monads;
 using System.Threading.Tasks;
 using ImageMaker.DataContext.Contexts;
 using ImageMaker.Entities;
@@ -13,9 +12,15 @@ namespace ImageMaker.Data.Repositories
     {
         Session GetActiveSession(bool includeImages = false);
 
+        Entities.Session GetLastSession();
+
         Task<Session> GetActiveSessionAsync(bool includeImages = false);
 
+        Task<Session> GetLastSessionAsync(bool includeImages = false);
+
         bool StartSession();
+
+        bool StopSession();
 
         IEnumerable<Session> GetAllSessions();
         
@@ -66,6 +71,13 @@ namespace ImageMaker.Data.Repositories
             return this.GetSingle<Session>(x => !x.EndTime.HasValue);
         }
 
+        public Session GetLastSession()
+        {
+            return QueryAll<Session>()
+                .OrderByDescending(x => x.StartTime)
+                .FirstOrDefault();
+        }
+
         public async Task<Session> GetActiveSessionAsync(bool includeImages = false)
         {
             if (includeImages)
@@ -74,6 +86,27 @@ namespace ImageMaker.Data.Repositories
                     .FirstOrDefaultAsync(x => !x.EndTime.HasValue);
 
             return await GetSingleAsync<Session>(x => !x.EndTime.HasValue);
+        }
+
+        public async Task<Session> GetLastSessionAsync(bool includeImages = false)
+        {
+            IQueryable<Session> query = QueryAll<Session>()
+                .OrderByDescending(x => x.StartTime);
+
+            if (includeImages)
+                query = query.Include(x => x.Images);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public bool StopSession()
+        {
+            Session active = GetActiveSession(false);
+            if (active == null)
+                return false;
+
+            active.EndTime = DateTime.Now;
+            return true;
         }
 
         public bool StartSession()

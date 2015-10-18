@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Monads;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -35,7 +33,12 @@ namespace ImageMaker.ViewModels.ViewModels
             get { return _isHashTag; }
             set
             {
+                if (_isHashTag == value)
+                    return;
+
                 _isHashTag = value;
+                _nextUrl = null;
+                Images.Clear();
                 RaisePropertyChanged();
             }
         }
@@ -45,7 +48,12 @@ namespace ImageMaker.ViewModels.ViewModels
             get { return _isUserName; }
             set
             {
+                if (_isUserName == value)
+                    return;
+
                 _isUserName = value;
+                _nextUrl = null;
+                Images.Clear();
                 RaisePropertyChanged();
             }
         }
@@ -91,25 +99,47 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
+        private string _nextUrl;
+        private string _previousSearch;
+
         private void Search(string text)
         {
-            IsBusy = true;
-
-            Task<ImageResponse> task = true
-                ? _instagramExplorer.GetImagesByHashTag(text, null)
-                : _instagramExplorer.GetImagesByUserName(text, null);
-            
-            task.ContinueWith(t =>
+            if (!string.IsNullOrEmpty(_previousSearch))
             {
-                _images.Clear();
-                foreach (var image in task.Result.Return(x => x.Images, Enumerable.Empty<Image>()))
+                if (string.Compare(text, _previousSearch, StringComparison.OrdinalIgnoreCase) != 0)
                 {
-                    InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data, image.Width, image.Height, "rgkrgm");
-                    _images.Add(viewModel);
+                    _nextUrl = null;
+                    Images.Clear();
                 }
+            }
 
-                IsBusy = false;
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            _previousSearch = text;
+            
+            IsBusy = true;
+            SearchCommand.RaiseCanExecuteChanged();
+            Task<ImageResponse> task = IsHashTag
+                ? (string.IsNullOrEmpty(_nextUrl)
+                    ? _instagramExplorer.GetImagesByHashTag(text, null)
+                    : _instagramExplorer.GetImagesFromUrl(_nextUrl))
+                : (string.IsNullOrEmpty(_nextUrl)
+                    ? _instagramExplorer.GetImagesByUserName(text, null)
+                    : _instagramExplorer.GetImagesFromUrl(_nextUrl));
+
+            task.ContinueWith(t =>
+                              {
+                                  // _images.Clear();
+                                  _nextUrl = task.Result.Return(x => x.NextUrl, null);
+
+                                  foreach (var image in task.Result.Return(x => x.Images, Enumerable.Empty<Image>()))
+                                  {
+                                      InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data,
+                                          image.Width, image.Height, image.Url);
+                                      _images.Add(viewModel);
+                                  }
+
+                                  IsBusy = false;
+                                  SearchCommand.RaiseCanExecuteChanged();
+                              }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void UpdateCommands()

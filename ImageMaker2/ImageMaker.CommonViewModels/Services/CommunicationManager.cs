@@ -1,4 +1,5 @@
-﻿using ImageMaker.AppClient.ServiceHosting;
+﻿using System.Threading;
+using ImageMaker.AppClient.ServiceHosting;
 using ImageMaker.AppServer;
 using ImageMaker.CommonViewModels.Messenger;
 
@@ -6,23 +7,18 @@ namespace ImageMaker.CommonViewModels.Services
 {
     public class CommunicationManager
     {
-        private readonly IMessenger _messenger;
+        private readonly ICommandProcessor _commandProcessor;
         private readonly ClientFactory _clientFactory;
 
-        public CommunicationManager(IMessenger messenger, ClientFactory clientFactory )
+        public CommunicationManager(ICommandProcessor commandProcessor, ClientFactory clientFactory )
         {
-            _messenger = messenger;
+            _commandProcessor = commandProcessor;
             _clientFactory = clientFactory;
         }
 
         public virtual void Connect()
         {
-            _clientFactory.CreateClient((command) =>
-                                        {
-                                            CommandMessage message = _messenger.CreateMessage<CommandMessage>();
-                                            message.Command = command;
-                                            _messenger.Send(message);
-                                        });
+            _clientFactory.CreateClient((command) => command.Process(_commandProcessor));
         }
 
         public virtual void SendHideCommand()
@@ -30,14 +26,48 @@ namespace ImageMaker.CommonViewModels.Services
             _clientFactory.SendCommand(new Command());
         }
 
-        public virtual void Abort()
+        public virtual void SendCloseCommand()
         {
-            _clientFactory.Abort();
+            _clientFactory.SendCommand(new CloseCommand(), true);
+        }
+
+        //public virtual void Abort()
+        //{
+        //    _clientFactory.Abort();
+        //}
+    }
+
+    public class CommandProcessor : ICommandProcessor
+    {
+        private readonly IMessenger _messenger;
+
+        public CommandProcessor(IMessenger messenger)
+        {
+            _messenger = messenger;
+        }
+
+        public void ProcessCommand(BaseCommand command)
+        {
+            CommandMessage message = _messenger.CreateMessage<CommandMessage>();
+            message.Command = command;
+            _messenger.Send(message);
+        }
+
+        public void ProcessCloseCommand(BaseCommand command)
+        {
+            CloseCommandMessage message = _messenger.CreateMessage<CloseCommandMessage>();
+            message.Command = command;
+            _messenger.Send(message);
         }
     }
 
     public class CommandMessage
     {
-        public Command Command { get; set; }
+        public BaseCommand Command { get; set; }
+    }
+
+    public class CloseCommandMessage
+    {
+        public BaseCommand Command { get; set; }
     }
 }

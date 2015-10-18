@@ -55,7 +55,7 @@ namespace ImageMaker.AppClient.ServiceHosting
         {
         }
 
-        public void SendCommand(Command command)
+        public void SendCommand(BaseCommand command)
         {
             this.Channel.SendCommand(command);
         }

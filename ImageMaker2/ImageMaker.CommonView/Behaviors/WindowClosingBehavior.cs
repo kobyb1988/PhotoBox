@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Interactivity;
 using ImageMaker.CommonView.Helpers;
 using ImageMaker.CommonViewModels.Behaviors;
@@ -19,6 +20,7 @@ namespace ImageMaker.CommonView.Behaviors
                 if (closeable != null)
                 {
                     closeable.StateChanged += (obj, state) => Application.Current.Dispatcher.BeginInvoke(new Action(() => this.AssociatedObject.SetWindowCloseStatus(state)));
+                    this.AssociatedObject.Closing += (o, eventArgs) => closeable.OnClose();
 
                     closeable.RequestWindowVisibilityChanged += (state) =>
                                               {

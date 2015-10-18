@@ -283,7 +283,11 @@
                     <customControls:ContentButton Grid.Row="1" Grid.Column="1" 
                                                   VerticalContentAlignment="Stretch"
                                                   HorizontalContentAlignment="Stretch"
-                                                  Title="Цвет&#10;кнопок:" Content="{Binding Path=OtherWindowsBackgroundColor}">
+                                                  Title="Цвет 1:" Content="{Binding Path=OtherWindowsBackgroundColor}">
+                    <!--<customControls:ContentButton Grid.Row="1" Grid.Column="1" 
+                                                  VerticalContentAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  Title="Цвет&#10;кнопок:" Content="{Binding Path=OtherWindowsBackgroundColor}">-->
                         <customControls:ContentButton.IconBrush>
                             <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
                                 <ImageBrush.Transform>
@@ -334,10 +338,14 @@
                             </DataTemplate>
                         </customControls:ContentButton.ContentTemplate>
                     </customControls:ContentButton>
-                    <customControls:ContentButton Grid.Row="2" Grid.Column="1" Title="Цвет&#10;окантовки&#10;кнопок:" 
+                    <customControls:ContentButton Grid.Row="2" Grid.Column="1" Title="Цвет 2:" 
                                                   HorizontalContentAlignment="Stretch"
                                                   VerticalContentAlignment="Stretch"
                                                   Content="{Binding Path=OtherWindowsBorderColor}">
+                    <!--<customControls:ContentButton Grid.Row="2" Grid.Column="1" Title="Цвет&#10;окантовки&#10;кнопок:" 
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch"
+                                                  Content="{Binding Path=OtherWindowsBorderColor}">-->
                         <customControls:ContentButton.IconBrush>
                             <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
                                 <ImageBrush.Transform>
@@ -391,8 +399,13 @@
                     <customControls:ContentButton Grid.Row="3" Grid.Column="1" 
                                                   VerticalContentAlignment="Stretch"
                                                   HorizontalContentAlignment="Stretch"
-                                                  Title="Цвет&#10;текста:" 
+                                                  Title="Цвет 3:" 
                                                   Content="{Binding Path=OtherWindowsForegroundColor}">
+                    <!--<customControls:ContentButton Grid.Row="3" Grid.Column="1" 
+                                                  VerticalContentAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  Title="Цвет&#10;текста:" 
+                                                  Content="{Binding Path=OtherWindowsForegroundColor}">-->
                         <customControls:ContentButton.IconBrush>
                             <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
                                 <ImageBrush.Transform>
@@ -494,7 +507,7 @@
                         </customControls:ContentButton.ContentTemplate>
                     </customControls:ContentButton>
 
-                    <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                    <!--<Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.25*" />
                             <ColumnDefinition Width="0.5*"/>
@@ -551,7 +564,7 @@
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
-                    </Grid>
+                    </Grid>-->
 
                 </Grid>
 

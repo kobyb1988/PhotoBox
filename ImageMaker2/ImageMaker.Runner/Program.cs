@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ImageMaker.View;
+﻿using System.Diagnostics;
 
 namespace ImageMaker.Runner
 {
@@ -22,8 +15,14 @@ namespace ImageMaker.Runner
                 {
                 });
 
-                Console.ReadLine();
-                process.Close();
+                process.WaitForExit();
+                //process.Exited += (sender, eventArgs) =>
+                //{
+                //    Console.
+                //};
+
+                //if (!process.HasExited)
+                //    process.Close();
             }
         }
     }

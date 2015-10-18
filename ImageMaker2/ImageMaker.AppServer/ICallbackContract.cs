@@ -5,6 +5,6 @@ namespace ImageMaker.AppServer
     public interface ICallbackContract
     {
         [OperationContract(IsOneWay = true)]
-        void SendCommand(Command command);
+        void SendCommand(BaseCommand command);
     }
 }

@@ -51,15 +51,18 @@ namespace InstagramImagePrinter
         {
             await Task.Run(async () =>
             {
-                string minTagId = null;
+                string nextUrl = null;
                 while (!tokenSource.IsCancellationRequested)
                 {
                     if (DateTime.Now.Ticks >= endDate.Ticks)
                         break;
 
                     Task.Delay(TimeSpan.FromSeconds(30)).Wait();
-                    ImageResponse result = await _instagramExplorer.GetImagesByHashTag(hashTag, minTagId);
-                    minTagId = result.Return(x => x.MinTagId, null);
+                    ImageResponse result = string.IsNullOrEmpty(nextUrl)
+                        ? await _instagramExplorer.GetImagesByHashTag(hashTag, null)
+                        : await _instagramExplorer.GetImagesFromUrl(nextUrl);
+                    
+                    nextUrl = result.Return(x => x.NextUrl, null);
 
                     await _messageAdapter.ProcessImages(result.Return(x => x.Images, Enumerable.Empty<Image>()), _printerName);
                 }

@@ -28,7 +28,13 @@ namespace ImageMaker.ViewModels.ViewModels
             navigator.NavigateForward<SelectActivityViewModel>(null);
 
             messenger.Register<CommandMessage>(this, OnOpenCommand);
-          //  communicationManager.Connect();
+            messenger.Register<CloseCommandMessage>(this, OnCloseCommand);
+            communicationManager.Connect();
+        }
+
+        private void OnCloseCommand(CloseCommandMessage command)
+        {
+            RaiseRequestClose(WindowState.Closed);
         }
 
         private void OnOpenCommand(CommandMessage command)
@@ -101,6 +107,10 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public event EventHandler<bool> StateChanged;
         public event Action<WindowState> RequestWindowVisibilityChanged;
+        public void OnClose()
+        {
+            _communicationManager.SendCloseCommand();
+        }
 
         public event EventHandler<ShowWindowEventArgs> ShowWindow;
     }

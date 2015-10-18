@@ -38,7 +38,7 @@ Names\SQL" Value="$(var.InstanceNameExpress)" Win64="yes"
     
 		<Chain>
 			<!-- TODO: Define the list of chained packages. -->
-      <ExePackage Id="Sql2012Express"
+      <!--<ExePackage Id="Sql2012Express"
         DisplayName="SQL Server 2012 Express"
         Cache="no"
         Compressed="no"
@@ -55,9 +55,9 @@ Names\SQL" Value="$(var.InstanceNameExpress)" Win64="yes"
         >
         <ExitCode Value ="3010" Behavior="forceReboot" />
         <dep:Provides DisplayName="Net2 SQL Server 2012 Express" Key="SQLServer2012Express,$(var.InstanceNameExpress)" Version="11.0.3000.0" />
-      </ExePackage>
+      </ExePackage>-->
 
-      <RollbackBoundary />
+      <!--<RollbackBoundary />-->
       
       <MsiPackage Id="MainPackage" SourceFile="..\ImageMaker.Setup\bin\$(var.Configuration)\ImageMaker.Setup.msi" DisplayInternalUI="yes" Compressed="yes" Vital="yes" Cache="no"/>
       

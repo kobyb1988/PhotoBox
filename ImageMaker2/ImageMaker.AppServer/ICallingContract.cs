@@ -11,7 +11,7 @@ namespace ImageMaker.AppServer
     public interface ICallingContract
     {
         [OperationContract(IsOneWay = true)]
-        void SendCommand(Command command);
+        void SendCommand(BaseCommand command);
 
         [OperationContract(IsOneWay = true)]
         void Connect();

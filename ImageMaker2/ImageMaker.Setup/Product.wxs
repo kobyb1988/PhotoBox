@@ -5,7 +5,7 @@
 	<Product Id="3326BD59-C901-41D7-A0B3-9D4C42F4BAA6" 
            Name="Test Product" Language="1033" Version="1.0.0.0" Manufacturer="s" UpgradeCode="36ff05cb-e805-4963-ae15-94915817f8ea">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-
+    <MediaTemplate EmbedCab="yes"/>
     <Property Id="InstallDir" Value="someDefaultValue" />
 
      <Binary Id="ImageMaker.RegisterServices.CA.dll"
@@ -14,7 +14,7 @@
     
     <CustomAction Id="SetPath"
               Property="ShortcutLocationChanger"
-              Value="Location=[INSTALLFOLDER]\Admin\"/>
+              Value="Location=[INSTALLFOLDER]\Main\"/>
 
     <CustomAction Id="ShortcutLocationChanger"
                Return="check"
@@ -32,9 +32,9 @@
       <ComponentGroupRef Id="MainGroup" />
 		</Feature>
   
-    <Feature Id="AdminFeature" Title="AdminFeature" Level="1">
+    <!--<Feature Id="AdminFeature" Title="AdminFeature" Level="1">
       <ComponentGroupRef Id="AdminGroup" />
-		</Feature>
+		</Feature>-->
   
     <Feature Id="ServiceFeature" Title="ServiceFeature" Level="1">
 			<ComponentGroupRef Id="OtherComponents" />
@@ -58,7 +58,7 @@
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="ImageMaker">
-          <Directory Id="Admin" Name="Admin" />
+          <!--<Directory Id="Admin" Name="Admin" />-->
           <Directory Id="Main" Name="Main" />
         </Directory>
 			</Directory>
@@ -66,14 +66,14 @@
 	</Fragment>
 
 	<Fragment>
-		<ComponentGroup Id="OtherComponents" Directory="INSTALLFOLDER">
+		<ComponentGroup Id="OtherComponents" Directory="Main">
       <Component Id='InstagramService' Guid='2575CFDC-5F26-4D81-BCD3-81F4209B7CAD'>
         <File Id='InstagramService.exe.config' Name='InstagramService.exe.config'
-              Source='..\ImageMaker.InstagramMonitoring\bin\$(var.Configuration)\ImageMaker.InstagramMonitoring.exe.config'
+              Source='..\Bin\ImageMaker.InstagramMonitoring.exe.config'
               DiskId='1' KeyPath='no' />
         
         <File Id='InstagramService.exe' Name='InstagramService.exe' 
-              Source='..\ImageMaker.InstagramMonitoring\bin\$(var.Configuration)\ImageMaker.InstagramMonitoring.exe' 
+              Source='..\Bin\ImageMaker.InstagramMonitoring.exe' 
               DiskId='1' KeyPath='yes' />
         
         <ServiceInstall Id="InstagramService" Type="ownProcess" Name="InstagramService" DisplayName="InstagramService"

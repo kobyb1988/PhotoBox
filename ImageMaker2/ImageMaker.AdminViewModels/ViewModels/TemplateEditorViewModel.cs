@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Helpers;
@@ -212,10 +215,40 @@ namespace ImageMaker.AdminViewModels.ViewModels
         {
             Stack.Value.Do(Template);
 
-            Template.Background = null;
+            Template.Background = CreateDefaultBackground();
             _canRemoveBackground = false;
             
             UpdateCommands();
+        }
+
+        public static ImageViewModel CreateDefaultBackground()
+        {
+            byte[] data = new byte[] { };
+            using (Bitmap backgroundBitmap = new Bitmap(500, 500))
+            {
+                using (Graphics canvas = Graphics.FromImage(backgroundBitmap))
+                {
+                    System.Drawing.Color color = System.Drawing.Color.FromArgb(255, 55, 62, 70);
+                    System.Drawing.Brush pen = new SolidBrush(color);
+
+                    canvas.FillRectangle(pen, 0, 0, 500, 500);
+                }
+
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        backgroundBitmap.Save(ms, ImageFormat.Png);
+                        data = ms.ToArray();
+                    }
+                }
+                catch (Exception e)
+                {
+                }
+            }
+
+            ImageViewModel background = new ImageViewModel(data);
+            return background;
         }
 
         public RelayCommand RemoveOverlayCommand

@@ -9,6 +9,7 @@
              xmlns:spinningWheel="clr-namespace:Hammer.SpinningWheel;assembly=Hammer.SpinningWheel"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:InstagramExplorerViewModel}"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -28,10 +29,10 @@
         </CollectionViewSource>
     </UserControl.Resources>
     <Viewbox Stretch="Fill">
-        <Border Padding="85,25">
-            <Border.Background>
+        <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
+            <!--<Border.Background>
                 <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
-            </Border.Background>
+            </Border.Background>-->
 
             <Grid Width="900" Height="730">
                 <Grid.RowDefinitions>
@@ -39,7 +40,9 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.18*" />
                 </Grid.RowDefinitions>
-                <Border Background="#ffffff" CornerRadius="40" Padding="5" Margin="5">
+                <Border 
+                    Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
+                    CornerRadius="40" Padding="5" Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"/>
@@ -113,7 +116,7 @@
                     <Grid>
                         <Grid.Resources>
                             <DataTemplate x:Key="tmpl" DataType="{x:Type images:InstagramImageViewModel}">
-                                <ToggleButton ClickMode="Release">
+                                <ToggleButton ClickMode="Release" IsChecked="{Binding Path=IsChecked}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="ToolTip" Value="{Binding Path=Name}" />
@@ -140,7 +143,10 @@
                                                Grid.RowSpan="2">
                                                                 </Image>
                                                                 <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
-                                                                <ToggleButton Grid.Row="1" Grid.Column="1" x:Name="toggle" Margin="7" IsChecked="{TemplateBinding IsChecked}">
+                                                                <ToggleButton Grid.Row="1" 
+                                                                              IsHitTestVisible="False"
+                                                                              Grid.Column="1" x:Name="toggle" Margin="7" 
+                                                                              IsChecked="{TemplateBinding IsChecked}">
                                                                     <ToggleButton.Style>
                                                                         <Style TargetType="{x:Type ToggleButton}">
                                                                             <Setter Property="Background" Value="White" />
@@ -224,6 +230,11 @@
                                     <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Setter Property="IsSelected" Value="{Binding Path=IsChecked, Mode=TwoWay}" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
                         </ListBox>
                         <spinningWheel:SpinningWheel 
                 HorizontalAlignment="Center"
@@ -240,6 +251,8 @@
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton 
                             Command="{Binding Path=GoBackCommand}"
+                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
                             CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"
@@ -251,11 +264,13 @@
                                                CornerAlign="BottomLeft,TopLeft"/>
                         <customControls:DataPagerCtl Grid.Column="1" 
                                                      ItemsView="{Binding Source={StaticResource Source}}" 
-                                                     PageSize="5"
+                                                     PageSize="15"
                                          PagesInRow="3"
                                                      Background="#4ecdc4"/>
                         <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
                         <customControls:BlueButton 
+                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
                             CornerRadius="40"
                                 Padding="8"
                             FontSize="18"

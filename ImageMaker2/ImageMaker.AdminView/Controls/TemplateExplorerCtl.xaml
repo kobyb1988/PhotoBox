@@ -354,28 +354,26 @@
                     </Grid>
                 </Border>
                 <Border  Padding="10" Grid.Row="2">
-                    <Grid  Width="700" Height="65">
+                    <Grid  Width="880" Height="65">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*"/>
                             <ColumnDefinition Width="0.75*"/>
                             <ColumnDefinition Width="1.4*"/>
                             <ColumnDefinition Width="0.75*"/>
-                            <ColumnDefinition Width="0.1*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton 
                             Command="{Binding Path=GoBackCommand}"
                             CornerRadius="30"
                                 InnerCornerRadius="30"
                                 Padding="5"
-                            Grid.Column="1"
+                            Grid.Column="0"
                             FontSize="18"
                             HorizontalAlignment="Stretch"
                                                Content="Назад" 
                                                ShowBackButton="True" 
                                                CornerAlign="BottomLeft,TopLeft"/>
-                        <customControls:DataPagerCtl Grid.Column="2" 
+                        <customControls:DataPagerCtl Grid.Column="1" 
                                                      ItemsView="{Binding Source={StaticResource Source}}" 
-                                                     PageSize="5"
+                                                     PageSize="15"
                                          PagesInRow="3"
                                                      Background="#4ecdc4"/>
                         <!--<Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>-->
@@ -385,7 +383,7 @@
                                 
                             FontSize="18"
                             HorizontalAlignment="Stretch"
-                        Grid.Column="3"
+                        Grid.Column="2"
                             CornerAlign="TopRight,BottomRight"
                                                Content="Сохранить"/>
                     </Grid>

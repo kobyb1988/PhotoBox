@@ -225,7 +225,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)ImageMaker.View\bin\Debug\*.*" "$(SolutionDir)Bin" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.exe" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.config" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.xml" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.bat" "$(SolutionDir)Bin" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

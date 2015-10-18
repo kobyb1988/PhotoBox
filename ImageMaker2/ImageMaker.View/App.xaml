@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
-             >
+             xmlns:system="clr-namespace:System;assembly=System">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -11,7 +11,41 @@
             </ResourceDictionary.MergedDictionaries>
 
             <SolidColorBrush x:Key="{x:Static themes:ThemeManager.MainBackgroundColorKey}"
-                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[MainBackgroundColor]}" />
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[MainBackgroundColor], TargetNullValue=#fefefe}" />
+            
+            <SolidColorBrush x:Key="{x:Static themes:ThemeManager.MainBorderColorKey}"
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[MainBorderColor], TargetNullValue=#00ffffff}" />
+
+            <SolidColorBrush x:Key="{x:Static themes:ThemeManager.MainForegroundColorKey}"
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[MainForegroundColor], TargetNullValue=#ac634c}" />
+
+            <SolidColorBrush x:Key="{x:Static themes:ThemeManager.OtherBackgroundColorKey}"
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherBackgroundColor], TargetNullValue=#ffffff}" />
+
+            <SolidColorBrush x:Key="{x:Static themes:ThemeManager.OtherBorderColorKey}"
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherForegroundColor], TargetNullValue=#43beb5}" />
+
+            <SolidColorBrush x:Key="{x:Static themes:ThemeManager.OtherForegroundColorKey}"
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherBorderColor], TargetNullValue=#ffffff}" />
+            
+            <ImageBrush x:Key="{x:Static themes:ThemeManager.MainImageKey}">
+                <ImageBrush.ImageSource>
+                    <Binding Source="{x:Static Application.Current}" Path="Properties[BackgroundImage]">
+                        <Binding.TargetNullValue>
+                            <system:Uri>pack://application:,,,/ImageMaker.Themes;component/Resources/colors.png</system:Uri>
+                        </Binding.TargetNullValue>
+                    </Binding>
+                </ImageBrush.ImageSource>
+            </ImageBrush>
+            <ImageBrush x:Key="{x:Static themes:ThemeManager.OtherImagesKey}">
+                <ImageBrush.ImageSource>
+                    <Binding Source="{x:Static Application.Current}" Path="Properties[OtherBackgroundImage]">
+                        <Binding.TargetNullValue>
+                            <system:Uri>pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg</system:Uri>
+                        </Binding.TargetNullValue>
+                    </Binding>
+                </ImageBrush.ImageSource>
+            </ImageBrush>
         </ResourceDictionary>
         
     </Application.Resources>

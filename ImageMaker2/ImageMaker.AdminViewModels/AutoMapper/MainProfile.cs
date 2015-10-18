@@ -18,10 +18,19 @@ namespace ImageMaker.AdminViewModels.AutoMapper
         {
             CreateMap<CameraSettingsExplorerViewModel, CameraSettingsDto>();
             CreateMap<AppSettingsExplorerViewModel, AppSettingsDto>()
-                .ForMember(x => x.DateEnd, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateEnd.Hours, c.DateEnd.Minutes, 0)))
-                .ForMember(x => x.DateStart, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateStart.Hours, c.DateStart.Minutes, 0)));
+                .ForMember(x => x.DateEnd, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateEnd.GetCurrentTime().Hours, c.DateEnd.GetCurrentTime().Minutes, 0)))
+                .ForMember(x => x.DateStart, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateStart.GetCurrentTime().Hours, c.DateStart.GetCurrentTime().Minutes, 0)));
             CreateMap<ThemeManagerViewModel, ThemeSettingsDto>()
-               // .ForMember(x => x.BackgroundImage, x => x.MapFrom(d => d.MainWindowImage.With(c => c.Data)))
+                .ForMember(x => x.BackgroundImage, x =>
+                                                   {
+                                                       x.Condition(c => c.MainWindowImage != null);
+                                                       x.MapFrom(d => d.MainWindowImage.With(c => c.Data));
+                                                   })
+                .ForMember(x => x.OtherBackgroundImage, x =>
+                                                        {
+                                                            x.Condition(c => c.OtherWindowsImage != null);
+                                                            x.MapFrom(d => d.OtherWindowsImage.With(c => c.Data));
+                                                        })
                 .ForMember(x => x.MainBackgroundColor, x => x.MapFrom(d => d.MainWindowBackgroundColor))
                 .ForMember(x => x.MainBorderColor, x => x.MapFrom(d => d.MainWindowBorderColor))
                 .ForMember(x => x.MainForegroundColor, x => x.MapFrom(d => d.MainWindowForegroundColor))
@@ -114,7 +123,8 @@ namespace ImageMaker.AdminViewModels.AutoMapper
                     Height =  c.Height,
                     X =  c.X,
                     Y =  c.Y,
-                    Id = c.Id
+                    Id = c.Id,
+                    TemplateId = template.Id
                 }).ToList(),
 
                 Background = background,

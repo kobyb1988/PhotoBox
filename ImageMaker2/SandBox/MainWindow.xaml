@@ -36,5 +36,5 @@
     <!--<views:SelectTemplateMainCtl />-->
     <!--<views:PagerTestCtl />-->
     <!--<views:CameraCtl />-->
-    <views:CameraResultCtl />
+    <!--<views:CameraResultCtl />-->
 </Window>

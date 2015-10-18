@@ -10,6 +10,7 @@
              xmlns:spinningWheel="clr-namespace:Hammer.SpinningWheel;assembly=Hammer.SpinningWheel"
              xmlns:controls1="clr-namespace:ImageMaker.CommonView.Controls;assembly=ImageMaker.CommonView"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels1:SelectPatternViewModel}"
              d:DesignHeight="800" d:DesignWidth="1000">
@@ -21,10 +22,10 @@
     </UserControl.Resources>
 
     <Viewbox Stretch="Fill">
-        <Border Padding="85,25">
-            <Border.Background>
+        <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
+            <!--<Border.Background>
                 <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
-            </Border.Background>
+            </Border.Background>-->
 
             <Grid Width="900" Height="730">
                 <Grid.RowDefinitions>
@@ -32,7 +33,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.18*" />
                 </Grid.RowDefinitions>
-                <Border Background="#ffffff" CornerRadius="40" Padding="5" Margin="5">
+                <Border Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}" CornerRadius="40" Padding="5" Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"/>
@@ -199,6 +200,7 @@
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton 
                             Command="{Binding Path=GoBackCommand}"
+                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
                             CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"
@@ -216,6 +218,8 @@
                         <!--<Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>-->
                         <customControls:BlueButton 
                             Command="{Binding Path=SelectPatternCommand}"
+                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
                             CornerRadius="40"
                                 Padding="8"
                             FontSize="18"

@@ -1,8 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Providers;
 using ImageMaker.AdminViewModels.ViewModels.Enums;
@@ -13,6 +21,9 @@ using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using Brushes = System.Windows.Media.Brushes;
+using Color = System.Windows.Media.Color;
+using Pen = System.Windows.Media.Pen;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -224,7 +235,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             string name = viewModel.Name;
 
-            _updatedTemplate = new CheckableTemplateViewModel(name, 500, 500, 0, Enumerable.Empty<TemplateImageViewModel>(), null, null);
+            _updatedTemplate = new CheckableTemplateViewModel(name, 500, 500, 0, 
+                Enumerable.Empty<TemplateImageViewModel>(), 
+                TemplateEditorViewModel.CreateDefaultBackground(), null);
 
             _navigator.NavigateForward<TemplateEditorViewModel>(this, _updatedTemplate);
         }

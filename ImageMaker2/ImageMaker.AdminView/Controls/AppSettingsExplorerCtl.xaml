@@ -9,7 +9,6 @@
              d:DataContext="{d:DesignInstance viewModels:AppSettingsExplorerViewModel}">
     <UserControl.Resources>
         <Style TargetType="{x:Type Calendar}"></Style>
-        <customControls:TimeSpanToHourConverter x:Key="TimeSpanToHour" />
     </UserControl.Resources>
     <Viewbox Stretch="Fill">
         <Border>
@@ -38,11 +37,11 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <customControls:TimeSelector Title="Начало&#10;печати:"  
-                                                     Time="{Binding Path=DateStart, UpdateSourceTrigger=LostFocus, Converter={StaticResource TimeSpanToHour}}"
+                                                     Time="{Binding Path=DateStart}"
                                                      InnerCornerRadius="38,38,0,0"
                                                      Margin="5,5,15,10" TitleFontSize="12" CornerRadius="30"/>
                         <customControls:TimeSelector 
-                            Time="{Binding Path=DateEnd, UpdateSourceTrigger=LostFocus, Converter={StaticResource TimeSpanToHour}}"
+                            Time="{Binding Path=DateEnd}"
                             Grid.Row="1" 
                             InnerCornerRadius="25,25,0,0"
                             Title="Конец&#10;печати:" Margin="5,5,15,10" TitleFontSize="12" CornerRadius="30"/>
@@ -65,7 +64,12 @@
                                            FontSize="12"
                                            Foreground="#777777"/>
                                 <Border Grid.Column="1" CornerRadius="30" Background="#d7d7d7" Margin="3">
-
+                                    <TextBox Background="Transparent" 
+                                             VerticalContentAlignment="Center"
+                                             Padding="5"
+                                             BorderBrush="Transparent"
+                                             FontSize="30"
+                                             Text="{Binding Path=HashTag, StringFormat={}#{0}}"/>
                                 </Border>
                             </Grid>
                         </Border >

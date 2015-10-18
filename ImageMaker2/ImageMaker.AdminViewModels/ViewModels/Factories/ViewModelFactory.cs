@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Runtime.InteropServices;
+using AutoMapper;
 using ImageMaker.AdminViewModels.Helpers;
 using ImageMaker.AdminViewModels.Providers;
 using ImageMaker.AdminViewModels.Services;
@@ -236,19 +237,25 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
     {
         private readonly IViewModelNavigator _navigator;
         private readonly SessionService _sessionService;
+        private readonly ImagePrinter _printer;
+        private readonly SettingsProvider _settings;
 
         public CurrentSessionViewModelFactory(
             IViewModelNavigator navigator,
-            SessionService sessionService
+            SessionService sessionService,
+            ImagePrinter printer,
+            SettingsProvider settings
             )
         {
             _navigator = navigator;
             _sessionService = sessionService;
+            _printer = printer;
+            _settings = settings;
         }
 
         protected override CurrentSessionViewModel GetViewModel(object param)
         {
-            return new CurrentSessionViewModel(_navigator, _sessionService);
+            return new CurrentSessionViewModel(_navigator, _sessionService, _printer, _settings);
         }
     }
 }

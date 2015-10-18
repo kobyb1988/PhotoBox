@@ -20,8 +20,8 @@ namespace ImageMaker.CommonViewModelsTests
         [TestFixtureSetUp]
         public void ImageServiceFixtureSetup()
         {
-            //NinjectBindings.Configure(new IntegrationTestNinjectModule());
-            var dirInfo = new DirectoryInfo("Images");
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            var dirInfo = new DirectoryInfo(Path.Combine(baseDir, "Images"));
             if (dirInfo.Exists)
                 dirInfo.Delete(true);
 
@@ -43,10 +43,12 @@ namespace ImageMaker.CommonViewModelsTests
             _context.SaveChanges();
 
             var imageService = new ImageService(rep);
-            
+
             imageService.SaveImage(new ImageViewModel(data));
 
-            Assert.IsNotEmpty(Directory.EnumerateFiles("Images", "*.png"));
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+
+            Assert.IsNotEmpty(Directory.EnumerateFiles(string.Format("{0}/Images/{1}", baseDir, session.StartTime.ToString("dd_MM_yyyy") + "_" +  session.Id), "*.png"));
             Assert.IsNotNull(_context.Images.FirstOrDefault());
         }
     }

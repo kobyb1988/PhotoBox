@@ -33,9 +33,9 @@ namespace SandBox
 
         public ICollectionView CollectionView { get; set; }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            ThemeManager.Change(Color.FromArgb(255, 0, 255, 255));
-        }
+        //private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    ThemeManager.Change(Color.FromArgb(255, 0, 255, 255));
+        //}
     }
 }

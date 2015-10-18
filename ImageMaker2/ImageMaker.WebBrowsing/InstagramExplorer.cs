@@ -13,15 +13,8 @@ namespace ImageMaker.WebBrowsing
         private const string cUserName = @"george.39reg";
         private const string cClientToken = @"fd2a555e04d54f1db8423c0e133fad91";
 
-        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string minTagId)
+        public async Task<ImageResponse> GetImagesFromUrl(string url)
         {
-            if (string.IsNullOrEmpty(hashTag))
-                return await Task.FromResult<ImageResponse>(null);
-
-            string url = string.Format(@"https://api.instagram.com/v1/tags/{0}/media/recent?client_id={1}{2}", 
-                hashTag, cClientToken, 
-                string.IsNullOrEmpty(minTagId) ? string.Empty : string.Format("&min_tag_id={0}", minTagId));
-
             ImageResponse imageResponse = null;
             List<Image> images = new List<Image>();
             try
@@ -30,7 +23,7 @@ namespace ImageMaker.WebBrowsing
                 {
                     string data = await client.DownloadStringTaskAsync(new Uri(url));
                     JObject token = JObject.Parse(data);
-                    
+
                     JObject paginationToken = JObject.FromObject(token.SelectToken("pagination"));
                     imageResponse = paginationToken.ToObject<ImageResponse>();
                     foreach (var tokenData in token.SelectToken("data"))
@@ -54,8 +47,20 @@ namespace ImageMaker.WebBrowsing
             catch (Exception)
             {
             }
-            
+
             return imageResponse;
+        }
+        
+        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string maxTagId)
+        {
+            if (string.IsNullOrEmpty(hashTag))
+                return await Task.FromResult<ImageResponse>(null);
+
+            string url = string.Format(@"https://api.instagram.com/v1/tags/{0}/media/recent?client_id={1}{2}", 
+                hashTag, cClientToken,
+                string.IsNullOrEmpty(maxTagId) ? string.Empty : string.Format("&max_tag_id={0}", maxTagId));
+
+            return await GetImagesFromUrl(url);
         }
 
         public async Task<ImageResponse> GetImagesByUserName(string userName, string minTagId)
@@ -82,6 +87,7 @@ namespace ImageMaker.WebBrowsing
                             cClientToken,
                             string.IsNullOrEmpty(minTagId) ? string.Empty : string.Format("&min_tag_id={0}", minTagId));
 
+                        return await GetImagesFromUrl(dataRetrieveUrl);
                         string data = await client.DownloadStringTaskAsync(new Uri(dataRetrieveUrl));
                         JObject token = JObject.Parse(data);
                         JObject paginationToken = JObject.FromObject(token.SelectToken("pagination"));
@@ -103,6 +109,7 @@ namespace ImageMaker.WebBrowsing
                         }
 
                         imageResponse.Images = images;
+                        return imageResponse;
                     }
                     else
                     {
@@ -114,9 +121,9 @@ namespace ImageMaker.WebBrowsing
             {
                 
             }
-            
 
-            return imageResponse;
+
+            return await Task.FromResult<ImageResponse>(null);
         }
     }
 }

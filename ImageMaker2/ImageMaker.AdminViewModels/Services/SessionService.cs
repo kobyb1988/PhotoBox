@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Monads;
-using System.Text;
+using System.Net.Mime;
 using System.Threading.Tasks;
-using System.Windows.Navigation;
 using AutoMapper;
+using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.Data.Repositories;
+using ImageMaker.Entities;
 
 namespace ImageMaker.AdminViewModels.Services
 {
@@ -31,10 +33,35 @@ namespace ImageMaker.AdminViewModels.Services
             _imageRepository.Commit();
         }
 
-        public virtual async Task<IEnumerable<ImageViewModel>> GetImagesAsync()
+        public virtual bool GetIsSessionActive()
         {
-            var session = await _imageRepository.GetActiveSessionAsync(true);
-            return session.With(x => x.Images.Select(_mappingEngine.Map<ImageViewModel>));
+            return _imageRepository.GetActiveSession() != null;
+        }
+
+        public virtual string GetLastSessionFolderPath()
+        {
+            Session activeSession = _imageRepository.GetLastSession();
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            if (activeSession != null)
+                return Path.Combine(Path.Combine(baseDir, "Images"),
+                    string.Format("{0}_{1}", activeSession.StartTime.ToString("dd_MM_yyyy"), activeSession.Id));
+
+            return null;
+        }
+
+        public virtual void StopSession()
+        {
+            bool stopped = _imageRepository.StopSession();
+            if (!stopped)
+                return;
+
+            _imageRepository.Commit();
+        }
+
+        public virtual async Task<IEnumerable<CheckableImageWrapper>> GetImagesAsync()
+        {
+            var session = await _imageRepository.GetLastSessionAsync(true);
+            return session.With(c => c.Images.Select(x => new CheckableImageWrapper(_mappingEngine.Map<ImageViewModel>(x))));
         } 
     }
 }

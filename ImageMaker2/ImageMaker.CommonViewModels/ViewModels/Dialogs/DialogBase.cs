@@ -7,6 +7,10 @@ namespace ImageMaker.CommonViewModels.ViewModels.Dialogs
     {
         public event EventHandler<bool> StateChanged;
         public event Action<WindowState> RequestWindowVisibilityChanged;
+        public void OnClose()
+        {
+            
+        }
 
         protected void Close()
         {

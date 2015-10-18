@@ -249,7 +249,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I;
+    <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I
+
+xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I
 xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)ImageMaker.AdminView\bin\Debug\" /Y /I
 xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)SandBox\bin\Debug\" /Y /I</PostBuildEvent>
   </PropertyGroup>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Services;
 using ImageMaker.CommonViewModels.Behaviors;
@@ -28,12 +29,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
             messenger.Register<WindowStateMessage>(this, state => RaiseStateChanged(state.State));
 
             messenger.Register<ContentChangedMessage>(this, OnContentChanged);
-            navigator.NavigateForward<WelcomeViewModel>(null); //temporary
-            //navigator.NavigateForward<PasswordPromptViewModel>(null);
+            //navigator.NavigateForward<WelcomeViewModel>(null); //temporary
+            navigator.NavigateForward<PasswordPromptViewModel>(null);
 
 
             messenger.Register<CommandMessage>(this, OnOpenCommand);
-            //communicationManager.Connect();
+            messenger.Register<CloseCommandMessage>(this, OnCloseCommand);
+            communicationManager.Connect();
+        }
+
+        private void OnCloseCommand(CloseCommandMessage command)
+        {
+            _process = null;
+            RaiseRequestClose(WindowState.Visible);
         }
 
         private void OnOpenCommand(CommandMessage command)
@@ -125,6 +133,12 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         public event EventHandler<bool> StateChanged;
         public event Action<WindowState> RequestWindowVisibilityChanged;
+
+        public void OnClose()
+        {
+            _communicationManager.SendCloseCommand();
+            Thread.Sleep(3000); //todo to wait for main window to close, find the better way
+        }
 
         public event EventHandler<ShowWindowEventArgs> ShowWindow;
     }

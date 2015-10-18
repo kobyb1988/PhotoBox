@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 using AutoMapper;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.Common.Dto;
@@ -8,6 +14,7 @@ using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using Color = System.Windows.Media.Color;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -65,7 +72,11 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 return;
             }
 
-            MainWindowImage = new ImageViewModel(settings.BackgroundImage);
+            if (settings.BackgroundImage != null)
+                MainWindowImage = new ImageViewModel(settings.BackgroundImage);
+
+            if (settings.OtherBackgroundImage != null)
+                OtherWindowsImage = new ImageViewModel(settings.OtherBackgroundImage);
 
             MainWindowBackgroundColor = settings.MainBackgroundColor;
             MainWindowBorderColor = settings.MainBorderColor;

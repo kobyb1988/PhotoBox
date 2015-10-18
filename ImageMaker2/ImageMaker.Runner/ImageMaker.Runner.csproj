@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{46B2111F-4C67-45D0-9D1C-BF65DEC26EB4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ImageMaker.Runner</RootNamespace>
     <AssemblyName>ImageMaker.Runner</AssemblyName>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -71,7 +74,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.*" "$(SolutionDir)Bin" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.exe" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.config" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.xml" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.bat" "$(SolutionDir)Bin" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

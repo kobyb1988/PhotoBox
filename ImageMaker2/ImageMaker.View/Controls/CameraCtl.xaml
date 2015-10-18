@@ -6,6 +6,7 @@
              xmlns:converters="clr-namespace:ImageMaker.View.Converters"
              xmlns:viewModels="clr-namespace:ImageMaker.ViewModels.ViewModels;assembly=ImageMaker.ViewModels"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:CameraViewModel}"
              d:DesignHeight="800" d:DesignWidth="1000">
@@ -15,10 +16,10 @@
     </UserControl.Resources>
 
     <Viewbox Stretch="Fill">
-        <Border Padding="85,25">
-            <Border.Background>
+        <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
+            <!--<Border.Background>
                 <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
-            </Border.Background>
+            </Border.Background>-->
 
             <Grid Width="900" Height="730">
                 <Grid.RowDefinitions>
@@ -26,7 +27,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.18*" />
                 </Grid.RowDefinitions>
-                <Border Background="#ffffff" CornerRadius="40" Padding="5" Margin="5">
+                <Border 
+                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
+                    
+                    CornerRadius="40" Padding="5" Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"/>
@@ -194,6 +198,8 @@
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton 
                             Command="{Binding Path=GoBackCommand}"
+                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
                             CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"
@@ -205,14 +211,17 @@
                                                CornerAlign="BottomLeft,TopLeft"/>
 
                         <Rectangle Grid.Column="1" Fill="#5543beb5"/>
-                        <Button Grid.Column="1" Command="{Binding Path=TakePictureCommand}">
+                        <Button Grid.Column="1" 
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                Command="{Binding Path=TakePictureCommand}">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="OverridesDefaultStyle" Value="True" />
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="#4ecdc4" CornerRadius="40" HorizontalAlignment="Center">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="40" HorizontalAlignment="Center">
                                                     <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/take_picture.png">
                                                         <Image.RenderTransform>
                                                             <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
@@ -229,7 +238,7 @@
                             </Button.Style>
                         </Button>
                         
-                        <customControls:BlueButton 
+                        <!--<customControls:BlueButton 
                             CornerRadius="40"
                                 Padding="8"
                             FontSize="18"
@@ -238,7 +247,7 @@
                             HorizontalAlignment="Stretch"
                         Grid.Column="2"
                             CornerAlign="TopRight,BottomRight"
-                                               Content="Вперед"/>
+                                               Content="Вперед"/>-->
                     </Grid>
                 </Border>
             </Grid>

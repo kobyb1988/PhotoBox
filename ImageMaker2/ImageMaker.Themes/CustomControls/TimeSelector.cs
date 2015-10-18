@@ -50,7 +50,7 @@ namespace ImageMaker.Themes.CustomControls
     ///     <MyNamespace:TimeSelector/>
     ///
     /// </summary>
-    public class TimeSelector : ComboBox
+    public class TimeSelector : ComboBox, INotifyPropertyChanged
     {
         static TimeSelector()
         {
@@ -59,9 +59,11 @@ namespace ImageMaker.Themes.CustomControls
 
         public TimeSelector()
         {
-            var hours = Enumerable.Range(0, 24).Select(x => new Hour(TimeSpan.FromHours(x))).ToList();
+            //var hours = Enumerable.Range(0, 24).Select(x => new Hour(TimeSpan.FromHours(x))).ToList();
+            //ItemsSource = hours;
+            var hours = Enumerable.Range(0, 24).Select(x => TimeSpan.FromHours(x)).ToList();
             ItemsSource = hours;
-            Time = hours.First();
+            Time = new Hour(hours.First());
         }
 
         public string Title
@@ -94,8 +96,6 @@ namespace ImageMaker.Themes.CustomControls
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(double), typeof(TimeSelector), new PropertyMetadata(0.0));
 
-
-
         public double TitleFontSize
         {
             get { return (double)GetValue(TitleFontSizeProperty); }
@@ -115,7 +115,10 @@ namespace ImageMaker.Themes.CustomControls
 
         // Using a DependencyProperty as the backing store for InnerCornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InnerCornerRadiusProperty =
-            DependencyProperty.Register("InnerCornerRadius", typeof(CornerRadius), typeof(TimeSelector), new PropertyMetadata(new CornerRadius(0)));
+            DependencyProperty.Register("InnerCornerRadius", 
+            typeof(CornerRadius), 
+            typeof(TimeSelector), 
+            new PropertyMetadata(new CornerRadius(0)));
 
         public Align CornerAlign
         {
@@ -139,6 +142,31 @@ namespace ImageMaker.Themes.CustomControls
         public static readonly DependencyProperty TimeProperty =
             DependencyProperty.Register("Time", typeof(Hour), typeof(TimeSelector), new PropertyMetadata(null));
 
+        public TimeSpan SelectedTime
+        {
+            get { return (TimeSpan)GetValue(SelectedTimeProperty); }
+            set { SetValue(SelectedTimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedTimeProperty =
+            DependencyProperty.Register("SelectedTime", 
+            typeof(TimeSpan), 
+            typeof(TimeSelector), 
+            new FrameworkPropertyMetadata(TimeSpan.Zero, PropertyChangedCallback));
+
+        private static void PropertyChangedCallback(
+            DependencyObject dependencyObject, 
+            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            TimeSelector selector = (TimeSelector) dependencyObject;
+            if (selector.Time == null)
+                return;
+
+            selector.Time.SetCurrentTime((TimeSpan) dependencyPropertyChangedEventArgs.NewValue);
+        }
+
+
         private RelayCommand _increaseCommand;
         private RelayCommand _decreaseCommand;
 
@@ -161,6 +189,7 @@ namespace ImageMaker.Themes.CustomControls
         private void Decrease()
         {
             Time.SubtractMinute();
+          //  OnPropertyChanged("Time");
         }
 
         private bool CanIncrease()
@@ -168,9 +197,21 @@ namespace ImageMaker.Themes.CustomControls
             return Time != null && Time.CanAdd();
         }
 
+       // public Hour CurrentTime { get { return (Time ?? new Hour(TimeSpan.Zero)); } }
+
         private void Increase()
         {
             Time.AddMinute();
+      //      OnPropertyChanged("Time");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
@@ -191,9 +232,7 @@ namespace ImageMaker.Themes.CustomControls
             if (time == null)
                 return TimeSpan.Zero;
 
-            TimeSpan timeSpan;
-            TimeSpan.TryParse(time.OriginalTime, out timeSpan);
-            return timeSpan;
+            return time.GetCurrentTime();
         }
     }
 
@@ -211,6 +250,12 @@ namespace ImageMaker.Themes.CustomControls
             _time = time;
             _currentTime = time;
             TimeString = OriginalTime = _time.ToString(CFormat);
+        }
+
+        public void SetCurrentTime(TimeSpan time)
+        {
+            _currentTime = time;
+            TimeString = OriginalTime = _currentTime.ToString(CFormat);
         }
 
         public void AddMinute()
@@ -247,6 +292,11 @@ namespace ImageMaker.Themes.CustomControls
             }
         }
 
+        public TimeSpan GetCurrentTime()
+        {
+            return _currentTime;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -254,6 +304,20 @@ namespace ImageMaker.Themes.CustomControls
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override bool Equals(object obj)
+        {
+            Hour other = obj as Hour;
+            if (other == null)
+                return false;
+
+            return _currentTime.Equals(other._currentTime);
+        }
+
+        public override int GetHashCode()
+        {
+            return _time.GetHashCode();
         }
     }
 }

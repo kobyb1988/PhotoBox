@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
-        <DirectoryRef Id="Admin">
-            <Component Id="cmp4A0FB61C10AFF23B3549FFDFAD971C18" Guid="4BB0E6C0-EA63-42B6-ADE6-A7C9A886421D">
+        <DirectoryRef Id="Main">
+            <Component Id="cmpDE95CC0363DB4301DF8F556E5214C270" Guid="40072E86-1902-4BCB-AEDE-514C4AFEC9F0">
                 <Class Id="{04772569-8E37-3DF5-A603-959455E15278}" Context="InprocServer32" Description="AutoMapper.IgnoreMapAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.IgnoreMapAttribute" Description="AutoMapper.IgnoreMapAttribute" />
                 </Class>
@@ -129,396 +129,396 @@
                 <Class Id="{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}" Context="InprocServer32" Description="AutoMapper.Mappers.EnumerableToDictionaryMapper" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.Mappers.EnumerableToDictionaryMapper" Description="AutoMapper.Mappers.EnumerableToDictionaryMapper" />
                 </Class>
-                <File Id="fil9B8A870D8DFEC73EF30822FCD9C680D6" KeyPath="yes" Source="SourceDir\AutoMapper.dll" />
+                <File Id="filBA70081CD5CCB7EA6ABC1E7C379ECABC" KeyPath="yes" Source="SourceDir\AutoMapper.dll" />
                 <ProgId Id="Record" />
                 <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.IgnoreMapAttribute" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32" Name="Class" Value="AutoMapper.IgnoreMapAttribute" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{04772569-8E37-3DF5-A603-959455E15278}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.NullableSourceMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.NullableSourceMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07191441-0653-34D7-BEA9-980A26A0698B}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.DefaultResolver" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32" Name="Class" Value="AutoMapper.DefaultResolver" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{08BF7322-D02B-3F0B-AF93-D5A4DD6E9A6B}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.ReaderWriterLockSlimFactory+NoOpReaderWriterLock" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32" Name="Class" Value="AutoMapper.Internal.ReaderWriterLockSlimFactory+NoOpReaderWriterLock" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E210D56-BA63-37DB-8754-B97FF9AE8183}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.ImplicitConversionOperatorMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.ImplicitConversionOperatorMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{10C0E54F-F8C9-3822-B32A-83DFF05A440B}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.MappedTypeExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.MappedTypeExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{17AADEF6-7C6E-3C3D-8EEF-EE04CBD7F1FB}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.AssignableArrayMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.AssignableArrayMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1AB6D9F5-7958-3CB2-A32B-008CFDD12B1F}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.ReaderWriterLockSlimFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32" Name="Class" Value="AutoMapper.Internal.ReaderWriterLockSlimFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1FA7F709-D8FC-3564-AEDB-A0C6035811D2}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.PascalCaseNamingConvention" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32" Name="Class" Value="AutoMapper.PascalCaseNamingConvention" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{21F2F116-3D28-3162-BC56-720862477110}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.DictionaryMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.DictionaryMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2213C963-0ACB-34A0-87F9-77580FB05C8E}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.MemberGetterExpressionResultConverter" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.MemberGetterExpressionResultConverter" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2346C98A-32E9-378C-92CA-ACBC252EA80E}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.TypeMapFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32" Name="Class" Value="AutoMapper.TypeMapFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26FD2B58-ABF5-38FF-A3C0-7C00CBF0AE64}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.CustomProjectionExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.CustomProjectionExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{33C7FFCB-3E37-35EC-A915-465457E64DBF}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.StringMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.StringMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{346339DC-8F34-3D62-8916-F564B7802088}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.ExplicitConversionOperatorMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.ExplicitConversionOperatorMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3505D20F-0291-387F-AB4A-8C19CF564AC0}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.NullSubstitutionExpressionResultConverter" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.NullSubstitutionExpressionResultConverter" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3F573201-FF09-3A37-99EB-E7D9EAA793C1}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.ProxyGeneratorFactory+NotSupportedProxyGenerator" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32" Name="Class" Value="AutoMapper.Internal.ProxyGeneratorFactory+NotSupportedProxyGenerator" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4E102B7F-B2C1-345F-8C4B-0A6682F45264}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.MemberResolverExpressionResultConverter" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.MemberResolverExpressionResultConverter" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{53A915E9-966A-383B-B58A-56D4B54042D2}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.DelegateFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32" Name="Class" Value="AutoMapper.DelegateFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{69DF2226-5D94-3809-B8D2-5B3CEA136EB3}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.ReadOnlyCollectionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.ReadOnlyCollectionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6AB57407-5497-3599-B28E-33BE78A9AADB}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.AssignableMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.AssignableMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{716453FE-C1D8-3CDE-987F-34A2285C84D2}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.LowerUnderscoreNamingConvention" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32" Name="Class" Value="AutoMapper.LowerUnderscoreNamingConvention" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{71EBA0ED-7451-38A2-9049-B191B688FFB8}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.StringExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.StringExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7884D78B-8BA4-3E19-BD62-F5C591DD784D}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.FlagsEnumMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.FlagsEnumMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7A8789B9-71C3-33D6-81B1-CB62DF505BF3}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.AutoMapperMappingException" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32" Name="Class" Value="AutoMapper.AutoMapperMappingException" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8133230D-5E72-35FB-AC2D-3A10553D5620}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.NullableMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.NullableMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8D6CAA6F-D10B-3887-8D2D-7A0FB5D025B7}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.ProxyGeneratorFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32" Name="Class" Value="AutoMapper.Internal.ProxyGeneratorFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8FAF8F90-74F0-3EAE-9B22-C92DD8207782}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.ArrayMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.ArrayMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{998DE8ED-D719-3C81-827F-74C89561C66C}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.EnumerableExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.EnumerableExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A83732BF-1103-3A58-8106-00534124FABA}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.ExpressionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.ExpressionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B00F5A30-8668-3F25-9E85-C7155372E046}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.NullableExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.NullableExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B6355FF9-FA1E-3FD6-B7A3-E31A4A4BC513}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.PrimitiveArrayMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.PrimitiveArrayMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B69AF94F-1C51-3EBA-9EE9-A95DEB9CF766}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.NullableConverterFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32" Name="Class" Value="AutoMapper.Internal.NullableConverterFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CCB2F61C-8672-3D25-8850-2B256985220A}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.EnumerableMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.EnumerableMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE6A103F-F555-30E3-A133-26AFB97B8CEC}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.DictionaryFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32" Name="Class" Value="AutoMapper.Internal.DictionaryFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF842633-5669-3C13-AD58-2BFA1A7DA791}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.EnumNameValueMapperFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32" Name="Class" Value="AutoMapper.Internal.EnumNameValueMapperFactory" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D6B9ED9D-F532-3562-B019-777D9128CA65}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.CollectionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.CollectionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D7BB873B-FDC3-30A9-BBDB-1F512AA6B5D6}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.EnumMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.EnumMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA4AFD51-ACF0-31D6-A2E3-70DE90D8CE54}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.AssignableExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32" Name="Class" Value="AutoMapper.QueryableExtensions.Impl.AssignableExpressionBinder" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EC44923F-0D6E-3B0D-9506-444AD5F6766B}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.PlatformSpecificMapperRegistry" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.PlatformSpecificMapperRegistry" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F0F756C4-338E-3CBE-A208-552492DE7DDF}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.MappingOperationOptions" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32" Name="Class" Value="AutoMapper.MappingOperationOptions" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5C4761B-9005-326D-B693-84EBA166F9E0}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.EnumerableToDictionaryMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.EnumerableToDictionaryMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FAAEEB51-9CE0-36C0-AEA4-3A32CEB9238E}\InprocServer32" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{9AE66B53-B49C-397F-AC07-6BEEC01186A2}\3.3.1.0" Name="Class" Value="AutoMapper.Impl.TypePair" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{9AE66B53-B49C-397F-AC07-6BEEC01186A2}\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{9AE66B53-B49C-397F-AC07-6BEEC01186A2}\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="Record\{9AE66B53-B49C-397F-AC07-6BEEC01186A2}\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{9AE66B53-B49C-397F-AC07-6BEEC01186A2}\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="Class" Value="AutoMapper.MemberList" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="Assembly" Value="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="CodeBase" Value="file:///[#fil9B8A870D8DFEC73EF30822FCD9C680D6]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp9795CD7FBF703E16D90C631389665CBD" Guid="90BF854B-17BF-4D1E-89C9-13E52809B087">
+            <Component Id="cmp4FCFD3107CFCD8758AAFA30C4CF830F4" Guid="7B1E2C0B-CD7A-489F-9659-A25EC715CACE">
                 <Class Id="{135A0B14-E206-3D22-8B03-FF271C2D8582}" Context="InprocServer32" Description="AutoMapper.Mappers.NameValueCollectionMapper" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.Mappers.NameValueCollectionMapper" Description="AutoMapper.Mappers.NameValueCollectionMapper" />
                 </Class>
@@ -558,383 +558,471 @@
                 <Class Id="{F45CA915-D717-35E4-8AB7-6D42866EEF8D}" Context="InprocServer32" Description="AutoMapper.Internal.ProxyGeneratorFactoryOverride" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.Internal.ProxyGeneratorFactoryOverride" Description="AutoMapper.Internal.ProxyGeneratorFactoryOverride" />
                 </Class>
-                <File Id="filCF6349DA8B24ADCCF3188292E3F2868E" KeyPath="yes" Source="SourceDir\AutoMapper.Net4.dll" />
+                <File Id="fil546E63238C6CEED8A03F14509FBEEB3F" KeyPath="yes" Source="SourceDir\AutoMapper.Net4.dll" />
                 <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.NameValueCollectionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.NameValueCollectionMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{135A0B14-E206-3D22-8B03-FF271C2D8582}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.DictionaryFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32" Name="Class" Value="AutoMapper.Internal.DictionaryFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{24C68C3F-51E6-3A05-81C8-695567938D1F}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.DelegateFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32" Name="Class" Value="AutoMapper.DelegateFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3CACEFE0-A90A-30BA-AE58-A867F245A2AD}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.ReaderWriterLockSlimFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32" Name="Class" Value="AutoMapper.Internal.ReaderWriterLockSlimFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{431E4AE9-3AC7-3DFA-9603-1E5562083B8D}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.DataReaderMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.DataReaderMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{48E29948-E039-3EFF-B4A7-DEE80FDB3B53}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.TypeConverterMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.TypeConverterMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5A9F7AA9-B3E2-32C6-9E2D-963166675FA1}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.EnumNameValueMapperFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32" Name="Class" Value="AutoMapper.Internal.EnumNameValueMapperFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B25ABAAE-D3CE-3DE8-BF66-9078844C77A3}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.PlatformSpecificMapperRegistryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.PlatformSpecificMapperRegistryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D8C22EB1-9350-3DB1-B830-74C35B5F6A72}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.ListSourceMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.ListSourceMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8468E4-E5CD-3EBE-A540-61F8AB4D13C9}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.NullableConverterFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32" Name="Class" Value="AutoMapper.Internal.NullableConverterFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DCA4E226-23E9-39C7-BA5C-412E99AA0881}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Mappers.HashSetMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32" Name="Class" Value="AutoMapper.Mappers.HashSetMapper" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DE99B537-8DDA-36E5-944F-81ED234ECDC6}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Impl.ProxyGenerator" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32" Name="Class" Value="AutoMapper.Impl.ProxyGenerator" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DFC6A6E1-D400-38BD-A278-E4CBD2FD149C}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32\3.3.1.0" Name="Class" Value="AutoMapper.Internal.ProxyGeneratorFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32\3.3.1.0" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="Class" Value="AutoMapper.Internal.ProxyGeneratorFactoryOverride" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="Assembly" Value="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="CodeBase" Value="file:///[#filCF6349DA8B24ADCCF3188292E3F2868E]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp3C8942CB1D01B77B8A322A7BFA7EB6D4" Guid="AC9030C6-95F1-48A9-9646-288925A191D9">
-                <File Id="fil82C80226F779D88335B898959FE7557A" KeyPath="yes" Source="SourceDir\AutoMapper.pdb" />
+            <Component Id="cmpBC75E43C761D0BAC4E9D1B797C3D31E5" Guid="98AE3329-AFBC-4F0B-9CCE-423AB41C4D93">
+                <File Id="filD3585DD1DDDAF34FD601B78C605636BD" KeyPath="yes" Source="SourceDir\AutoMapper.pdb" />
             </Component>
-            <Component Id="cmp20DD5D3CA16B05088E3F6490322EDAD0" Guid="BE70E0BA-72ED-43C9-B1F6-CC143F895C22">
-                <File Id="fil84E93458DC100E5F120CBB3F3775D0CA" KeyPath="yes" Source="SourceDir\AutoMapper.xml" />
+            <Component Id="cmp9F72431D52754004177B3A6F8A89807D" Guid="802FF365-87F8-432B-A906-B26B4A214EA0">
+                <File Id="fil3B7603346C3BA132DC6D60FC65DC14A9" KeyPath="yes" Source="SourceDir\AutoMapper.xml" />
             </Component>
-            <Component Id="cmpCE628C5870E0E404E5DA0B6EDAAFDEFB" Guid="3C0492FD-ECD0-499C-BA9B-0B54E181D27E">
-                <File Id="fil368088FC5D6FDC8ABE8D205DFF97D083" KeyPath="yes" Source="SourceDir\EntityFramework.dll" />
+            <Component Id="cmp36DD3258436BAB7823E85ADB220C6436" Guid="4072BB5C-0663-4467-A0F4-F8F2904B07D9">
+                <File Id="filEE9A149841837F79E9F56D6576D4120B" KeyPath="yes" Source="SourceDir\BCrypt.Net.dll" />
             </Component>
-            <Component Id="cmp47ABEA5C09A97132F9C724C4D36ED80E" Guid="597A2E3C-5068-469D-96A9-BA32A6FAAC0F">
-                <File Id="fil1E19CE3526AE60A411BCC212F0109A3C" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.dll" />
+            <Component Id="cmp666E4C92855293F5043C6E8D0D5C083C" Guid="49944443-95A8-4152-9759-052521B9DAFF">
+                <File Id="fil9CDAE5037AC3B10FDBC77B5E1C8024CB" KeyPath="yes" Source="SourceDir\BCrypt.Net.pdb" />
             </Component>
-            <Component Id="cmpEDE6BE06C8704E9279ADF58AD67C99F5" Guid="3D0DF76D-4B13-4666-83E9-107B67AA4E66">
-                <File Id="filC089BD87FDA413050224D62CF84D32AE" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.xml" />
+            <Component Id="cmpBDA03D0A6F2242DA3ADF5CF509AFCF00" Guid="E8572877-3491-4ABB-B159-06B91D3B7E0D">
+                <File Id="filC104CE95BFEADC0308762674361EC70F" KeyPath="yes" Source="SourceDir\BCrypt.Net.xml" />
             </Component>
-            <Component Id="cmp6C875EBFFAE0F1212FC450FD7394FDAE" Guid="8BDF6A8D-88DA-41C6-B508-340B8F9DB0B4">
-                <File Id="fil66A298FF492E401993DB051FB79DC479" KeyPath="yes" Source="SourceDir\EntityFramework.xml" />
+            <Component Id="cmp6745A582FDA208E73B26129E0825F9B8" Guid="CC0A0E5C-806F-498A-A1B8-7F9A793DE733">
+                <File Id="fil3DEE1774A998EABD7EC743057B4A7B78" KeyPath="yes" Source="SourceDir\ConcurrentPriorityQueue.dll" />
             </Component>
-            <Component Id="cmp278BCAA92E0A981F9A54379A390CB77A" Guid="65AEC7F2-3BDB-4BCC-9965-C78E8FF33280">
-                <File Id="fil1EEED509F47660B8F1285B87265E2864" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.dll" />
+            <Component Id="cmp24A3CE40834AFF2500AB7DB9DE2F568E" Guid="05330E94-9860-4E21-83C6-2ECED9C1768C">
+                <File Id="fil8FD99D2BF65809099DD624BFD86A47CF" KeyPath="yes" Source="SourceDir\EDSDKLib.dll" />
             </Component>
-            <Component Id="cmp67DCEC9DFF94158D6703AF1860197A25" Guid="0D614685-7D3F-4349-8D38-8995291BF610">
-                <File Id="fil2370BA763D58099F2C93355B1BE098F2" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.dll" />
+            <Component Id="cmp96C09ECE344A9C01D2E4CB0680501554" Guid="138F10B6-70B4-43C7-A215-8C102DE99437">
+                <File Id="filC98144C2F1208BC0D0F459F9DC1761DC" KeyPath="yes" Source="SourceDir\EntityFramework.dll" />
             </Component>
-            <Component Id="cmpA22BCE396DEDFA14EF2705F9608DFEB3" Guid="2B216F12-9FBF-4613-881C-9309DF7FF51F">
-                <File Id="fil62C98ACFAEFD0C7E63D2682DF61A63F2" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.pdb" />
+            <Component Id="cmpBCF8FE9A3E3E66A695E0D9F911287C17" Guid="AF74AEC6-58A2-4B57-8BAF-EA9C902C4270">
+                <File Id="fil48879B399DC1E3264778814DC3C3EA75" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.dll" />
             </Component>
-            <Component Id="cmp37713A7CA14BDD4E73665BD7F78EC2BE" Guid="3AD5B968-64AE-4E4B-A774-1135F944BA58">
-                <File Id="filEC587E6F7A490308BD70B2EAB5C1C3FF" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.xml" />
+            <Component Id="cmpF4F90C83158C56D938F41A8221317786" Guid="0E36A66E-063C-4028-9FAE-3BFEA484339B">
+                <File Id="fil1DBAD72FCA5D38FFA61DC55FEE4F1AF0" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.xml" />
             </Component>
-            <Component Id="cmpAC6E7668AF09B8E6CE09CDC98872B06C" Guid="75E37B3E-9541-4AFD-B3FC-898F868E670E">
-                <File Id="filF397509533C3067A6FB4C3144E919ACF" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.pdb" />
+            <Component Id="cmp3EB84CB60335EC878A3D6185BE4B4B35" Guid="908DC5E2-F56C-474B-99A5-8FD2C621C9C8">
+                <File Id="fil9CAEDD948218B4A0B1449E9667C771DA" KeyPath="yes" Source="SourceDir\EntityFramework.xml" />
             </Component>
-            <Component Id="cmpCE299A937977C62B8D6CB5A54AFCA710" Guid="C0EC34E0-FB10-4E90-AC2E-371AEEAA4ECD">
-                <File Id="fil96FBA433F3BBB24BA58849D4D55D2D93" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.dll" />
+            <Component Id="cmpB12F7BDDF7CBD4674D71CE366ECA8877" Guid="D54F18A3-FBA6-4666-B587-CF12D3926123">
+                <File Id="filA027BDED0D8C36AA710D436007F73456" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.dll" />
             </Component>
-            <Component Id="cmp3058B2B6E792B17ABEF8D466D667465C" Guid="7F99F243-D7A7-4BD1-A4F5-AEA6F443294C">
-                <File Id="filCD98BDEEF48BA664A8957E3E139FB263" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.pdb" />
+            <Component Id="cmp108DC132D7428136506EBB9BBD1EFCA0" Guid="D195A8AC-E8C6-4E6F-9DEF-C2E7637B3EAF">
+                <File Id="filB544D34E084094CBB34188279DE90B2A" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.dll" />
             </Component>
-            <Component Id="cmpC0B2AEAF3DE35A216B73120192590C51" Guid="9317AFBD-5217-4EA0-9B8B-B32DA6934399">
-                <File Id="fil9A3F0882B9C1F2649AE6C418BFE7829D" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.xml" />
+            <Component Id="cmp89946A4FF81AFB1FC73CE340AEE21897" Guid="9724A84B-6765-4B3A-88EB-DD113D9E9327">
+                <File Id="fil520BE8EE074363F831FE34D205DD1D02" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.pdb" />
             </Component>
-            <Component Id="cmp9324C5EF46A1F4140E80C37EBBE0EB61" Guid="5A07AD58-2800-406A-983A-0DA93CFFD6A2">
-                <File Id="fil05C2F4B62AAC38CB8227DC411717982F" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.xml" />
+            <Component Id="cmp395B3DE4FE09C4021E3DD6F827E022CD" Guid="894274E2-D880-40D0-B41F-7A4CCE00B42D">
+                <File Id="fil8329CC5D03B7AD99B518325D2489EE6D" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.xml" />
             </Component>
-            <Component Id="cmp7E87DCD2886C6EB62F26093CC7E64509" Guid="0FB1A878-EADD-4407-AD9B-943D5C384A61">
-                <File Id="fil18BB69B4F76D7F6C4A05CFC6841D2026" KeyPath="yes" Source="SourceDir\Hammer.SpinningWheel.dll" />
+            <Component Id="cmpF5DCE5B61B10A1E43686ADB955C2F80E" Guid="3707093D-DEBA-4EA2-B5E6-FF5E8C8023E7">
+                <File Id="filB7F42200A5B722A32F86BF00EAED39A6" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.pdb" />
             </Component>
-            <Component Id="cmpBC151AF71FC338009E0B1E0D7BD32E22" Guid="C649419C-E3DB-437C-800C-BF99C4A15A17">
-                <File Id="fil44075905126E8DDB0A8BBC805BC13BB0" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe" />
+            <Component Id="cmp5F4E0FA71BA4DC8DB965A6AF05EC7F95" Guid="26FBDBC4-CE74-462A-B1C9-67149A508CF0">
+                <File Id="fil8C0A84C5E3492FA8BA0AF2E667A2FB35" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.dll" />
             </Component>
-            <Component Id="cmp25DE1875D39833B58ECAACFB1EFCCB2D" Guid="C0FB8BB4-DA5C-4F92-9DA3-594584D58D16">
-                <File Id="filDC6951DE7362001503F76431E7FF322D" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe.config" />
+            <Component Id="cmp593E4FC19CB4C60D4A4EBCB1F1AE5336" Guid="D28726FD-3ED8-411C-BD6D-DC0E9AC3FB30">
+                <File Id="filD1488F1F74BE092FEF029C897BA24312" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.pdb" />
             </Component>
-            <Component Id="cmpC32315FC876399D9BF83B42FE3D4D6E4" Guid="FCBECA16-7C54-47FE-B2EC-421CD3A0AF14">
-                <File Id="fil2F9DB77F0ED521C1361920C4642D4E30" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.pdb" />
+            <Component Id="cmp139CEC88D8DE3FF309A17459A2398299" Guid="B6E6BB03-F859-416A-B168-8BEA8FCEDFCF">
+                <File Id="fil38434A88E8C20D46C0EC6927C2C3BEC9" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.xml" />
             </Component>
-            <Component Id="cmpD4C0ABC774D407DADEE2D43F172DCDD1" Guid="3EFDC828-0FE2-4F33-B200-1AE202B77242">
-                <File Id="fil23B49A4C01B915152A3757ED6999A8AC" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.vshost.exe" />
+            <Component Id="cmp56DF90EE600C88C6E1982E90A7026DD9" Guid="CBEBCFB7-5079-40FD-BEE3-170B6811682B">
+                <File Id="filD2AF34244FDF8DA55E60F06BCC18038E" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.xml" />
             </Component>
-            <Component Id="cmp74603492B48E67421481EFCE84AB26A5" Guid="ED69FE23-434F-41EA-87D4-EAA4DC5F04BC">
-                <File Id="fil8984FA3A907F6094191A5403F7689D86" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.vshost.exe.config" />
+            <Component Id="cmp9D316BEA722349C2D791617048DBA934" Guid="01C112B7-C174-4409-AC7F-64F5F0D66242">
+                <File Id="fil6781F62979212DBA5BF28F138DDE0AFD" KeyPath="yes" Source="SourceDir\Hammer.SpinningWheel.dll" />
             </Component>
-            <Component Id="cmp7ACCA3A508B71DA3CB96DF20910D670C" Guid="79C7D152-53A4-438B-9C59-732FA8021ABE">
-                <File Id="fil6DDB8EDF02D533E64138057F8A736660" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.vshost.exe.manifest" />
+            <Component Id="cmp0068428326F0A41F5452DC741F499685" Guid="76C2D5E9-D783-4140-8C7E-60AC1D370882">
+                <File Id="fil55CCBDA5E65A9D24A63F4D403FFF3961" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe" />
             </Component>
-            <Component Id="cmp96EA06FE51BDAF53453335373194EBCE" Guid="D012EE69-F66C-4493-B98A-76B746774A36">
-                <File Id="fil750CB92114CE0C7FDE074A8284FDB65D" KeyPath="yes" Source="SourceDir\ImageMaker.AdminViewModels.dll" />
+            <Component Id="cmp19F45E434453B71F1ABA9CA701F89A5F" Guid="6F74946C-17AA-4E3E-B376-E4AE626F4D57">
+                <File Id="filDC876B0746B44DB7C5F766D28A35E3FD" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe.config" />
             </Component>
-            <Component Id="cmpF763567F4ED213BCEF6B3E7ED7D9B648" Guid="FBBCF742-0DCA-4C74-A9E6-E1F8710AE233">
-                <File Id="fil00280F7E53ED380775007D49B2005E30" KeyPath="yes" Source="SourceDir\ImageMaker.AdminViewModels.pdb" />
+            <Component Id="cmp639219B445CA91FD02685A84A86E0881" Guid="A148AF6B-6732-4915-99A8-968F36990BD4">
+                <File Id="fil112C19342B27EC4C1EB2471576076A8B" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.pdb" />
             </Component>
-            <Component Id="cmpD2F59F85EEB917E1E3B486953B25AEC1" Guid="76973787-D057-45E7-9B9D-E6A4BF7A39D1">
-                <File Id="filA6741D659F36FAAE8A14FF955ED55A8A" KeyPath="yes" Source="SourceDir\ImageMaker.Common.dll" />
+            <Component Id="cmpC76FE238ECFD048EA5E0377C2056F9A1" Guid="D16A14FA-B8C5-4690-8292-8191C7FE4AAE">
+                <File Id="filF3AB171AFCB3C4F424623F4D31CB438C" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.vshost.exe" />
             </Component>
-            <Component Id="cmp296CC35F36E6B5938AAC0B2D41BFB2EC" Guid="C2601FA6-38A9-46F8-9C19-1448D6D5EDC2">
-                <File Id="filFB63A58E706C666434ADAE0CB878D9F0" KeyPath="yes" Source="SourceDir\ImageMaker.Common.pdb" />
+            <Component Id="cmp9A7BDFF133D6237A5AB9747DFD93029E" Guid="01560940-4F97-4D98-878C-23B297367F49">
+                <File Id="filB05F37B47D59F15D6216F4A970174BCC" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.vshost.exe.config" />
             </Component>
-            <Component Id="cmpDA366426A385CC3235CF73DA4D5021BD" Guid="9E28D54E-1EA7-4183-8D83-F72709FD7749">
-                <File Id="fil2A37F94BB0CC140C6837DF9F05A86ACC" KeyPath="yes" Source="SourceDir\ImageMaker.CommonView.dll" />
+            <Component Id="cmp4D116018513768E4FDFB0170D5F5213A" Guid="6B13C8BD-87B0-491B-86AA-C6BFE0A4F6E0">
+                <File Id="fil9DB8F5B34E3F6C4F4150948455102E04" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.vshost.exe.manifest" />
             </Component>
-            <Component Id="cmp03816638FE092CB9FAC5DB6F104E751C" Guid="1FD87C30-1599-4B34-A867-5D7CBF0F50C2">
-                <File Id="fil9FDBDF9C648803FCA34FCB43F3B60B6A" KeyPath="yes" Source="SourceDir\ImageMaker.CommonView.pdb" />
+            <Component Id="cmp500FF85F27619FD21E5B4A3354DA9024" Guid="0441F513-1D82-4B0C-A984-270820CD156B">
+                <File Id="filDD18A65C2BCD58B1E400E7ABDF8CAB74" KeyPath="yes" Source="SourceDir\ImageMaker.AdminViewModels.dll" />
             </Component>
-            <Component Id="cmp809C0E16314BEB67BB038E9490ADA135" Guid="D8F1E48C-AAC8-4E5D-BE26-22E8736C9323">
-                <File Id="filD703E6BA272B4542FD1FE2D989CDCC3A" KeyPath="yes" Source="SourceDir\ImageMaker.CommonViewModels.dll" />
+            <Component Id="cmpA490EFAEAAFD3F541E78B0763484FEDF" Guid="E547CA2F-A5CB-4D90-902C-77D50DD890B9">
+                <File Id="fil3A7E52F4BDC04C92BDB48AC08B576F7E" KeyPath="yes" Source="SourceDir\ImageMaker.AdminViewModels.pdb" />
             </Component>
-            <Component Id="cmpB3C94A144B666F0DFFDB4C77A70B3458" Guid="B6193D1C-2F88-4B44-9EE4-ECE27FC31E48">
-                <File Id="fil09B692A9E81ACE413118BADD92301817" KeyPath="yes" Source="SourceDir\ImageMaker.CommonViewModels.pdb" />
+            <Component Id="cmpD6F84051227B800E74CFEC17230ED075" Guid="48B0440F-B2D5-4080-9C1A-ABBA4E596674">
+                <File Id="filCB34A87858476E4F08F9F818F318A73C" KeyPath="yes" Source="SourceDir\ImageMaker.AppClient.dll" />
             </Component>
-            <Component Id="cmp01CD7ACC1FA9D6E61A84ED3FFE940114" Guid="F521D97E-3AB0-43B0-80E7-3CA6BC9204CE">
-                <File Id="fil46C4B950EA451D1720EBAA4F3A3FF932" KeyPath="yes" Source="SourceDir\ImageMaker.Data.dll" />
+            <Component Id="cmp730B680307150831DC1D203B17F62ED5" Guid="CFD10C06-658E-4B87-B486-62D67B93F810">
+                <File Id="fil8606E3D151111A95816BE760F28DFBCE" KeyPath="yes" Source="SourceDir\ImageMaker.AppClient.pdb" />
             </Component>
-            <Component Id="cmpD054E3E11956D4ADAF18C93620FD8A94" Guid="5E514B26-C1E0-4549-ADA8-DB3FF7444BE7">
-                <File Id="fil4CC31343FBF2891A62296FEC6709F558" KeyPath="yes" Source="SourceDir\ImageMaker.Data.pdb" />
+            <Component Id="cmp8238B7DF4C2582409F193623C4A93840" Guid="0FF12691-50D1-458C-A7CA-FD0EB66D5534">
+                <File Id="fil26973F7D8ECC586083069BE4BBE031DD" KeyPath="yes" Source="SourceDir\ImageMaker.AppServer.dll" />
             </Component>
-            <Component Id="cmp2DB8B50AD88F5D82369B7E0B70003AD2" Guid="701C52B8-F135-44A3-8770-15BDD3D361D2">
-                <File Id="fil86136EA68CC85B49EEDCEE799A1A0466" KeyPath="yes" Source="SourceDir\ImageMaker.DataContext.dll" />
+            <Component Id="cmpC802C7C45B32505EEF8331C7F23C6D60" Guid="2CD8BF46-8CAF-417B-AE10-AB84FE3B5F62">
+                <File Id="fil604BE7AF4E995EFC68BE3E90007E7DEE" KeyPath="yes" Source="SourceDir\ImageMaker.AppServer.pdb" />
             </Component>
-            <Component Id="cmp91DFD9C2F069F858E4254F2B0FDB6C05" Guid="EC44E42A-52A5-4B06-B050-461C23FD237D">
-                <File Id="filCB7231F96392682E0555F1DE3BA972D5" KeyPath="yes" Source="SourceDir\ImageMaker.DataContext.pdb" />
+            <Component Id="cmpD1794B22756920312EE3C7C6C863BC6C" Guid="91BAF804-1862-46E3-B6A3-D891DDA32609">
+                <File Id="filE2F999AF26C88DF6455732BE3F4046DB" KeyPath="yes" Source="SourceDir\ImageMaker.Camera.dll" />
             </Component>
-            <Component Id="cmp85A8038CD433CEBB20216A195B4E5E41" Guid="F68D1B2E-6EE9-4F54-BFAC-BC22DFC30BCD">
-                <File Id="fil9808DAB0B7AEAEC092A42BCA9413EFCD" KeyPath="yes" Source="SourceDir\ImageMaker.Entities.dll" />
+            <Component Id="cmpBA3C65F12DE41EF1E8451DA35BBBEC7E" Guid="FBAF03FC-A9FB-4DC4-9C55-AD74B279BE9E">
+                <File Id="filAEC961F758C2D8FD6AE04C5A0811DE13" KeyPath="yes" Source="SourceDir\ImageMaker.Common.dll" />
             </Component>
-            <Component Id="cmp3161345A92AB1067616B8A1AB97ECB67" Guid="C8C18265-4341-4F03-9119-8A3858FC39CE">
-                <File Id="filFFA16841391646D9DCB964E9B35A8D05" KeyPath="yes" Source="SourceDir\ImageMaker.Entities.pdb" />
+            <Component Id="cmp52A941921135944BD55823E89D00D44A" Guid="3DDF52E3-82B5-49B6-BC5E-0377EC9AC18D">
+                <File Id="filEB5CB0886DD5C7C8486A70B228146AB5" KeyPath="yes" Source="SourceDir\ImageMaker.Common.pdb" />
             </Component>
-            <Component Id="cmp74CEA20A316205102EA99E3D7C2BF600" Guid="9B82D111-09A2-4CCE-B814-5909B83936E3">
-                <File Id="filD6E71B73CF67198E57DF617E8020CCB4" KeyPath="yes" Source="SourceDir\ImageMaker.SDKData.dll" />
+            <Component Id="cmp8C4F8C1FE286FD22DFE28F74B5191612" Guid="EAF8C2A4-B1DA-4562-877A-2D8A89FC1A70">
+                <File Id="fil903A0DD2A57346011B9D61BD4467A311" KeyPath="yes" Source="SourceDir\ImageMaker.CommonView.dll" />
             </Component>
-            <Component Id="cmp0A46E09C366F8399498F8BE0260D2011" Guid="35971924-26E5-4032-804F-5D359A57061A">
-                <File Id="fil4D13F59D3F699C758AD132C706902324" KeyPath="yes" Source="SourceDir\ImageMaker.SDKData.pdb" />
+            <Component Id="cmp3E54EB4BFB60F565BF5652952E6EC2DE" Guid="EBBFB045-1553-49D4-9114-56FE7CF57224">
+                <File Id="filC2AF1C5F8C51C64FC30EF8FE92C2038C" KeyPath="yes" Source="SourceDir\ImageMaker.CommonView.pdb" />
             </Component>
-            <Component Id="cmp9C2E595A6184734E07FD80BBBF58AD37" Guid="4093EAE4-E455-4157-A66D-949B802F3701">
-                <File Id="filE8AB281E43B4C61E5735845B2FBA2E1A" KeyPath="yes" Source="SourceDir\ImageMaker.Themes.dll" />
+            <Component Id="cmpE59E6DC2C48D287734E2BBBA13ED8045" Guid="BCBEE58E-80BD-4176-9E6A-CCFB401886DF">
+                <File Id="fil82612E19CA7CCC87CF364D16CBD7B457" KeyPath="yes" Source="SourceDir\ImageMaker.CommonViewModels.dll" />
             </Component>
-            <Component Id="cmp705F98C21ADAC127F0C50B1D890C7754" Guid="E36D8E08-1DA7-41C1-9255-C00445ED849D">
-                <File Id="filBDE2CA0516749B41AAEC85A2F712E46A" KeyPath="yes" Source="SourceDir\ImageMaker.Themes.pdb" />
+            <Component Id="cmp2CDD8A12DB6A8CEE95B82ED3AE041155" Guid="D7A9FA9F-08F7-4FFC-86FC-0E035089BB46">
+                <File Id="fil9AC69FA497729503149BEFB22505EF1F" KeyPath="yes" Source="SourceDir\ImageMaker.CommonViewModels.pdb" />
             </Component>
-            <Component Id="cmp91AFDC6EC6E3AAE9CD78A286784ECA5B" Guid="6083DE4E-32A2-42A6-A5F9-118D9A90864F">
-                <File Id="fil631FA2E93D55CDD97F4F23B6A6252252" KeyPath="yes" Source="SourceDir\ImageMaker.Utils.dll" />
+            <Component Id="cmp1BC22B771ABC3546920D30B8968548A0" Guid="FC238FE2-D090-4554-8D49-5A7F1AEF34B2">
+                <File Id="fil3D070FC09D8D35C4A2E83256FD90114F" KeyPath="yes" Source="SourceDir\ImageMaker.Data.dll" />
             </Component>
-            <Component Id="cmpC542CA44854125E387FE024817ADD793" Guid="A2D61CAD-2D2A-414F-B552-88CD411CE806">
-                <File Id="filAE43512DFAA1B3B577A56B9B5D0A9179" KeyPath="yes" Source="SourceDir\ImageMaker.Utils.pdb" />
+            <Component Id="cmp30EB5590A38B6085DC0832F9847C335D" Guid="3B1A0690-DF18-4164-8EE8-FF0B8437AFF8">
+                <File Id="fil2910C5DAD4A474B7C1FC5632419E8145" KeyPath="yes" Source="SourceDir\ImageMaker.Data.pdb" />
             </Component>
-            <Component Id="cmp7241E822884E75212DF19F32BC5954B3" Guid="012309DA-9E98-42D2-853B-A5E61A1BA950">
+            <Component Id="cmpE8B250FEACBD56A18D4B77BC054F981D" Guid="F0A60C01-7298-4496-A005-9DDCB77FF267">
+                <File Id="fil1DA45219C4CDFA7681FC3BF48AF5D420" KeyPath="yes" Source="SourceDir\ImageMaker.DataContext.dll" />
+            </Component>
+            <Component Id="cmpFFE54B20B0EB69FD3E840DA1B91B21FA" Guid="5EB1A348-298E-40B6-B297-9E268BACBC35">
+                <File Id="fil994C6209B5DC3ECE2A0BF044ED0E7901" KeyPath="yes" Source="SourceDir\ImageMaker.DataContext.pdb" />
+            </Component>
+            <Component Id="cmpC0E30C0D1259431CF997042BB0C0C2E8" Guid="66A5C5F8-15E5-4508-A71F-BF8415A3A1A9">
+                <File Id="fil45326C948198F8033CF761C66BE22801" KeyPath="yes" Source="SourceDir\ImageMaker.Entities.dll" />
+            </Component>
+            <Component Id="cmpDEDB050AFE6D1B03B1CF87EB477FC249" Guid="14ABA4F6-9E5F-4341-AD83-B919114B5124">
+                <File Id="filAA9425BC5C88119ED33A25556D6D0490" KeyPath="yes" Source="SourceDir\ImageMaker.Entities.pdb" />
+            </Component>
+            <Component Id="cmp77D9AA608EE8620684A57B06BE28B31D" Guid="57D23AFD-2395-4939-BD94-117CC466ACDD">
+                <File Id="filC64E51B57AF679FA2EEF3ED958BFFD22" KeyPath="yes" Source="SourceDir\ImageMaker.MessageQueueing.dll" />
+            </Component>
+            <Component Id="cmp7874374F9C9594F6D85DAB7563B69951" Guid="049C2F48-20C3-499A-81BC-FF645BEDD2E2">
+                <File Id="fil1F868BD12AB78838D7E11B18A603BA59" KeyPath="yes" Source="SourceDir\ImageMaker.MessageQueueing.pdb" />
+            </Component>
+            <Component Id="cmpE1FDB9B9DAC511A4D24A8705C2AC8B50" Guid="850A4781-F738-4507-BC02-CDAFA9C2B120">
+                <File Id="filACB18EFE44F8B9187B1D9B40839D24A5" KeyPath="yes" Source="SourceDir\ImageMaker.PatternProcessing.dll" />
+            </Component>
+            <Component Id="cmp7F8A5AAE3040295E6601FEED9ACBEB25" Guid="B66BEF0E-ECF6-47D5-8996-992B8E326FDC">
+                <File Id="fil16C0B0E7D44090B2BB504E476A6333FD" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.exe" />
+            </Component>
+            <Component Id="cmp6F2E99FEAA9E9BAE2ECE8EA08C0E5A1C" Guid="D9F0E0B2-3F13-423C-ACED-12A8477A531D">
+                <File Id="fil6A5AD650CE024854C8E187B4220C8DAA" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.exe.config" />
+            </Component>
+            <Component Id="cmp15F0A4E0052C2433C09A86891F5AFFF2" Guid="F84AE9EC-E788-4E26-A992-18CB1A81CE78">
+                <File Id="fil38DBC24977A60AF0DCDC095F1E825346" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.vshost.exe" />
+            </Component>
+            <Component Id="cmp750CC5F16ABF87369D5D8784A286CA91" Guid="5F320BE6-8D9A-45CC-9BF6-E639CF27ABFB">
+                <File Id="filEF9FF0E9BB39541B1440CADCDBD13B0E" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.vshost.exe.config" />
+            </Component>
+            <Component Id="cmp3A7B83B2BB43AC9C3EBF075863389C03" Guid="DBDD1E78-E1E4-470D-84F0-B031E87917F9">
+                <File Id="fil82D685CAB7AD21BC54793EB7A7F50B18" KeyPath="yes" Source="SourceDir\ImageMaker.SDKData.dll" />
+            </Component>
+            <Component Id="cmp86E6BA342F83126224ECA30EFCAE3874" Guid="6DA7B1E6-9B91-49A2-8FC1-E11E61B385D1">
+                <File Id="fil80F6F78B7132B8EAF1F9E3D707559C53" KeyPath="yes" Source="SourceDir\ImageMaker.SDKData.pdb" />
+            </Component>
+            <Component Id="cmpF561C4977B4B9F4D1FDF3C107F5F9F8B" Guid="64183768-5E73-4B80-B73C-324CB535A360">
+                <File Id="fil97A75FB3E9F37E8187C7C1156AC40E74" KeyPath="yes" Source="SourceDir\ImageMaker.Themes.dll" />
+            </Component>
+            <Component Id="cmpD42CB3D219E2E7C3EEFE147313A16036" Guid="4E1D54B1-A5C3-468E-8034-DEF31D433A14">
+                <File Id="fil1499558003FDA25DD0BA46F8EB5750E6" KeyPath="yes" Source="SourceDir\ImageMaker.Themes.pdb" />
+            </Component>
+            <Component Id="cmpCD53F9ECA6BD7CB7944BFC8B13A48F9D" Guid="4B8FE037-9A32-441B-9914-92E2EE3741B1">
+                <File Id="filA0BA33018FE5C0A3E076C4690418D64C" KeyPath="yes" Source="SourceDir\ImageMaker.Utils.dll" />
+            </Component>
+            <Component Id="cmp7ECD79ECFB62AEBC7A0456CA308EF28C" Guid="14250346-4B65-4AE0-AEA2-C508900B0C60">
+                <File Id="filFD7D4F83524D1D954965DB5AA7C24354" KeyPath="yes" Source="SourceDir\ImageMaker.Utils.pdb" />
+            </Component>
+            <Component Id="cmp42B66761D5A5B33004A88CE2B44D940E" Guid="07590028-F58E-4A3E-A321-E9A52E6036F5">
+                <File Id="fil03E3B7839662B2B7087DD419F1725BF0" KeyPath="yes" Source="SourceDir\ImageMaker.View.exe" />
+            </Component>
+            <Component Id="cmp46485E87E965B488E8A50B6430798813" Guid="4AD7141F-966A-400C-B57C-DCE3806AFBE7">
+                <File Id="filB232353706482341B868EA1E06F6B2F8" KeyPath="yes" Source="SourceDir\ImageMaker.ViewModels.dll" />
+            </Component>
+            <Component Id="cmp384BCB7BE89584BC802BD516E013EA18" Guid="4574CB9C-F78D-4816-A966-2C2A5ECB32BA">
+                <File Id="fil76C455272A4229F8055A0D48A0DFDCA9" KeyPath="yes" Source="SourceDir\ImageMaker.WebBrowsing.dll" />
+            </Component>
+            <Component Id="cmpDE21CD7C0E0D1F188E3127A0F273B9A2" Guid="3E24E9CC-C9EB-4B46-AB41-ACBF04C50FE1">
                 <Class Id="{3CA2611C-F83B-3F7C-B26C-DEA377803521}" Context="InprocServer32" Description="Microsoft.Practices.ServiceLocation.ActivationException" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Microsoft.Practices.ServiceLocation.ActivationException" Description="Microsoft.Practices.ServiceLocation.ActivationException" />
                 </Class>
-                <File Id="fil385962A23D6FA915932AC04F93298CD9" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.dll" />
+                <File Id="fil1412185555A5FB9CC36A0842DFD16192" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.dll" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32\1.3.0.0" Name="Class" Value="Microsoft.Practices.ServiceLocation.ActivationException" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32\1.3.0.0" Name="Assembly" Value="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32\1.3.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32\1.3.0.0" Name="CodeBase" Value="file:///[#fil385962A23D6FA915932AC04F93298CD9]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32\1.3.0.0" Name="CodeBase" Value="file:///[#fil1412185555A5FB9CC36A0842DFD16192]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="Class" Value="Microsoft.Practices.ServiceLocation.ActivationException" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="Assembly" Value="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="CodeBase" Value="file:///[#fil385962A23D6FA915932AC04F93298CD9]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="CodeBase" Value="file:///[#fil1412185555A5FB9CC36A0842DFD16192]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp5BD2B7654D6AA5F7B42795F6FD833592" Guid="ED7C54D1-CFF7-446B-B4C5-76051BE0108D">
-                <File Id="filD78F4FA73A30564F77ADCEF30A3D2EF5" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.pdb" />
+            <Component Id="cmp4C54DD0092E9763D91D8AE866C3E3AFD" Guid="A4ECC2B5-B906-4708-A0DD-B619289D8819">
+                <File Id="fil76DF3AF06DF08EB197BC131912B78DAF" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.pdb" />
             </Component>
-            <Component Id="cmpDB64475E060E11A2D0C2BB618155AD10" Guid="DF616E30-46B0-4914-AEA0-1F108A6585D8">
-                <File Id="filA956C421D85D8BB3272D68CA611D82CE" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.xml" />
+            <Component Id="cmp879EF891041694F3C5F65B0F198D792E" Guid="D65C3DFF-A0AF-4D70-B8D3-D59874AA1B0E">
+                <File Id="fil7AF86FEC5A40D9D7CD8014F96FE82C50" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.xml" />
             </Component>
-            <Component Id="cmp546B47974CBF7572DA20D8754EBC8D9F" Guid="E39597AB-5105-445E-983F-C16ADF18CFF1">
-                <File Id="filD9C60303D4F900F752ADC9798B0B2BAC" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.dll" />
+            <Component Id="cmp83DA3B24EAEE6114D4373E4D4F1DC552" Guid="61AC4F8C-8915-4CAF-8F82-D5CA8E74564A">
+                <File Id="fil9CDB743566628445E34695E3CD219110" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.dll" />
             </Component>
-            <Component Id="cmpCABC88880F3419D15058BF2D2C3C8239" Guid="D9B0341C-51D5-40CD-A89B-E1802DDF821D">
-                <File Id="fil6A1F13B56E1D1ECC63D0733FB905B51A" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.xml" />
+            <Component Id="cmp34CCBF05E6E8F01CC96A25C6032B134E" Guid="3037E106-F16D-40EC-AB82-E837681E7F58">
+                <File Id="filBDE0B79A5F21254202AE93CF7C3E56FC" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.xml" />
             </Component>
-            <Component Id="cmpF8005CC446B1B420337FCE0A8810AE0B" Guid="DB45027A-B62A-42A8-9CA3-3463B67F72E2">
-                <File Id="filD94BF03BB11C18482E408C3AF83DAD8E" KeyPath="yes" Source="SourceDir\Monads.dll" />
+            <Component Id="cmpB00E63C839DFA4FFD4AC3C1D265067DC" Guid="8B0A5CA1-C15C-4F99-9838-A35CD2082BF2">
+                <File Id="fil0A370EC0325BF70C1D0BABF2D00E4463" KeyPath="yes" Source="SourceDir\Monads.dll" />
             </Component>
-            <Component Id="cmpA1B4EC4C26818B1EA83BAA30F8E9801A" Guid="47480F54-B0CC-46B5-A63D-58274BAF4B3A">
-                <File Id="fil327EB5098881ED3C860C85C79AF941E0" KeyPath="yes" Source="SourceDir\Monads.xml" />
+            <Component Id="cmpB2AAFE727B686EBD6B96A6830CC78501" Guid="723837DE-A11B-4BE0-A505-E21F370CA140">
+                <File Id="fil3032413F8B6D3B203B63051C75322D7F" KeyPath="yes" Source="SourceDir\Monads.xml" />
             </Component>
-            <Component Id="cmp6BA85AB439ABF71224D2562B2A4E3379" Guid="C22352C8-D8E8-4500-BB27-09B48CA2F7B3">
-                <File Id="fil061CBA4CBCE5C1DE53429122F8805AB4" KeyPath="yes" Source="SourceDir\Ninject.dll" />
+            <Component Id="cmpB6749B9EE8073AED416A4BEE193678C7" Guid="7902BBA8-C466-4C2E-AD72-6DAA153AB27A">
+                <File Id="fil27CDCBC89F7D0F209432E5D6449B5F88" KeyPath="yes" Source="SourceDir\Newtonsoft.Json.dll" />
             </Component>
-            <Component Id="cmpF2BD75AE0C7A73BE4E1C8A5BC0979D54" Guid="79D7A16E-6A17-42BB-86EE-D4A7E36C07FB">
-                <File Id="fil40BE09069A18A35E763712645BD43413" KeyPath="yes" Source="SourceDir\Ninject.xml" />
+            <Component Id="cmpB4515FD827B688B867CDF2379D6ED538" Guid="116348B9-630F-46AF-BD6E-9A34D772A262">
+                <File Id="filAA00973CC61A8E4FF37F2DBD5CE2931A" KeyPath="yes" Source="SourceDir\Newtonsoft.Json.xml" />
             </Component>
-            <Component Id="cmp8DF33DE1DD5F3DB2D88D824DE6DAF6F9" Guid="341B7349-16B4-4ACF-B57D-CF8F71E8CB2E">
-                <File Id="fil9F52EAEBD396DF02B09B1EF5CED38288" KeyPath="yes" Source="SourceDir\startService.bat" />
+            <Component Id="cmpF0F9CB9C99F6640C80B1B96E4C3631B7" Guid="E2CA8E42-BFB0-48F6-8A6A-92F1CADBF90E">
+                <File Id="fil743CDF3AB2B2F21AA21E4AAF5727B8F5" KeyPath="yes" Source="SourceDir\Ninject.dll" />
             </Component>
-            <Component Id="cmp2EDF68663B4B9471AEF005F1C24DE589" Guid="810A2A39-5BDE-4B64-AA84-F86251B5665A">
-                <File Id="fil6FB10E0EA55BDD5F4A22CEE1183AF024" KeyPath="yes" Source="SourceDir\startService_admin.lnk" />
+            <Component Id="cmp6AA3127F4A348DD5156A75A49250CDC5" Guid="86F7946F-19A9-48C7-A144-F873E1349577">
+                <File Id="filCE80836912D9DF4ED3F81015DCF027F1" KeyPath="yes" Source="SourceDir\Ninject.xml" />
             </Component>
-            <Component Id="cmpADAC57205CDE38E1AF3789BFD65C0F18" Guid="32CBF711-293F-4066-9CFD-8E52A687F53A">
-                <File Id="fil8807998698BEEDB5E26FD30977C05427" KeyPath="yes" Source="SourceDir\stopService.bat" />
+            <Component Id="cmp10B84D3DCBE010DCD871F3663B0BD0CF" Guid="7B436CD2-1B75-4A29-B82C-582D4504BDEA">
+                <File Id="fil712FEBCE51C4B0BF5E91DACF42C3B0DB" KeyPath="yes" Source="SourceDir\startService.bat" />
             </Component>
-            <Component Id="cmpE278E69A4FC499A4B583760A04781340" Guid="D2FEA87F-CABA-4245-8E7B-03F09625063E">
-                <File Id="filB54143CB7AD1E60FE08D06AF10B35ED6" KeyPath="yes" Source="SourceDir\stopService_admin.lnk" />
+            <Component Id="cmp84751FE786634351D32B652FCF91CC45" Guid="9594E927-BE39-4505-9824-42CA515124C4">
+                <File Id="filFB07C7A6E2D9D2540FE9C38B4E16F82A" KeyPath="yes" Source="SourceDir\startService_admin.lnk" />
             </Component>
-            <Component Id="cmp02C7C2E500EFCE3EF3664C537C74A59C" Guid="90F77ABA-6E47-4DF1-A871-186D06DD3255">
-                <File Id="filCDE464BBE7F97A9F062E6B831C41183C" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Input.Toolkit.dll" />
+            <Component Id="cmp8D2D76E8D696D320680312095B7E2E66" Guid="0FF68855-AF6B-4B40-9FA9-E0EE23C31203">
+                <File Id="filC1685F1EA69D194F170B0BF849664200" KeyPath="yes" Source="SourceDir\stopService.bat" />
             </Component>
-            <Component Id="cmp2502A3377042C971A1BA85C4DC1D4B45" Guid="999989BA-B8D7-4222-9577-D1244EEC2B09">
-                <File Id="fil5976E6261B1F53FAF20177994AEF8D72" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Layout.Toolkit.dll" />
+            <Component Id="cmp3FE4BBCCD005CE8EAE6F2D955C6F8716" Guid="99B89730-FD6A-4269-B352-8D50AA462526">
+                <File Id="filD3BFD405067BE9FCFBF0563BBA2CAD35" KeyPath="yes" Source="SourceDir\stopService_admin.lnk" />
             </Component>
-            <Component Id="cmp14781E82DF33E461A9CA4B430B12A0AA" Guid="68BB1C88-1EE1-4EE7-8CB4-27497E12D373">
-                <File Id="filEB19FC979DC575BDD5B265B8A5C03419" KeyPath="yes" Source="SourceDir\System.Windows.Interactivity.dll" />
+            <Component Id="cmp70712FCDCB52A2DDE03B743455D8F338" Guid="0081387C-EEFF-4DAB-819D-7BD011D5DB45">
+                <File Id="fil897463EAC14C1480B7849BF5F73D7D36" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Input.Toolkit.dll" />
             </Component>
-            <Component Id="cmp9F34C5B191B3F35329CB34B434BF06C7" Guid="C9D3D399-00B5-4623-B3FA-F66294D7669C">
-                <File Id="filAE144F58044298640EDBB8BE9AD4F1AE" KeyPath="yes" Source="SourceDir\WPFToolkit.dll" />
+            <Component Id="cmpA2560771212EDE4A33849D702FE5AC77" Guid="CFFC4B3E-068B-44E7-9850-BBBEA4818FE7">
+                <File Id="filFAC5477CFE6EAC205BDDD26E1A71A299" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Layout.Toolkit.dll" />
             </Component>
-            <Component Id="cmp3077633366FD2C4501128B5007370F12" Guid="58802723-00A4-4874-991E-E91C33FF4DDB">
-                <File Id="fil1D629C61705E634BEA12E24BCAEFAAB4" KeyPath="yes" Source="SourceDir\Xceed.Wpf.Toolkit.dll" />
+            <Component Id="cmpABAA94D9A211CBB7C230453A1104075F" Guid="414871F3-FCEF-4D1D-8C35-1A992555F109">
+                <File Id="filDCD3E7EDA6FCF106B61CF15A165D109E" KeyPath="yes" Source="SourceDir\System.Windows.Interactivity.dll" />
+            </Component>
+            <Component Id="cmp91AD46FA8235CCC0D256E177D68EC53E" Guid="9E0CD236-0809-4981-8438-15B5D3B06E07">
+                <File Id="fil59DDA49C01E4C4CE31C89AEB87636176" KeyPath="yes" Source="SourceDir\WPFToolkit.dll" />
+            </Component>
+            <Component Id="cmp91ECCAC9888CF52F6E6950C847E06DC6" Guid="F2EB9E8E-3658-45C1-B840-0A5047C548AE">
+                <File Id="filABE27200655351687D519265383A0EA2" KeyPath="yes" Source="SourceDir\Xceed.Wpf.Toolkit.dll" />
             </Component>
         </DirectoryRef>
     </Fragment>
     <Fragment>
         <ComponentGroup Id="AdminGroup">
-            <ComponentRef Id="cmp4A0FB61C10AFF23B3549FFDFAD971C18" />
-            <ComponentRef Id="cmp9795CD7FBF703E16D90C631389665CBD" />
-            <ComponentRef Id="cmp3C8942CB1D01B77B8A322A7BFA7EB6D4" />
-            <ComponentRef Id="cmp20DD5D3CA16B05088E3F6490322EDAD0" />
-            <ComponentRef Id="cmpCE628C5870E0E404E5DA0B6EDAAFDEFB" />
-            <ComponentRef Id="cmp47ABEA5C09A97132F9C724C4D36ED80E" />
-            <ComponentRef Id="cmpEDE6BE06C8704E9279ADF58AD67C99F5" />
-            <ComponentRef Id="cmp6C875EBFFAE0F1212FC450FD7394FDAE" />
-            <ComponentRef Id="cmp278BCAA92E0A981F9A54379A390CB77A" />
-            <ComponentRef Id="cmp67DCEC9DFF94158D6703AF1860197A25" />
-            <ComponentRef Id="cmpA22BCE396DEDFA14EF2705F9608DFEB3" />
-            <ComponentRef Id="cmp37713A7CA14BDD4E73665BD7F78EC2BE" />
-            <ComponentRef Id="cmpAC6E7668AF09B8E6CE09CDC98872B06C" />
-            <ComponentRef Id="cmpCE299A937977C62B8D6CB5A54AFCA710" />
-            <ComponentRef Id="cmp3058B2B6E792B17ABEF8D466D667465C" />
-            <ComponentRef Id="cmpC0B2AEAF3DE35A216B73120192590C51" />
-            <ComponentRef Id="cmp9324C5EF46A1F4140E80C37EBBE0EB61" />
-            <ComponentRef Id="cmp7E87DCD2886C6EB62F26093CC7E64509" />
-            <ComponentRef Id="cmpBC151AF71FC338009E0B1E0D7BD32E22" />
-            <ComponentRef Id="cmp25DE1875D39833B58ECAACFB1EFCCB2D" />
-            <ComponentRef Id="cmpC32315FC876399D9BF83B42FE3D4D6E4" />
-            <ComponentRef Id="cmpD4C0ABC774D407DADEE2D43F172DCDD1" />
-            <ComponentRef Id="cmp74603492B48E67421481EFCE84AB26A5" />
-            <ComponentRef Id="cmp7ACCA3A508B71DA3CB96DF20910D670C" />
-            <ComponentRef Id="cmp96EA06FE51BDAF53453335373194EBCE" />
-            <ComponentRef Id="cmpF763567F4ED213BCEF6B3E7ED7D9B648" />
-            <ComponentRef Id="cmpD2F59F85EEB917E1E3B486953B25AEC1" />
-            <ComponentRef Id="cmp296CC35F36E6B5938AAC0B2D41BFB2EC" />
-            <ComponentRef Id="cmpDA366426A385CC3235CF73DA4D5021BD" />
-            <ComponentRef Id="cmp03816638FE092CB9FAC5DB6F104E751C" />
-            <ComponentRef Id="cmp809C0E16314BEB67BB038E9490ADA135" />
-            <ComponentRef Id="cmpB3C94A144B666F0DFFDB4C77A70B3458" />
-            <ComponentRef Id="cmp01CD7ACC1FA9D6E61A84ED3FFE940114" />
-            <ComponentRef Id="cmpD054E3E11956D4ADAF18C93620FD8A94" />
-            <ComponentRef Id="cmp2DB8B50AD88F5D82369B7E0B70003AD2" />
-            <ComponentRef Id="cmp91DFD9C2F069F858E4254F2B0FDB6C05" />
-            <ComponentRef Id="cmp85A8038CD433CEBB20216A195B4E5E41" />
-            <ComponentRef Id="cmp3161345A92AB1067616B8A1AB97ECB67" />
-            <ComponentRef Id="cmp74CEA20A316205102EA99E3D7C2BF600" />
-            <ComponentRef Id="cmp0A46E09C366F8399498F8BE0260D2011" />
-            <ComponentRef Id="cmp9C2E595A6184734E07FD80BBBF58AD37" />
-            <ComponentRef Id="cmp705F98C21ADAC127F0C50B1D890C7754" />
-            <ComponentRef Id="cmp91AFDC6EC6E3AAE9CD78A286784ECA5B" />
-            <ComponentRef Id="cmpC542CA44854125E387FE024817ADD793" />
-            <ComponentRef Id="cmp7241E822884E75212DF19F32BC5954B3" />
-            <ComponentRef Id="cmp5BD2B7654D6AA5F7B42795F6FD833592" />
-            <ComponentRef Id="cmpDB64475E060E11A2D0C2BB618155AD10" />
-            <ComponentRef Id="cmp546B47974CBF7572DA20D8754EBC8D9F" />
-            <ComponentRef Id="cmpCABC88880F3419D15058BF2D2C3C8239" />
-            <ComponentRef Id="cmpF8005CC446B1B420337FCE0A8810AE0B" />
-            <ComponentRef Id="cmpA1B4EC4C26818B1EA83BAA30F8E9801A" />
-            <ComponentRef Id="cmp6BA85AB439ABF71224D2562B2A4E3379" />
-            <ComponentRef Id="cmpF2BD75AE0C7A73BE4E1C8A5BC0979D54" />
-            <ComponentRef Id="cmp8DF33DE1DD5F3DB2D88D824DE6DAF6F9" />
-            <ComponentRef Id="cmp2EDF68663B4B9471AEF005F1C24DE589" />
-            <ComponentRef Id="cmpADAC57205CDE38E1AF3789BFD65C0F18" />
-            <ComponentRef Id="cmpE278E69A4FC499A4B583760A04781340" />
-            <ComponentRef Id="cmp02C7C2E500EFCE3EF3664C537C74A59C" />
-            <ComponentRef Id="cmp2502A3377042C971A1BA85C4DC1D4B45" />
-            <ComponentRef Id="cmp14781E82DF33E461A9CA4B430B12A0AA" />
-            <ComponentRef Id="cmp9F34C5B191B3F35329CB34B434BF06C7" />
-            <ComponentRef Id="cmp3077633366FD2C4501128B5007370F12" />
+            <ComponentRef Id="cmpDE95CC0363DB4301DF8F556E5214C270" />
+            <ComponentRef Id="cmp4FCFD3107CFCD8758AAFA30C4CF830F4" />
+            <ComponentRef Id="cmpBC75E43C761D0BAC4E9D1B797C3D31E5" />
+            <ComponentRef Id="cmp9F72431D52754004177B3A6F8A89807D" />
+            <ComponentRef Id="cmp36DD3258436BAB7823E85ADB220C6436" />
+            <ComponentRef Id="cmp666E4C92855293F5043C6E8D0D5C083C" />
+            <ComponentRef Id="cmpBDA03D0A6F2242DA3ADF5CF509AFCF00" />
+            <ComponentRef Id="cmp6745A582FDA208E73B26129E0825F9B8" />
+            <ComponentRef Id="cmp24A3CE40834AFF2500AB7DB9DE2F568E" />
+            <ComponentRef Id="cmp96C09ECE344A9C01D2E4CB0680501554" />
+            <ComponentRef Id="cmpBCF8FE9A3E3E66A695E0D9F911287C17" />
+            <ComponentRef Id="cmpF4F90C83158C56D938F41A8221317786" />
+            <ComponentRef Id="cmp3EB84CB60335EC878A3D6185BE4B4B35" />
+            <ComponentRef Id="cmpB12F7BDDF7CBD4674D71CE366ECA8877" />
+            <ComponentRef Id="cmp108DC132D7428136506EBB9BBD1EFCA0" />
+            <ComponentRef Id="cmp89946A4FF81AFB1FC73CE340AEE21897" />
+            <ComponentRef Id="cmp395B3DE4FE09C4021E3DD6F827E022CD" />
+            <ComponentRef Id="cmpF5DCE5B61B10A1E43686ADB955C2F80E" />
+            <ComponentRef Id="cmp5F4E0FA71BA4DC8DB965A6AF05EC7F95" />
+            <ComponentRef Id="cmp593E4FC19CB4C60D4A4EBCB1F1AE5336" />
+            <ComponentRef Id="cmp139CEC88D8DE3FF309A17459A2398299" />
+            <ComponentRef Id="cmp56DF90EE600C88C6E1982E90A7026DD9" />
+            <ComponentRef Id="cmp9D316BEA722349C2D791617048DBA934" />
+            <ComponentRef Id="cmp0068428326F0A41F5452DC741F499685" />
+            <ComponentRef Id="cmp19F45E434453B71F1ABA9CA701F89A5F" />
+            <ComponentRef Id="cmp639219B445CA91FD02685A84A86E0881" />
+            <ComponentRef Id="cmpC76FE238ECFD048EA5E0377C2056F9A1" />
+            <ComponentRef Id="cmp9A7BDFF133D6237A5AB9747DFD93029E" />
+            <ComponentRef Id="cmp4D116018513768E4FDFB0170D5F5213A" />
+            <ComponentRef Id="cmp500FF85F27619FD21E5B4A3354DA9024" />
+            <ComponentRef Id="cmpA490EFAEAAFD3F541E78B0763484FEDF" />
+            <ComponentRef Id="cmpD6F84051227B800E74CFEC17230ED075" />
+            <ComponentRef Id="cmp730B680307150831DC1D203B17F62ED5" />
+            <ComponentRef Id="cmp8238B7DF4C2582409F193623C4A93840" />
+            <ComponentRef Id="cmpC802C7C45B32505EEF8331C7F23C6D60" />
+            <ComponentRef Id="cmpD1794B22756920312EE3C7C6C863BC6C" />
+            <ComponentRef Id="cmpBA3C65F12DE41EF1E8451DA35BBBEC7E" />
+            <ComponentRef Id="cmp52A941921135944BD55823E89D00D44A" />
+            <ComponentRef Id="cmp8C4F8C1FE286FD22DFE28F74B5191612" />
+            <ComponentRef Id="cmp3E54EB4BFB60F565BF5652952E6EC2DE" />
+            <ComponentRef Id="cmpE59E6DC2C48D287734E2BBBA13ED8045" />
+            <ComponentRef Id="cmp2CDD8A12DB6A8CEE95B82ED3AE041155" />
+            <ComponentRef Id="cmp1BC22B771ABC3546920D30B8968548A0" />
+            <ComponentRef Id="cmp30EB5590A38B6085DC0832F9847C335D" />
+            <ComponentRef Id="cmpE8B250FEACBD56A18D4B77BC054F981D" />
+            <ComponentRef Id="cmpFFE54B20B0EB69FD3E840DA1B91B21FA" />
+            <ComponentRef Id="cmpC0E30C0D1259431CF997042BB0C0C2E8" />
+            <ComponentRef Id="cmpDEDB050AFE6D1B03B1CF87EB477FC249" />
+            <ComponentRef Id="cmp77D9AA608EE8620684A57B06BE28B31D" />
+            <ComponentRef Id="cmp7874374F9C9594F6D85DAB7563B69951" />
+            <ComponentRef Id="cmpE1FDB9B9DAC511A4D24A8705C2AC8B50" />
+            <ComponentRef Id="cmp7F8A5AAE3040295E6601FEED9ACBEB25" />
+            <ComponentRef Id="cmp6F2E99FEAA9E9BAE2ECE8EA08C0E5A1C" />
+            <ComponentRef Id="cmp15F0A4E0052C2433C09A86891F5AFFF2" />
+            <ComponentRef Id="cmp750CC5F16ABF87369D5D8784A286CA91" />
+            <ComponentRef Id="cmp3A7B83B2BB43AC9C3EBF075863389C03" />
+            <ComponentRef Id="cmp86E6BA342F83126224ECA30EFCAE3874" />
+            <ComponentRef Id="cmpF561C4977B4B9F4D1FDF3C107F5F9F8B" />
+            <ComponentRef Id="cmpD42CB3D219E2E7C3EEFE147313A16036" />
+            <ComponentRef Id="cmpCD53F9ECA6BD7CB7944BFC8B13A48F9D" />
+            <ComponentRef Id="cmp7ECD79ECFB62AEBC7A0456CA308EF28C" />
+            <ComponentRef Id="cmp42B66761D5A5B33004A88CE2B44D940E" />
+            <ComponentRef Id="cmp46485E87E965B488E8A50B6430798813" />
+            <ComponentRef Id="cmp384BCB7BE89584BC802BD516E013EA18" />
+            <ComponentRef Id="cmpDE21CD7C0E0D1F188E3127A0F273B9A2" />
+            <ComponentRef Id="cmp4C54DD0092E9763D91D8AE866C3E3AFD" />
+            <ComponentRef Id="cmp879EF891041694F3C5F65B0F198D792E" />
+            <ComponentRef Id="cmp83DA3B24EAEE6114D4373E4D4F1DC552" />
+            <ComponentRef Id="cmp34CCBF05E6E8F01CC96A25C6032B134E" />
+            <ComponentRef Id="cmpB00E63C839DFA4FFD4AC3C1D265067DC" />
+            <ComponentRef Id="cmpB2AAFE727B686EBD6B96A6830CC78501" />
+            <ComponentRef Id="cmpB6749B9EE8073AED416A4BEE193678C7" />
+            <ComponentRef Id="cmpB4515FD827B688B867CDF2379D6ED538" />
+            <ComponentRef Id="cmpF0F9CB9C99F6640C80B1B96E4C3631B7" />
+            <ComponentRef Id="cmp6AA3127F4A348DD5156A75A49250CDC5" />
+            <ComponentRef Id="cmp10B84D3DCBE010DCD871F3663B0BD0CF" />
+            <ComponentRef Id="cmp84751FE786634351D32B652FCF91CC45" />
+            <ComponentRef Id="cmp8D2D76E8D696D320680312095B7E2E66" />
+            <ComponentRef Id="cmp3FE4BBCCD005CE8EAE6F2D955C6F8716" />
+            <ComponentRef Id="cmp70712FCDCB52A2DDE03B743455D8F338" />
+            <ComponentRef Id="cmpA2560771212EDE4A33849D702FE5AC77" />
+            <ComponentRef Id="cmpABAA94D9A211CBB7C230453A1104075F" />
+            <ComponentRef Id="cmp91AD46FA8235CCC0D256E177D68EC53E" />
+            <ComponentRef Id="cmp91ECCAC9888CF52F6E6950C847E06DC6" />
         </ComponentGroup>
     </Fragment>
 </Wix>

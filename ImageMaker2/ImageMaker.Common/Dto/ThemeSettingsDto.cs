@@ -22,5 +22,7 @@ namespace ImageMaker.Common.Dto
         public Color OtherBorderColor { get; set; }
 
         public byte[] BackgroundImage { get; set; }
+
+        public byte[] OtherBackgroundImage { get; set; }
     }
 }

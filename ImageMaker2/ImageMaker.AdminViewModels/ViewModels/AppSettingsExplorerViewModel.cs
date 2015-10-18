@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using AutoMapper;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
+using ImageMaker.Themes.CustomControls;
 using ImageMaker.Utils.Services;
 
 namespace ImageMaker.AdminViewModels.ViewModels
@@ -19,8 +21,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private readonly ImagePrinter _imagePrinter;
         private RelayCommand _saveSettings;
         private RelayCommand _goBackCommand;
-        private TimeSpan _dateStart;
-        private TimeSpan _dateEnd;
+        private Hour _dateStart;
+        private Hour _dateEnd;
         private bool _showPrinterOnStartup;
         private string _hashTag;
         private string _printerName;
@@ -56,8 +58,12 @@ namespace ImageMaker.AdminViewModels.ViewModels
             if (settings == null)
             {
                 HashTag = string.Empty;
-                DateStart = TimeSpan.FromHours(DateTime.Now.Hour);
-                DateEnd = TimeSpan.FromHours(DateTime.Now.Hour).Add(TimeSpan.FromMinutes(5));
+                _dateStart = new Hour(TimeSpan.FromHours(DateTime.Now.Hour));
+                _dateEnd = new Hour(TimeSpan.FromHours(DateTime.Now.Hour).Add(TimeSpan.FromMinutes(5)));
+            
+                RaisePropertyChanged(() => DateStart);
+                RaisePropertyChanged(() => DateEnd);
+                
                 ShowPrinterOnStartup = false;
                 return;
             }
@@ -65,10 +71,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
             PrinterName = settings.PrinterName;
             HashTag = settings.HashTag;
 
-            var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(DateStart);
+           // var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(_dateStart.GetCurrentTime());
 
-            DateStart = TimeSpan.FromHours(settings.DateStart.Hour);
-            DateEnd = TimeSpan.FromHours(settings.DateEnd.Hour);
+            _dateStart = new Hour(TimeSpan.FromHours(settings.DateStart.Hour).Add(TimeSpan.FromMinutes(settings.DateStart.Minute)));
+            _dateEnd = new Hour(TimeSpan.FromHours(settings.DateEnd.Hour).Add(TimeSpan.FromMinutes(settings.DateEnd.Minute)));
+            
+            RaisePropertyChanged(() => DateStart);
+            RaisePropertyChanged(() => DateEnd);
+
             ShowPrinterOnStartup = settings.ShowPrinterOnStartup;
         }
 
@@ -77,7 +87,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _navigator.NavigateBack(this);
         }
 
-        public TimeSpan DateStart
+        public Hour DateStart
         {
             get { return _dateStart; }
             set
@@ -89,6 +99,24 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        //public Hour DateStart
+        //{
+        //    get { return new Hour(_dateStart); }
+        //    set
+        //    {
+        //        if (value == null)
+        //        {
+        //            _dateStart = TimeSpan.Zero;
+        //            return;
+        //        }
+        //        //if (_dateStart == value)
+        //        //    return;
+
+        //        _dateStart = value.GetCurrentTime();
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
         public string PrinterName
         {
@@ -116,7 +144,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             }
         }
 
-        public TimeSpan DateEnd
+        public Hour DateEnd
         {
             get { return _dateEnd; }
             set
@@ -128,6 +156,22 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        //public Hour DateEnd
+        //{
+        //    get { return new Hour(_dateEnd);; }
+        //    set
+        //    {
+        //        if (value == null)
+        //        {
+        //            _dateEnd = TimeSpan.Zero;
+        //            return;
+        //        }
+
+        //        _dateEnd = value.GetCurrentTime();
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
         public bool ShowPrinterOnStartup
         {
@@ -150,7 +194,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void Save()
         {
             _settingsProvider.SaveAppSettings(_mappingEngine.Map<AppSettingsDto>(this));
-            var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(DateStart);
+            var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(_dateStart.GetCurrentTime());
             _schedulerService.StartInstagramMonitoring(dt);
         }
     }

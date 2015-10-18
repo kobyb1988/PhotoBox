@@ -111,6 +111,7 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             _printer.Print(Image, _printerName, CopiesCount);
             _imageService.SaveImage(new ImageViewModel(Image));
+            Complete();
         }
     }
 }
