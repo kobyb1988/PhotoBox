@@ -56,7 +56,9 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public CheckableTemplateViewModel Copy()
         {
-            return new TemplateViewModel(Name, Width, Height, Id, Children, Background, Overlay).ToCheckable(State);
+            var copy = new TemplateViewModel(Name, Width, Height, Id, Children, Background, Overlay).ToCheckable(State);
+            copy.IsDefaultBackground = IsDefaultBackground;
+            return copy;
         }
 
         public void CopyTo(CheckableTemplateViewModel to)
@@ -68,6 +70,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             to.Background = Background;
             to.Overlay = Overlay;
 
+            to.IsDefaultBackground = IsDefaultBackground;
+
             to.State = State;
 
             to.Children.Clear();
@@ -77,5 +81,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
                 to.Children.Add(child);
             }
         }
+
+        public bool IsDefaultBackground { get; set; }
     }
 }

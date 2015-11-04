@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -6,8 +7,11 @@ using System.Monads;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using ImageMaker.CommonViewModels.ViewModels.Settings;
+using ImageMaker.Utils.Services;
 using ImageMaker.ViewModels.ViewModels.Images;
 using ImageMaker.WebBrowsing;
 
@@ -16,14 +20,22 @@ namespace ImageMaker.ViewModels.ViewModels
     public class InstagramExplorerViewModel : BaseViewModel
     {
         private readonly IViewModelNavigator _navigator;
+        private readonly ImagePrinter _printer;
         private readonly InstagramExplorer _instagramExplorer;
+        private readonly string _printerName;
 
         public InstagramExplorerViewModel(
             IViewModelNavigator navigator, 
-            InstagramExplorer instagramExplorer)
+            InstagramExplorer instagramExplorer,
+            SettingsProvider settings,
+            ImagePrinter printer)
         {
             _navigator = navigator;
+            _printer = printer;
             _instagramExplorer = instagramExplorer;
+            AppSettingsDto appSettings = settings.GetAppSettings();
+            if (appSettings != null)
+                _printerName = appSettings.PrinterName;
 
             IsHashTag = true;
         }
@@ -61,6 +73,27 @@ namespace ImageMaker.ViewModels.ViewModels
         public ICollectionView ImagesView
         {
             get { return _imagesView ?? (_imagesView = CollectionViewSource.GetDefaultView(Images)); }
+        }
+
+        public RelayCommand PrintCommand
+        {
+            get { return _printCommand ?? (_printCommand = new RelayCommand(Print, () => _checkedImages.IsValueCreated && _checkedImages.Value.Count > 0)); }
+        }
+
+        private void Print()
+        {
+            Action<byte[]> print = null;
+            if (!string.IsNullOrEmpty(_printerName))
+                print = (data) => _printer.Print(data, _printerName);
+            else
+            {
+                print = (data) => _printer.Print(data);
+            }
+
+            foreach (var image in _checkedImages.Value)
+            {
+                print(image.Data);
+            }
         }
 
         public ObservableCollection<InstagramImageViewModel> Images
@@ -101,6 +134,27 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private string _nextUrl;
         private string _previousSearch;
+        private RelayCommand _printCommand;
+
+        public RelayCommand<InstagramImageViewModel> CheckCommand
+        {
+            get { return _checkCommand ?? (_checkCommand = new RelayCommand<InstagramImageViewModel>(Check)); }
+        }
+
+        private readonly Lazy<List<InstagramImageViewModel>> _checkedImages = new Lazy<List<InstagramImageViewModel>>();
+        private RelayCommand<InstagramImageViewModel> _checkCommand;
+
+        private void Check(InstagramImageViewModel image)
+        {
+            if (_checkedImages.Value.Contains(image))
+            {
+                _checkedImages.Value.Remove(image);
+                return;
+            }
+
+            _checkedImages.Value.Add(image);
+            PrintCommand.RaiseCanExecuteChanged();
+        }
 
         private void Search(string text)
         {

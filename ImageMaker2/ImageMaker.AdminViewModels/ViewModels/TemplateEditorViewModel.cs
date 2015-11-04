@@ -91,6 +91,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
                         break;
                 }
             };
+
+            _canRemoveBackground = !Template.IsDefaultBackground;
+            _canRemoveOverlay = Template.Overlay != null;
         }
 
         private void ItemOnSelectionChanged(ISelectable item)
@@ -216,6 +219,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
             Stack.Value.Do(Template);
 
             Template.Background = CreateDefaultBackground();
+            Template.IsDefaultBackground = true;
+
             _canRemoveBackground = false;
             
             UpdateCommands();
@@ -276,6 +281,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             if (background == null)
                 return;
 
+            Template.IsDefaultBackground = false;
             Stack.Value.Do(Template);
 
             Template.Background = background;

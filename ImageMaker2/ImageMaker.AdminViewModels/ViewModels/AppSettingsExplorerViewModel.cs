@@ -7,6 +7,7 @@ using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
+using ImageMaker.CommonViewModels.ViewModels.Validation;
 using ImageMaker.Themes.CustomControls;
 using ImageMaker.Utils.Services;
 

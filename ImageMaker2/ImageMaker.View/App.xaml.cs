@@ -27,6 +27,7 @@ namespace ImageMaker.View
             var kernel = NinjectBootstrapper.GetKernel(new MainModule(), new NinjectBaseModule());
             var settings = kernel.Get<SettingsProvider>();
             ThemeSettingsDto theme = settings.GetThemeSettings();
+            if (theme != null)
             foreach (var property in typeof(ThemeSettingsDto).GetProperties())
             {
                 this.Properties.Add(property.Name, property.GetValue(theme));

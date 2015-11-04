@@ -52,7 +52,7 @@
         </Setter>
     </Style>
     
-    <Style TargetType="{x:Type local:SearchBoxCtl}">
+    <Style TargetType="{x:Type local:SearchBoxCtl}" x:Key="SearchBoxStyle">
         <Setter Property="BorderBrush" Value="#dad1ce"/>
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="Background" Value="#dcf5f3" />

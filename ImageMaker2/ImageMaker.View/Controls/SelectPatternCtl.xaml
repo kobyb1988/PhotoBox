@@ -212,7 +212,7 @@
                                                CornerAlign="BottomLeft,TopLeft"/>
                         <customControls:DataPagerCtl Grid.Column="1" 
                                                      ItemsView="{Binding Source={StaticResource Patterns}}" 
-                                                     PageSize="5"
+                                                     PageSize="15"
                                          PagesInRow="3"
                                                      Background="#4ecdc4"/>
                         <!--<Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>-->

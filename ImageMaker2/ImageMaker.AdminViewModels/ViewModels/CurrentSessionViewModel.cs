@@ -119,7 +119,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void Print()
         {
             Action<byte[]> print = null;
-            if (string.IsNullOrEmpty(_printerName))
+            if (!string.IsNullOrEmpty(_printerName))
                 print = (data) => _printer.Print(data, _printerName);
             else
             {

@@ -150,16 +150,24 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
     {
         private readonly IViewModelNavigator _navigator;
         private readonly InstagramExplorer _instagramExplorer;
+        private readonly SettingsProvider _settings;
+        private readonly ImagePrinter _printer;
 
-        public InstagramExplorerViewModelFactory(IViewModelNavigator navigator, InstagramExplorer instagramExplorer)
+        public InstagramExplorerViewModelFactory(
+            IViewModelNavigator navigator, 
+            InstagramExplorer instagramExplorer,
+            SettingsProvider settings,
+            ImagePrinter printer)
         {
             _navigator = navigator;
             _instagramExplorer = instagramExplorer;
+            _settings = settings;
+            _printer = printer;
         }
 
         protected override InstagramExplorerViewModel GetViewModel(object param)
         {
-            return new InstagramExplorerViewModel(_navigator, _instagramExplorer);
+            return new InstagramExplorerViewModel(_navigator, _instagramExplorer, _settings, _printer);
         }
     }
 

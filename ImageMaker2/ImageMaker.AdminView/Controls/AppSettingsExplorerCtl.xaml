@@ -69,7 +69,7 @@
                                              Padding="5"
                                              BorderBrush="Transparent"
                                              FontSize="30"
-                                             Text="{Binding Path=HashTag, StringFormat={}#{0}}"/>
+                                             Text="{Binding Path=HashTag}"/>
                                 </Border>
                             </Grid>
                         </Border >

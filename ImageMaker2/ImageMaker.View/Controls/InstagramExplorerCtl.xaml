@@ -83,7 +83,7 @@
                                 </customControls:CustomRadioButton>
                                 <TextBlock IsHitTestVisible="False" Foreground="#ffffff" VerticalAlignment="Center" 
                                            HorizontalAlignment="Center" Text="a" FontSize="50" Margin="0,-15,0,0"/>
-                                <TextBlock Text="название" Grid.Row="1" HorizontalAlignment="Center"/>
+                                <TextBlock Text="аккаунт" Grid.Row="1" HorizontalAlignment="Center"/>
                             </Grid>
                             <Grid Margin="5,0,0,0">
                                 <Grid.RowDefinitions>
@@ -108,7 +108,21 @@
                                 <TextBlock Text="хэштег" Grid.Row="1" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
-                        <customControls:SearchBoxCtl Grid.Column="2" Tag="Введите хэштег" Margin="5,5,15,5" SearchCommand="{Binding Path=SearchCommand}"/>
+                        <customControls:SearchBoxCtl Grid.Column="2" Margin="5,5,15,5" 
+                                                     SearchCommand="{Binding Path=SearchCommand}">
+                            <customControls:SearchBoxCtl.Style>
+                                <Style TargetType="{x:Type customControls:SearchBoxCtl}" BasedOn="{StaticResource SearchBoxStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsHashTag}" Value="True">
+                                            <Setter Property="Tag" Value="Введите хэштег" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsUserName}" Value="True">
+                                            <Setter Property="Tag" Value="Введите аккаунт" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </customControls:SearchBoxCtl.Style>
+                        </customControls:SearchBoxCtl>
                     </Grid>
                 </Border>
 
@@ -116,7 +130,10 @@
                     <Grid>
                         <Grid.Resources>
                             <DataTemplate x:Key="tmpl" DataType="{x:Type images:InstagramImageViewModel}">
-                                <ToggleButton ClickMode="Release" IsChecked="{Binding Path=IsChecked}">
+                                <ToggleButton ClickMode="Release" 
+                                              Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.CheckCommand}"
+                                              CommandParameter="{Binding Path=.}"
+                                              IsChecked="{Binding Path=IsChecked}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="ToolTip" Value="{Binding Path=Name}" />
@@ -269,6 +286,7 @@
                                                      Background="#4ecdc4"/>
                         <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
                         <customControls:BlueButton 
+                            Command="{Binding Path=PrintCommand}"
                             Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
                             Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
                             CornerRadius="40"
@@ -279,7 +297,7 @@
                             HorizontalAlignment="Stretch"
                         Grid.Column="2"
                             CornerAlign="TopRight,BottomRight"
-                                               Content="Далее"/>
+                                               Content="Печать"/>
                     </Grid>
                 </Border>
             </Grid>

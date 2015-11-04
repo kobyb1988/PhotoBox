@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Providers;
 using ImageMaker.AdminViewModels.ViewModels.Enums;
@@ -18,12 +9,7 @@ using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.Common.Extensions;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
-using ImageMaker.CommonViewModels.ViewModels.Factories;
-using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using Brushes = System.Windows.Media.Brushes;
-using Color = System.Windows.Media.Color;
-using Pen = System.Windows.Media.Pen;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -219,6 +205,15 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void GoBack()
         {
+            if (Children.Count(x => x.State != ItemState.Unchanged) > 0)
+            {
+                bool result =
+                    _dialogService.ShowConfirmationDialog("При переходе все изменения будут потеряны. Продолжить?");
+                
+                if (!result)
+                    return;
+            }
+
             _navigator.NavigateBack(this);
         }
 
@@ -239,6 +234,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 Enumerable.Empty<TemplateImageViewModel>(), 
                 TemplateEditorViewModel.CreateDefaultBackground(), null);
 
+            _updatedTemplate.IsDefaultBackground = true;
             _navigator.NavigateForward<TemplateEditorViewModel>(this, _updatedTemplate);
         }
     }

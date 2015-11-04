@@ -228,6 +228,7 @@
     <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I
 xcopy "$(ProjectDir)bin\Debug\*.exe" "$(SolutionDir)Bin" /Y /I
 xcopy "$(ProjectDir)bin\Debug\*.config" "$(SolutionDir)Bin" /Y /I
+xcopy "$(ProjectDir)bin\Debug\*.lnk" "$(SolutionDir)Bin" /Y /I
 xcopy "$(ProjectDir)bin\Debug\*.xml" "$(SolutionDir)Bin" /Y /I
 xcopy "$(ProjectDir)bin\Debug\*.bat" "$(SolutionDir)Bin" /Y /I</PostBuildEvent>
   </PropertyGroup>
