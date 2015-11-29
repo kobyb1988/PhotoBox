@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
-using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.SDKData.Enums;
 using ImageMaker.SDKData.Events;
-using ImageMaker.SDKData.Structs;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
@@ -28,6 +27,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private readonly CompositionModelProcessor _imageProcessor;
         private int _width;
         private int _height;
+        private int _imageNumber;
 
         private RelayCommand _goBackCommand;
         private RelayCommand _openSessionCommand;
@@ -62,9 +62,12 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public override void Initialize()
         {
+            if (!Debugger.IsAttached)
+                Debugger.Launch();
             _imageProcessor.TimerElapsed += ImageProcessorOnTimerElapsed;
             _imageProcessor.CameraErrorEvent += ImageProcessorOnCameraErrorEvent;
             _imageProcessor.ImageChanged += ImageProcessorOnStreamChanged;
+            _imageProcessor.ImageNumberChanged += ImageProcessorOnImageNumberChanged;
 
 
             _imageProcessor.InitializeProcessor();
@@ -87,11 +90,17 @@ namespace ImageMaker.ViewModels.ViewModels
             StartLiveView();
         }
 
+        private void ImageProcessorOnImageNumberChanged(object sender, int newValue)
+        {
+            ImageNumber = newValue;
+        }
+
         public override void Dispose()
         {
             _imageProcessor.TimerElapsed -= ImageProcessorOnTimerElapsed;
             _imageProcessor.CameraErrorEvent -= ImageProcessorOnCameraErrorEvent;
             _imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
+            _imageProcessor.ImageNumberChanged -= ImageProcessorOnImageNumberChanged;
 
             _sessionOpened = false;
             TakingPicture = false;
@@ -141,12 +150,12 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void TakePicture()
         {
+            if (!Debugger.IsAttached)
+                Debugger.Launch();
             TakingPicture = true;
             UpdateCommands();
-
             //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
-
-            _imageProcessor.TakePicture()
+            _imageProcessor.TakePicture(LiveViewImageStream)
                 .ContinueWith(task =>
                 {
                     //TakingPicture = false;
@@ -179,6 +188,8 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void OpenSession()
         {
+            if (!Debugger.IsAttached)
+                Debugger.Launch();
             bool result = _imageProcessor.OpenSession();
             if (!result)
             {
@@ -256,6 +267,12 @@ namespace ImageMaker.ViewModels.ViewModels
             {
                 Set(() => Height, ref _height, value);
             }
+        }
+
+        public int ImageNumber
+        {
+            get { return _imageNumber; }
+            set { Set(() => ImageNumber, ref _imageNumber, value); }
         }
 
         public byte[] LiveViewImageStream

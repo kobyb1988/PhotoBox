@@ -12,8 +12,6 @@ using ImageMaker.Entities;
 using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.SDKData.Events;
 using Image = System.Drawing.Image;
-using Point = System.Drawing.Point;
-using Rectangle = System.Drawing.Rectangle;
 
 namespace ImageMaker.PatternProcessing.ImageProcessors
 {
@@ -24,6 +22,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
         public event EventHandler<ImageDto> ImageChanged;
         public event EventHandler<int> TimerElapsed;
+        public event EventHandler<int> ImageNumberChanged; 
         public event EventHandler<CameraEventBase> CameraErrorEvent;
 
         public CompositionModelProcessor(Template pattern, ImageProcessor imageProcessor)
@@ -52,32 +51,30 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 handler(this, cameraError);
         }
 
-        public virtual Task<CompositionProcessingResult> TakePicture()
+        public virtual async Task<CompositionProcessingResult> TakePicture(byte[] liveViewImageStream)
         {
-            TaskCompletionSource<CompositionProcessingResult> source = new TaskCompletionSource<CompositionProcessingResult>();
+            Size liveViewImageStreamSize;
+            using (var stream= new MemoryStream(liveViewImageStream))
+            {
+                var img = Image.FromStream(stream);
+                liveViewImageStreamSize = img.Size;
+            }
             
-            TakePictureInternal()
-                .ContinueWith(t => source.TrySetResult(new CompositionProcessingResult(_pattern, t.Result)));
-
-            return source.Task;
+            return new CompositionProcessingResult(_pattern, await TakePictureInternal(liveViewImageStreamSize));
         }
 
-        protected Task<byte[]> TakePictureInternal()
+        protected async Task<byte[]> TakePictureInternal(Size liveViewImageStreamSize)
         {
-            TaskCompletionSource<byte[]> source = new TaskCompletionSource<byte[]>();
-            
-            Task.Run(() => Run().Result)
-                .ContinueWith(t => source.TrySetResult(t.Result));
-
-            return source.Task;
+            return await Task.Run(() => Run(liveViewImageStreamSize));
         }
 
-        private async Task<byte[]> Run()
+        private async Task<byte[]> Run(Size liveViewImageStreamSize)
         {
             List<byte[]> pictures = new List<byte[]>();
 
             for (int i = 0; i < _pattern.Images.Count; i++)
             {
+                RaiseImageNumberChanged(i+1);
                 RaiseTimerElapsed(4);
                 await Task.Delay(TimeSpan.FromSeconds(2));
 
@@ -89,19 +86,19 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
                 byte[] picture = await _imageProcessor.DoTakePicture();
                 pictures.Add(picture);
-                RaiseImageChanged(picture, 1920, 1280); //todo take size from camera
                 await Task.Delay(TimeSpan.FromSeconds(3)); //todo
-                StartLiveView();
+                StopLiveView();
+               StartLiveView();
             }
 
-            byte[] result = ProcessImages(pictures);
+            byte[] result = ProcessImages(pictures,liveViewImageStreamSize);
             return result;
         }
 
-        private byte[] ProcessImages(List<byte[]> images)
+        private byte[] ProcessImages(List<byte[]> images, Size liveViewImageStreamSize)
         {
-            int defWidth = 1024;
-            int defHeight = 768;
+            int defWidth = liveViewImageStreamSize.Width;//840;
+            int defHeight = liveViewImageStreamSize.Height;//420; //768;
 
             bool hasBackground = _pattern.Background != null;
             bool hasOverlay = _pattern.Overlay != null;
@@ -139,7 +136,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                         int stepX = (int) (width * template.X);
                         int stepY = (int) (height * template.Y);
 
-                        FillCanvas(canvas, images[i], new Point(stepX, stepY), destWidth, destHeight, 0, 0);
+                        FillCanvas(canvas, images[i], new Point(stepX, stepY), destWidth, destHeight, 0, 0,liveViewImageStreamSize);
                     }
 
 // ReSharper disable once AccessToDisposedClosure
@@ -154,45 +151,61 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             }
         }
 
-        protected void FillCanvas(
-            Graphics canvas,
-            byte[] buffer,
-            Point position,
-            int destWidth,
-            int destHeight,
-            int offsetX,
-            int offsetY)
+        protected void FillCanvas(Graphics canvas, byte[] buffer, Point position, int destWidth, int destHeight, int offsetX, int offsetY, Size liveViewImageStreamSize)
         {
             using (var imageStream = new MemoryStream(buffer))
             {
                 Image image = Image.FromStream(imageStream);
-
                 canvas.DrawImage(image,
                 new Rectangle(position.X + offsetX, position.Y + offsetY, destWidth, destHeight),
                 new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
             }
         }
 
+        /// <summary>
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">The image to resize.</param>
+        /// <param name="width">The width to resize to.</param>
+        /// <param name="height">The height to resize to.</param>
+        /// <param name="hResolution"></param>
+        /// <param name="vResolution"></param>
+        /// <returns>The resized image.</returns>
+        public Bitmap ResizeImage(Image image, int width, int height, float hResolution, float vResolution)
+        {
+            Rectangle cropRect = new Rectangle(0, 0, width, height);
+            Bitmap target = new Bitmap(cropRect.Width, cropRect.Height, image.PixelFormat);
+
+            target.SetResolution(hResolution,vResolution);
+            ((Bitmap) image).SetResolution(hResolution, vResolution);
+            using (Graphics g = Graphics.FromImage(target))
+            {
+                g.DrawImage(image, cropRect, new Rectangle(0, 0, width, height),
+                                GraphicsUnit.Pixel);
+            }
+            return target;
+        }
+
+        private void RaiseImageNumberChanged(int newNumber)
+        {
+            ImageNumberChanged?.Invoke(this, newNumber);
+        }
+
+
         private void RaiseTimerElapsed(int tick)
         {
-            var handler = TimerElapsed;
-            if (handler != null)
-                handler(this, tick);
+            TimerElapsed?.Invoke(this, tick);
         }
 
         private void RaiseImageChanged(byte[] imgBuf)
         {
-            var handler = ImageChanged;
-            if (handler != null)
-                ImageChanged(this, new ImageDto(imgBuf));
+            ImageChanged?.Invoke(this, new ImageDto(imgBuf));
         }
 
-        private void RaiseImageChanged(byte[] imgBuf, int width, int height)
-        {
-            var handler = ImageChanged;
-            if (handler != null)
-                ImageChanged(this, new ImageDto(imgBuf, width, height));
-        }
+        //private void RaiseImageChanged(byte[] imgBuf, int width, int height)
+        //{
+        //    ImageChanged?.Invoke(this, new ImageDto(imgBuf, width, height));
+        //}
 
         private void ImageProcessorOnStreamChanged(object sender, byte[] bytes)
         {

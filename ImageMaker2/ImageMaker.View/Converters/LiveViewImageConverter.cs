@@ -17,6 +17,8 @@ namespace ImageMaker.View.Converters
         [HandleProcessCorruptedStateExceptions]
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
+            //if (!Debugger.IsAttached)
+            //    Debugger.Launch();
             try
             {
                 if (values.Length < 4)

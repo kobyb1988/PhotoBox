@@ -20,8 +20,6 @@ namespace ImageMaker.Runner
         private ServiceHost _host;
         public void Launch()
         {
-//            Debugger.Launch();
-
             _host = new ServiceHost(typeof(AppService), new Uri("net.tcp://localhost:8732/"));
             try
             {

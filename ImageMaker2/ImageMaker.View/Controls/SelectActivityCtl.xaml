@@ -58,7 +58,7 @@
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <customControls:RoundedButton Content="Выбрать шаблон для фото" 
+                            <customControls:RoundedButton Content="Фотобудка" 
                                                           Command="{Binding Path=ProceedToPatternSelectionCommand}"
                                                           BorderBrush="{DynamicResource {x:Static themes:ThemeManager.MainBorderColorKey}}"
                                                           Foreground="{DynamicResource {x:Static themes:ThemeManager.MainForegroundColorKey}}"

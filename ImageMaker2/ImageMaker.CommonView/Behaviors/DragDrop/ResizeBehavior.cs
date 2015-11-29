@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interactivity;
 using ImageMaker.CommonViewModels.DragDrop;
@@ -21,36 +22,38 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
             IResizable resizable = this.AssociatedObject.DataContext as IResizable;
             if (resizable == null)
                 return;
+            if (!Debugger.IsAttached)
+                Debugger.Launch();
 
             double deltaX = 0;
             double deltaY = 0;
             double offsetX = 0;
             double offsetY = 0;
 
-            if ((ResizeDirection & Direction.Right) == Direction.Right)
+            if ((ResizeDirection & Direction.Right) == Direction.Right || (ResizeDirection & Direction.Left) == Direction.Left)
             {
                 deltaX = dragDeltaEventArgs.HorizontalChange;
-            }
-
-            if ((ResizeDirection & Direction.Left) == Direction.Left)
-            {
                 offsetX = dragDeltaEventArgs.HorizontalChange;
 
                 deltaX = -dragDeltaEventArgs.HorizontalChange;
+                deltaY = dragDeltaEventArgs.HorizontalChange;
+                offsetY = dragDeltaEventArgs.HorizontalChange;
+
+                deltaY = -dragDeltaEventArgs.HorizontalChange;
             }
 
-            if ((ResizeDirection & Direction.Bottom) == Direction.Bottom)
+            if ((ResizeDirection & Direction.Bottom) == Direction.Bottom || (ResizeDirection & Direction.Top) == Direction.Top)
             {
+                deltaX = dragDeltaEventArgs.VerticalChange;
+                offsetX = dragDeltaEventArgs.VerticalChange;
+
+                deltaX = -dragDeltaEventArgs.VerticalChange;
                 deltaY = dragDeltaEventArgs.VerticalChange;
-            }
-
-            if ((ResizeDirection & Direction.Top) == Direction.Top)
-            {
                 offsetY = dragDeltaEventArgs.VerticalChange;
 
                 deltaY = -dragDeltaEventArgs.VerticalChange;
             }
-
+            
             resizable.Resize(deltaX, deltaY, offsetX, offsetY);
         }
     }

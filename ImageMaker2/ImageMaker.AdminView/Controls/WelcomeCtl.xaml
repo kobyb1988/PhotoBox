@@ -53,12 +53,12 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Button Content="Настройка интерфейса:" Command="{Binding Path=ManageAppSettingsCommand}"/>
+                        <Button Content="Настройка принтера:" Command="{Binding Path=ManageAppSettingsCommand}"/>
                         <Button  Content="Настройка камеры:" Grid.Row="1" Command="{Binding Path=ManageCameraSettingsCommand}"/>
-                        <Button  Content="Настройка шаблонов:" Grid.Row="2" Command="{Binding Path=ManageTemplatesCommand}"/>
-                        <Button  Content="Редактор тем:" Grid.Column="1" Command="{Binding Path=ManageThemesCommand}"/>
-                        <Button  Content="Статистика:" Grid.Column="1" Grid.Row="1" Command="{Binding Path=ShowStatsCommand}"/>
-                        <Button  Content="Запустить основной модуль:" Grid.Column="1" Grid.Row="2" FontSize="10" 
+                        <Button  Content="Редактор шаблонов:" Grid.Row="2" Command="{Binding Path=ManageTemplatesCommand}"/>
+                        <Button  Content="Настройка интерфейса:" Grid.Column="1" Command="{Binding Path=ManageThemesCommand}"/>
+                        <Button  Content="Статистика и Сессия:" Grid.Column="1" Grid.Row="1" Command="{Binding Path=ShowStatsCommand}"/>
+                        <Button  Content="Начать сессию" Grid.Column="1" Grid.Row="2" 
                                  Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
                     </Grid>
                 </Viewbox>

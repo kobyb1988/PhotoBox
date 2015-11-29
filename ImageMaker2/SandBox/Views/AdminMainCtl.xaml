@@ -50,12 +50,12 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Button Content="Настройка интерфейса:" />
+                        <Button Content="Настройка принтера:" />
                         <Button  Content="Настройка камеры:" Grid.Row="1"/>
-                        <Button  Content="Настройка шаблонов:" Grid.Row="2"/>
-                        <Button  Content="Редактор тем:" Grid.Column="1" />
-                        <Button  Content="Статистика:" Grid.Column="1" Grid.Row="1"/>
-                        <Button  Content="Запустить основной модуль:" Grid.Column="1" Grid.Row="2" FontSize="10"/>
+                        <Button  Content="Редактор шаблонов:" Grid.Row="2"/>
+                        <Button  Content="Настройка интерфейса:" Grid.Column="1" />
+                        <Button  Content="Статистика и Сессия:" Grid.Column="1" Grid.Row="1"/>
+                        <Button  Content="Начать сессию" Grid.Column="1" Grid.Row="2" />
                     </Grid>
                 </Viewbox>
             </Grid>
