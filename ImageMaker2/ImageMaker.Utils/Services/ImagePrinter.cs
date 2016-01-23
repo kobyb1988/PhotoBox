@@ -121,7 +121,7 @@ namespace ImageMaker.Utils.Services
                     //printer not found
                     if (string.IsNullOrEmpty(name))
                         return;
-
+                    
                     _printDocument.PrinterSettings.Copies = (short) copies;
                     _printDocument.PrintController = new StandardPrintController();
                     _printDocument.PrinterSettings.PrinterName = name;
@@ -152,7 +152,7 @@ namespace ImageMaker.Utils.Services
 
             // Set some preferences, our method should print a box with any 
             // combination of these properties being true/false.
-            _printDocument.DefaultPageSettings.Landscape = _image.Height < _image.Width;
+            _printDocument.DefaultPageSettings.Landscape = _image.Height > _image.Width;
             _printDocument.DefaultPageSettings.Margins.Top = 100;
             _printDocument.DefaultPageSettings.Margins.Left = 0;
             _printDocument.DefaultPageSettings.Margins.Right = 50;

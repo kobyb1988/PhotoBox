@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Services;
 using ImageMaker.CommonViewModels.Behaviors;
@@ -68,9 +69,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void RaiseRequestClose(WindowState state)
         {
-            var handler = RequestWindowVisibilityChanged;
-            if (handler != null)
-                handler(state);
+            RequestWindowVisibilityChanged?.Invoke(state);
         }
 
         private void RaiseShowWindow(ShowChildWindowMessage message)
@@ -126,9 +125,29 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             _sessionService.StartSession();
 
-            _process = Process.Start(new ProcessStartInfo(CMain)
+            Task.Factory.StartNew(() =>
             {
+                try
+                {
+                    _process = Process.Start(new ProcessStartInfo(CMain)
+                    {
+                    });
+                    _process.ErrorDataReceived += ErorHandle;
+                    _process.WaitForExit();
+                    var s = 0;
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw;
+                }
+                
             });
+        }
+
+        private void ErorHandle(object sender, DataReceivedEventArgs e)
+        {
+            
         }
 
         public event EventHandler<bool> StateChanged;

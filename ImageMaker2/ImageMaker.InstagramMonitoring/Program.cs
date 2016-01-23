@@ -16,7 +16,6 @@ namespace ImageMaker.InstagramMonitoring
         static void Main()
         {
             ServiceBase[] ServicesToRun;
-            //Debugger.Launch();
             ServicesToRun = new ServiceBase[] 
             { 
                 new InstagramService() 

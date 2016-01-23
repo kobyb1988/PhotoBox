@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Threading;
 using ImageMaker.AppClient.ServiceHosting;
 using ImageMaker.AppServer;
 using ImageMaker.CommonViewModels.Messenger;
@@ -31,10 +32,6 @@ namespace ImageMaker.CommonViewModels.Services
             _clientFactory.SendCommand(new CloseCommand(), true);
         }
 
-        //public virtual void Abort()
-        //{
-        //    _clientFactory.Abort();
-        //}
     }
 
     public class CommandProcessor : ICommandProcessor

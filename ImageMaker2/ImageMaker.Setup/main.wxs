@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="Main">
-            <Component Id="cmpDE95CC0363DB4301DF8F556E5214C270" Guid="CBD1DCEA-57B4-4798-9D80-FC9EF192958A">
+            <Component Id="cmpDE95CC0363DB4301DF8F556E5214C270" Guid="7EAE7FCD-B89E-4883-877A-31F0D7B19B8A">
                 <Class Id="{04772569-8E37-3DF5-A603-959455E15278}" Context="InprocServer32" Description="AutoMapper.IgnoreMapAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.IgnoreMapAttribute" Description="AutoMapper.IgnoreMapAttribute" />
                 </Class>
@@ -518,7 +518,7 @@
                 <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp4FCFD3107CFCD8758AAFA30C4CF830F4" Guid="FF65E618-D5AA-4354-AE64-F4A534D78E52">
+            <Component Id="cmp4FCFD3107CFCD8758AAFA30C4CF830F4" Guid="67877D47-09E3-47A5-A547-E922D626E1AD">
                 <Class Id="{135A0B14-E206-3D22-8B03-FF271C2D8582}" Context="InprocServer32" Description="AutoMapper.Mappers.NameValueCollectionMapper" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.Mappers.NameValueCollectionMapper" Description="AutoMapper.Mappers.NameValueCollectionMapper" />
                 </Class>
@@ -677,157 +677,160 @@
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp9F72431D52754004177B3A6F8A89807D" Guid="05FEF651-50A8-48F3-A7AB-F832C8813C50">
+            <Component Id="cmp9F72431D52754004177B3A6F8A89807D" Guid="D92A0D15-6CBD-4585-8504-8A25B8275DED">
                 <File Id="fil3B7603346C3BA132DC6D60FC65DC14A9" KeyPath="yes" Source="SourceDir\AutoMapper.xml" />
             </Component>
-            <Component Id="cmp36DD3258436BAB7823E85ADB220C6436" Guid="7E92BBFF-18CC-42CB-8F4C-B698293495AD">
+            <Component Id="cmp36DD3258436BAB7823E85ADB220C6436" Guid="3BA00009-B0C9-4DF7-B907-BCAEF819E49A">
                 <File Id="filEE9A149841837F79E9F56D6576D4120B" KeyPath="yes" Source="SourceDir\BCrypt.Net.dll" />
             </Component>
-            <Component Id="cmpBDA03D0A6F2242DA3ADF5CF509AFCF00" Guid="92906318-9114-431A-8245-37A204497B25">
+            <Component Id="cmpBDA03D0A6F2242DA3ADF5CF509AFCF00" Guid="52665FCC-8DFD-4948-B045-09CB2247CA9C">
                 <File Id="filC104CE95BFEADC0308762674361EC70F" KeyPath="yes" Source="SourceDir\BCrypt.Net.xml" />
             </Component>
-            <Component Id="cmp6745A582FDA208E73B26129E0825F9B8" Guid="89E16E64-182C-4A58-BAE4-EAF028989765">
+            <Component Id="cmp6745A582FDA208E73B26129E0825F9B8" Guid="CDBA5F87-ED3F-4C39-942D-08666103A2B5">
                 <File Id="fil3DEE1774A998EABD7EC743057B4A7B78" KeyPath="yes" Source="SourceDir\ConcurrentPriorityQueue.dll" />
             </Component>
-            <Component Id="cmpE903A0CC7403A4D729B166A3908AD7CC" Guid="DC417B9E-E902-4443-BD2D-56FB17BD3890">
+            <Component Id="cmpE903A0CC7403A4D729B166A3908AD7CC" Guid="045FACB2-55C2-45AF-A916-2EB86FFD1425">
                 <File Id="fil45F044C9C106010F685939FA5FDFFF8E" KeyPath="yes" Source="SourceDir\EDSDK.dll" />
             </Component>
-            <Component Id="cmp24A3CE40834AFF2500AB7DB9DE2F568E" Guid="1B68D1AE-2225-4C77-B7A0-D8B0CA4FFD62">
+            <Component Id="cmp24A3CE40834AFF2500AB7DB9DE2F568E" Guid="C599C22B-810B-4C21-BB14-A9A29695E7C5">
                 <File Id="fil8FD99D2BF65809099DD624BFD86A47CF" KeyPath="yes" Source="SourceDir\EDSDKLib.dll" />
             </Component>
-            <Component Id="cmpAF9044A29826C8836D98FF34A5D53638" Guid="EBCB4D0C-DC5C-4417-8BDA-3C6A81BE0976">
+            <Component Id="cmpAF9044A29826C8836D98FF34A5D53638" Guid="0285D21C-F46D-483B-88B4-B36C3D2D2DD5">
                 <File Id="filB68CF1F865CE3D5D5618673191CB9BCC" KeyPath="yes" Source="SourceDir\EdsImage.dll" />
             </Component>
-            <Component Id="cmp96C09ECE344A9C01D2E4CB0680501554" Guid="DFB1214E-6B23-4445-9CD3-1A73ACBF028C">
+            <Component Id="cmp96C09ECE344A9C01D2E4CB0680501554" Guid="0D59BD68-9A00-45DA-8C7E-5E243AB601B7">
                 <File Id="filC98144C2F1208BC0D0F459F9DC1761DC" KeyPath="yes" Source="SourceDir\EntityFramework.dll" />
             </Component>
-            <Component Id="cmpBCF8FE9A3E3E66A695E0D9F911287C17" Guid="B9356F3F-31F3-4C0B-9826-90C8F6791618">
+            <Component Id="cmpBCF8FE9A3E3E66A695E0D9F911287C17" Guid="65A69689-3EC1-4F65-AD19-29ED3D02A057">
                 <File Id="fil48879B399DC1E3264778814DC3C3EA75" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.dll" />
             </Component>
-            <Component Id="cmpF4F90C83158C56D938F41A8221317786" Guid="28D858D7-E3DA-4CF3-98C4-378697551B80">
+            <Component Id="cmpF4F90C83158C56D938F41A8221317786" Guid="6CEF981D-1EC6-4856-BA04-5C3002CCD86A">
                 <File Id="fil1DBAD72FCA5D38FFA61DC55FEE4F1AF0" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.xml" />
             </Component>
-            <Component Id="cmp3EB84CB60335EC878A3D6185BE4B4B35" Guid="91C4966C-7B48-4110-B0A8-4FDFECCBBC73">
+            <Component Id="cmp3EB84CB60335EC878A3D6185BE4B4B35" Guid="D6C50285-FD3D-48FF-86C2-1EB77E9280C6">
                 <File Id="fil9CAEDD948218B4A0B1449E9667C771DA" KeyPath="yes" Source="SourceDir\EntityFramework.xml" />
             </Component>
-            <Component Id="cmpB12F7BDDF7CBD4674D71CE366ECA8877" Guid="BC27C77D-6D49-469C-B2F1-A86594D6481E">
+            <Component Id="cmpB12F7BDDF7CBD4674D71CE366ECA8877" Guid="E818B594-1924-459B-AA51-EC8FD7908D0B">
                 <File Id="filA027BDED0D8C36AA710D436007F73456" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.dll" />
             </Component>
-            <Component Id="cmp108DC132D7428136506EBB9BBD1EFCA0" Guid="7A2C119B-72CA-44D1-BD1C-76A5D5EB506F">
+            <Component Id="cmp108DC132D7428136506EBB9BBD1EFCA0" Guid="28707D77-8A1B-494B-A4D3-61118E69B2FE">
                 <File Id="filB544D34E084094CBB34188279DE90B2A" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.dll" />
             </Component>
-            <Component Id="cmp395B3DE4FE09C4021E3DD6F827E022CD" Guid="0622CDEE-F1FD-491A-AFD3-FEF36AFE24F2">
+            <Component Id="cmp395B3DE4FE09C4021E3DD6F827E022CD" Guid="23ABC0BA-F2A4-4EA3-B3A3-FE381216724E">
                 <File Id="fil8329CC5D03B7AD99B518325D2489EE6D" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.xml" />
             </Component>
-            <Component Id="cmp5F4E0FA71BA4DC8DB965A6AF05EC7F95" Guid="E3C6415C-F128-4F46-8C38-E2A84482B825">
+            <Component Id="cmp5F4E0FA71BA4DC8DB965A6AF05EC7F95" Guid="B983F87D-3AB2-4866-80AA-75CDCCF70E02">
                 <File Id="fil8C0A84C5E3492FA8BA0AF2E667A2FB35" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.dll" />
             </Component>
-            <Component Id="cmp139CEC88D8DE3FF309A17459A2398299" Guid="10FD7997-CE2A-4E04-A954-EC45ABEB3B1F">
+            <Component Id="cmp139CEC88D8DE3FF309A17459A2398299" Guid="8124E162-5976-4EC9-8AB7-00DCA1309A2C">
                 <File Id="fil38434A88E8C20D46C0EC6927C2C3BEC9" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.xml" />
             </Component>
-            <Component Id="cmp56DF90EE600C88C6E1982E90A7026DD9" Guid="5E4E5D24-50FD-4750-8235-F684B1B68066">
+            <Component Id="cmp56DF90EE600C88C6E1982E90A7026DD9" Guid="B006088C-4E97-4DD6-8E4D-8C5ECC28D09D">
                 <File Id="filD2AF34244FDF8DA55E60F06BCC18038E" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.xml" />
             </Component>
-            <Component Id="cmp9D316BEA722349C2D791617048DBA934" Guid="C4CEAB7E-7A62-455F-A3A5-07ED0B768170">
+            <Component Id="cmp9D316BEA722349C2D791617048DBA934" Guid="15268281-5149-431F-BC7C-6B6AA32C9062">
                 <File Id="fil6781F62979212DBA5BF28F138DDE0AFD" KeyPath="yes" Source="SourceDir\Hammer.SpinningWheel.dll" />
             </Component>
-            <Component Id="cmp0068428326F0A41F5452DC741F499685" Guid="89AA8828-19F4-4212-A1BA-AD114B0DC105">
+            <Component Id="cmp0068428326F0A41F5452DC741F499685" Guid="A6C71E59-4D9F-4CFA-BBEE-42AD7A11FC31">
                 <File Id="fil55CCBDA5E65A9D24A63F4D403FFF3961" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe" />
             </Component>
-            <Component Id="cmp19F45E434453B71F1ABA9CA701F89A5F" Guid="BECB289A-F188-45B0-8A73-6D5B1AB76A4A">
+            <Component Id="cmp19F45E434453B71F1ABA9CA701F89A5F" Guid="B8BD38D1-73BA-4FE1-AC0D-EA9CE0985C36">
                 <File Id="filDC876B0746B44DB7C5F766D28A35E3FD" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe.config" />
             </Component>
-            <Component Id="cmp500FF85F27619FD21E5B4A3354DA9024" Guid="35E1B7DC-79F1-431F-8F4E-DB0AC565E905">
+            <Component Id="cmpDD68FCBADC54CA781FB4A4E62D09023A" Guid="3EF49102-0C18-48CB-B278-F071A86818FA">
+                <File Id="fil919E2C5BE8A3963AAD3F107C46A1060C" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.suo" />
+            </Component>
+            <Component Id="cmp500FF85F27619FD21E5B4A3354DA9024" Guid="02CEE34B-CF11-42FB-81BA-30F1731AAB53">
                 <File Id="filDD18A65C2BCD58B1E400E7ABDF8CAB74" KeyPath="yes" Source="SourceDir\ImageMaker.AdminViewModels.dll" />
             </Component>
-            <Component Id="cmpD6F84051227B800E74CFEC17230ED075" Guid="3C206782-8ECC-4C0C-BCFF-EA3F6AE70BFD">
+            <Component Id="cmpD6F84051227B800E74CFEC17230ED075" Guid="9F1F0654-0781-4982-A583-3FAA22B8072A">
                 <File Id="filCB34A87858476E4F08F9F818F318A73C" KeyPath="yes" Source="SourceDir\ImageMaker.AppClient.dll" />
             </Component>
-            <Component Id="cmp8238B7DF4C2582409F193623C4A93840" Guid="8FF45B77-1AE4-43BA-AA35-AE7C77B666A2">
+            <Component Id="cmp8238B7DF4C2582409F193623C4A93840" Guid="F94229F4-74E7-4758-89C2-7A6179FCDB90">
                 <File Id="fil26973F7D8ECC586083069BE4BBE031DD" KeyPath="yes" Source="SourceDir\ImageMaker.AppServer.dll" />
             </Component>
-            <Component Id="cmpD1794B22756920312EE3C7C6C863BC6C" Guid="F33761ED-AC04-4513-B526-02E183758E85">
+            <Component Id="cmpD1794B22756920312EE3C7C6C863BC6C" Guid="350EF556-9B34-4C6B-82DD-5DD7BC24B679">
                 <File Id="filE2F999AF26C88DF6455732BE3F4046DB" KeyPath="yes" Source="SourceDir\ImageMaker.Camera.dll" />
             </Component>
-            <Component Id="cmpBA3C65F12DE41EF1E8451DA35BBBEC7E" Guid="EB3461EF-140A-4BD5-8679-F66C6BF0C39E">
+            <Component Id="cmpBA3C65F12DE41EF1E8451DA35BBBEC7E" Guid="26E152D1-2E0C-4AD7-A441-65DDE2895323">
                 <File Id="filAEC961F758C2D8FD6AE04C5A0811DE13" KeyPath="yes" Source="SourceDir\ImageMaker.Common.dll" />
             </Component>
-            <Component Id="cmp8C4F8C1FE286FD22DFE28F74B5191612" Guid="D82B6172-F921-4796-9F75-1AC5AD3A3FAC">
+            <Component Id="cmp8C4F8C1FE286FD22DFE28F74B5191612" Guid="723A3177-D65D-4F62-B33A-FA186FF23E4B">
                 <File Id="fil903A0DD2A57346011B9D61BD4467A311" KeyPath="yes" Source="SourceDir\ImageMaker.CommonView.dll" />
             </Component>
-            <Component Id="cmpE59E6DC2C48D287734E2BBBA13ED8045" Guid="E9200A1D-1F16-4DC7-9013-AEE4D36D21E6">
+            <Component Id="cmpE59E6DC2C48D287734E2BBBA13ED8045" Guid="E349E010-72A2-4A91-8D22-829FDC980D65">
                 <File Id="fil82612E19CA7CCC87CF364D16CBD7B457" KeyPath="yes" Source="SourceDir\ImageMaker.CommonViewModels.dll" />
             </Component>
-            <Component Id="cmp1BC22B771ABC3546920D30B8968548A0" Guid="796F7A9B-762F-4548-B0F7-37684DBE16EB">
+            <Component Id="cmp1BC22B771ABC3546920D30B8968548A0" Guid="0E30A904-979B-4E66-A16C-E041A3AB5664">
                 <File Id="fil3D070FC09D8D35C4A2E83256FD90114F" KeyPath="yes" Source="SourceDir\ImageMaker.Data.dll" />
             </Component>
-            <Component Id="cmpE8B250FEACBD56A18D4B77BC054F981D" Guid="90AD58E0-71A6-4056-8C06-1A461F65AF2E">
+            <Component Id="cmpE8B250FEACBD56A18D4B77BC054F981D" Guid="AC79B9A7-14F4-45D6-AF53-17177BC5F913">
                 <File Id="fil1DA45219C4CDFA7681FC3BF48AF5D420" KeyPath="yes" Source="SourceDir\ImageMaker.DataContext.dll" />
             </Component>
-            <Component Id="cmpC0E30C0D1259431CF997042BB0C0C2E8" Guid="4F4B593E-5985-4A35-807B-2740DFE57461">
+            <Component Id="cmpC0E30C0D1259431CF997042BB0C0C2E8" Guid="938AF37F-634E-4CC4-A3A8-46AB6DEDC354">
                 <File Id="fil45326C948198F8033CF761C66BE22801" KeyPath="yes" Source="SourceDir\ImageMaker.Entities.dll" />
             </Component>
-            <Component Id="cmp195639064E0D29A4B770FD116924F92E" Guid="5C7AAFAA-9929-4B8D-97B6-B3B43D0C14D5">
+            <Component Id="cmp195639064E0D29A4B770FD116924F92E" Guid="2C31D8A9-1D44-443D-9987-7BBA67A55A6C">
                 <File Id="filABBD550C85F7693C1F176CE730557D16" KeyPath="yes" Source="SourceDir\ImageMaker.InstagramMonitoring.exe" />
             </Component>
-            <Component Id="cmp0D31380B1B4F6D7E6099099109AF29AC" Guid="204397F3-F4AC-4C22-BE30-F0F404DF792F">
+            <Component Id="cmp0D31380B1B4F6D7E6099099109AF29AC" Guid="DE846DF8-E881-48D8-9963-A34338BAEB52">
                 <File Id="fil38EDCAD6867B2309DDB8BE8F6B161D12" KeyPath="yes" Source="SourceDir\ImageMaker.InstagramMonitoring.exe.config" />
             </Component>
-            <Component Id="cmp77D9AA608EE8620684A57B06BE28B31D" Guid="0629E657-A307-438B-B514-E2E1F89AF7BB">
+            <Component Id="cmp77D9AA608EE8620684A57B06BE28B31D" Guid="7BFC95A8-2E81-401A-9617-7EBE9C55E310">
                 <File Id="filC64E51B57AF679FA2EEF3ED958BFFD22" KeyPath="yes" Source="SourceDir\ImageMaker.MessageQueueing.dll" />
             </Component>
-            <Component Id="cmpE1FDB9B9DAC511A4D24A8705C2AC8B50" Guid="940502A7-26FA-447A-A42B-8FCA78F0066A">
+            <Component Id="cmpE1FDB9B9DAC511A4D24A8705C2AC8B50" Guid="5B1B6B4C-6782-4B0E-8FD0-0CF2197CC330">
                 <File Id="filACB18EFE44F8B9187B1D9B40839D24A5" KeyPath="yes" Source="SourceDir\ImageMaker.PatternProcessing.dll" />
             </Component>
-            <Component Id="cmp7F8A5AAE3040295E6601FEED9ACBEB25" Guid="CC6F309E-8F21-4416-884E-3CB0AD81A801">
+            <Component Id="cmp7F8A5AAE3040295E6601FEED9ACBEB25" Guid="837D50AE-C248-4F39-AB76-86FF4DE6394B">
                 <File Id="fil16C0B0E7D44090B2BB504E476A6333FD" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.exe" />
             </Component>
-            <Component Id="cmp6F2E99FEAA9E9BAE2ECE8EA08C0E5A1C" Guid="6A165E4C-6392-4F61-9C80-9248369BA50E">
+            <Component Id="cmp6F2E99FEAA9E9BAE2ECE8EA08C0E5A1C" Guid="CA619BFB-E8FA-4886-AA2A-DFB32F7E0099">
                 <File Id="fil6A5AD650CE024854C8E187B4220C8DAA" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.exe.config" />
             </Component>
-            <Component Id="cmp15F0A4E0052C2433C09A86891F5AFFF2" Guid="4A370132-155A-4F43-A662-37DDD9084886">
+            <Component Id="cmp15F0A4E0052C2433C09A86891F5AFFF2" Guid="B36AE266-49E6-45BE-9763-F8EA99F753EF">
                 <File Id="fil38DBC24977A60AF0DCDC095F1E825346" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.vshost.exe" />
             </Component>
-            <Component Id="cmp750CC5F16ABF87369D5D8784A286CA91" Guid="9C6B8D10-BEF0-4C10-B98A-50BB2CB4CB02">
+            <Component Id="cmp750CC5F16ABF87369D5D8784A286CA91" Guid="62420F61-8178-4FE2-9761-C612BBD5EA07">
                 <File Id="filEF9FF0E9BB39541B1440CADCDBD13B0E" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.vshost.exe.config" />
             </Component>
-            <Component Id="cmp3A7B83B2BB43AC9C3EBF075863389C03" Guid="C4246463-CD85-4E22-B97D-F5748AF7874F">
+            <Component Id="cmp3A7B83B2BB43AC9C3EBF075863389C03" Guid="085D5F9F-0625-4D38-9F81-46A99EBE051F">
                 <File Id="fil82D685CAB7AD21BC54793EB7A7F50B18" KeyPath="yes" Source="SourceDir\ImageMaker.SDKData.dll" />
             </Component>
-            <Component Id="cmpF561C4977B4B9F4D1FDF3C107F5F9F8B" Guid="46D59523-1920-4258-8DAC-71D4C85B788D">
+            <Component Id="cmpF561C4977B4B9F4D1FDF3C107F5F9F8B" Guid="620476C6-69E4-40D4-9743-ACCF039019B3">
                 <File Id="fil97A75FB3E9F37E8187C7C1156AC40E74" KeyPath="yes" Source="SourceDir\ImageMaker.Themes.dll" />
             </Component>
-            <Component Id="cmpCD53F9ECA6BD7CB7944BFC8B13A48F9D" Guid="BF31AC4F-C9DB-41B5-B7DD-AB64C9C4F6B5">
+            <Component Id="cmpCD53F9ECA6BD7CB7944BFC8B13A48F9D" Guid="D500EB06-68F3-4B1C-87DC-61125F2F3658">
                 <File Id="filA0BA33018FE5C0A3E076C4690418D64C" KeyPath="yes" Source="SourceDir\ImageMaker.Utils.dll" />
             </Component>
-            <Component Id="cmp42B66761D5A5B33004A88CE2B44D940E" Guid="287B916B-058F-4317-8017-AD79767A7788">
+            <Component Id="cmp42B66761D5A5B33004A88CE2B44D940E" Guid="4ED697F0-78F8-4694-AEA8-F8C170E8F0DA">
                 <File Id="fil03E3B7839662B2B7087DD419F1725BF0" KeyPath="yes" Source="SourceDir\ImageMaker.View.exe" />
             </Component>
-            <Component Id="cmp3A5AD75EC9A57ED660B7E5958B9CDEFF" Guid="74310F0B-5EFE-4331-A00F-5FB9AA8568CB">
+            <Component Id="cmp3A5AD75EC9A57ED660B7E5958B9CDEFF" Guid="E53F2E85-CA89-443B-B3F4-2AE82AB22C31">
                 <File Id="filCF2B017013F67024EAD14323E1185CBA" KeyPath="yes" Source="SourceDir\ImageMaker.View.exe.config" />
             </Component>
-            <Component Id="cmpD1E0C29A23ED6C4025FF32474C755E5A" Guid="91C88FFD-58E5-496D-AD72-F117AEBF8800">
+            <Component Id="cmpD1E0C29A23ED6C4025FF32474C755E5A" Guid="B3FEBFB7-D0D8-4E7E-AF97-8314AEC12D10">
                 <File Id="fil1F36C403CA5BB4765930750FC966D31E" KeyPath="yes" Source="SourceDir\ImageMaker.View.suo" />
             </Component>
-            <Component Id="cmp03CA6DF9F81B29E06B3877A4E62C127F" Guid="7A0300D8-7BBE-4E75-A1BD-78A8ABCCB8B6">
+            <Component Id="cmp03CA6DF9F81B29E06B3877A4E62C127F" Guid="DDBCF811-FF6B-4F68-910D-DC7E1A7D8857">
                 <File Id="fil193FF1F7B6101FF57B56055366E8912C" KeyPath="yes" Source="SourceDir\ImageMaker.View.vshost.exe" />
             </Component>
-            <Component Id="cmp056A4EC6C80398DE641A74256FF80944" Guid="01D8375C-6F5C-4730-BA1F-A1BEB00ABEB3">
+            <Component Id="cmp056A4EC6C80398DE641A74256FF80944" Guid="ED23E9F0-FCDF-4E7D-9217-05C65AEF6522">
                 <File Id="fil9F2AF8051D69F4084E798DD52ED38DED" KeyPath="yes" Source="SourceDir\ImageMaker.View.vshost.exe.config" />
             </Component>
-            <Component Id="cmpBAA55677611E6105421F2706649E9B11" Guid="E8656575-4D6A-4ACE-8FDF-A3112E4D8AF2">
+            <Component Id="cmpBAA55677611E6105421F2706649E9B11" Guid="0732BA20-0039-47F4-A18B-D1C2D3509ABF">
                 <File Id="filC1CB7B958DFB1388B20BF59AA36C19C3" KeyPath="yes" Source="SourceDir\ImageMaker.View.vshost.exe.manifest" />
             </Component>
-            <Component Id="cmp46485E87E965B488E8A50B6430798813" Guid="467C7CFD-6FEF-495B-B43D-D2E1244E4080">
+            <Component Id="cmp46485E87E965B488E8A50B6430798813" Guid="794BC952-6C6E-4645-9997-43F9C2E543B3">
                 <File Id="filB232353706482341B868EA1E06F6B2F8" KeyPath="yes" Source="SourceDir\ImageMaker.ViewModels.dll" />
             </Component>
-            <Component Id="cmp384BCB7BE89584BC802BD516E013EA18" Guid="687EDAA5-6446-4ABE-A58F-C15B2180F06E">
+            <Component Id="cmp384BCB7BE89584BC802BD516E013EA18" Guid="07F17C68-B734-4CE8-B9C6-6AD500E01049">
                 <File Id="fil76C455272A4229F8055A0D48A0DFDCA9" KeyPath="yes" Source="SourceDir\ImageMaker.WebBrowsing.dll" />
             </Component>
-            <Component Id="cmpB10EF4AE1EFD05A1ACF57D10AF500B2A" Guid="720BDD61-D963-451E-AB16-1CCD4F5BA981">
+            <Component Id="cmpB10EF4AE1EFD05A1ACF57D10AF500B2A" Guid="00A7AE3A-B1C4-426A-871E-4D9260F58690">
                 <File Id="filE87C6613B5F4F20CBC38D0922061B19A" KeyPath="yes" Source="SourceDir\InstagramImagePrinter.dll" />
             </Component>
-            <Component Id="cmpDE21CD7C0E0D1F188E3127A0F273B9A2" Guid="A7324DE4-C07D-4939-9450-6B629E9937A3">
+            <Component Id="cmpDE21CD7C0E0D1F188E3127A0F273B9A2" Guid="1B9C4610-2BBE-4F86-8A62-FA21E149FCBF">
                 <Class Id="{3CA2611C-F83B-3F7C-B26C-DEA377803521}" Context="InprocServer32" Description="Microsoft.Practices.ServiceLocation.ActivationException" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Microsoft.Practices.ServiceLocation.ActivationException" Description="Microsoft.Practices.ServiceLocation.ActivationException" />
                 </Class>
@@ -842,58 +845,58 @@
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="CodeBase" Value="file:///[#fil1412185555A5FB9CC36A0842DFD16192]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp879EF891041694F3C5F65B0F198D792E" Guid="440CEBCD-4D40-4314-A686-2302F03FB099">
+            <Component Id="cmp879EF891041694F3C5F65B0F198D792E" Guid="DED43995-3D05-4D32-9250-42FA9E718263">
                 <File Id="fil7AF86FEC5A40D9D7CD8014F96FE82C50" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.xml" />
             </Component>
-            <Component Id="cmp83DA3B24EAEE6114D4373E4D4F1DC552" Guid="DA6828B7-752F-419C-A02C-D790B5383F39">
+            <Component Id="cmp83DA3B24EAEE6114D4373E4D4F1DC552" Guid="F816FAA3-0E08-4C1D-B8C3-329C1C1D6C07">
                 <File Id="fil9CDB743566628445E34695E3CD219110" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.dll" />
             </Component>
-            <Component Id="cmp34CCBF05E6E8F01CC96A25C6032B134E" Guid="353A2B7F-420D-47AB-9DC1-B74AD0715D47">
+            <Component Id="cmp34CCBF05E6E8F01CC96A25C6032B134E" Guid="69E37156-053E-45D6-BFA3-AA11D34D9971">
                 <File Id="filBDE0B79A5F21254202AE93CF7C3E56FC" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.xml" />
             </Component>
-            <Component Id="cmpB00E63C839DFA4FFD4AC3C1D265067DC" Guid="F2484371-DD46-47C0-8CDE-3E44E8A1EB8E">
+            <Component Id="cmpB00E63C839DFA4FFD4AC3C1D265067DC" Guid="FC5B4578-2EE8-437E-A4A5-8B53FE12B7AF">
                 <File Id="fil0A370EC0325BF70C1D0BABF2D00E4463" KeyPath="yes" Source="SourceDir\Monads.dll" />
             </Component>
-            <Component Id="cmpB2AAFE727B686EBD6B96A6830CC78501" Guid="9D29F598-A38A-46BB-8F50-752B3CA877F0">
+            <Component Id="cmpB2AAFE727B686EBD6B96A6830CC78501" Guid="97B4E31C-FDA2-4999-B630-44424AC8B354">
                 <File Id="fil3032413F8B6D3B203B63051C75322D7F" KeyPath="yes" Source="SourceDir\Monads.xml" />
             </Component>
-            <Component Id="cmpB6749B9EE8073AED416A4BEE193678C7" Guid="CFD8D13A-6860-45EF-9EC3-C9AF2A8658B4">
+            <Component Id="cmpB6749B9EE8073AED416A4BEE193678C7" Guid="3D44315B-F95F-4A53-BCB6-DD29ADABE4FB">
                 <File Id="fil27CDCBC89F7D0F209432E5D6449B5F88" KeyPath="yes" Source="SourceDir\Newtonsoft.Json.dll" />
             </Component>
-            <Component Id="cmpB4515FD827B688B867CDF2379D6ED538" Guid="DD8690D5-BA45-49A9-A189-DEA9027A2DAD">
+            <Component Id="cmpB4515FD827B688B867CDF2379D6ED538" Guid="2469DCAB-6DD9-49CD-B0D1-C7988DC69DAB">
                 <File Id="filAA00973CC61A8E4FF37F2DBD5CE2931A" KeyPath="yes" Source="SourceDir\Newtonsoft.Json.xml" />
             </Component>
-            <Component Id="cmpF0F9CB9C99F6640C80B1B96E4C3631B7" Guid="30AA1CBC-A9AE-43AA-88E1-838C4C039AB0">
+            <Component Id="cmpF0F9CB9C99F6640C80B1B96E4C3631B7" Guid="05E9B7D3-36D0-476F-B0DB-27A36C63E681">
                 <File Id="fil743CDF3AB2B2F21AA21E4AAF5727B8F5" KeyPath="yes" Source="SourceDir\Ninject.dll" />
             </Component>
-            <Component Id="cmp6AA3127F4A348DD5156A75A49250CDC5" Guid="31189C2C-1047-46E1-8402-8CFA73C6D492">
+            <Component Id="cmp6AA3127F4A348DD5156A75A49250CDC5" Guid="F25C622F-2F06-4A28-92A9-694A84769CEB">
                 <File Id="filCE80836912D9DF4ED3F81015DCF027F1" KeyPath="yes" Source="SourceDir\Ninject.xml" />
             </Component>
-            <Component Id="cmp10B84D3DCBE010DCD871F3663B0BD0CF" Guid="DC497A64-F29E-4CE5-B92A-6C79684BC799">
+            <Component Id="cmp10B84D3DCBE010DCD871F3663B0BD0CF" Guid="67286916-8153-40E7-A1BC-EAD07241DE5B">
                 <File Id="fil712FEBCE51C4B0BF5E91DACF42C3B0DB" KeyPath="yes" Source="SourceDir\startService.bat" />
             </Component>
-            <Component Id="cmp84751FE786634351D32B652FCF91CC45" Guid="1A8ACFF6-F1C4-4326-A36F-DD37BAF94F9B">
+            <Component Id="cmp84751FE786634351D32B652FCF91CC45" Guid="D47D053F-8027-4AC9-8EEC-DBAA7B9E3143">
                 <File Id="filFB07C7A6E2D9D2540FE9C38B4E16F82A" KeyPath="yes" Source="SourceDir\startService_admin.lnk" />
             </Component>
-            <Component Id="cmp8D2D76E8D696D320680312095B7E2E66" Guid="98A97EF3-06BB-409F-A042-8DB5EA5787D2">
+            <Component Id="cmp8D2D76E8D696D320680312095B7E2E66" Guid="E89D6ECD-5FF0-40D0-B2F1-BB24AEC98440">
                 <File Id="filC1685F1EA69D194F170B0BF849664200" KeyPath="yes" Source="SourceDir\stopService.bat" />
             </Component>
-            <Component Id="cmp3FE4BBCCD005CE8EAE6F2D955C6F8716" Guid="8AE38314-B9D0-4D7E-B045-C7149281C654">
+            <Component Id="cmp3FE4BBCCD005CE8EAE6F2D955C6F8716" Guid="8232F208-1938-415A-A726-861D120B2814">
                 <File Id="filD3BFD405067BE9FCFBF0563BBA2CAD35" KeyPath="yes" Source="SourceDir\stopService_admin.lnk" />
             </Component>
-            <Component Id="cmp70712FCDCB52A2DDE03B743455D8F338" Guid="97665EBB-C09D-4D68-872A-2DCA667C9FE2">
+            <Component Id="cmp70712FCDCB52A2DDE03B743455D8F338" Guid="5F154345-1466-4B53-B00A-EF028A430E69">
                 <File Id="fil897463EAC14C1480B7849BF5F73D7D36" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Input.Toolkit.dll" />
             </Component>
-            <Component Id="cmpA2560771212EDE4A33849D702FE5AC77" Guid="E0C56964-BF6D-42B8-9873-B3E3D03CDFF6">
+            <Component Id="cmpA2560771212EDE4A33849D702FE5AC77" Guid="BA77C813-01C3-4F64-ACFE-B4027F64459D">
                 <File Id="filFAC5477CFE6EAC205BDDD26E1A71A299" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Layout.Toolkit.dll" />
             </Component>
-            <Component Id="cmpABAA94D9A211CBB7C230453A1104075F" Guid="A0AF48DC-4B42-4DEF-9BD5-B7BEFDF01AE8">
+            <Component Id="cmpABAA94D9A211CBB7C230453A1104075F" Guid="C711248B-F68C-4095-A396-7D1E3F1704F6">
                 <File Id="filDCD3E7EDA6FCF106B61CF15A165D109E" KeyPath="yes" Source="SourceDir\System.Windows.Interactivity.dll" />
             </Component>
-            <Component Id="cmp91AD46FA8235CCC0D256E177D68EC53E" Guid="D4EFC961-2C7E-49B2-91D1-CE407BD8B8DE">
+            <Component Id="cmp91AD46FA8235CCC0D256E177D68EC53E" Guid="794E7C21-F67D-49EA-98BB-9967DE3DC6FF">
                 <File Id="fil59DDA49C01E4C4CE31C89AEB87636176" KeyPath="yes" Source="SourceDir\WPFToolkit.dll" />
             </Component>
-            <Component Id="cmp91ECCAC9888CF52F6E6950C847E06DC6" Guid="6A1A69BC-AC0E-4C14-84D8-680F4E633147">
+            <Component Id="cmp91ECCAC9888CF52F6E6950C847E06DC6" Guid="D9FEEDD9-B042-473E-BFC6-4B3026D8612B">
                 <File Id="filABE27200655351687D519265383A0EA2" KeyPath="yes" Source="SourceDir\Xceed.Wpf.Toolkit.dll" />
             </Component>
         </DirectoryRef>
@@ -922,6 +925,7 @@
             <ComponentRef Id="cmp9D316BEA722349C2D791617048DBA934" />
             <ComponentRef Id="cmp0068428326F0A41F5452DC741F499685" />
             <ComponentRef Id="cmp19F45E434453B71F1ABA9CA701F89A5F" />
+            <ComponentRef Id="cmpDD68FCBADC54CA781FB4A4E62D09023A" />
             <ComponentRef Id="cmp500FF85F27619FD21E5B4A3354DA9024" />
             <ComponentRef Id="cmpD6F84051227B800E74CFEC17230ED075" />
             <ComponentRef Id="cmp8238B7DF4C2582409F193623C4A93840" />

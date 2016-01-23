@@ -15,16 +15,16 @@ namespace ImageMaker.AdminViewModels.ViewModels
                                             CheckFileExists = true,
                                             CheckPathExists = true,
                                             Multiselect = true,
-                                            Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg"
-                                        };
+                                            Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png"
+            };
 
             Func<string, bool> isValidFile = file =>
                                              {
                                                  string[] extensions =
                                                  {
+                                                     ".jpg",
                                                      ".png",
-                                                     ".jpeg",
-                                                     ".jpg"
+                                                     ".jpeg"
                                                  };
 
                                                  string ext = Path.GetExtension(file);

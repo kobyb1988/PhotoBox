@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Monads;
 using ImageMaker.Common.Dto;
 using ImageMaker.Common.Extensions;
 using ImageMaker.Common.Helpers;
@@ -57,7 +58,7 @@ namespace ImageMaker.CommonViewModels.Providers
 
         public virtual void SaveThemeSettings(ThemeSettingsDto settings)
         {
-            _user.Value.ThemeSettings = settings.Serialize();
+            _user.Value.ThemeSettings = settings.With(x=>x.Serialize());
             _userRepository.UpdateUser(_user.Value);
             _userRepository.Commit();
         }

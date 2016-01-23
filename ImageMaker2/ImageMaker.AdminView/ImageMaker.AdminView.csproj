@@ -197,6 +197,7 @@
     <Compile Include="Controls\WelcomeCtl.xaml.cs">
       <DependentUpon>WelcomeCtl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\TestBindingConverter.cs" />
     <Compile Include="CustomControls\UIntTextBox.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -261,9 +262,7 @@
       <Name>ImageMaker.Themes</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\blur.jpg" />
     <Resource Include="Resources\colors.png" />

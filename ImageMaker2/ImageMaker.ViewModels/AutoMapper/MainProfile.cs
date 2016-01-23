@@ -18,7 +18,7 @@ namespace ImageMaker.ViewModels.AutoMapper
             //    .ConvertUsing(x => new CompositionViewModel(x.Id, x.TemplateId, x.Name, FromTemplate(x.Template), FromImage(x.Background), FromImage(x.Overlay)));
 
             CreateMap<Template, TemplateViewModel>()
-                .ConvertUsing(x => new TemplateViewModel(x.Id, x.Name, FromTemplate(x), FromImage(x.Background), FromImage(x.Overlay)));
+                .ConvertUsing(x => new TemplateViewModel(x.Id, x.Name, FromTemplate(x), FromImage(x.Background), FromImage(x.Overlay),x.IsInstaPrinterTemplate));
 
             CreateMap<TemplateViewModel, Template>()
                 .ConvertUsing(FromTemplateViewModel);
@@ -36,7 +36,7 @@ namespace ImageMaker.ViewModels.AutoMapper
             //    .ReverseMap();
 
             CreateMap<InstagramMessageDto, InstagramImageViewModel>()
-                .ConvertUsing(x => new InstagramImageViewModel(x.Data, x.Width, x.Height, x.Name));
+                .ConvertUsing(x => new InstagramImageViewModel(x.Data, x.Width, x.Height, x.Name,x.FullName,x.ProfilePictureData,x.UrlAvatar ));
         }
 
         private IEnumerable<TemplateImageData> FromTemplate(Template template)

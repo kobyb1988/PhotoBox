@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -31,6 +32,18 @@ namespace ImageMaker.WebBrowsing
                         JObject jObject = JObject.FromObject(new { id = tokenData.SelectToken("id").Value<string>() });
                         JToken imageToken = tokenData.SelectToken("images").SelectToken("standard_resolution");
                         JObject imageObject = JObject.FromObject(imageToken);
+                        JToken userDataToken =JObject.FromObject(tokenData.SelectToken("user"));
+                        string fullName = userDataToken.SelectToken("full_name").Value<string>();
+                        JObject userObject=JObject.FromObject(new
+                        {
+                            fullname=string.IsNullOrEmpty(fullName) ? userDataToken.SelectToken("username").Value<string>() : fullName,
+                        });
+                        JObject profilepictureObject = JObject.FromObject(new {profilepictureobject= userDataToken.SelectToken("profile_picture").Value<string>() });
+                        JObject avatarData = JObject.FromObject(new
+                        {
+                            profilepicturedata = await client.DownloadDataTaskAsync(new Uri(userDataToken.SelectToken("profile_picture").Value<string>()))
+                        });
+
                         JObject dataObject = JObject.FromObject(new
                         {
                             data = await client.DownloadDataTaskAsync(new Uri(imageObject.SelectToken("url").Value<string>()))
@@ -38,13 +51,16 @@ namespace ImageMaker.WebBrowsing
 
                         jObject.Merge(imageObject);
                         jObject.Merge(dataObject);
+                        jObject.Merge(userObject);
+                        jObject.Merge(profilepictureObject);
+                        jObject.Merge(avatarData);
                         images.Add(jObject.ToObject<Image>());
                     }
 
                     imageResponse.Images = images;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Monads;
 using System.Threading;
@@ -21,8 +22,8 @@ namespace InstagramImagePrinter
         private readonly string _printerName;
 
         public MonitoringService(
-            SettingsProvider settingsProvider, 
-            MessageAdapter messageAdapter, 
+            SettingsProvider settingsProvider,
+            MessageAdapter messageAdapter,
             InstagramExplorer instagramExplorer)
         {
             _messageAdapter = messageAdapter;
@@ -61,7 +62,7 @@ namespace InstagramImagePrinter
                     ImageResponse result = string.IsNullOrEmpty(nextUrl)
                         ? await _instagramExplorer.GetImagesByHashTag(hashTag, null)
                         : await _instagramExplorer.GetImagesFromUrl(nextUrl);
-                    
+
                     nextUrl = result.Return(x => x.NextUrl, null);
 
                     await _messageAdapter.ProcessImages(result.Return(x => x.Images, Enumerable.Empty<Image>()), _printerName);

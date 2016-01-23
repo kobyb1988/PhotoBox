@@ -59,7 +59,13 @@ namespace ImageMaker.Themes.CustomControls
 
         // Using a DependencyProperty as the backing store for SearchText.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchTextProperty =
-            DependencyProperty.Register("SearchText", typeof(string), typeof(SearchBoxCtl), new PropertyMetadata(null));
+            DependencyProperty.Register("SearchText", typeof(string), typeof(SearchBoxCtl), new PropertyMetadata(SearchTextPropertyChanged));
+
+        private static void SearchTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            //var dataContext= ((SearchBoxCtl)d).DataContext as ISearch;
+            //dataContext.
+        }
 
         public ICommand SearchCommand
         {

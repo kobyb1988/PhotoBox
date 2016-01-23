@@ -24,5 +24,14 @@ namespace ImageMaker.WebBrowsing
 
         [JsonProperty("data")]
         public byte[] Data { get; set; }
+
+        [JsonProperty("fullname")]
+        public string FullName { get; set; }
+
+        [JsonProperty("profilepictureObject")]
+        public string UrlAvatar { get; set; }
+
+        [JsonProperty("profilepicturedata")]
+        public byte [] ProfilePictureData { get; set; }
     }
 }

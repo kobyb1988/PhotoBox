@@ -26,10 +26,11 @@ namespace ImageMaker.Entities
 
         public virtual FileData Overlay { get; set; }
 
-
         public int? BackgroundId { get; set; }
 
         public int? OverlayId { get; set; }
+
+        public bool IsInstaPrinterTemplate { get; set; }
 
         public ICollection<TemplateImage> Images { get; set; }
     }

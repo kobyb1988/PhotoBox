@@ -35,7 +35,7 @@ namespace InstagramImagePrinter
             {
                 InstagramMessageDto imageDto = _mappingEngine.Map<InstagramMessageDto>(image);
                 _imageService.SaveImage(new ImageViewModel(image.Data));
-                _imagePrinter.PrintAsync(imageDto.Data, printerName);
+                _imagePrinter.Print(imageDto.Data, printerName);
                 await _queueUtilizer.SendMessage(imageDto);
             }
         }

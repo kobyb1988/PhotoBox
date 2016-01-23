@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="ImageMaker.PatternProcessing.ProcessingViews.InstagramDefaultCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="1290" Height="1766" >
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="183"/>
+            <RowDefinition />
+            <!--<RowDefinition MaxHeight="183"/>-->
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF115587">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Visibility="Hidden">
+                <Ellipse Fill="White" Height="22" Width="22" Margin="2,0,2,0"/>
+                <Ellipse Fill="White" Height="22" Width="22" Margin="2,0,2,0"/>
+                <Ellipse Fill="White" Height="22" Width="22" Margin="2,0,2,0"/>
+                <Ellipse Stroke="White" Height="22" Width="22" Margin="2,0,2,0"/>
+                <Ellipse Stroke="White" Height="22" Width="22" Margin="2,0,2,0"/>
+                <TextBlock x:Name="PHONE" Foreground="White" FontSize="43" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"  TextAlignment="Left" TextWrapping="Wrap" Text="PHONE" />
+                <Path x:Name="wifi" Data="F1M25.95,26.057C29.096,26.057 31.975,27.362 34.212,29.242 34.212,29.242 25.95,38.491 25.95,38.491 25.95,38.491 17.699,29.233 17.699,29.233 19.934,27.357 22.809,26.057 25.95,26.057z M25.95,13.962C32.187,13.962 37.874,16.448 42.245,20.25 42.245,20.25 38.229,24.745 38.229,24.745 34.925,21.903 30.641,20.179 25.95,20.179 21.268,20.179 16.991,21.898 13.688,24.731 13.688,24.731 9.677,20.229 9.677,20.229 14.045,16.44 19.725,13.962 25.95,13.962z M25.95,1.699C35.236,1.699 43.693,5.682 50.168,11.381 50.168,11.381 46.374,15.629 46.374,15.629 40.907,10.838 33.776,7.916 25.95,7.916 18.137,7.916 11.018,10.826 5.554,15.603 5.554,15.603 1.766,11.351 1.766,11.351 8.234,5.671 16.681,1.699 25.95,1.699z" Fill="White" Height="40" Width="52"/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Height="117" Style="{DynamicResource InstagramLogoStyle}"  Width="410" Grid.Column="1" HorizontalAlignment="Center"/>
+                <Path Margin="0,0,30,0" Fill="White" Height="82" Width="93" HorizontalAlignment="Right" Grid.Column="2" Data="F1M21.457,7.955C19.711,7.955 18.176,8.328 17.082,12.917 17.082,12.917 7.91,43.715 7.91,43.715 7.91,43.715 31.289,43.844 31.289,43.844 31.105,44.812 31,45.809 31,46.831 31,55.628 38.16,62.755 46.996,62.755 55.836,62.755 63,55.628 63,46.831 63,45.869 62.898,44.932 62.734,44.018 62.734,44.018 86.074,44.147 86.074,44.147 86.074,44.147 76.949,13.067 76.949,13.067 75.41,8.352 73.98,7.955 72.535,7.955 72.535,7.955 21.457,7.955 21.457,7.955z M21.457,1.985C21.457,1.985 72.535,1.985 72.535,1.985 79.641,1.985 81.852,8.758 82.684,11.308 82.684,11.308 92,44.18 92,44.18 92,44.18 92,70.053 92,70.053 92,75.547 87.519,80.004 82,80.004 82,80.004 12,80.004 12,80.004 6.477,80.004 2,75.547 2,70.053 2,70.053 2,43.682 2,43.682 2,43.682 11.289,11.382 11.289,11.382 11.809,9.178 13.519,1.985 21.457,1.985z"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="120"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="-100,0,0,0">
+                <Image.Clip>
+                    <EllipseGeometry Center="75,75" RadiusX="70" RadiusY="70" />
+                </Image.Clip>
+            </Image>
+            <TextBlock x:Name="PublishAuthorTxt" Grid.Row="0" Grid.Column="1" Margin="-100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF0A5183" FontWeight="Bold" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
+                        TextAlignment="Left" TextWrapping="Wrap" Text="Alexey Palatkin"/>
+            <TextBlock x:Name="TimeUpdateTxt" Grid.Row="0" Grid.Column="2" Margin="0,0,30,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FFA3A3A3" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
+                        TextAlignment="Left" TextWrapping="Wrap" Text="3min"/>
+
+            <Image x:Name="BodyImage"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="1290" Width="1290"/>
+            <!--<Rectangle Fill="Black" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="1130" Width="1130"/>-->
+
+            <StackPanel Margin="30,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">
+                <Path Margin="0,10,15,0" Data="F1M24.012,37.997C12.609,34.461 1.601,21.107 1.997,14.297 2.389,7.486 7.105,2.253 13.791,1.989 20.473,1.726 24.012,6.703 24.012,6.703 24.012,6.703 27.552,1.726 34.232,1.989 40.916,2.253 45.631,7.486 46.027,14.297 46.42,21.107 35.412,34.461 24.012,37.997z" Fill="#FF095183"/>
+                <TextBlock x:Name="LikesTxt" Foreground="#FF0A5183" FontWeight="Bold" FontSize="50" FontFamily="Arial"  TextAlignment="Left" TextWrapping="Wrap" Text="Нравится"/>
+            </StackPanel>
+            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#F12938" FontWeight="Bold" FontSize="50" FontFamily="Arial" TextWrapping="Wrap" Text="www.selfy-box.ru"/>
+            <StackPanel Visibility="Hidden" Orientation="Horizontal" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
+                <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
+                <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
+            </StackPanel>
+
+
+        </Grid>
+        <Grid Grid.Row="2" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="#FF151719"  HorizontalAlignment="Stretch" Grid.Column="0">
+                <Path x:Name="icon" Data="F1M51.5,1.985C51.5,1.985 1.998,51.373 1.998,51.373 1.998,51.373 9.569,59.896 9.569,59.896 9.569,59.896 15.559,53.88 15.559,53.88 15.559,53.88 15.559,89.98 15.559,89.98 15.559,89.98 38.938,89.98 38.938,89.98 38.938,89.98 38.938,65.997 38.938,65.997 38.938,59.03 44.562,53.38 51.498,53.38 58.433,53.38 64.059,59.03 64.059,65.997 64.059,65.997 64.059,89.98 64.059,89.98 64.059,89.98 87.44,89.98 87.44,89.98 87.44,89.98 87.44,53.88 87.44,53.88 87.44,53.88 93.43,59.896 93.43,59.896 93.43,59.896 101.001,51.373 101.001,51.373 101.001,51.373 51.5,1.985 51.5,1.985z" Fill="White" Height="91" Width="103"/>
+            </Grid>
+            <Grid Background="#FF151719"  HorizontalAlignment="Stretch" Grid.Column="1">
+                <Path x:Name="icon1" Data="F1M43.613,13.767C27.095,13.767 13.706,27.227 13.706,43.83 13.706,60.434 27.095,73.894 43.613,73.894 60.13,73.894 73.52,60.434 73.52,43.83 73.52,27.227 60.13,13.767 43.613,13.767z M43.613,1.992C66.599,1.992 85.234,20.724 85.234,43.83 85.234,53.719 81.801,62.791 76.095,69.952 76.095,69.952 95.998,88.447 95.998,88.447 95.998,88.447 87.174,97.988 87.174,97.988 87.174,97.988 66.487,78.765 66.487,78.765 59.921,83.118 52.067,85.668 43.613,85.668 20.626,85.668 1.992,66.937 1.992,43.83 1.992,20.724 20.626,1.992 43.613,1.992z" Fill="White" Height="99" Opacity="0.502" Width="97"/>
+            </Grid>
+            <Grid Background="#FF151719"  HorizontalAlignment="Stretch" Grid.Column="2">
+                <Path x:Name="icon2" Data="F1M53,28.75C66.391,28.75 77.25,39.607 77.25,53 77.25,66.393 66.391,77.25 53,77.25 39.605,77.25 28.75,66.393 28.75,53 28.75,39.607 39.605,28.75 53,28.75z M53,16C32.559,16 16,32.561 16,53 16,73.439 32.559,90 53,90 73.438,90 90,73.439 90,53 90,32.561 73.438,16 53,16z M11,1C11,1 95,1 95,1 100.52,1 105,5.477 105,11 105,11 105,95 105,95 105,100.523 100.52,105 95,105 95,105 11,105 11,105 5.477,105 1,100.523 1,95 1,95 1,11 1,11 1,5.477 5.477,1 11,1z" Fill="White" Height="106" Width="106"/>
+            </Grid>
+            <Grid Background="#FF151719"  HorizontalAlignment="Stretch" Grid.Column="3">
+                <Path x:Name="icon3" Data="F1M37.949,28.978C37.505,28.978 37.057,29.007 36.606,29.069 27.727,29.738 24.601,40.774 24.601,40.774 24.601,40.774 21.6,52.48 29.603,60.172 29.603,60.172 49.945,76.895 49.945,76.895 49.945,76.895 70.286,60.172 70.286,60.172 78.289,52.48 75.288,40.774 75.288,40.774 75.288,40.774 72.162,29.738 63.283,29.069 62.832,29.006 62.384,28.978 61.94,28.978 55.491,28.978 49.945,35.089 49.945,35.089 49.945,35.089 44.399,28.978 37.949,28.978z M49.854,1.978C76.835,1.978 98.707,23.915 98.707,50.975 98.707,58.856 96.841,66.295 93.545,72.891 93.545,72.891 101,96.962 101,96.962 101,96.962 77.018,91.7 77.018,91.7 69.25,96.922 59.908,99.972 49.854,99.972 22.873,99.972 1,78.035 1,50.975 1,23.915 22.873,1.978 49.854,1.978z" Fill="White" Height="101" Opacity="0.502" Width="102"/>
+            </Grid>
+            <Grid Background="#FF151719"  HorizontalAlignment="Stretch" Grid.Column="4">
+                <Path x:Name="icon4" Data="F1M43.418,59.896C68.421,59.896 77.482,68.178 85.99,76.677 85.99,76.677 86,94.997 86,94.997 86,94.997 2,94.997 2,94.997 2,94.997 2,76.677 2,76.677 2,76.677 2.009,76.677 2.009,76.677 9.816,68.879 18.414,59.896 43.418,59.896z M44,1.994C54.143,1.994 62.366,9.879 62.366,19.606 62.366,39.876 54.143,51.174 44,51.174 33.856,51.174 25.634,38.879 25.634,19.606 25.634,9.879 33.856,1.994 44,1.994z" Fill="White" Height="96" Opacity="0.502" Width="88"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -80,18 +80,34 @@ namespace ImageMaker.Themes.CustomControls
         //    pager.CalculatePages();
         //}
 
-        
+
         public int PageSize
         {
             get { return (int)GetValue(PageSizeProperty); }
             set { SetValue(PageSizeProperty, value); }
-        }   
+        }
 
         // Using a DependencyProperty as the backing store for PageSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register("PageSize", typeof(int), typeof(DataPagerCtl), new PropertyMetadata(0));
 
+        public static readonly DependencyProperty ExtendedNextCommandProperty =
+            DependencyProperty.Register("ExtendedNextCommand", typeof(ICommand), typeof(DataPagerCtl), new PropertyMetadata(default(ICommand)));
 
+        public static readonly DependencyProperty ExtendedNextCommandParamsProperty = DependencyProperty.Register(
+            "ExtendedNextCommandParams", typeof (string), typeof (DataPagerCtl), new PropertyMetadata(default(string)));
+
+        public string ExtendedNextCommandParams
+        {
+            get { return (string) GetValue(ExtendedNextCommandParamsProperty); }
+            set { SetValue(ExtendedNextCommandParamsProperty, value); }
+        }
+
+        public ICommand ExtendedNextCommand
+        {
+            get { return (ICommand)GetValue(ExtendedNextCommandProperty); }
+            set { SetValue(ExtendedNextCommandProperty, value); }
+        }
 
         public int PagesInRow
         {
@@ -114,7 +130,7 @@ namespace ImageMaker.Themes.CustomControls
         public static readonly DependencyProperty PagesViewProperty =
             DependencyProperty.Register("PagesView", typeof(ListCollectionView), typeof(DataPagerCtl), new PropertyMetadata(null));
 
-        
+
         public IList<PageItemWrapper> Pages
         {
             get { return (IList<PageItemWrapper>)GetValue(PagesProperty); }
@@ -125,7 +141,7 @@ namespace ImageMaker.Themes.CustomControls
         public static readonly DependencyProperty PagesProperty =
             DependencyProperty.Register("Pages", typeof(IList<PageItemWrapper>), typeof(DataPagerCtl), new PropertyMetadata(null));
 
-        
+
         public int PageIndex
         {
             get { return (int)GetValue(PageIndexProperty); }
@@ -155,7 +171,8 @@ namespace ImageMaker.Themes.CustomControls
         {
             get
             {
-                return _moveNextCommand ?? (_moveNextCommand = new RelayCommand(MoveNext, () => Pages != null && PageIndex < Pages.Count - 1)); 
+                return _moveNextCommand ?? (_moveNextCommand = new RelayCommand(MoveNext, () => Pages != null &&
+                (ExtendedNextCommand != null && ExtendedNextCommand.CanExecute(ExtendedNextCommandParams))));
             }
         }
 
@@ -232,7 +249,7 @@ namespace ImageMaker.Themes.CustomControls
                                     int index = Pages.IndexOf(wrapper);
                                     if (index == Pages.Count - 1
                                         || index == 0
-                                        || (Pages.Count - 2)/2 < PagesInRow)
+                                        || (Pages.Count - 2) / 2 < PagesInRow)
                                     {
                                         wrapper.Update(false);
                                         return true;
@@ -274,7 +291,7 @@ namespace ImageMaker.Themes.CustomControls
                                         return true;
                                     }
 
-                                    if ((pageIndexGroupIdx + 1)*PagesInRow + 1 - PagesInRow == index)
+                                    if ((pageIndexGroupIdx + 1) * PagesInRow + 1 - PagesInRow == index)
                                     {
                                         wrapper.Update(true);
                                         return true;
@@ -304,11 +321,17 @@ namespace ImageMaker.Themes.CustomControls
         {
             if (Pages.Count <= 0)
                 return;
+           
 
             if (PageIndex >= 0)
                 Pages.ElementAt(PageIndex).IsSelected = false;
 
             PageIndex = pageIndex;
+            if (Pages.Count == PageIndex)
+            {
+                ExtendedNextCommand.Execute(ExtendedNextCommandParams);
+                return;
+            }
             if (PageIndex >= 0)
                 Pages.ElementAt(PageIndex).IsSelected = true;
 
@@ -407,7 +430,7 @@ namespace ImageMaker.Themes.CustomControls
             {
                 if (_content == value)
                     return;
-                
+
                 _content = value;
                 OnPropertyChanged();
             }

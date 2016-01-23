@@ -163,11 +163,20 @@ namespace ImageMaker.Data.Repositories
 
         public async Task<IEnumerable<Template>> GetTemplatesAsync()
         {
-            return await QueryAll<Template>()
+            try
+            {
+                return await QueryAll<Template>()
                 .Include(x => x.Images)
                 .Include(x => x.Overlay)
                 .Include(x => x.Background)
                 .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+            
         }
 
         public IEnumerable<Composition> GetCompositions()
@@ -204,6 +213,7 @@ namespace ImageMaker.Data.Repositories
             {
                 pair.Old.Height = pair.New.Height;
                 pair.Old.Width = pair.New.Width;
+                pair.Old.IsInstaPrinterTemplate = pair.New.IsInstaPrinterTemplate;
 
                 if (pair.Old.BackgroundId != pair.New.BackgroundId)
                     pair.Old.Background = pair.New.Background;

@@ -11,7 +11,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         private ItemState _state;
 
         public CheckableTemplateViewModel(TemplateViewModel viewModel)
-            : base(viewModel.Name, viewModel.Width, viewModel.Height, viewModel.Id, viewModel.Children, viewModel.Background, viewModel.Overlay)
+            : base(viewModel.Name, viewModel.Width, viewModel.Height, viewModel.Id, viewModel.Children, viewModel.Background, viewModel.Overlay,viewModel.IsInstaPrinterTemplate)
         {
         }
 
@@ -28,8 +28,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             int id, 
             IEnumerable<TemplateImageViewModel> children, 
             ImageViewModel background, 
-            ImageViewModel overlay)
-            : base(name, width, height, id, children, background, overlay)
+            ImageViewModel overlay,bool isInstaPrinterTemplate)
+            : base(name, width, height, id, children, background, overlay, isInstaPrinterTemplate)
         {
             State = ItemState.Added;
         }
@@ -56,7 +56,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public CheckableTemplateViewModel Copy()
         {
-            var copy = new TemplateViewModel(Name, Width, Height, Id, Children, Background, Overlay).ToCheckable(State);
+            var copy = new TemplateViewModel(Name, Width, Height, Id, Children, Background, Overlay,IsInstaPrinterTemplate).ToCheckable(State);
             copy.IsDefaultBackground = IsDefaultBackground;
             return copy;
         }
@@ -83,5 +83,6 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         }
 
         public bool IsDefaultBackground { get; set; }
+      
     }
 }

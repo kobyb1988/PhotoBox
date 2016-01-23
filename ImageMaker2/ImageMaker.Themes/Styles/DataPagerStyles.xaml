@@ -21,7 +21,7 @@
                                 <ColumnDefinition Width="0.15*"/>
                             </Grid.ColumnDefinitions>
                             <Button Content="ПРЕД" 
-                                    Margin="5"
+                                    Margin="5" FontSize="18" 
                                     Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MovePreviousCommand}">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
@@ -87,7 +87,7 @@
                                     <DataTemplate DataType="{x:Type local:PageItemWrapper}">
                                         <Button
                                             x:Name="bt"
-                                            Content="{Binding Path=Content}"
+                                            Content="{Binding Path=Content}" FontSize="18"
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:DataPagerCtl}}, Path=MoveToCommand}" 
                                                 CommandParameter="{Binding Path=Index}">
                                             <Button.Style>
@@ -105,7 +105,6 @@
                                                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                                                                     </Grid>
-
                                                                 </Border>
                                                             </ControlTemplate>
                                                         </Setter.Value>
@@ -123,7 +122,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <Button Grid.Column="2" Content="СЛЕД" 
-                                    Margin="5"
+                                    Margin="5" FontSize="18"
                                     Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MoveNextCommand}">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">

@@ -22,8 +22,6 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
             IResizable resizable = this.AssociatedObject.DataContext as IResizable;
             if (resizable == null)
                 return;
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
 
             double deltaX = 0;
             double deltaY = 0;

@@ -55,6 +55,8 @@ namespace ImageMaker.ViewModels.Ninject
             Bind<SelectActivityViewModelFactory>().ToSelf();
             Bind<ImportPatternsViewModelFactory>().ToSelf();
             Bind<InstagramExplorerViewModelFactory>().ToSelf();
+            Bind<ImageUtils>().ToSelf();
+
 
             Bind<IViewModelNavigator>().To<ViewModelNavigator>()
                 .WithConstructorArgument(typeof(IChildrenViewModelsFactory),

@@ -14,7 +14,7 @@ namespace ImageMaker.DataContext.Migrations
     {
         public ImageContextConfiguration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ImageContext context)

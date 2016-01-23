@@ -10,6 +10,8 @@
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
+             xmlns:converters="clr-namespace:ImageMaker.View.Converters"
+             xmlns:helpers="clr-namespace:ImageMaker.View.Helpers"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:InstagramExplorerViewModel}"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -40,7 +42,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.18*" />
                 </Grid.RowDefinitions>
-                <Border 
+                <Border x:Name="SearchTollBar"
                     Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
                     CornerRadius="40" Padding="5" Margin="5">
                     <Grid>
@@ -83,7 +85,7 @@
                                 </customControls:CustomRadioButton>
                                 <TextBlock IsHitTestVisible="False" Foreground="#ffffff" VerticalAlignment="Center" 
                                            HorizontalAlignment="Center" Text="a" FontSize="50" Margin="0,-15,0,0"/>
-                                <TextBlock Text="аккаунт" Grid.Row="1" HorizontalAlignment="Center"/>
+                                <TextBlock Text="аккаунт" Grid.Row="1" HorizontalAlignment="Center" FontSize="18"/>
                             </Grid>
                             <Grid Margin="5,0,0,0">
                                 <Grid.RowDefinitions>
@@ -105,10 +107,12 @@
                                 </customControls:CustomRadioButton>
                                 <TextBlock IsHitTestVisible="False" Foreground="#ffffff" VerticalAlignment="Center" 
                                            HorizontalAlignment="Center" Text="#" FontSize="50"/>
-                                <TextBlock Text="хэштег" Grid.Row="1" HorizontalAlignment="Center"/>
+                                <TextBlock Text="хэштег" Grid.Row="1" HorizontalAlignment="Center" FontSize="18"/>
                             </Grid>
                         </StackPanel>
-                        <customControls:SearchBoxCtl Grid.Column="2" Margin="5,5,15,5" 
+                        <helpers:Proxy In="{Binding ElementName=SearchBoxCtl,Path=SearchText,UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"
+                                       Out="{Binding TextSearch,UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"/>
+                        <customControls:SearchBoxCtl x:Name="SearchBoxCtl" Grid.Column="2" Margin="5,6,15,4"
                                                      SearchCommand="{Binding Path=SearchCommand}">
                             <customControls:SearchBoxCtl.Style>
                                 <Style TargetType="{x:Type customControls:SearchBoxCtl}" BasedOn="{StaticResource SearchBoxStyle}">
@@ -279,7 +283,9 @@
                                                Content="Назад" 
                                                ShowBackButton="True" 
                                                CornerAlign="BottomLeft,TopLeft"/>
-                        <customControls:DataPagerCtl Grid.Column="1" 
+                        <customControls:DataPagerCtl Grid.Column="1" ExtendedNextCommand="{Binding SearchCommand}" 
+                                                     ExtendedNextCommandParams="{Binding TextSearch,
+                            UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"
                                                      ItemsView="{Binding Source={StaticResource Source}}" 
                                                      PageSize="15"
                                          PagesInRow="3"

@@ -2,42 +2,60 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Monads;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using AutoMapper;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
+using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.Utils.Services;
+using ImageMaker.ViewModels.Abstract;
+using ImageMaker.ViewModels.Providers;
 using ImageMaker.ViewModels.ViewModels.Images;
 using ImageMaker.WebBrowsing;
+using EntityTemplate = ImageMaker.Entities.Template;
+using Image = System.Drawing.Image;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
-    public class InstagramExplorerViewModel : BaseViewModel
+    public class InstagramExplorerViewModel : BaseViewModel,ISearch
     {
         private readonly IViewModelNavigator _navigator;
         private readonly ImagePrinter _printer;
+        private readonly PatternViewModelProvider _patternVmProvider;
+        private readonly ImageUtils _imageUtils;
+        private readonly IMappingEngine _mappingEngine;
         private readonly InstagramExplorer _instagramExplorer;
         private readonly string _printerName;
 
         public InstagramExplorerViewModel(
-            IViewModelNavigator navigator, 
+            IViewModelNavigator navigator,
             InstagramExplorer instagramExplorer,
             SettingsProvider settings,
-            ImagePrinter printer)
+            ImagePrinter printer, PatternViewModelProvider patternVMProvider,
+            ImageUtils imageUtils, IMappingEngine mappingEngine)
         {
             _navigator = navigator;
             _printer = printer;
+            _patternVmProvider = patternVMProvider;
+            _imageUtils = imageUtils;
+            _mappingEngine = mappingEngine;
             _instagramExplorer = instagramExplorer;
             AppSettingsDto appSettings = settings.GetAppSettings();
             if (appSettings != null)
                 _printerName = appSettings.PrinterName;
 
             IsHashTag = true;
+
         }
 
         public bool IsHashTag
@@ -80,8 +98,11 @@ namespace ImageMaker.ViewModels.ViewModels
             get { return _printCommand ?? (_printCommand = new RelayCommand(Print, () => _checkedImages.IsValueCreated && _checkedImages.Value.Count > 0)); }
         }
 
-        private void Print()
+        private async void Print()
         {
+            var result = await _patternVmProvider.GetPatternsAsync();
+
+            TemplateViewModel instaTemplate = result.SingleOrDefault(x => x.IsInstaPrinterTemplate);
             Action<byte[]> print = null;
             if (!string.IsNullOrEmpty(_printerName))
                 print = (data) => _printer.Print(data, _printerName);
@@ -92,10 +113,27 @@ namespace ImageMaker.ViewModels.ViewModels
 
             foreach (var image in _checkedImages.Value)
             {
-                print(image.Data);
+                byte[] imageData = new byte[] { };
+                Size imageStreamSize;
+
+                using (var stream = new MemoryStream(image.Data))
+                {
+                    var img = Image.FromStream(stream);
+                    imageStreamSize = img.Size;
+                }
+
+                if (instaTemplate != null)
+                    imageData = _imageUtils.ProcessImages(new List<byte[]> { image.Data }, imageStreamSize,
+                        _mappingEngine.Map<EntityTemplate>(instaTemplate));
+
+                else
+                {
+                    imageData = _imageUtils.GetCaptureForInstagramControl(image.Data,image.FullName,DateTime.Now,image.ProfilePictureData);
+                }
+                print(imageData);
             }
         }
-
+      
         public ObservableCollection<InstagramImageViewModel> Images
         {
             get { return _images ?? (_images = new ObservableCollection<InstagramImageViewModel>()); }
@@ -126,7 +164,7 @@ namespace ImageMaker.ViewModels.ViewModels
             {
                 if (_isBusy == value)
                     return;
-
+                
                 Set(() => IsBusy, ref _isBusy, value);
                 UpdateCommands();
             }
@@ -168,7 +206,7 @@ namespace ImageMaker.ViewModels.ViewModels
             }
 
             _previousSearch = text;
-            
+
             IsBusy = true;
             SearchCommand.RaiseCanExecuteChanged();
             Task<ImageResponse> task = IsHashTag
@@ -184,10 +222,10 @@ namespace ImageMaker.ViewModels.ViewModels
                                   // _images.Clear();
                                   _nextUrl = task.Result.Return(x => x.NextUrl, null);
 
-                                  foreach (var image in task.Result.Return(x => x.Images, Enumerable.Empty<Image>()))
+                                  foreach (var image in task.Result.Return(x => x.Images, Enumerable.Empty<WebBrowsing.Image>()))
                                   {
                                       InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data,
-                                          image.Width, image.Height, image.Url);
+                                          image.Width, image.Height, image.Url,image.FullName, image.ProfilePictureData,image.UrlAvatar);
                                       _images.Add(viewModel);
                                   }
 
@@ -205,6 +243,21 @@ namespace ImageMaker.ViewModels.ViewModels
         private void GoBack()
         {
             _navigator.NavigateBack(this);
+        }
+
+        private string _textSearch;
+
+        public string TextSearch
+        {
+            get
+            {
+                return _textSearch;
+            }
+            set
+            {
+                _textSearch = value;
+                RaisePropertyChanged();
+            }
         }
     }
 }

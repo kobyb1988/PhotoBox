@@ -59,7 +59,7 @@ namespace ImageMaker.AdminViewModels.AutoMapper
                 template.Images.Select(c =>
                     new TemplateImageViewModel( c.X, c.Y,  c.Width, c.Height, c.Id, template.Width, template.Height)), 
                     template.Background.With(FromImage), 
-                    template.Overlay.With(FromImage));
+                    template.Overlay.With(FromImage),template.IsInstaPrinterTemplate);
         }
 
         private ImageViewModel FromImage(FileData image)
@@ -131,6 +131,7 @@ namespace ImageMaker.AdminViewModels.AutoMapper
                 //BackgroundId = background.Return(x => x.Id, (int?)null),
                 Overlay = overlay,
                 //OverlayId = overlay.Return(x => x.Id, (int?)null),
+                IsInstaPrinterTemplate = template.IsInstaPrinterTemplate
             };
         }
 

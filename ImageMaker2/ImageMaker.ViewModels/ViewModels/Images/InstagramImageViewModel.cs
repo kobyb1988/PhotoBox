@@ -11,12 +11,15 @@ namespace ImageMaker.ViewModels.ViewModels.Images
     {
         private bool _isChecked;
 
-        public InstagramImageViewModel(byte[] data, int width, int height, string name)
+        public InstagramImageViewModel(byte[] data, int width, int height, string name, string fullName, byte[] profilePictureData, string urlAvatar)
         {
             Name = name;
             Height = height;
             Width = width;
             Data = data;
+            FullName = fullName;
+            ProfilePictureData = profilePictureData;
+            UrlAvatar = urlAvatar;
         }
 
         public byte[] Data { get; private set; }
@@ -27,13 +30,19 @@ namespace ImageMaker.ViewModels.ViewModels.Images
 
         public string Name { get; private set; }
 
+        public string FullName { get; set; }
+
+        public string UrlAvatar { get; set; }
+
+        public byte[] ProfilePictureData { get; set; }
+
         public bool IsChecked
         {
             get { return _isChecked; }
             set
             {
                 if (_isChecked == value) return;
-                
+
                 _isChecked = value;
                 RaisePropertyChanged();
             }

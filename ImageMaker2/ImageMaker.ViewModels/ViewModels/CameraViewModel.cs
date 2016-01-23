@@ -62,8 +62,6 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public override void Initialize()
         {
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
             _imageProcessor.TimerElapsed += ImageProcessorOnTimerElapsed;
             _imageProcessor.CameraErrorEvent += ImageProcessorOnCameraErrorEvent;
             _imageProcessor.ImageChanged += ImageProcessorOnStreamChanged;
@@ -150,8 +148,6 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void TakePicture()
         {
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
             TakingPicture = true;
             UpdateCommands();
             //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
@@ -188,8 +184,6 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void OpenSession()
         {
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
             bool result = _imageProcessor.OpenSession();
             if (!result)
             {

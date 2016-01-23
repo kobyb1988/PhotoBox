@@ -74,7 +74,7 @@
                                 <ColumnDefinition  Width="0.8*"/>
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBox Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SearchText}" 
+                            <TextBox Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SearchText,UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}" 
                                      x:Name="tb"
                                      Foreground="{TemplateBinding Foreground}"
                                      Tag="{TemplateBinding Tag}"

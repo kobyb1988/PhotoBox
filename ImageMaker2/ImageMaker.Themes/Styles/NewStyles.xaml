@@ -17,6 +17,7 @@
         <ResourceDictionary Source="SearchBoxStyles.xaml" />
         <ResourceDictionary Source="UpDownStyles.xaml" />
         <ResourceDictionary Source="DateTimePickerStyles.xaml" />
+        <ResourceDictionary Source="ImageStyles.xaml"/>
         <ResourceDictionary Source="SliderStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
     

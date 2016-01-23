@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using AutoMapper;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
@@ -152,22 +153,30 @@ namespace ImageMaker.ViewModels.ViewModels.Factories
         private readonly InstagramExplorer _instagramExplorer;
         private readonly SettingsProvider _settings;
         private readonly ImagePrinter _printer;
+        private readonly PatternViewModelProvider _patternVmProvider;
+        private readonly ImageUtils _imageUtils;
+        private readonly IMappingEngine _mappingEngine;
 
         public InstagramExplorerViewModelFactory(
             IViewModelNavigator navigator, 
             InstagramExplorer instagramExplorer,
             SettingsProvider settings,
-            ImagePrinter printer)
+            ImagePrinter printer, PatternViewModelProvider patternVMProvider,
+            ImageUtils imageUtils,IMappingEngine mappingEngine)
         {
             _navigator = navigator;
             _instagramExplorer = instagramExplorer;
             _settings = settings;
             _printer = printer;
+            _patternVmProvider = patternVMProvider;
+            _imageUtils = imageUtils;
+            _mappingEngine = mappingEngine;
         }
 
         protected override InstagramExplorerViewModel GetViewModel(object param)
         {
-            return new InstagramExplorerViewModel(_navigator, _instagramExplorer, _settings, _printer);
+            return new InstagramExplorerViewModel(_navigator, _instagramExplorer, _settings,
+                _printer, _patternVmProvider,_imageUtils,_mappingEngine);
         }
     }
 

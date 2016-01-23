@@ -50,9 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ImageDto.cs" />
+    <Compile Include="Extensions\ByteArrExtensions.cs" />
     <Compile Include="ImageProcessingResult.cs" />
     <Compile Include="ImageProcessors\CompositionModelProcessor.cs" />
     <Compile Include="ImageProcessors\CompositionModelProcessorFactory.cs" />
+    <Compile Include="ImageProcessors\ImageUtils.cs" />
+    <Compile Include="ProcessingViews\InstagramDefaultCtrl.xaml.cs">
+      <DependentUpon>InstagramDefaultCtrl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimerData.cs" />
   </ItemGroup>
@@ -84,6 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ProcessingViews\InstagramDefaultCtrl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

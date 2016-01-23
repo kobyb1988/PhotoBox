@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Reflection;
-using System.Windows;
+using System.Diagnostics;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Resources;
 using AutoMapper;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.Common.Dto;
@@ -14,7 +9,6 @@ using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using Color = System.Windows.Media.Color;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -33,7 +27,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private Color _otherWindowsForegroundColor;
         private Color _otherWindowsBorderColor;
 
+        private bool _isBackToDefaultTheme;
         private ImageViewModel _mainWindowImage;
+        private RelayCommand _backToDefaultThemeCommand;
         private RelayCommand _goBackCommand;
         private RelayCommand<ColorType> _pickColorCommand;
         private RelayCommand _selectImageCommand;
@@ -44,7 +40,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand _selectBackgroundImageCommand;
 
         public ThemeManagerViewModel(
-            IViewModelNavigator navigator, 
+            IViewModelNavigator navigator,
             IDialogService dialogService,
             SettingsProvider settingsProvider,
             IMappingEngine mappingEngine,
@@ -62,13 +58,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             ThemeSettingsDto settings = _settingsProvider.GetThemeSettings();
             if (settings == null)
             {
-                MainWindowBackgroundColor = Colors.Orange;
-                MainWindowBorderColor = Colors.Orange;
-                MainWindowForegroundColor = Colors.White;
-
-                OtherWindowsBackgroundColor = Colors.Orange;
-                OtherWindowsBorderColor = Colors.Orange;
-                OtherWindowsForegroundColor = Colors.White;
+                BackToDefaultTheme();
                 return;
             }
 
@@ -87,15 +77,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
             OtherWindowsForegroundColor = settings.OtherForegroundColor;
         }
 
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
-        }
 
-        public RelayCommand SelectBackgroundImageCommand
-        {
-            get { return _selectBackgroundImageCommand ?? (_selectBackgroundImageCommand = new RelayCommand(SelectBackgroundImage)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
+
+        public RelayCommand SelectBackgroundImageCommand => _selectBackgroundImageCommand ?? (_selectBackgroundImageCommand = new RelayCommand(SelectBackgroundImage));
 
         private void SelectBackgroundImage()
         {
@@ -103,15 +88,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
             BackgroundImage = viewModel;
         }
 
-        public RelayCommand SelectImageCommand
-        {
-            get { return _selectImageCommand ?? (_selectImageCommand = new RelayCommand(SelectImage)); }
-        }
+        public RelayCommand SelectImageCommand => _selectImageCommand ?? (_selectImageCommand = new RelayCommand(SelectImage));
 
-        public RelayCommand SelectOtherWindowsImageCommand
-        {
-            get { return _selectOtherWindowsImageCommand ?? (_selectOtherWindowsImageCommand = new RelayCommand(SelectOtherWindowsImage)); }
-        }
+        public RelayCommand SelectOtherWindowsImageCommand => _selectOtherWindowsImageCommand ?? (_selectOtherWindowsImageCommand = new RelayCommand(SelectOtherWindowsImage));
 
         private void SelectOtherWindowsImage()
         {
@@ -119,14 +98,18 @@ namespace ImageMaker.AdminViewModels.ViewModels
             OtherWindowsImage = viewModel;
         }
 
-        public RelayCommand SaveSettingsCommand
-        {
-            get { return _saveSettingsCommand ?? (_saveSettingsCommand = new RelayCommand(SaveSettings)); }
-        }
+        public RelayCommand SaveSettingsCommand => _saveSettingsCommand ?? (_saveSettingsCommand = new RelayCommand(SaveSettings));
 
         private void SaveSettings()
         {
-            _settingsProvider.SaveThemeSettings(_mappingEngine.Map<ThemeSettingsDto>(this));
+            if (IsBackToDefaultTheme)
+            {
+                BackToDefaultTheme();
+                _settingsProvider.SaveThemeSettings(null);
+            }
+            else
+                _settingsProvider.SaveThemeSettings(_mappingEngine.Map<ThemeSettingsDto>(this));
+
         }
 
         private void SelectImage()
@@ -135,10 +118,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             MainWindowImage = viewModel;
         }
 
-        public RelayCommand<ColorType> PickColorCommand
-        {
-            get { return _pickColorCommand ?? (_pickColorCommand = new RelayCommand<ColorType>(PickColor)); }
-        }
+        public RelayCommand<ColorType> PickColorCommand => _pickColorCommand ?? (_pickColorCommand = new RelayCommand<ColorType>(PickColor));
 
         private void PickColor(ColorType colorType)
         {
@@ -186,6 +166,27 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void GoBack()
         {
             _navigator.NavigateBack(this);
+        }
+
+        private void BackToDefaultTheme()
+        {
+            MainWindowBackgroundColor = Colors.Orange;
+            MainWindowBorderColor = Colors.Orange;
+            MainWindowForegroundColor = Colors.White;
+
+            OtherWindowsBackgroundColor = Colors.Orange;
+            OtherWindowsBorderColor = Colors.Orange;
+            OtherWindowsForegroundColor = Colors.White;
+        }
+
+        public bool IsBackToDefaultTheme
+        {
+            get { return _isBackToDefaultTheme; }
+            set
+            {
+                _isBackToDefaultTheme = value;
+                RaisePropertyChanged();
+            }
         }
 
         public ImageViewModel BackgroundImage

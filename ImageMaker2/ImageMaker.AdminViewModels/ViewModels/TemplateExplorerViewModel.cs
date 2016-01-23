@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Providers;
 using ImageMaker.AdminViewModels.ViewModels.Enums;
@@ -22,6 +24,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand _goBackCommand;
         private RelayCommand<FilterEventArgs> _filterCommand;
         private RelayCommand _updateTemplateCommand;
+        private RelayCommand _setInstaPrinterTemplateCommand;
         private RelayCommand _saveCommand;
         private CheckableTemplateViewModel _selectedTemplate;
         private RelayCommand _checkCommand;
@@ -112,6 +115,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
             CheckItem();
         }
 
+        public RelayCommand SetInstaPrinterTemplateCommand
+        {
+            get
+            {
+                return _setInstaPrinterTemplateCommand ?? (_setInstaPrinterTemplateCommand = new RelayCommand(SetInstaPrinterTemplate, () => SelectedTemplate != null));
+            }
+        }
+
         public RelayCommand UpdateTemplateCommand
         {
             get { return _updateTemplateCommand ?? (_updateTemplateCommand = new RelayCommand(UpdateTemplate, () => SelectedTemplate != null)); }
@@ -166,6 +177,15 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             CheckItem();
         }
+        private void SetInstaPrinterTemplate()
+        {
+            foreach (var child in Children)
+            {
+                child.IsInstaPrinterTemplate = child.IsChecked && !child.IsInstaPrinterTemplate;
+                child.State=ItemState.Updated;
+            }
+            CheckItem();
+        }
 
         private void UpdateTemplate()
         {
@@ -199,7 +219,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void Filter(FilterEventArgs args)
         {
-            CheckableTemplateViewModel item = (CheckableTemplateViewModel) args.Item;
+            CheckableTemplateViewModel item = (CheckableTemplateViewModel)args.Item;
             args.Accepted = item.State != ItemState.Removed;
         }
 
@@ -209,7 +229,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 bool result =
                     _dialogService.ShowConfirmationDialog("При переходе все изменения будут потеряны. Продолжить?");
-                
+
                 if (!result)
                     return;
             }
@@ -230,9 +250,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             string name = viewModel.Name;
 
-            _updatedTemplate = new CheckableTemplateViewModel(name, 500, 500, 0, 
-                Enumerable.Empty<TemplateImageViewModel>(), 
-                TemplateEditorViewModel.CreateDefaultBackground(), null);
+            _updatedTemplate = new CheckableTemplateViewModel(name, 500, 500, 0,
+                Enumerable.Empty<TemplateImageViewModel>(),
+                TemplateEditorViewModel.CreateDefaultBackground(), null,false);
 
             _updatedTemplate.IsDefaultBackground = true;
             _navigator.NavigateForward<TemplateEditorViewModel>(this, _updatedTemplate);
