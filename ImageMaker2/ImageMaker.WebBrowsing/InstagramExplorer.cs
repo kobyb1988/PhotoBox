@@ -67,14 +67,14 @@ namespace ImageMaker.WebBrowsing
             return imageResponse;
         }
         
-        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string maxTagId)
+        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string maxTagId,byte count=15)
         {
             if (string.IsNullOrEmpty(hashTag))
                 return await Task.FromResult<ImageResponse>(null);
 
-            string url = string.Format(@"https://api.instagram.com/v1/tags/{0}/media/recent?client_id={1}{2}", 
+            string url = string.Format(@"https://api.instagram.com/v1/tags/{0}/media/recent?count={3}&client_id={1}{2}", 
                 hashTag, cClientToken,
-                string.IsNullOrEmpty(maxTagId) ? string.Empty : string.Format("&max_tag_id={0}", maxTagId));
+                string.IsNullOrEmpty(maxTagId) ? string.Empty : string.Format("&max_tag_id={0}", maxTagId),count);
 
             return await GetImagesFromUrl(url);
         }

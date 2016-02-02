@@ -95,6 +95,10 @@
       <Project>{2bf0867e-b87f-4a10-b13c-18ea156a2c4c}</Project>
       <Name>ImageMaker.MessageQueueing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.PatternProcessing\ImageMaker.ImageProcessing.csproj">
+      <Project>{d97626b4-643e-4b4e-ab84-e626c45d38cd}</Project>
+      <Name>ImageMaker.ImageProcessing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageMaker.Utils\ImageMaker.Utils.csproj">
       <Project>{3f6c0346-5cf3-4b8a-93b6-5a3118617abb}</Project>
       <Name>ImageMaker.Utils</Name>

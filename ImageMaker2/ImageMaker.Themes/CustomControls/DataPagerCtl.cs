@@ -321,17 +321,17 @@ namespace ImageMaker.Themes.CustomControls
         {
             if (Pages.Count <= 0)
                 return;
-           
 
-            if (PageIndex >= 0)
-                Pages.ElementAt(PageIndex).IsSelected = false;
-
-            PageIndex = pageIndex;
-            if (Pages.Count == PageIndex)
+            if (Pages.Count == pageIndex)
             {
                 ExtendedNextCommand.Execute(ExtendedNextCommandParams);
                 return;
             }
+            if (PageIndex >= 0)
+                Pages.ElementAt(PageIndex).IsSelected = false;
+
+            PageIndex = pageIndex;
+           
             if (PageIndex >= 0)
                 Pages.ElementAt(PageIndex).IsSelected = true;
 

@@ -13,7 +13,7 @@ namespace ImageMaker.WebBrowsingTests.IntegrationTests
         public void TestGetImagesByHashTag_AnyState_ReturnsValidImages()
         {
             var explorer = new InstagramExplorer();
-            var images = explorer.GetImagesByHashTag("wedding", null).Result;
+            var images = explorer.GetImagesByHashTag("wedding", null,15).Result;
             Assert.IsTrue(images != null && images.Images != null && images.Images.Any() && images.Images.All(x => x.Data != null));
         }
 

@@ -43,12 +43,12 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="-100,0,0,0">
+            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="-100,0,0,0" Source="../rita.jpg">
                 <Image.Clip>
-                    <EllipseGeometry Center="75,75" RadiusX="70" RadiusY="70" />
+                    <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="70" />
                 </Image.Clip>
             </Image>
-            <TextBlock x:Name="PublishAuthorTxt" Grid.Row="0" Grid.Column="1" Margin="-100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF0A5183" FontWeight="Bold" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
+            <TextBlock x:Name="PublishAuthorTxt" Grid.Row="0" Grid.Column="1" Margin="-105,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF0A5183" FontWeight="Bold" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
                         TextAlignment="Left" TextWrapping="Wrap" Text="Alexey Palatkin"/>
             <TextBlock x:Name="TimeUpdateTxt" Grid.Row="0" Grid.Column="2" Margin="0,0,30,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FFA3A3A3" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
                         TextAlignment="Left" TextWrapping="Wrap" Text="3min"/>
@@ -60,7 +60,8 @@
                 <Path Margin="0,10,15,0" Data="F1M24.012,37.997C12.609,34.461 1.601,21.107 1.997,14.297 2.389,7.486 7.105,2.253 13.791,1.989 20.473,1.726 24.012,6.703 24.012,6.703 24.012,6.703 27.552,1.726 34.232,1.989 40.916,2.253 45.631,7.486 46.027,14.297 46.42,21.107 35.412,34.461 24.012,37.997z" Fill="#FF095183"/>
                 <TextBlock x:Name="LikesTxt" Foreground="#FF0A5183" FontWeight="Bold" FontSize="50" FontFamily="Arial"  TextAlignment="Left" TextWrapping="Wrap" Text="Нравится"/>
             </StackPanel>
-            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#F12938" FontWeight="Bold" FontSize="50" FontFamily="Arial" TextWrapping="Wrap" Text="www.selfy-box.ru"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,0,30,0"
+                       HorizontalAlignment="Right" Foreground="#F12938" FontWeight="Bold" FontSize="50" FontFamily="Arial" TextWrapping="Wrap" Text="www.selfy-box.ru"/>
             <StackPanel Visibility="Hidden" Orientation="Horizontal" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
                 <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>

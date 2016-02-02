@@ -20,6 +20,7 @@ namespace ImageMaker.Utils.Services
 
         public void Print(byte[] buffer, string printerName, int copies = 1)
         {
+            copies = 1;
             if (string.IsNullOrEmpty(printerName))
                 return;
 
@@ -48,6 +49,7 @@ namespace ImageMaker.Utils.Services
         {
             try
             {
+                copies = 1;
                 using (var stream = new MemoryStream(buffer))
                 {
                     _image = Image.FromStream(stream);
@@ -77,7 +79,7 @@ namespace ImageMaker.Utils.Services
         {
             if (string.IsNullOrEmpty(printerName))
                 return;
-            
+
             Task.Run(() =>
             {
                 try
@@ -109,6 +111,7 @@ namespace ImageMaker.Utils.Services
             {
                 try
                 {
+                    copies = 1;
                     using (var stream = new MemoryStream(buffer))
                     {
                         _image = Image.FromStream(stream);
@@ -121,8 +124,8 @@ namespace ImageMaker.Utils.Services
                     //printer not found
                     if (string.IsNullOrEmpty(name))
                         return;
-                    
-                    _printDocument.PrinterSettings.Copies = (short) copies;
+
+                    _printDocument.PrinterSettings.Copies = (short)copies;
                     _printDocument.PrintController = new StandardPrintController();
                     _printDocument.PrinterSettings.PrinterName = name;
                     _printDocument.BeginPrint += printDocument_BeginPrint;
@@ -219,7 +222,7 @@ namespace ImageMaker.Utils.Services
             Rectangle printedMarginArea = Rectangle.Truncate(marginBounds);
             printedMarginArea.Width--;
             printedMarginArea.Height--;
-           // g.DrawRectangle(Pens.Red, printedMarginArea);
+            // g.DrawRectangle(Pens.Red, printedMarginArea);
         }
     }
 }

@@ -86,7 +86,7 @@
                         <Rectangle Grid.Column="1" Fill="#5543beb5"/>
                         <customControls:ContentButton Grid.Column="1" 
                                                       Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
-                                                  Content="{Binding Path=CopiesCount, Mode=TwoWay}"
+                                                  Content="1"
                                                       CornerRadius="50"
                                                       HorizontalAlignment="Stretch"
                                                   HorizontalContentAlignment="Stretch"

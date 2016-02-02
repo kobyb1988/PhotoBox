@@ -15,25 +15,25 @@ namespace ImageMaker.View
         public MainWindow()
         {
             InitializeComponent();
-            TouchDown += BasePage_TouchDown;
-            TouchMove += BasePage_TouchMove;
+            //TouchDown += BasePage_TouchDown;
+            //TouchMove += BasePage_TouchMove;
         }
 
-        void BasePage_TouchDown(object sender, TouchEventArgs e)
-        {
-            _touchStart = e.GetTouchPoint(this);
-        }
+        //void BasePage_TouchDown(object sender, TouchEventArgs e)
+        //{
+        //    _touchStart = e.GetTouchPoint(this);
+        //}
 
-        void BasePage_TouchMove(object sender, TouchEventArgs e)
-        {
-            var touch = e.GetTouchPoint(this);
+        //void BasePage_TouchMove(object sender, TouchEventArgs e)
+        //{
+        //    var touch = e.GetTouchPoint(this);
 
-            if (_touchStart != null && touch.Position.X > (_touchStart.Position.X - Width- Delta))
-            {
-                if (((MainViewModel)DataContext).ShowAdminCommand.CanExecute(sender))
-                    ((MainViewModel)DataContext).ShowAdminCommand.Execute(sender);
-            }
-            e.Handled = true;
-        }
+        //    if (_touchStart != null && touch.Position.X > (_touchStart.Position.X - Width- Delta))
+        //    {
+        //        if (((MainViewModel)DataContext).ShowAdminCommand.CanExecute(sender))
+        //            ((MainViewModel)DataContext).ShowAdminCommand.Execute(sender);
+        //    }
+        //    e.Handled = true;
+        //}
     }
 }

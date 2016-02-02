@@ -21,6 +21,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private const int CDefWidth = 2048;
         private const int CDefHeight = 1536;
 
+        private CameraSettingsDto _settings;
         private readonly SettingsProvider _settingsProvider;
         private readonly IDialogService _dialogService;
         private readonly IViewModelNavigator _navigator;
@@ -73,16 +74,16 @@ namespace ImageMaker.ViewModels.ViewModels
             if (!_sessionOpened)
                 return;
 
-            CameraSettingsDto settings = _settingsProvider.GetCameraSettings();
+            _settings = _settingsProvider.GetCameraSettings();
 
-            if (settings != null)
+            if (_settings != null)
             {
-                _imageProcessor.SetSetting((uint) PropertyId.AEMode, (uint) settings.SelectedAeMode);
-                _imageProcessor.SetSetting((uint) PropertyId.WhiteBalance, (uint) settings.SelectedWhiteBalance);
-                _imageProcessor.SetSetting((uint) PropertyId.Av, (uint) settings.SelectedAvValue);
-                _imageProcessor.SetSetting((uint) PropertyId.ExposureCompensation, (uint) settings.SelectedCompensation);
-                _imageProcessor.SetSetting((uint) PropertyId.ISOSpeed, (uint) settings.SelectedIsoSensitivity);
-                _imageProcessor.SetSetting((uint) PropertyId.Tv, (uint) settings.SelectedShutterSpeed);
+                _imageProcessor.SetSetting((uint) PropertyId.AEMode, (uint)_settings.SelectedAeMode);
+                _imageProcessor.SetSetting((uint) PropertyId.WhiteBalance, (uint)_settings.SelectedWhiteBalance);
+                _imageProcessor.SetSetting((uint) PropertyId.Av, (uint)_settings.SelectedAvValue);
+                _imageProcessor.SetSetting((uint) PropertyId.ExposureCompensation, (uint)_settings.SelectedCompensation);
+                _imageProcessor.SetSetting((uint) PropertyId.ISOSpeed, (uint)_settings.SelectedIsoSensitivity);
+                _imageProcessor.SetSetting((uint) PropertyId.Tv, (uint)_settings.SelectedShutterSpeed);
             }
 
             StartLiveView();
@@ -150,8 +151,10 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             TakingPicture = true;
             UpdateCommands();
+
             //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
-            _imageProcessor.TakePicture(LiveViewImageStream)
+            _imageProcessor.TakePicture(LiveViewImageStream, _settings.SelectedAeMode, _settings.SelectedAvValue, 
+                _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed, _settings.SelectedWhiteBalance)
                 .ContinueWith(task =>
                 {
                     //TakingPicture = false;

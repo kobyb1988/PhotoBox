@@ -27,7 +27,7 @@ using Image = System.Drawing.Image;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
-    public class InstagramExplorerViewModel : BaseViewModel,ISearch
+    public class InstagramExplorerViewModel : BaseViewModel, ISearch
     {
         private readonly IViewModelNavigator _navigator;
         private readonly ImagePrinter _printer;
@@ -128,12 +128,12 @@ namespace ImageMaker.ViewModels.ViewModels
 
                 else
                 {
-                    imageData = _imageUtils.GetCaptureForInstagramControl(image.Data,image.FullName,DateTime.Now,image.ProfilePictureData);
+                    imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
                 }
                 print(imageData);
             }
         }
-      
+
         public ObservableCollection<InstagramImageViewModel> Images
         {
             get { return _images ?? (_images = new ObservableCollection<InstagramImageViewModel>()); }
@@ -164,7 +164,7 @@ namespace ImageMaker.ViewModels.ViewModels
             {
                 if (_isBusy == value)
                     return;
-                
+
                 Set(() => IsBusy, ref _isBusy, value);
                 UpdateCommands();
             }
@@ -218,20 +218,28 @@ namespace ImageMaker.ViewModels.ViewModels
                     : _instagramExplorer.GetImagesFromUrl(_nextUrl));
 
             task.ContinueWith(t =>
-                              {
-                                  // _images.Clear();
-                                  _nextUrl = task.Result.Return(x => x.NextUrl, null);
+            {
+                // _images.Clear();
+                _nextUrl = task.Result.Return(x => x.NextUrl, null);
 
-                                  foreach (var image in task.Result.Return(x => x.Images, Enumerable.Empty<WebBrowsing.Image>()))
-                                  {
-                                      InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data,
-                                          image.Width, image.Height, image.Url,image.FullName, image.ProfilePictureData,image.UrlAvatar);
-                                      _images.Add(viewModel);
-                                  }
+                if (_nextUrl == null && _lastInstagramImageId == task.Result.MinTagId)
+                {
+                    IsBusy = false;
+                    SearchCommand.RaiseCanExecuteChanged();
+                    return;
+                }
 
-                                  IsBusy = false;
-                                  SearchCommand.RaiseCanExecuteChanged();
-                              }, TaskScheduler.FromCurrentSynchronizationContext());
+                _lastInstagramImageId = task.Result.MinTagId;
+                foreach (var image in task.Result.Return(x => x.Images, Enumerable.Empty<WebBrowsing.Image>()))
+                {
+                    InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data,
+                        image.Width, image.Height, image.Url, image.FullName, image.ProfilePictureData, image.UrlAvatar);
+                    _images.Add(viewModel);
+                }
+
+                IsBusy = false;
+                SearchCommand.RaiseCanExecuteChanged();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void UpdateCommands()
@@ -246,6 +254,7 @@ namespace ImageMaker.ViewModels.ViewModels
         }
 
         private string _textSearch;
+        private string _lastInstagramImageId;
 
         public string TextSearch
         {

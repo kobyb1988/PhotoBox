@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -70,6 +71,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         }
         public byte[] ProcessImages(List<byte[]> images, Size liveViewImageStreamSize, Template pattern)
         {
+
             int defWidth = liveViewImageStreamSize.Width;//840;
             int defHeight = liveViewImageStreamSize.Height;//420; //768;
 

@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels1:MainViewModel}"
         Title="Главное окно" MinHeight="500" MinWidth="500" Content="{Binding Path=CurrentContent}" 
-        IsManipulationEnabled="True" >
+        WindowStyle="None" ResizeMode="NoResize"  
+    WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.InputBindings>
         <KeyBinding Modifiers="Alt+Control" Key="X" Command="{Binding Path=ShowAdminCommand}"></KeyBinding>
     </Window.InputBindings>
