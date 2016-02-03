@@ -37,7 +37,7 @@
                     </Binding>
                 </ImageBrush.ImageSource>
             </ImageBrush>
-            <ImageBrush x:Key="{x:Static themes:ThemeManager.OtherImagesKey}">
+            <ImageBrush x:Key="{x:Static themes:ThemeManager.OtherImagesKey}" Stretch="UniformToFill">
                 <ImageBrush.ImageSource>
                     <Binding Source="{x:Static Application.Current}" Path="Properties[OtherBackgroundImage]">
                         <Binding.TargetNullValue>

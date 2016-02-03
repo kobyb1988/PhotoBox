@@ -21,12 +21,8 @@
         <CollectionViewSource x:Key="Patterns" Source="{Binding Path=Patterns}"/>
     </UserControl.Resources>
 
-    <Viewbox Stretch="Fill">
-        <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
-            <!--<Border.Background>
-                <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
-            </Border.Background>-->
-
+    <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
+        <Viewbox Stretch="Uniform">
             <Grid Width="900" Height="730">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.18*"/>
@@ -47,17 +43,17 @@
                         </Image>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="Шаг 1: " 
-                                       FontSize="20"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                       Foreground="Red"/>
+                                    FontSize="20"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                    Foreground="Red"/>
                             <TextBlock Text="Выберите шаблон" 
-                                       FontSize="20"
-                                       VerticalAlignment="Center"/>
+                                    FontSize="20"
+                                    VerticalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                 </Border>
 
-                <Border  Grid.Row="1">
+                <Border Grid.Row="1">
                     <Grid>
                         <Grid.Resources>
                             <DataTemplate x:Key="tmpl" DataType="{x:Type images:CompositionViewModel}">
@@ -70,10 +66,12 @@
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                                                         <Border x:Name="RootBorder"
-                                            Margin="10"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent" BorderThickness="2" 
-                                    Width="157.4" Height="157.4" >
+                                                                Margin="10"
+                                                                Background="Transparent"
+                                                                BorderBrush="Transparent"
+                                                                BorderThickness="2"
+                                                                Width="157.4"
+                                                                Height="157.4">
                                                             <Grid x:Name="rootGrid" >
                                                                 <Grid.RowDefinitions>
                                                                     <RowDefinition Height="7*"/>
@@ -83,9 +81,7 @@
                                                                     <ColumnDefinition Width="7*"/>
                                                                     <ColumnDefinition Width="3*"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Image Stretch="Fill"
-                                               Grid.ColumnSpan="2" 
-                                               Grid.RowSpan="2">
+                                                                <Image Stretch="Fill" Grid.ColumnSpan="2" Grid.RowSpan="2">
                                                                     <Image.Source>
                                                                         <MultiBinding Converter="{StaticResource ImageConverter}" UpdateSourceTrigger="PropertyChanged">
                                                                             <Binding Path="TemplateImages"/>
@@ -94,11 +90,14 @@
                                                                         </MultiBinding>
                                                                     </Image.Source>
                                                                 </Image>
-                                                               
+
                                                                 <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
-                                                                <ToggleButton Grid.Row="1" Grid.Column="1" x:Name="toggle" Margin="7" 
-                                                                              IsHitTestVisible="False"
-                                                                              IsChecked="{TemplateBinding IsChecked}">
+                                                                <ToggleButton Grid.Row="1"
+                                                                        Grid.Column="1"
+                                                                        x:Name="toggle"
+                                                                        Margin="7"
+                                                                        IsHitTestVisible="False"
+                                                                        IsChecked="{TemplateBinding IsChecked}">
                                                                     <ToggleButton.Style>
                                                                         <Style TargetType="{x:Type ToggleButton}">
                                                                             <Setter Property="Background" Value="White" />
@@ -118,8 +117,10 @@
                                                                                                         <Point X="0.5" Y="0.5"></Point>
                                                                                                     </Ellipse.RenderTransformOrigin>
                                                                                                 </Ellipse>
-                                                                                                <Border Background="Transparent" BorderBrush="Transparent"
-                                                                                VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                                                                <Border Background="Transparent"
+                                                                                                        BorderBrush="Transparent"
+                                                                                                        VerticalAlignment="Center"
+                                                                                                        HorizontalAlignment="Center">
                                                                                                     <Path Data="M 0,0 L 11,-2 L 8,5" x:Name="Tick" Stroke="Transparent" StrokeThickness="1">
                                                                                                         <Path.RenderTransform>
                                                                                                             <RotateTransform Angle="135" CenterX="5.5" CenterY="1"/>
@@ -159,20 +160,18 @@
                                         </Style>
                                     </ToggleButton.Style>
                                 </ToggleButton>
-
-
                             </DataTemplate>
                         </Grid.Resources>
 
                         <ListBox Background="Transparent"
-                                     ItemTemplate="{StaticResource tmpl}"
-                                     ItemsSource="{Binding Source={StaticResource Patterns}}"
-                            BorderBrush="Transparent"
-                                 BorderThickness="0"
-                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                 SelectedItem="{Binding Path=SelectedPattern}"
-                                     SelectionMode="Single">
+                                ItemTemplate="{StaticResource tmpl}"
+                                ItemsSource="{Binding Source={StaticResource Patterns}}"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                SelectedItem="{Binding Path=SelectedPattern}"
+                                SelectionMode="Single">
                             <ListBox.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#00000000"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#00000000"/>
@@ -188,153 +187,48 @@
                                 </Style>
                             </ItemsControl.ItemContainerStyle>
                         </ListBox>
-                        <spinningWheel:SpinningWheel IsSpinning="{Binding Path=IsBusyLoading}" Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <spinningWheel:SpinningWheel IsSpinning="{Binding Path=IsBusyLoading}"
+                                Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </Grid>
                 </Border>
-                <Border  Padding="0" Grid.Row="2">
-                    <Grid  Width="890" Height="85">
+                <Border Padding="0" Grid.Row="2">
+                    <Grid Width="890" Height="85">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.25*"/>
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
-                        <customControls:BlueButton 
-                            Command="{Binding Path=GoBackCommand}"
-                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                            CornerRadius="40"
+                        <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                                CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"
-                            Grid.Column="0"
-                            FontSize="18"
-                            HorizontalAlignment="Stretch"
-                                               Content="Назад" 
-                                               ShowBackButton="True" 
-                                               CornerAlign="BottomLeft,TopLeft"/>
+                                Grid.Column="0"
+                                FontSize="18"
+                                HorizontalAlignment="Stretch"
+                                Content="Назад" 
+                                ShowBackButton="True" 
+                                CornerAlign="BottomLeft,TopLeft"/>
                         <customControls:DataPagerCtl Grid.Column="1" 
-                                                     ItemsView="{Binding Source={StaticResource Patterns}}" 
-                                                     PageSize="15"
-                                         PagesInRow="3"
-                                                     Background="#4ecdc4"/>
-                        <!--<Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>-->
-                        <customControls:BlueButton 
-                            Command="{Binding Path=SelectPatternCommand}"
-                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
-                            CornerRadius="40"
+                                ItemsView="{Binding Source={StaticResource Patterns}}" 
+                                PageSize="15"
+                                PagesInRow="3"
+                                Background="#4ecdc4"/>
+                        <customControls:BlueButton Command="{Binding Path=SelectPatternCommand}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                CornerRadius="40"
                                 Padding="8"
-                            FontSize="18"
-                            ShowBackButton="True"
-                            IsLeftOriented="False"
-                            HorizontalAlignment="Stretch"
-                        Grid.Column="2"
-                            CornerAlign="TopRight,BottomRight"
-                                               Content="Далее"/>
+                                FontSize="18"
+                                ShowBackButton="True"
+                                IsLeftOriented="False"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="2"
+                                CornerAlign="TopRight,BottomRight"
+                                Content="Далее"/>
                     </Grid>
                 </Border>
             </Grid>
-        </Border>
-    </Viewbox>
-    
-    <!--<Border  Background="{StaticResource  BackgroundBrush}" Padding="30">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-
-            <Border Background="White"
-                            CornerRadius="6"
-                            BorderBrush="{StaticResource ShadowBrushBottom}"
-                            BorderThickness="0,1,0,5">
-                <Border Background="White"
-                            CornerRadius="6"
-                                Padding="7"
-                            BorderBrush="{StaticResource ShadowBrushLeft}"
-                            BorderThickness="2,0,1,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Margin="5" HorizontalAlignment="Left">
-                            <Image 
-                       Source="pack://application:,,,/ImageMaker.CommonView;component/Resources/camera_title_orange.png">
-                            </Image>
-                        </Viewbox>
-                        <Label Content="Выберите шаблон для фотографии: " 
-                               Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource GrayBrush}" FontSize="15"/>
-                    </Grid>
-                    
-                </Border>
-            </Border>
-            
-            <Grid Grid.Row="1">
-                    <ListBox ItemsSource="{Binding Path=PatternsView}" BorderBrush="Transparent" SelectionMode="Single"
-                             Background="{StaticResource BackgroundBrush}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type images:CompositionViewModel}">
-                                <Button BorderBrush="Transparent" BorderThickness="1"
-                                        Background="White"
-                                        ToolTip="{Binding Path=Name}"
-                                    
-                                        Foreground="{StaticResource GrayBrush}"
-                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:SelectPatternCtl}}, Path=DataContext.SelectPatternCommand}"
-                                    CommandParameter="{Binding Path=.}">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border 
-                                                CornerRadius="5"
-                                                Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                                BorderThickness="{TemplateBinding BorderThickness}"  Padding="5">
-                                                <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition />
-                                                        <RowDefinition Height="Auto"/>
-                                                    </Grid.RowDefinitions>
-
-                                                    <Border BorderBrush="Transparent" BorderThickness="2" Background="Black" Width="100" Height="100">
-                                                        <Viewbox Stretch="Uniform">
-                                                            <Image>
-                                                                <Image.Source>
-                                                                    <MultiBinding Converter="{StaticResource ImageConverter}" UpdateSourceTrigger="PropertyChanged">
-                                                                        <Binding Path="TemplateImages"/>
-                                                                        <Binding Path="Overlay.Data"/>
-                                                                        <Binding Path="Background.Data"/>
-                                                                    </MultiBinding>
-                                                                </Image.Source>
-                                                            </Image>
-                                                        </Viewbox>
-                                                    </Border>
-                                                </Grid>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ListBox>
-                <spinningWheel:SpinningWheel IsSpinning="{Binding Path=IsBusyLoading}" Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            </Grid>
-
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Button  Content="&lt; Назад" Command="{Binding Path=GoBackCommand}" HorizontalAlignment="Left"/>
-                <controls1:DataPagerCtl Grid.Column="1" PageSize="5" Margin="10" 
-                                        ItemsView="{Binding Path=PatternsView}"/>
-            </Grid>
-            
-        </Grid>
-    </Border>-->
+        </Viewbox>
+    </Border>
 </UserControl>

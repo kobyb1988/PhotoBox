@@ -21,12 +21,11 @@
             </CollectionViewSource.LiveFilteringProperties>
         </CollectionViewSource>
     </UserControl.Resources>
-    <Viewbox Stretch="Fill">
-        <Border Padding="85,25">
-            <Border.Background>
-                <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
-            </Border.Background>
-
+    <Border Padding="85,25">
+        <Border.Background>
+            <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" Stretch="UniformToFill" />
+        </Border.Background>
+        <Viewbox Stretch="Uniform">
             <Grid Width="900" Height="730">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.18*"/>
@@ -41,7 +40,7 @@
                             <ColumnDefinition Width="0.3*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/logo_1.png" 
-                               Margin="20,0,0,0">
+                                Margin="20,0,0,0">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </Image.RenderTransform>
@@ -58,28 +57,32 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <Button Content="" Background="#ff6b6b" Command="{Binding Path=CompleteSessionCommand}"/>
-                                <TextBlock VerticalAlignment="Center" Text="завершить сессию" Foreground="#ffffff" 
-                                           HorizontalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center"
+                                        Text="завершить сессию"
+                                        Foreground="#ffffff" 
+                                        HorizontalAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Column="1">
-                                
+
                                 <Button Content="" Background="#4ecdc4" Command="{Binding Path=ShowImagesFolderCommand}"/>
-                                <TextBlock VerticalAlignment="Center" Text="показать в папке" 
-                                           Foreground="#ffffff" Grid.Row="0" 
-                                           HorizontalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center"
+                                        Text="показать в папке" 
+                                        Foreground="#ffffff"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Center"/>
                             </Grid>
                         </Grid>
-                      
                     </Grid>
                 </Border>
 
-                <Border  Grid.Row="1">
+                <Border Grid.Row="1">
                     <Grid>
                         <Grid.Resources>
                             <DataTemplate x:Key="tmpl" DataType="{x:Type images1:CheckableImageWrapper}">
-                                <ToggleButton ClickMode="Release" IsChecked="{Binding Path=IsChecked}"
-                                              Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.CheckCommand}"
-                                              CommandParameter="{Binding Path=.}">
+                                <ToggleButton ClickMode="Release"
+                                        IsChecked="{Binding Path=IsChecked}"
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.CheckCommand}"
+                                        CommandParameter="{Binding Path=.}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="ToolTip" Value="{Binding Path=Image.Name}" />
@@ -87,11 +90,13 @@
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                                                         <Border x:Name="RootBorder"
-                                            Margin="10"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent" BorderThickness="2" 
-                                    Width="157.4" Height="157.4" >
-                                                            <Grid x:Name="rootGrid" >
+                                                                Margin="10"
+                                                                Background="Transparent"
+                                                                BorderBrush="Transparent"
+                                                                BorderThickness="2" 
+                                                                Width="157.4"
+                                                                Height="157.4">
+                                                            <Grid x:Name="rootGrid">
                                                                 <Grid.RowDefinitions>
                                                                     <RowDefinition Height="7*"/>
                                                                     <RowDefinition Height="3*"/>
@@ -101,14 +106,17 @@
                                                                     <ColumnDefinition Width="3*"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 <Image Source="{Binding Path=Image.Data, Converter={StaticResource ByteArrayToImageConverter}}"
-                                                                       Stretch="Fill"
-                                               Grid.ColumnSpan="2" 
-                                               Grid.RowSpan="2">
+                                                                        Stretch="Fill"
+                                                                        Grid.ColumnSpan="2"
+                                                                        Grid.RowSpan="2">
                                                                 </Image>
                                                                 <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
-                                                                <ToggleButton Grid.Row="1" Grid.Column="1" x:Name="toggle" Margin="7" 
-                                                                              IsHitTestVisible="False"
-                                                                              IsChecked="{TemplateBinding IsChecked}">
+                                                                <ToggleButton Grid.Row="1"
+                                                                        Grid.Column="1"
+                                                                        x:Name="toggle"
+                                                                        Margin="7" 
+                                                                        IsHitTestVisible="False"
+                                                                        IsChecked="{TemplateBinding IsChecked}">
                                                                     <ToggleButton.Style>
                                                                         <Style TargetType="{x:Type ToggleButton}">
                                                                             <Setter Property="Background" Value="White" />
@@ -128,8 +136,10 @@
                                                                                                         <Point X="0.5" Y="0.5"></Point>
                                                                                                     </Ellipse.RenderTransformOrigin>
                                                                                                 </Ellipse>
-                                                                                                <Border Background="Transparent" BorderBrush="Transparent"
-                                                                                VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                                                                <Border Background="Transparent"
+                                                                                                        BorderBrush="Transparent"
+                                                                                                        VerticalAlignment="Center"
+                                                                                                        HorizontalAlignment="Center">
                                                                                                     <Path Data="M 0,0 L 11,-2 L 8,5" x:Name="Tick" Stroke="Transparent" StrokeThickness="1">
                                                                                                         <Path.RenderTransform>
                                                                                                             <RotateTransform Angle="135" CenterX="5.5" CenterY="1"/>
@@ -170,19 +180,18 @@
                                     </ToggleButton.Style>
                                 </ToggleButton>
 
-
                             </DataTemplate>
 
                         </Grid.Resources>
 
                         <ListBox Background="Transparent"
-                                     ItemTemplate="{StaticResource tmpl}"
-                                     ItemsSource="{Binding Source={StaticResource Source}}"
-                            BorderBrush="Transparent"
-                                 BorderThickness="0"
-                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                     SelectionMode="Multiple">
+                                ItemTemplate="{StaticResource tmpl}"
+                                ItemsSource="{Binding Source={StaticResource Source}}"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                SelectionMode="Multiple">
                             <ListBox.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#00000000"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#00000000"/>
@@ -193,50 +202,47 @@
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ListBox>
-                        <spinningWheel:SpinningWheel 
-                HorizontalAlignment="Center"
-                IsSpinning="{Binding Path=IsBusyLoading}" 
-                Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <spinningWheel:SpinningWheel HorizontalAlignment="Center"
+                                IsSpinning="{Binding Path=IsBusyLoading}" 
+                                Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </Grid>
                 </Border>
-                <Border  Padding="0" Grid.Row="2">
-                    <Grid  Width="890" Height="85">
+                <Border Padding="0" Grid.Row="2">
+                    <Grid Width="890" Height="85">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.25*"/>
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
-                        <customControls:BlueButton 
-                            Command="{Binding Path=GoBackCommand}"
-                            CornerRadius="40"
+                        <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
+                                CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"
-                            Grid.Column="0"
-                            FontSize="18"
-                            HorizontalAlignment="Stretch"
-                                               Content="Назад" 
-                                               ShowBackButton="True" 
-                                               CornerAlign="BottomLeft,TopLeft"/>
+                                Grid.Column="0"
+                                FontSize="18"
+                                HorizontalAlignment="Stretch"
+                                Content="Назад" 
+                                ShowBackButton="True" 
+                                CornerAlign="BottomLeft,TopLeft"/>
                         <customControls:DataPagerCtl Grid.Column="1" 
-                                                     ItemsView="{Binding Source={StaticResource Source}}" 
-                                                     PageSize="15"
-                                         PagesInRow="3"
-                                                     Background="#4ecdc4"/>
+                                ItemsView="{Binding Source={StaticResource Source}}" 
+                                PageSize="15"
+                                PagesInRow="3"
+                                Background="#4ecdc4"/>
                         <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
-                        <customControls:BlueButton 
-                            Command="{Binding Path=PrintCommand}"
-                            CornerRadius="40"
+                        <customControls:BlueButton Command="{Binding Path=PrintCommand}"
+                                CornerRadius="40"
                                 Padding="8"
-                            FontSize="18"
-                            ShowBackButton="True"
-                            IsLeftOriented="False"
-                            HorizontalAlignment="Stretch"
-                        Grid.Column="2"
-                            CornerAlign="TopRight,BottomRight"
-                                               Content="Печать"/>
+                                FontSize="18"
+                                ShowBackButton="True"
+                                IsLeftOriented="False"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="2"
+                                CornerAlign="TopRight,BottomRight"
+                                Content="Печать"/>
                     </Grid>
                 </Border>
             </Grid>
-        </Border>
-    </Viewbox>
+        </Viewbox>
+    </Border>
 </UserControl>

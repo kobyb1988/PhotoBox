@@ -10,11 +10,11 @@
     <UserControl.Resources>
         <Style TargetType="{x:Type Calendar}"></Style>
     </UserControl.Resources>
-    <Viewbox Stretch="Fill">
-        <Border>
-            <Border.Background>
-                <ImageBrush ImageSource="../Resources/blur.jpg" />
-            </Border.Background>
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="../Resources/blur.jpg" Stretch="UniformToFill" />
+        </Border.Background>
+        <Viewbox Stretch="Uniform">
             <Grid Height="600" Width="650">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.35*"/>
@@ -37,14 +37,19 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <customControls:TimeSelector Title="Начало&#10;печати:"  
-                                                     Time="{Binding Path=DateStart}"
-                                                     InnerCornerRadius="38,38,0,0"
-                                                     Margin="5,5,15,10" TitleFontSize="12" CornerRadius="30"/>
+                                Time="{Binding Path=DateStart}"
+                                InnerCornerRadius="38,38,0,0"
+                                Margin="5,5,15,10"
+                                TitleFontSize="12"
+                                CornerRadius="30"/>
                         <customControls:TimeSelector 
-                            Time="{Binding Path=DateEnd}"
-                            Grid.Row="1" 
-                            InnerCornerRadius="25,25,0,0"
-                            Title="Конец&#10;печати:" Margin="5,5,15,10" TitleFontSize="12" CornerRadius="30"/>
+                                Time="{Binding Path=DateEnd}"
+                                Grid.Row="1" 
+                                InnerCornerRadius="25,25,0,0"
+                                Title="Конец&#10;печати:"
+                                Margin="5,5,15,10"
+                                TitleFontSize="12"
+                                CornerRadius="30"/>
 
                         <Border Grid.Column="1"
                                 Margin="15,5,5,10"
@@ -60,33 +65,41 @@
                                     <ColumnDefinition Width="0.3*"/>
                                     <ColumnDefinition Width="0.7*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Хэштег:" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                           FontSize="12"
-                                           Foreground="#777777"/>
+                                <TextBlock Text="Хэштег:"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center" 
+                                        FontSize="12"
+                                        Foreground="#777777"/>
                                 <Border Grid.Column="1" CornerRadius="30" Background="#d7d7d7" Margin="3">
                                     <TextBox Background="Transparent" 
-                                             VerticalContentAlignment="Center"
-                                             Padding="5"
-                                             BorderBrush="Transparent"
-                                             FontSize="30"
-                                             Text="{Binding Path=HashTag}"/>
+                                            VerticalContentAlignment="Center"
+                                            Padding="5"
+                                            BorderBrush="Transparent"
+                                            FontSize="30"
+                                            Text="{Binding Path=HashTag}"/>
                                 </Border>
                             </Grid>
                         </Border >
-                        <customControls:CustomComboBox 
-                            ItemsSource="{Binding Path=AvailablePrinters}" 
-                          SelectedItem="{Binding Path=PrinterName}"
-                            Title="Устройство&#10;печати:" Grid.Row="1" Grid.Column="1" CornerRadius="30" Margin="15,5,5,10" TitleFontSize="12"/>
-                        <ToggleButton 
-                            IsChecked="{Binding Path=ShowPrinterOnStartup}"
-                            VerticalAlignment="Center" HorizontalAlignment="Center"
-                                  Grid.ColumnSpan="2" Grid.Row="2" Content="Показывать кнопку печати" 
-                                  Style="{StaticResource ToggleBaseStyle}"/>
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=AvailablePrinters}" 
+                                SelectedItem="{Binding Path=PrinterName}"
+                                Title="Устройство&#10;печати:"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                CornerRadius="30"
+                                Margin="15,5,5,10"
+                                TitleFontSize="12"/>
+                        <ToggleButton IsChecked="{Binding Path=ShowPrinterOnStartup}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="2"
+                                Content="Показывать кнопку печати" 
+                                Style="{StaticResource ToggleBaseStyle}"/>
                     </Grid>
                 </Border>
 
-                <Border  Padding="20" Grid.Row="2">
-                    <Grid  Width="500" Height="65">
+                <Border Padding="20" Grid.Row="2">
+                    <Grid Width="500" Height="65">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="0.5*"/>
@@ -95,101 +108,24 @@
                             <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton 
-                            Command="{Binding Path=GoBackCommand}"
-                            Grid.Column="1"
-                            CornerRadius="30"
-                            HorizontalAlignment="Stretch"
-                                               Content="Назад" 
-                                               ShowBackButton="True" 
-                                               CornerAlign="BottomLeft,TopLeft"/>
-                        <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
+                                Command="{Binding Path=GoBackCommand}"
+                                Grid.Column="1"
+                                CornerRadius="30"
+                                HorizontalAlignment="Stretch"
+                                Content="Назад" 
+                                ShowBackButton="True" 
+                                CornerAlign="BottomLeft,TopLeft"/>
+                        <Rectangle Grid.Column="2" Width="48" Fill="#5543beb5"/>
                         <customControls:BlueButton 
-                            Command="{Binding Path=SaveSettings}"
-                            CornerRadius="30"
-                            HorizontalAlignment="Stretch"
-                        Grid.Column="3"
-                            CornerAlign="TopRight,BottomRight"
-                                               Content="Сохранить"/>
+                                Command="{Binding Path=SaveSettings}"
+                                CornerRadius="30"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="3"
+                                CornerAlign="TopRight,BottomRight"
+                                Content="Сохранить"/>
                     </Grid>
                 </Border>
             </Grid>
-        </Border>
-    </Viewbox>
-    
-    <!--<Border Padding="15" Background="{StaticResource BackgroundBrush}" >
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="6*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
-            <Border Background="White"
-                            CornerRadius="6"
-                            BorderBrush="{StaticResource ShadowBrushBottom}"
-                            BorderThickness="0,1,0,5">
-                <Border Background="White"
-                            CornerRadius="6"
-                                Padding="7"
-                            BorderBrush="{StaticResource ShadowBrushLeft}"
-                            BorderThickness="2,0,1,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Margin="5" HorizontalAlignment="Left">
-                            <Image 
-                       Source="pack://application:,,,/ImageMaker.CommonView;component/Resources/camera_title_orange.png">
-                            </Image>
-                        </Viewbox>
-                        <Border Margin="10" Grid.Column="1" BorderBrush="{StaticResource GrayBrush}" BorderThickness="2,0,0,0" Padding="3">
-                            <customControls:CustomButton Style="{StaticResource LightGrayBtnStyle}" 
-                                Padding="5"
-                                Content="Сохранить"
-                Command="{Binding Path=SaveSettings}"
-                VerticalAlignment="Stretch" 
-                                                         HorizontalAlignment="Left" />    
-                        </Border>
-                    </Grid>
-
-                </Border>
-            </Border>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Content="Начало печати: " HorizontalAlignment="Right"/>
-                <Label Grid.Column="0" Grid.Row="1" Content="Конец печати: " HorizontalAlignment="Right"/>
-                <Label Grid.Column="0" Grid.Row="2" Content="Хэштег: " HorizontalAlignment="Right"/>
-                <Label Grid.Column="0" Grid.Row="3" Content="Устройство печати: " HorizontalAlignment="Right"/>
-                <Label Grid.Column="0" Grid.Row="4" Content="Показывать кнопку печати: " HorizontalAlignment="Right"/>
-                <xctk:DateTimePicker Grid.Column="1" Grid.Row="0" TimeFormat="ShortTime"
-                                     Format="ShortTime" Value="{Binding Path=DateStart, UpdateSourceTrigger=LostFocus}" Margin="5"
-                                     Style="{StaticResource DateTimePickerStyle}"/>
-                <xctk:DateTimePicker Grid.Column="1" Grid.Row="1" TimeFormat="ShortTime" 
-                                     Format="ShortTime" Value="{Binding Path=DateEnd, UpdateSourceTrigger=LostFocus}" Margin="5"
-                                     Style="{StaticResource DateTimePickerStyle}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=HashTag}" Margin="5" Style="{StaticResource InputStyle}" Tag="Хэштег"/>
-                <ComboBox Grid.Column="1" Grid.Row="3" 
-                          ItemsSource="{Binding Path=AvailablePrinters}" 
-                          SelectedItem="{Binding Path=PrinterName}"/>
-                <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=ShowPrinterOnStartup}" VerticalAlignment="Center" Style="{StaticResource CheckBoxStyle}"/>
-            </Grid>
-           
-            <Button 
-                Content="&lt; Назад"
-                Command="{Binding Path=GoBackCommand}"
-                VerticalAlignment="Center" HorizontalAlignment="Left" 
-                    Grid.Row="2" />
-        </Grid>
-    </Border>-->
-    
+        </Viewbox>
+    </Border>
 </UserControl>

@@ -11,7 +11,7 @@
              Background="{StaticResource BackgroundBrush}">
     <Border>
         <Border.Background>
-            <ImageBrush ImageSource="../Resources/girls.jpg" Viewbox="0.15,0.05,0.7,0.9"/>
+            <ImageBrush ImageSource="../Resources/girls.jpg" Viewbox="0.15,0.05,0.7,0.9" Stretch="UniformToFill" />
         </Border.Background>
         <Grid>
             <Rectangle>
@@ -54,58 +54,15 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Button Content="Настройка принтера" Command="{Binding Path=ManageAppSettingsCommand}"/>
-                        <Button  Content="Настройка камеры" Grid.Row="1" Command="{Binding Path=ManageCameraSettingsCommand}"/>
-                        <Button  Content="Редактор шаблонов" Grid.Row="2" Command="{Binding Path=ManageTemplatesCommand}"/>
-                        <Button  Content="Настройка интерфейса" Grid.Column="1" Command="{Binding Path=ManageThemesCommand}"/>
-                        <Button  Content="Статистика и Сессия" Grid.Column="1" Grid.Row="1" Command="{Binding Path=ShowStatsCommand}"/>
-                        <Button  Content="Начать сессию" Grid.Column="1" Grid.Row="2" 
-                                 Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
+                        <Button Content="Настройка камеры" Grid.Row="1" Command="{Binding Path=ManageCameraSettingsCommand}"/>
+                        <Button Content="Редактор шаблонов" Grid.Row="2" Command="{Binding Path=ManageTemplatesCommand}"/>
+                        <Button Content="Настройка интерфейса" Grid.Column="1" Command="{Binding Path=ManageThemesCommand}"/>
+                        <Button Content="Статистика и Сессия" Grid.Column="1" Grid.Row="1" Command="{Binding Path=ShowStatsCommand}"/>
+                        <Button Content="Начать сессию" Grid.Column="1" Grid.Row="2" 
+                                Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
                     </Grid>
                 </Viewbox>
             </Grid>
         </Grid>
     </Border>
-    <!--<Border Padding="15">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.33*"/>
-                <ColumnDefinition Width="0.33*" />
-                <ColumnDefinition Width="0.33*" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1.75*"/>
-                    <RowDefinition Height="1.75*"/>
-                    <RowDefinition Height="1.75*"/>
-                    <RowDefinition Height="1.75*"/>
-                    <RowDefinition Height="1.75*"/>
-                    <RowDefinition Height="1.75*"/>
-                    --><!--<RowDefinition Height="1.75*"/>--><!--
-                </Grid.RowDefinitions>
-                
-                <Viewbox Margin="5">
-                    <Image 
-                       Source="pack://application:,,,/ImageMaker.CommonView;component/Resources/camera_title.png">
-                    </Image>
-                </Viewbox>
-                <TextBlock Text="АДМИНПАНЕЛЬ" Foreground="{StaticResource DarkGrayBrush}" FontSize="15" Grid.Row="1" HorizontalAlignment="Center"/>
-                <Button Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                    Content="Настройка интерфейса" Command="{Binding Path=ManageAppSettingsCommand}"/>
-                <Button Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
-                    Content="Настройка камеры" Command="{Binding Path=ManageCameraSettingsCommand}"/>
-                <Button Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                    Content="Настройка шаблонов" Command="{Binding Path=ManageTemplatesCommand}"/>
-                <Button Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                    Content="Редактор тем" Command="{Binding Path=ManageThemesCommand}"/>
-                <Button Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                    Content="Статистика" Command="{Binding Path=ShowStatsCommand}"/>
-                <Button Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                    Content="Запустить основной модуль" 
-                        Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
-            </Grid>
-        </Grid>
-        
-    </Border>-->
 </UserControl>

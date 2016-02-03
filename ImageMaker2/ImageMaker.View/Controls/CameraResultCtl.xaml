@@ -16,12 +16,9 @@
     <UserControl.Resources>
         <converters1:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
     </UserControl.Resources>
-    <Viewbox Stretch="Fill">
-        <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
-            <!--<Border.Background>
-                <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
-            </Border.Background>-->
 
+    <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
+        <Viewbox Stretch="Uniform">
             <Grid Width="900" Height="730">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.18*"/>
@@ -42,12 +39,13 @@
                         </Image>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="Шаг 3: " 
-                                       FontSize="20"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                       Foreground="Red"/>
+                                    FontSize="20"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center" 
+                                    Foreground="Red"/>
                             <TextBlock Text="Печать результата" 
-                                       FontSize="20"
-                                       VerticalAlignment="Center"/>
+                                    FontSize="20"
+                                    VerticalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -59,7 +57,6 @@
                                 <ImageBrush ImageSource="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}}"/>
                             </Rectangle.Fill>
                         </Rectangle>
-                        <!--<TextBlock FontSize="300" Text="2" Foreground="#808994" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
                     </Grid>
                 </Border>
                 <Border  Padding="0" Grid.Row="2">
@@ -69,33 +66,31 @@
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
-                        <customControls:BlueButton 
-                            Command="{Binding Path=GoBackCommand}"
-                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
-                            CornerRadius="40"
+                        <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"
-                            Grid.Column="0"
-                            FontSize="18"
-                            HorizontalAlignment="Stretch"
-                                               Content="Назад" 
-                                               ShowBackButton="True" 
-                                               CornerAlign="BottomLeft,TopLeft"/>
+                                Grid.Column="0"
+                                FontSize="18"
+                                HorizontalAlignment="Stretch"
+                                Content="Назад" 
+                                ShowBackButton="True" 
+                                CornerAlign="BottomLeft,TopLeft"/>
 
-                        <Rectangle Grid.Column="1" Fill="#5543beb5"/>
                         <customControls:ContentButton Grid.Column="1" 
-                                                      Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
-                                                  Content="1"
-                                                      CornerRadius="50"
-                                                      HorizontalAlignment="Stretch"
-                                                  HorizontalContentAlignment="Stretch"
-                                                  VerticalContentAlignment="Stretch"
-                                                  Title="Кол-во&#10;фото:">
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
+                                Content="1"
+                                CornerRadius="50"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
+                                Title="Кол-во&#10;фото:">
                             <customControls:ContentButton.IconBrush>
                                 <SolidColorBrush Color="Transparent" />
                                 <!-- Платная версия -->
-                                
+
                                 <!--<VisualBrush>
                                     <VisualBrush.Visual>
                                         <StackPanel Orientation="Vertical">
@@ -126,17 +121,16 @@
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition />
                                             </Grid.RowDefinitions>
-                                            <customControls:CustomRepeatButton 
-                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CameraResultCtl}}, Path=DataContext.ChangeUpCommand}"
-                                                x:Name="PART_LineUpButton" 
-                                                              BorderBrush="Transparent"
-                                                          CornerRadius="50,50,0,0"
-                                      Style="{StaticResource ScrollBarCustomButton}">
+                                            <customControls:CustomRepeatButton x:Name="PART_LineUpButton"
+                                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CameraResultCtl}}, Path=DataContext.ChangeUpCommand}"
+                                                    BorderBrush="Transparent"
+                                                    CornerRadius="50,50,0,0"
+                                                    Style="{StaticResource ScrollBarCustomButton}">
                                                 <Path x:Name="ArrowTop" 
-                                                  Data="M 0,0 L 0,10 L 10,10"
-                                                  Stroke="#b4b4b4"
-                                                  StrokeThickness="2"
-                                                      Margin="0">
+                                                        Data="M 0,0 L 0,10 L 10,10"
+                                                        Stroke="#b4b4b4"
+                                                        StrokeThickness="2"
+                                                        Margin="0">
                                                     <!--HorizontalAlignment="Center"  VerticalAlignment="Center">-->
                                                     <Path.RenderTransform>
                                                         <TransformGroup>
@@ -154,13 +148,12 @@
                                             <Border BorderBrush="#cccccc" BorderThickness="0.05" Grid.Row="1"/>
 
                                             <customControls:CustomRepeatButton x:Name="PART_LineDownButton" 
-                                                                      CornerRadius="50,50,0,0"
-                                                              BorderBrush="Transparent"
-                                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CameraResultCtl}}, Path=DataContext.ChangeDownCommand}"
-                                       Grid.Row="2" 
-                                      Style="{StaticResource ScrollBarCustomButton}">
-                                               
-                                                
+                                                    CornerRadius="50,50,0,0"
+                                                    BorderBrush="Transparent"
+                                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CameraResultCtl}}, Path=DataContext.ChangeDownCommand}"
+                                                    Grid.Row="2" 
+                                                    Style="{StaticResource ScrollBarCustomButton}">
+
                                                 <RepeatButton.RenderTransform>
                                                     <RotateTransform Angle="180" />
                                                 </RepeatButton.RenderTransform>
@@ -168,10 +161,10 @@
                                                     <Point X="0.5" Y="0.5" />
                                                 </RepeatButton.RenderTransformOrigin>
                                                 <Path x:Name="ArrowBottom" 
-                                                  Data="M 0,0 L 0,10 L 10,10"
-                                                  Stroke="#b4b4b4"
-                                                  StrokeThickness="2"
-                                                   Margin="0" >
+                                                        Data="M 0,0 L 0,10 L 10,10"
+                                                        Stroke="#b4b4b4"
+                                                        StrokeThickness="2"
+                                                        Margin="0">
                                                     <Path.RenderTransform>
                                                         <TransformGroup>
                                                             <RotateTransform Angle="135" />
@@ -195,82 +188,21 @@
                                 <Point X="0.5" Y="0.5" />
                             </customControls:ContentButton.RenderTransformOrigin>
                         </customControls:ContentButton>
-                        <customControls:BlueButton 
-                            Command="{Binding Path=PrintImageCommand}"
-                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
-                            CornerRadius="40"
+                        <customControls:BlueButton Command="{Binding Path=PrintImageCommand}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                CornerRadius="40"
                                 Padding="8"
-                            FontSize="18"
-                            ShowBackButton="True"
-                            IsLeftOriented="False"
-                            HorizontalAlignment="Stretch"
-                        Grid.Column="2"
-                            CornerAlign="TopRight,BottomRight"
-                                               Content="Печать"/>
+                                FontSize="18"
+                                ShowBackButton="True"
+                                IsLeftOriented="False"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="2"
+                                CornerAlign="TopRight,BottomRight"
+                                Content="Печать"/>
                     </Grid>
                 </Border>
             </Grid>
-        </Border>
-    </Viewbox>
-    
-    <!--<Border Padding="15" Background="{StaticResource BackgroundBrush}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Border Background="White" Grid.ColumnSpan="2"
-                            CornerRadius="6"
-                            BorderBrush="{StaticResource ShadowBrushBottom}"
-                            BorderThickness="0,1,0,5">
-                <Border Background="White"
-                            CornerRadius="6"
-                                Padding="7"
-                            BorderBrush="{StaticResource ShadowBrushLeft}"
-                            BorderThickness="2,0,1,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Margin="5" HorizontalAlignment="Left">
-                            <Image 
-                       Source="pack://application:,,,/ImageMaker.CommonView;component/Resources/camera_title_orange.png">
-                            </Image>
-                        </Viewbox>
-
-                        
-                        <Border Margin="10" Grid.Column="2" BorderBrush="{StaticResource GrayBrush}" BorderThickness="2,0,0,0"
-                                Padding="3">
-                            <customControls:CustomButton 
-                                Style="{StaticResource LightGrayBtnStyle}"
-                                Padding="5"
-                                Content="Печать"
-                Command="{Binding Path=PrintImageCommand}"
-                VerticalAlignment="Center" HorizontalAlignment="Left" />
-                        </Border>
-
-                        <xctk:IntegerUpDown Minimum="1" Maximum="10" Value="{Binding Path=CopiesCount, Mode=TwoWay}" 
-                                            Style="{StaticResource IntegerUpDownStyle}"
-                                            VerticalAlignment="Center"
-                                        Margin="5" Width="100"  Grid.Column="1"/>
-                    </Grid>
-
-                </Border>
-            </Border>
-            <Border BorderBrush="Black" BorderThickness="2" Grid.Row="1">
-                <Viewbox>
-                    <Image x:Name="img" Source="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}}"/>
-                </Viewbox>
-            </Border>
-            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                <Button Content="Повторить" Command="{Binding Path=GoBackCommand}" HorizontalAlignment="Left"/>
-                <Button Content="Закончить" Command="{Binding Path=CompleteCommand}" HorizontalAlignment="Left"/>
-            </StackPanel>
-            
-        </Grid>
-    </Border>-->
+        </Viewbox>
+    </Border>
 </UserControl>

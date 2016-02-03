@@ -30,12 +30,8 @@
             </CollectionViewSource.LiveFilteringProperties>
         </CollectionViewSource>
     </UserControl.Resources>
-    <Viewbox Stretch="Fill">
-        <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
-            <!--<Border.Background>
-                <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" />
-            </Border.Background>-->
-
+    <Border Padding="85,25" Background="{DynamicResource {x:Static themes:ThemeManager.OtherImagesKey}}">
+        <Viewbox Stretch="Uniform">
             <Grid Width="900" Height="730">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.18*"/>
@@ -43,8 +39,10 @@
                     <RowDefinition Height="0.18*" />
                 </Grid.RowDefinitions>
                 <Border x:Name="SearchTollBar"
-                    Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
-                    CornerRadius="40" Padding="5" Margin="5">
+                        Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
+                        CornerRadius="40"
+                        Padding="5"
+                        Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"/>
@@ -68,12 +66,13 @@
                                     <RowDefinition Height="0.9*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <customControls:CustomRadioButton 
-                                    IsChecked="{Binding Path=IsUserName}"
-                                    Style="{StaticResource CustomRadioButtonStyle}" 
-                                                                  GroupName="searchCriteria" IsThreeState="False"
-                                             Background="#c7f464" BorderBrush="#c7f464"  
-                                         VerticalContentAlignment="Top">
+                                <customControls:CustomRadioButton IsChecked="{Binding Path=IsUserName}"
+                                        Style="{StaticResource CustomRadioButtonStyle}" 
+                                        GroupName="searchCriteria"
+                                        IsThreeState="False"
+                                        Background="#c7f464"
+                                        BorderBrush="#c7f464"  
+                                        VerticalContentAlignment="Top">
                                     <customControls:CustomRadioButton.SelectedBorderBrush>
                                         <LinearGradientBrush>
                                             <LinearGradientBrush.GradientStops>
@@ -83,8 +82,13 @@
                                         </LinearGradientBrush>
                                     </customControls:CustomRadioButton.SelectedBorderBrush>
                                 </customControls:CustomRadioButton>
-                                <TextBlock IsHitTestVisible="False" Foreground="#ffffff" VerticalAlignment="Center" 
-                                           HorizontalAlignment="Center" Text="a" FontSize="50" Margin="0,-15,0,0"/>
+                                <TextBlock IsHitTestVisible="False"
+                                        Foreground="#ffffff"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Text="a"
+                                        FontSize="50"
+                                        Margin="0,-15,0,0"/>
                                 <TextBlock Text="аккаунт" Grid.Row="1" HorizontalAlignment="Center" FontSize="18"/>
                             </Grid>
                             <Grid Margin="5,0,0,0">
@@ -92,10 +96,12 @@
                                     <RowDefinition Height="0.9*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <customControls:CustomRadioButton
-                                Style="{StaticResource CustomRadioButtonStyle}"
-                                    IsChecked="{Binding Path=IsHashTag}"
-                                GroupName="searchCriteria" IsThreeState="False" Background="#4ecdc4" BorderBrush="#4ecdc4" >
+                                <customControls:CustomRadioButton Style="{StaticResource CustomRadioButtonStyle}"
+                                        IsChecked="{Binding Path=IsHashTag}"
+                                        GroupName="searchCriteria"
+                                        IsThreeState="False"
+                                        Background="#4ecdc4"
+                                        BorderBrush="#4ecdc4" >
                                     <customControls:CustomRadioButton.SelectedBorderBrush>
                                         <LinearGradientBrush>
                                             <LinearGradientBrush.GradientStops>
@@ -105,15 +111,21 @@
                                         </LinearGradientBrush>
                                     </customControls:CustomRadioButton.SelectedBorderBrush>
                                 </customControls:CustomRadioButton>
-                                <TextBlock IsHitTestVisible="False" Foreground="#ffffff" VerticalAlignment="Center" 
-                                           HorizontalAlignment="Center" Text="#" FontSize="50"/>
+                                <TextBlock IsHitTestVisible="False"
+                                        Foreground="#ffffff"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        Text="#"
+                                        FontSize="50"/>
                                 <TextBlock Text="хэштег" Grid.Row="1" HorizontalAlignment="Center" FontSize="18"/>
                             </Grid>
                         </StackPanel>
                         <helpers:Proxy In="{Binding ElementName=SearchBoxCtl,Path=SearchText,UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"
-                                       Out="{Binding TextSearch,UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"/>
-                        <customControls:SearchBoxCtl x:Name="SearchBoxCtl" Grid.Column="2" Margin="5,6,15,4"
-                                                     SearchCommand="{Binding Path=SearchCommand}">
+                                Out="{Binding TextSearch,UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"/>
+                        <customControls:SearchBoxCtl x:Name="SearchBoxCtl"
+                                Grid.Column="2"
+                                Margin="5,6,15,4"
+                                SearchCommand="{Binding Path=SearchCommand}">
                             <customControls:SearchBoxCtl.Style>
                                 <Style TargetType="{x:Type customControls:SearchBoxCtl}" BasedOn="{StaticResource SearchBoxStyle}">
                                     <Style.Triggers>
@@ -135,9 +147,9 @@
                         <Grid.Resources>
                             <DataTemplate x:Key="tmpl" DataType="{x:Type images:InstagramImageViewModel}">
                                 <ToggleButton ClickMode="Release" 
-                                              Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.CheckCommand}"
-                                              CommandParameter="{Binding Path=.}"
-                                              IsChecked="{Binding Path=IsChecked}">
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.CheckCommand}"
+                                        CommandParameter="{Binding Path=.}"
+                                        IsChecked="{Binding Path=IsChecked}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="ToolTip" Value="{Binding Path=Name}" />
@@ -145,10 +157,12 @@
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                                                         <Border x:Name="RootBorder"
-                                            Margin="10"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent" BorderThickness="2" 
-                                    Width="157.4" Height="157.4" >
+                                                                Margin="10"
+                                                                Background="Transparent"
+                                                                BorderBrush="Transparent"
+                                                                BorderThickness="2" 
+                                                                Width="157.4"
+                                                                Height="157.4">
                                                             <Grid x:Name="rootGrid" >
                                                                 <Grid.RowDefinitions>
                                                                     <RowDefinition Height="7*"/>
@@ -159,15 +173,17 @@
                                                                     <ColumnDefinition Width="3*"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 <Image Source="{Binding Path=Data, Converter={StaticResource ByteArrayToImageConverter}}"
-                                                                       Stretch="Fill"
-                                               Grid.ColumnSpan="2" 
-                                               Grid.RowSpan="2">
+                                                                        Stretch="Fill"
+                                                                        Grid.ColumnSpan="2" 
+                                                                        Grid.RowSpan="2">
                                                                 </Image>
                                                                 <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
                                                                 <ToggleButton Grid.Row="1" 
-                                                                              IsHitTestVisible="False"
-                                                                              Grid.Column="1" x:Name="toggle" Margin="7" 
-                                                                              IsChecked="{TemplateBinding IsChecked}">
+                                                                        IsHitTestVisible="False"
+                                                                        Grid.Column="1"
+                                                                        x:Name="toggle"
+                                                                        Margin="7" 
+                                                                        IsChecked="{TemplateBinding IsChecked}">
                                                                     <ToggleButton.Style>
                                                                         <Style TargetType="{x:Type ToggleButton}">
                                                                             <Setter Property="Background" Value="White" />
@@ -187,8 +203,10 @@
                                                                                                         <Point X="0.5" Y="0.5"></Point>
                                                                                                     </Ellipse.RenderTransformOrigin>
                                                                                                 </Ellipse>
-                                                                                                <Border Background="Transparent" BorderBrush="Transparent"
-                                                                                VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                                                                <Border Background="Transparent"
+                                                                                                        BorderBrush="Transparent"
+                                                                                                        VerticalAlignment="Center"
+                                                                                                        HorizontalAlignment="Center">
                                                                                                     <Path Data="M 0,0 L 11,-2 L 8,5" x:Name="Tick" Stroke="Transparent" StrokeThickness="1">
                                                                                                         <Path.RenderTransform>
                                                                                                             <RotateTransform Angle="135" CenterX="5.5" CenterY="1"/>
@@ -231,17 +249,17 @@
 
 
                             </DataTemplate>
-                            
+
                         </Grid.Resources>
 
                         <ListBox Background="Transparent"
-                                     ItemTemplate="{StaticResource tmpl}"
-                                     ItemsSource="{Binding Source={StaticResource Source}}"
-                            BorderBrush="Transparent"
-                                 BorderThickness="0"
-                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                     SelectionMode="Multiple">
+                                ItemTemplate="{StaticResource tmpl}"
+                                ItemsSource="{Binding Source={StaticResource Source}}"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                SelectionMode="Multiple">
                             <ListBox.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#00000000"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#00000000"/>
@@ -257,10 +275,9 @@
                                 </Style>
                             </ItemsControl.ItemContainerStyle>
                         </ListBox>
-                        <spinningWheel:SpinningWheel 
-                HorizontalAlignment="Center"
-                IsSpinning="{Binding Path=IsBusy}" 
-                Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <spinningWheel:SpinningWheel HorizontalAlignment="Center"
+                                IsSpinning="{Binding Path=IsBusy}" 
+                                Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </Grid>
                 </Border>
                 <Border  Padding="0" Grid.Row="2">
@@ -270,186 +287,41 @@
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
-                        <customControls:BlueButton 
-                            Command="{Binding Path=GoBackCommand}"
-                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
-                            CornerRadius="40"
+                        <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"
-                            Grid.Column="0"
-                            FontSize="18"
-                            HorizontalAlignment="Stretch"
-                                               Content="Назад" 
-                                               ShowBackButton="True" 
-                                               CornerAlign="BottomLeft,TopLeft"/>
-                        <customControls:DataPagerCtl Grid.Column="1" ExtendedNextCommand="{Binding SearchCommand}" 
-                                                     ExtendedNextCommandParams="{Binding TextSearch,
-                            UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"
-                                                     ItemsView="{Binding Source={StaticResource Source}}" 
-                                                     PageSize="15"
-                                         PagesInRow="3"
-                                                     Background="#4ecdc4"/>
-                        <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
-                        <customControls:BlueButton 
-                            Command="{Binding Path=PrintCommand}"
-                            Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                            Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
-                            CornerRadius="40"
+                                Grid.Column="0"
+                                FontSize="18"
+                                HorizontalAlignment="Stretch"
+                                Content="Назад" 
+                                ShowBackButton="True" 
+                                CornerAlign="BottomLeft,TopLeft"/>
+                        <customControls:DataPagerCtl Grid.Column="1"
+                                ExtendedNextCommand="{Binding SearchCommand}" 
+                                ExtendedNextCommandParams="{Binding TextSearch,
+                                UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"
+                                ItemsView="{Binding Source={StaticResource Source}}" 
+                                PageSize="15"
+                                PagesInRow="3"
+                                Background="#4ecdc4"/>
+                        <customControls:BlueButton Command="{Binding Path=PrintCommand}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                CornerRadius="40"
                                 Padding="8"
-                            FontSize="18"
-                            ShowBackButton="True"
-                            IsLeftOriented="False"
-                            HorizontalAlignment="Stretch"
-                        Grid.Column="2"
-                            CornerAlign="TopRight,BottomRight"
-                                               Content="Печать"/>
+                                FontSize="18"
+                                ShowBackButton="True"
+                                IsLeftOriented="False"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="2"
+                                CornerAlign="TopRight,BottomRight"
+                                Content="Печать"/>
                     </Grid>
                 </Border>
             </Grid>
-        </Border>
-    </Viewbox>
-    
-    <!--<Border Padding="15" Background="{StaticResource BackgroundBrush}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="8*" />
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Border Background="White" Grid.ColumnSpan="2"
-                            CornerRadius="6"
-                            BorderBrush="{StaticResource ShadowBrushBottom}"
-                            BorderThickness="0,1,0,5">
-                <Border Background="White"
-                            CornerRadius="6"
-                                Padding="7"
-                            BorderBrush="{StaticResource ShadowBrushLeft}"
-                            BorderThickness="2,0,1,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="4*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Margin="5" HorizontalAlignment="Left">
-                            <Image 
-                       Source="pack://application:,,,/ImageMaker.CommonView;component/Resources/camera_title_orange.png">
-                            </Image>
-                        </Viewbox>
-
-                        <TextBlock TextWrapping="Wrap" Text="Найти фото" Grid.Column="1" FontSize="15" Foreground="{StaticResource GrayBrush}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                        
-                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                            <RadioButton GroupName="gr1" Content="По имени" IsThreeState="False" IsChecked="{Binding Path=IsHashTag}" 
-                                         VerticalContentAlignment="Center"
-                                         Foreground="{StaticResource GrayBrush}" FontSize="15"/>
-                            <RadioButton GroupName="gr1" 
-                                         VerticalContentAlignment="Center"
-                                         Content="По хэштэгу" IsThreeState="False" IsChecked="{Binding Path=IsUserName}"  Foreground="{StaticResource GrayBrush}" FontSize="15"/>
-                        </StackPanel>
-
-                        <customControls:SearchBoxCtl Grid.Column="3"  SearchCommand="{Binding Path=SearchCommand}" Tag="Введите хэштег" VerticalAlignment="Center"/>
-                      
-                    </Grid>
-
-                </Border>
-            </Border>
-           
-            <ItemsControl ItemsSource="{Binding Path=ImagesView}" Grid.Row="1" Background="Transparent" BorderBrush="Transparent">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type images:InstagramImageViewModel}">
-                        <Grid  Width="100" Height="100" ToolTip="{Binding Path=Name}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="7*"/>
-                                <RowDefinition Height="3*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="3*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                            Grid.ColumnSpan="2"
-                                            Grid.RowSpan="2"
-                                        CornerRadius="5"
-                                        Background="White"
-                                        BorderBrush="Transparent" BorderThickness="1" Padding="5">
-                                <Border BorderBrush="Black" Background="Black" >
-                                    <Viewbox Stretch="Uniform">
-                                        <Image Source="{Binding Path=Data, Converter={StaticResource ByteArrayToImageConverter}}" />
-                                    </Viewbox>
-                                </Border>
-                            </Border>
-                            <ToggleButton Grid.Row="1" Grid.Column="1" >
-                                <ToggleButton.Style>
-                                    <Style TargetType="{x:Type ToggleButton}">
-                                        <Setter Property="Background" Value="White" />
-                                        <Setter Property="Padding" Value="5" />
-                                        <Setter Property="IsThreeState" Value="False" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                    <Border
-                                                                        CornerRadius="5" 
-                                                Background="{TemplateBinding Background}" 
-                                                                        Padding="{TemplateBinding Padding}" 
-                                                HorizontalAlignment="Stretch" 
-                                                VerticalAlignment="Stretch">
-                                                        <Border Background="Transparent" 
-                                                                                x:Name="Container"
-                                                        BorderBrush="{StaticResource GrayBrush}" 
-                                                        BorderThickness="1" 
-                                                        CornerRadius="5">
-                                                            <Border Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                                <Path Data="M 0,0 L 7,0 L 7,5" x:Name="Tick" Stroke="Transparent" StrokeThickness="1">
-                                                                    <Path.RenderTransform>
-                                                                        <RotateTransform Angle="135" CenterX="4.5" CenterY="2"/>
-                                                                    </Path.RenderTransform>
-                                                                </Path>
-                                                            </Border>
-
-
-                                                        </Border>
-                                                    </Border>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="Tick" Property="Stroke" Value="#FF51bf87" />
-                                                            <Setter TargetName="Container" Property="BorderBrush" Value="#FF51bf87" />
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ToggleButton.Style>
-                            </ToggleButton>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            
-            <spinningWheel:SpinningWheel 
-                HorizontalAlignment="Center"
-                IsSpinning="{Binding Path=IsBusy}" 
-                Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1"/>
-
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Button  Content="&lt; Назад" Command="{Binding Path=GoBackCommand}" HorizontalAlignment="Left"/>
-                <controls:DataPagerCtl Grid.Column="1" PageSize="5" Margin="10" 
-                                        ItemsView="{Binding Path=ImagesView}"/>
-            </Grid>
-            
-        </Grid>
-    </Border>-->
+        </Viewbox>
+    </Border>
 </UserControl>
