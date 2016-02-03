@@ -31,7 +31,7 @@ namespace InstagramImagePrinter
             InstagramExplorer instagramExplorer,
             ImageUtils imageUtils)
         {
-            
+
             _messageAdapter = messageAdapter;
             _instagramExplorer = instagramExplorer;
             _imageUtils = imageUtils;
@@ -50,17 +50,17 @@ namespace InstagramImagePrinter
             return kernel.Get<MonitoringService>();
         }
 
-        public async Task StartMonitoring(CancellationTokenSource tokenSource)
+        public void StartMonitoring(CancellationTokenSource tokenSource, Action stopService)
         {
-            await StartMonitoring(tokenSource, _endTime, _hashTag);
+            StartMonitoring(tokenSource, _endTime, _hashTag, stopService);
         }
-
-        public async Task StartMonitoring(CancellationTokenSource tokenSource, DateTime endDate, string hashTag)
+        //TODO передать токен для отмены ниже по стеку
+        public  void StartMonitoring(CancellationTokenSource tokenSource, DateTime endDate, string hashTag, Action stopService)
         {
             if (!Debugger.IsAttached)
                 Debugger.Launch();
-            //await Task.Factory.StartNew (async () =>
-            //{
+            var thread = new Thread(async () =>
+            {
                 string nextUrl = null;
                 while (!tokenSource.IsCancellationRequested)
                 {
@@ -69,10 +69,10 @@ namespace InstagramImagePrinter
 
 
                     Task.Delay(TimeSpan.FromSeconds(10)).Wait();
-                    
+
                     ImageResponse result = string.IsNullOrEmpty(nextUrl)
-                        ? await _instagramExplorer.GetImagesByHashTag(hashTag, _lastInstagramImageId, 1)
-                        : await _instagramExplorer.GetImagesFromUrl(nextUrl);
+                        ? _instagramExplorer.GetImagesByHashTag(hashTag, _lastInstagramImageId, 1).Result
+                        : _instagramExplorer.GetImagesFromUrl(nextUrl).Result;
 
                     nextUrl = result.Return(x => x.NextUrl, null);
 
@@ -82,15 +82,17 @@ namespace InstagramImagePrinter
 
                     foreach (var image in result.Images)
                     {
-                        
+
                         var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
 
                         image.Data = imageData;
                         await _messageAdapter.ProcessImages(new List<Image>() { image }, _printerName);
                     }
                 }
-
-           // },  tokenSource.Token,TaskCreationOptions.AttachedToParent, TaskScheduler.FromCurrentSynchronizationContext());
+                stopService();
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
         }
     }
 }
