@@ -6,16 +6,17 @@
              xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance viewModels:AppSettingsExplorerViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:AppSettingsExplorerViewModel}"
+             d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="{x:Type Calendar}"></Style>
     </UserControl.Resources>
-    <Border>
+    <Border Padding="85,25">
         <Border.Background>
             <ImageBrush ImageSource="../Resources/blur.jpg" Stretch="UniformToFill" />
         </Border.Background>
         <Viewbox Stretch="Uniform">
-            <Grid Height="600" Width="650">
+            <Grid Height="900" Width="900">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.35*"/>
                     <RowDefinition Height="0.5*"/>
@@ -98,29 +99,30 @@
                     </Grid>
                 </Border>
 
-                <Border Padding="20" Grid.Row="2">
-                    <Grid Width="500" Height="65">
+                <Border Padding="10" Grid.Row="2">
+                    <Grid Width="880" Height="85">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
                             <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton 
                                 Command="{Binding Path=GoBackCommand}"
-                                Grid.Column="1"
-                                CornerRadius="30"
+                                Grid.Column="0"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
+                                FontSize="18"
                                 HorizontalAlignment="Stretch"
                                 Content="Назад" 
                                 ShowBackButton="True" 
                                 CornerAlign="BottomLeft,TopLeft"/>
-                        <Rectangle Grid.Column="2" Width="48" Fill="#5543beb5"/>
                         <customControls:BlueButton 
                                 Command="{Binding Path=SaveSettings}"
-                                CornerRadius="30"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
+                                FontSize="18"
                                 HorizontalAlignment="Stretch"
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 CornerAlign="TopRight,BottomRight"
                                 Content="Сохранить"/>
                     </Grid>

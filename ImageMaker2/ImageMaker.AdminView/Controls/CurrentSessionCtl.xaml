@@ -26,7 +26,7 @@
             <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/blur.jpg" Stretch="UniformToFill" />
         </Border.Background>
         <Viewbox Stretch="Uniform">
-            <Grid Width="900" Height="730">
+            <Grid Width="900" Height="800">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.18*"/>
                     <RowDefinition Height="*"/>
@@ -207,8 +207,8 @@
                                 Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </Grid>
                 </Border>
-                <Border Padding="0" Grid.Row="2">
-                    <Grid Width="890" Height="85">
+                <Border Padding="10" Grid.Row="2">
+                    <Grid Width="880" Height="85">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.25*"/>
                             <ColumnDefinition Width="0.5*"/>
@@ -216,7 +216,7 @@
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
                                 CornerRadius="40"
-                                InnerCornerRadius="40"
+                                InnerCornerRadius="60"
                                 Padding="8"
                                 Grid.Column="0"
                                 FontSize="18"
@@ -232,6 +232,7 @@
                         <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
                         <customControls:BlueButton Command="{Binding Path=PrintCommand}"
                                 CornerRadius="40"
+                                InnerCornerRadius="60"
                                 Padding="8"
                                 FontSize="18"
                                 ShowBackButton="True"
