@@ -111,9 +111,15 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
                 //RaiseImageNumberChanged(i + 1);
                 await Task.Delay(TimeSpan.FromSeconds(1));
-
-                byte[] picture = await _imageProcessor.DoTakePicture();
+                try
+                {
+                    byte[] picture = await _imageProcessor.DoTakePicture();
                 pictures.Add(picture);
+                }
+                catch (Exception ex)
+                {
+
+                }
                 await Task.Delay(TimeSpan.FromSeconds(3)); //todo
 
                 SetCameraSettings(selectedAeMode, selectedWhiteBalance,
