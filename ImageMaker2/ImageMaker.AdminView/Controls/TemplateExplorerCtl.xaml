@@ -396,16 +396,15 @@
                     </Grid>
                 </Border>
                 <Border  Padding="10" Grid.Row="2">
-                    <!--Width="880"Height="65"-->
-                    <Grid>
+                    <Grid Width="880" Height="85">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.75*"/>
-                            <ColumnDefinition Width="1.4*"/>
-                            <ColumnDefinition Width="0.75*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
-                                CornerRadius="30"
-                                InnerCornerRadius="30"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
                                 Padding="5"
                                 Grid.Column="0"
                                 FontSize="18"
@@ -419,7 +418,8 @@
                                 PagesInRow="3"
                                 Background="#4ecdc4"/>
                         <customControls:BlueButton Command="{Binding Path=SaveCommand}"
-                                CornerRadius="30"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
                                 FontSize="18"
                                 HorizontalAlignment="Stretch"
                                 Grid.Column="2"

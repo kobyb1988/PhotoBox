@@ -506,31 +506,28 @@
                 </Grid>
 
                 <Border Padding="10" Grid.Row="2">
-                    <Grid Width="700" Height="75">
+                    <Grid Width="880" Height="85">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="0.35*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="0.35*"/>
-                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
-                                CornerRadius="35"
-                                InnerCornerRadius="35"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
                                 Padding="8"
-                                Grid.Column="1"
+                                Grid.Column="0"
                                 FontSize="18"
                                 HorizontalAlignment="Stretch"
                                 Content="Назад" 
                                 ShowBackButton="True" 
                                 CornerAlign="BottomLeft,TopLeft"/>
-
-                        <Rectangle Grid.Column="2" Width="48" Fill="#5543beb5"/>
                         <customControls:BlueButton Command="{Binding Path=SaveSettingsCommand}"
-                                CornerRadius="35"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
                                 FontSize="18"
                                 HorizontalAlignment="Stretch"
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 CornerAlign="TopRight,BottomRight"
                                 Content="Сохранить"/>
                     </Grid>

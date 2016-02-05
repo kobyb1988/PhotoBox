@@ -8,12 +8,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels:CameraSettingsExplorerViewModel}">
-    <Border>
+    <Border Padding="85,25">
         <Border.Background>
             <ImageBrush ImageSource="../Resources/blur.jpg" Stretch="UniformToFill" />
         </Border.Background>
         <Viewbox Stretch="Uniform">
-            <Grid>
+            <Grid Width="900" Height="800">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.4*"/>
                     <RowDefinition Height="0.51*"/>
@@ -88,34 +88,33 @@
                     </Grid>
                 </Border>
 
-                <Viewbox Grid.Row="2" Stretch="Uniform">
-                    <Border Padding="20">
-                        <Grid Width="550" Height="65">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.5*"/>
-                                <ColumnDefinition Width="0.5*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="0.5*"/>
-                                <ColumnDefinition Width="0.5*"/>
-                            </Grid.ColumnDefinitions>
-                            <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
-                                    Grid.Column="1"
-                                    Padding="7"
-                                    HorizontalAlignment="Stretch"
-                                    CornerRadius="30"
-                                    Content="Назад" 
-                                    ShowBackButton="True" 
-                                    CornerAlign="BottomLeft,TopLeft"/>
-                            <Rectangle Grid.Column="2" Width="48" Fill="#5543beb5"/>
-                            <customControls:BlueButton Command="{Binding Path=SaveSettings}"
-                                    CornerRadius="30"
-                                    HorizontalAlignment="Stretch"
-                                    Grid.Column="3"
-                                    CornerAlign="TopRight,BottomRight"
-                                    Content="Сохранить"/>
-                        </Grid>
-                    </Border>
-                </Viewbox>
+                <Border Padding="10" Grid.Row="2">
+                    <Grid Width="880" Height="85">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
+                                Grid.Column="0"
+                                Padding="7"
+                                FontSize="18"
+                                HorizontalAlignment="Stretch"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
+                                Content="Назад" 
+                                ShowBackButton="True" 
+                                CornerAlign="BottomLeft,TopLeft"/>
+                        <customControls:BlueButton Command="{Binding Path=SaveSettings}"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
+                                FontSize="18"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="2"
+                                CornerAlign="TopRight,BottomRight"
+                                Content="Сохранить"/>
+                    </Grid>
+                </Border>
             </Grid>
         </Viewbox>
     </Border>

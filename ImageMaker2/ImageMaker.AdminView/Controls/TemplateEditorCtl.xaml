@@ -368,15 +368,15 @@
                     </Grid>
                 </Grid>
                 <Border Padding="10" Grid.Row="2">
-                    <Grid >
+                    <Grid Width="880" Height="85">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.75*"/>
-                            <ColumnDefinition Width="1.4*"/>
-                            <ColumnDefinition Width="0.75*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
                         <customControls1:BlueButton Command="{Binding Path=GoBackCommand}"
-                                CornerRadius="30"
-                                InnerCornerRadius="30"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
                                 Padding="5"
                                 Grid.Column="0"
                                 FontSize="18"
@@ -384,9 +384,9 @@
                                 Content="Назад" 
                                 ShowBackButton="True" 
                                 CornerAlign="BottomLeft,TopLeft"/>
-                        <Rectangle Grid.Column="2" Width="18" Fill="#5543beb5"/>
                         <customControls1:BlueButton Command="{Binding Path=SaveCommand}"
-                                CornerRadius="30"
+                                CornerRadius="40"
+                                InnerCornerRadius="60"
                                 FontSize="18"
                                 HorizontalAlignment="Stretch"
                                 Grid.Column="2"
