@@ -165,13 +165,13 @@
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.SelectObjectCommand}" 
                                     CommandParameter="{x:Null}" />
                         </Border.InputBindings>
-                        <ListBox SelectionMode="Single" 
+                        <ListBox SelectionMode="Single"
                                 Padding="0"
                                 DataContext="{Binding Path=Template}"
                                 ItemsSource="{Binding Path=Children}"
                                 SelectedItem="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.SelectedObject}">
                             <ListBox.Background>
-                                <ImageBrush ImageSource="{Binding Path=Background.Data, TargetNullValue={StaticResource GrayBrush}, FallbackValue={StaticResource GrayBrush}, Converter={StaticResource ByteArrayToImageConverter}}" />
+                                <ImageBrush ImageSource="{Binding Path=Background.Data, TargetNullValue={StaticResource GrayBrush}, FallbackValue={StaticResource GrayBrush}, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
                             </ListBox.Background>
 
                             <ItemsControl.Resources>
@@ -291,7 +291,7 @@
                                             MinHeight="{Binding Path=Height}">
                                         <Canvas.Background>
                                             <ImageBrush Opacity="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.OverlayOpacity}" 
-                                                    ImageSource="{Binding Path=Overlay.Data, Converter={StaticResource ByteArrayToImageConverter}}" />
+                                                    ImageSource="{Binding Path=Overlay.Data, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
                                         </Canvas.Background>
 
                                         <i:Interaction.Behaviors>

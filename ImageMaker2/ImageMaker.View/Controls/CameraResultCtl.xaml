@@ -43,7 +43,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center" 
                                     Foreground="Red"/>
-                            <TextBlock Text="Печать результата" 
+                            <TextBlock Text="Печать результата"
                                     FontSize="20"
                                     VerticalAlignment="Center"/>
                         </StackPanel>
@@ -54,7 +54,7 @@
                     <Grid>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}}"/>
+                                <ImageBrush ImageSource="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Grid>
