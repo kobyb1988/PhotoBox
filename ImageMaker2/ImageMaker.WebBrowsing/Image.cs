@@ -21,6 +21,9 @@ namespace ImageMaker.WebBrowsing
 
         [JsonProperty("height")]
         public int Height { get; set; }
+        
+        [JsonProperty("createdtime")]
+        public long CreatedTime { get; set; }
 
         [JsonProperty("data")]
         public byte[] Data { get; set; }

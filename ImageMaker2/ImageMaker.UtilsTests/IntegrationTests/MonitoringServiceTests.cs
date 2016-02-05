@@ -18,7 +18,7 @@ namespace ImageMaker.UtilsTests.IntegrationTests
             bool res = false;
             await Task.Run(() =>
            {
-               svc.StartMonitoring(new CancellationTokenSource(), DateTime.Now + TimeSpan.FromMinutes(2), "love", () => { });
+               svc.StartMonitoring(new CancellationTokenSource(), DateTime.Now, DateTime.Now + TimeSpan.FromMinutes(2), "love", () => { });
                res = true;
            });
 

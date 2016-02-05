@@ -12,8 +12,6 @@ namespace ImageMaker.InstagramMonitoring
     {
         public InstagramService()
         {
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
             InitializeComponent();
         }
 
