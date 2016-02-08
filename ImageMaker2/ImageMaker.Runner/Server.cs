@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using ImageMaker.AppServer;
 using ImageMaker.Runner.Annotations;
+using NLog;
 
 namespace ImageMaker.Runner
 {
@@ -24,14 +25,15 @@ namespace ImageMaker.Runner
             try
             {
                 _host.Open();
-                Console.WriteLine("qq epta!");
+                LogManager.GetCurrentClassLogger().Info("start server");
             }
-            catch (TimeoutException)
+            catch (TimeoutException ex)
             {
+                LogManager.GetCurrentClassLogger().Error(ex);
             }
-            catch (CommunicationException)
+            catch (CommunicationException ex)
             {
-
+                LogManager.GetCurrentClassLogger().Error(ex);
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using ImageMaker.ViewModels.ViewModels;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ImageMaker.View
 {
@@ -15,6 +17,7 @@ namespace ImageMaker.View
         public MainWindow()
         {
             InitializeComponent();
+
             //TouchDown += BasePage_TouchDown;
             //TouchMove += BasePage_TouchMove;
         }
