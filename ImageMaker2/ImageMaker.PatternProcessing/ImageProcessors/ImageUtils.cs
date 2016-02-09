@@ -83,11 +83,20 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             Image backgroundImage = backgroundStream.Return(Image.FromStream, null);
             Image overlayImage = overlayStream.Return(Image.FromStream, null);
 
-            int width = Math.Max(defWidth,
-                Math.Max(backgroundImage.Return(x => x.Width, defWidth), overlayImage.Return(x => x.Width, defWidth)));
+            //int width = Math.Max(defWidth,
+            //    Math.Max(backgroundImage.Return(x => x.Width, defWidth), overlayImage.Return(x => x.Width, defWidth)));
 
-            int height = Math.Max(defHeight,
-                Math.Max(backgroundImage.Return(x => x.Height, defHeight), overlayImage.Return(x => x.Height, defHeight)));
+            //int height = Math.Max(defHeight,
+            //    Math.Max(backgroundImage.Return(x => x.Height, defHeight), overlayImage.Return(x => x.Height, defHeight)));
+
+            int width = Math.Max(backgroundImage.Return(x => x.Width, 0), overlayImage.Return(x => x.Width, 0));
+            int height = Math.Max(backgroundImage.Return(x => x.Height, 0), overlayImage.Return(x => x.Height, 0));
+
+            if (width == 0 && height == 0)
+            {
+                width = defWidth;
+                height = defHeight;
+            }
 
             using (Bitmap backgroundBitmap = new Bitmap(width, height))
             {

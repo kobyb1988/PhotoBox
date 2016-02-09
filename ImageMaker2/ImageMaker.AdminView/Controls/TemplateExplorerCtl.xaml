@@ -167,7 +167,8 @@
                                                                 BorderBrush="Transparent" BorderThickness="2" 
                                                                 Width="157.4"
                                                                 Height="157.4">
-                                                            <Grid x:Name="rootGrid" ToolTip="{Binding Path=Name}">
+                                                            <Grid x:Name="rootGrid"
+                                                                    ToolTip="{Binding Path=Name}">
                                                                 <Grid.RowDefinitions>
                                                                     <RowDefinition Height="7*"/>
                                                                     <RowDefinition Height="3*"/>
@@ -177,96 +178,100 @@
                                                                     <ColumnDefinition Width="6*"/>
                                                                 </Grid.ColumnDefinitions>
 
-                                                                <ItemsControl Grid.RowSpan="2"
+                                                                <Viewbox Stretch="Uniform"
+                                                                        Grid.RowSpan="2"
                                                                         Grid.ColumnSpan="2"
-                                                                        Margin="5"
-                                                                        ItemsSource="{Binding Path=Children}">
-                                                                    <ItemsControl.Background>
-                                                                        <ImageBrush ImageSource="{Binding Path=Background.Data, Converter={StaticResource ByteArrayToImageConverter}}" />
-                                                                    </ItemsControl.Background>
-                                                                    <ItemsControl.ItemsPanel>
-                                                                        <ItemsPanelTemplate>
-                                                                            <Canvas IsItemsHost="True" 
-                                                                                    Width="{Binding Width}" 
-                                                                                    Height="{Binding Height}">
-                                                                                <Canvas.Background>
-                                                                                    <ImageBrush ImageSource="{Binding Path=Overlay.Data, Converter={StaticResource ByteArrayToImageConverter}}" />
-                                                                                </Canvas.Background>
-                                                                            </Canvas>
-                                                                        </ItemsPanelTemplate>
-                                                                    </ItemsControl.ItemsPanel>
-                                                                    <ItemsControl.Template>
-                                                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                                                            <Border Padding="{TemplateBinding Padding}"
-                                                                                    Width="{TemplateBinding Width}"
-                                                                                    Height="{TemplateBinding Height}"
-                                                                                    BorderBrush="{TemplateBinding BorderBrush}" 
-                                                                                    BorderThickness="{TemplateBinding BorderThickness}" 
-                                                                                    Background="{TemplateBinding Background}">
-                                                                                <Viewbox Stretch="Fill" >
-                                                                                    <ItemsPresenter />
-                                                                                </Viewbox>
-                                                                            </Border>
-                                                                        </ControlTemplate>
-                                                                    </ItemsControl.Template>
-                                                                    <ItemsControl.ItemContainerStyle>
-                                                                        <Style>
-                                                                            <Setter Property="Canvas.Left">
-                                                                                <Setter.Value>
-                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                                                        <Binding Path="X" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                                                        <Binding Path="DataContext.Width" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
-                                                                                    </MultiBinding>
-                                                                                </Setter.Value>
-                                                                            </Setter>
-                                                                            <Setter Property="Canvas.Top">
-                                                                                <Setter.Value>
-                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                                                        <Binding Path="Y" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                                                        <Binding Path="DataContext.Height" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
-                                                                                    </MultiBinding>
-                                                                                </Setter.Value>
-                                                                            </Setter>
-                                                                        </Style>
-                                                                    </ItemsControl.ItemContainerStyle>
-                                                                    <ItemsControl.ItemTemplate>
-                                                                        <DataTemplate DataType="{x:Type images:TemplateImageViewModel}">
-                                                                            <Label>
-                                                                                <Label.Width>
-                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                                                        <Binding Path="Width" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                                                        <Binding Path="DataContext.Width" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
-                                                                                    </MultiBinding>
-                                                                                </Label.Width>
-                                                                                <Label.Height>
-                                                                                    <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                                                        <Binding Path="Height" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                                                        <Binding Path="DataContext.Height" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
-                                                                                    </MultiBinding>
-                                                                                </Label.Height>
-                                                                                <Label.Style>
-                                                                                    <Style TargetType="{x:Type Label}">
-                                                                                        <Setter Property="BorderBrush" Value="Black" />
-                                                                                        <Setter Property="BorderThickness" Value="2" />
-                                                                                        <Setter Property="Template">
+                                                                        Margin="5">
+                                                                    <ItemsControl ItemsSource="{Binding Path=Children}"
+                                                                            Width="{Binding Path=Background.Width}"
+                                                                            Height="{Binding Path=Background.Height}">
+                                                                        <ItemsControl.Background>
+                                                                            <ImageBrush ImageSource="{Binding Path=Background.Data, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
+                                                                        </ItemsControl.Background>
+                                                                        <ItemsControl.ItemsPanel>
+                                                                            <ItemsPanelTemplate>
+                                                                                <Canvas IsItemsHost="True" 
+                                                                                        Width="{Binding Width}" 
+                                                                                        Height="{Binding Height}">
+                                                                                    <Canvas.Background>
+                                                                                        <ImageBrush ImageSource="{Binding Path=Overlay.Data, Converter={StaticResource ByteArrayToImageConverter}}" />
+                                                                                    </Canvas.Background>
+                                                                                </Canvas>
+                                                                            </ItemsPanelTemplate>
+                                                                        </ItemsControl.ItemsPanel>
+                                                                        <ItemsControl.Template>
+                                                                            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                                                                <Border Padding="{TemplateBinding Padding}"
+                                                                                        Width="{TemplateBinding Width}"
+                                                                                        Height="{TemplateBinding Height}"
+                                                                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                                                                        BorderThickness="{TemplateBinding BorderThickness}" 
+                                                                                        Background="{TemplateBinding Background}">
+                                                                                    <Viewbox Stretch="Fill" >
+                                                                                        <ItemsPresenter />
+                                                                                    </Viewbox>
+                                                                                </Border>
+                                                                            </ControlTemplate>
+                                                                        </ItemsControl.Template>
+                                                                        <ItemsControl.ItemContainerStyle>
+                                                                            <Style>
+                                                                                <Setter Property="Canvas.Left">
+                                                                                    <Setter.Value>
+                                                                                        <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                            <Binding Path="X" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                            <Binding Path="DataContext.Width" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                        </MultiBinding>
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                                <Setter Property="Canvas.Top">
+                                                                                    <Setter.Value>
+                                                                                        <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                            <Binding Path="Y" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                            <Binding Path="DataContext.Height" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                        </MultiBinding>
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                            </Style>
+                                                                        </ItemsControl.ItemContainerStyle>
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate DataType="{x:Type images:TemplateImageViewModel}">
+                                                                                <Label>
+                                                                                    <Label.Width>
+                                                                                        <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                            <Binding Path="Width" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                            <Binding Path="DataContext.Width" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                        </MultiBinding>
+                                                                                    </Label.Width>
+                                                                                    <Label.Height>
+                                                                                        <MultiBinding Converter="{StaticResource DoubleValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                                                            <Binding Path="Height" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                                                            <Binding Path="DataContext.Height" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}" />
+                                                                                        </MultiBinding>
+                                                                                    </Label.Height>
+                                                                                    <Label.Style>
+                                                                                        <Style TargetType="{x:Type Label}">
+                                                                                            <Setter Property="BorderBrush" Value="Black" />
+                                                                                            <Setter Property="BorderThickness" Value="2" />
+                                                                                            <Setter Property="Template">
 
-                                                                                            <Setter.Value>
-                                                                                                <ControlTemplate TargetType="{x:Type Label}">
-                                                                                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
-                                                                                                            BorderThickness="{TemplateBinding BorderThickness}"  
-                                                                                                            Height="{TemplateBinding Height}"
-                                                                                                            Width="{TemplateBinding Width}">
-                                                                                                        <Rectangle Fill="Gray" />
-                                                                                                    </Border>
-                                                                                                </ControlTemplate>
-                                                                                            </Setter.Value>
-                                                                                        </Setter>
-                                                                                    </Style>
-                                                                                </Label.Style>
-                                                                            </Label>
-                                                                        </DataTemplate>
-                                                                    </ItemsControl.ItemTemplate>
-                                                                </ItemsControl>
+                                                                                                <Setter.Value>
+                                                                                                    <ControlTemplate TargetType="{x:Type Label}">
+                                                                                                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                                                                                BorderThickness="{TemplateBinding BorderThickness}"  
+                                                                                                                Height="{TemplateBinding Height}"
+                                                                                                                Width="{TemplateBinding Width}">
+                                                                                                            <Rectangle Fill="Gray" />
+                                                                                                        </Border>
+                                                                                                    </ControlTemplate>
+                                                                                                </Setter.Value>
+                                                                                            </Setter>
+                                                                                        </Style>
+                                                                                    </Label.Style>
+                                                                                </Label>
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                </Viewbox>
 
                                                                 <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
                                                                 <DockPanel Grid.Row="1" Grid.Column="1">

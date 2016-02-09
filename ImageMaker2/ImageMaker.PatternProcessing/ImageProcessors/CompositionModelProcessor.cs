@@ -114,7 +114,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 try
                 {
                     byte[] picture = await _imageProcessor.DoTakePicture();
-                pictures.Add(picture);
+                    pictures.Add(picture);
                 }
                 catch (Exception ex)
                 {

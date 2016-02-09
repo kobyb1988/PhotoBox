@@ -52,10 +52,10 @@
                 </Border>
 
                 <Border Grid.Row="1" Padding="20">
-                    <Grid >
-                        <Rectangle >
+                    <Grid>
+                        <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush >
+                                <ImageBrush Stretch="Uniform">
                                     <ImageBrush.ImageSource>
                                         <MultiBinding Converter="{StaticResource LiveViewImageConverter}">
                                             <Binding Path="LiveViewImageStream" />
