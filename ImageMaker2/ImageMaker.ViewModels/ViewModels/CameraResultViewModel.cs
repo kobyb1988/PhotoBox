@@ -7,6 +7,7 @@ using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.PatternProcessing;
 using ImageMaker.Utils.Services;
+using System.IO;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
@@ -59,6 +60,8 @@ namespace ImageMaker.ViewModels.ViewModels
         private RelayCommand _printImageCommand;
         private RelayCommand _goBackCommand;
         private byte[] _image;
+        private int _width;
+        private int _height;
         private int _copiesCount;
         private RelayCommand _completeCommand;
         private RelayCommand _changeUpCommand;
@@ -68,7 +71,22 @@ namespace ImageMaker.ViewModels.ViewModels
         public byte[] Image
         {
             get { return _image; }
-            set { Set(() => Image, ref _image, value); }
+            set {
+                Set(() => Image, ref _image, value);
+
+                var image = System.Drawing.Image.FromStream(new MemoryStream(Image));
+                _width = image.Width;
+                _height = image.Height;
+            }
+        }
+
+        public int Width
+        {
+            get { return _width; }
+        }
+        public int Height
+        {
+            get { return _height; }
         }
 
         public int CopiesCount

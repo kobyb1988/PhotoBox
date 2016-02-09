@@ -10,7 +10,7 @@
              xmlns:controls="clr-namespace:ImageMaker.View.Controls"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:CameraResultViewModel}"
              d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
@@ -52,11 +52,13 @@
 
                 <Border  Grid.Row="1" Padding="20">
                     <Grid>
-                        <Rectangle>
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
-                            </Rectangle.Fill>
-                        </Rectangle>
+                        <Viewbox Stretch="Uniform">
+                            <Rectangle Height="{Binding Path=Height}" Width="{Binding Path=Width}">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Viewbox>
                     </Grid>
                 </Border>
                 <Border  Padding="0" Grid.Row="2">

@@ -81,7 +81,7 @@
                                                                     <ColumnDefinition Width="7*"/>
                                                                     <ColumnDefinition Width="3*"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Image Stretch="Fill" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                                                <Image Stretch="Uniform" Grid.ColumnSpan="2" Grid.RowSpan="2">
                                                                     <Image.Source>
                                                                         <MultiBinding Converter="{StaticResource ImageConverter}" UpdateSourceTrigger="PropertyChanged">
                                                                             <Binding Path="TemplateImages"/>
