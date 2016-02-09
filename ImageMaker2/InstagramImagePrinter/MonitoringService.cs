@@ -12,6 +12,7 @@ using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.WebBrowsing;
 using InstagramImagePrinter.Ninject;
 using Ninject;
+using ImageMaker.Data.Repositories;
 
 namespace InstagramImagePrinter
 {
@@ -20,7 +21,9 @@ namespace InstagramImagePrinter
         private readonly MessageAdapter _messageAdapter;
         private readonly InstagramExplorer _instagramExplorer;
         private readonly ImageUtils _imageUtils;
+        private readonly IImageRepository _imageRep;
         private readonly string _hashTag;
+        private readonly DateTime _startTime;
         private readonly DateTime _endTime;
         private readonly string _printerName;
         private string _lastInstagramImageId;
@@ -29,17 +32,20 @@ namespace InstagramImagePrinter
             SettingsProvider settingsProvider,
             MessageAdapter messageAdapter,
             InstagramExplorer instagramExplorer,
-            ImageUtils imageUtils)
+            ImageUtils imageUtils,
+            IImageRepository imageRep)
         {
-            
+
             _messageAdapter = messageAdapter;
             _instagramExplorer = instagramExplorer;
             _imageUtils = imageUtils;
+            _imageRep = imageRep;
             AppSettingsDto settings = settingsProvider.GetAppSettings();
             if (settings == null)
                 throw new InvalidOperationException();
 
             _hashTag = settings.HashTag;
+            _startTime = imageRep.GetActiveSession(includeImages: false).StartTime;
             _endTime = settings.DateEnd;
             _printerName = settings.PrinterName;
         }
@@ -50,47 +56,60 @@ namespace InstagramImagePrinter
             return kernel.Get<MonitoringService>();
         }
 
-        public async Task StartMonitoring(CancellationTokenSource tokenSource)
+        public void StartMonitoring(CancellationTokenSource tokenSource, Action stopService)
         {
-            await StartMonitoring(tokenSource, _endTime, _hashTag);
+            StartMonitoring(tokenSource, _startTime, _endTime, _hashTag, stopService);
         }
-
-        public async Task StartMonitoring(CancellationTokenSource tokenSource, DateTime endDate, string hashTag)
+        //TODO передать токен для отмены ниже по стеку
+        public  void StartMonitoring(CancellationTokenSource tokenSource, DateTime startDate, DateTime endDate, string hashTag, Action stopService)
         {
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
-            //await Task.Factory.StartNew (async () =>
-            //{
-                string nextUrl = null;
-                while (!tokenSource.IsCancellationRequested)
+            var thread = new Thread( () =>
+            {
+                var printed = new List<string>();
+                try
                 {
-                    if (DateTime.Now.Ticks >= endDate.Ticks)
-                        break;
-
-
-                    Task.Delay(TimeSpan.FromSeconds(10)).Wait();
-                    
-                    ImageResponse result = string.IsNullOrEmpty(nextUrl)
-                        ? await _instagramExplorer.GetImagesByHashTag(hashTag, _lastInstagramImageId, 1)
-                        : await _instagramExplorer.GetImagesFromUrl(nextUrl);
-
-                    nextUrl = result.Return(x => x.NextUrl, null);
-
-                    if (nextUrl == null && _lastInstagramImageId == result.MinTagId)
-                        continue;
-                    _lastInstagramImageId = result.MinTagId;
-
-                    foreach (var image in result.Images)
+                    string nextUrl = null;
+                    while (!tokenSource.IsCancellationRequested)
                     {
-                        
-                        var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
+                        if (DateTime.Now.Ticks >= endDate.Ticks)
+                            break;
 
-                        image.Data = imageData;
-                        await _messageAdapter.ProcessImages(new List<Image>() { image }, _printerName);
+                        Task.Delay(TimeSpan.FromSeconds(10)).Wait();
+
+                        ImageResponse result = string.IsNullOrEmpty(nextUrl)
+                            ? _instagramExplorer.GetImagesByHashTag(hashTag, "", 1).Result
+                            : _instagramExplorer.GetImagesFromUrl(nextUrl).Result;
+
+                        nextUrl = result.Return(x => x.NextUrl, null);
+
+                        foreach (var image in result.Images)
+                        {
+                            if (image.CreatedTime < startDate.Ticks)
+                            {
+                                nextUrl = null;
+                                printed.Add(image.Url);
+                            }
+
+                            if (printed.Contains(image.Url))
+                                continue;
+
+                            printed.Add(image.Url);
+                            var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
+
+                            image.Data = imageData;
+                            _messageAdapter.ProcessImages(new List<Image>() { image }, _printerName).Wait();
+                        }
                     }
                 }
+                catch( Exception ec)
+                {
 
-           // },  tokenSource.Token,TaskCreationOptions.AttachedToParent, TaskScheduler.FromCurrentSynchronizationContext());
+                }
+                
+                stopService();
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
         }
     }
 }

@@ -12,8 +12,6 @@ namespace ImageMaker.InstagramMonitoring
     {
         public InstagramService()
         {
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
             InitializeComponent();
         }
 
@@ -29,13 +27,13 @@ namespace ImageMaker.InstagramMonitoring
             
         }
 
-        protected async void StartService()
+        protected  void StartService()
         {
             try
             {
                 MonitoringService service = MonitoringService.Create();
                 _tokenSource = new CancellationTokenSource();
-                await service.StartMonitoring(_tokenSource);
+                 service.StartMonitoring(_tokenSource,()=>Stop());
             }
             catch (Exception e)
             {

@@ -38,6 +38,13 @@ namespace ImageMaker.WebBrowsing
                         {
                             fullname=string.IsNullOrEmpty(fullName) ? userDataToken.SelectToken("username").Value<string>() : fullName,
                         });
+                        long created = tokenData.SelectToken("created_time").Value<long>();
+                        var dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                        dt = dt.AddSeconds(created).ToLocalTime();
+                        JObject dateObject = JObject.FromObject(new
+                        {
+                            createdtime = dt.Ticks
+                        });
                         JObject profilepictureObject = JObject.FromObject(new {profilepictureobject= userDataToken.SelectToken("profile_picture").Value<string>() });
                         JObject avatarData = JObject.FromObject(new
                         {
@@ -52,6 +59,7 @@ namespace ImageMaker.WebBrowsing
                         jObject.Merge(imageObject);
                         jObject.Merge(dataObject);
                         jObject.Merge(userObject);
+                        jObject.Merge(dateObject);
                         jObject.Merge(profilepictureObject);
                         jObject.Merge(avatarData);
                         images.Add(jObject.ToObject<Image>());
@@ -67,7 +75,7 @@ namespace ImageMaker.WebBrowsing
             return imageResponse;
         }
         
-        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string maxTagId,byte count=15)
+        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string maxTagId, byte count=15)
         {
             if (string.IsNullOrEmpty(hashTag))
                 return await Task.FromResult<ImageResponse>(null);
