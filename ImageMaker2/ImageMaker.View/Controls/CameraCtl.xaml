@@ -226,36 +226,20 @@
                                 Grid.Column="0"
                                 FontSize="18"
                                 HorizontalAlignment="Stretch"
-                                Content="Назад"
+                                Content="Отменить"
                                 ShowBackButton="True" 
                                 CornerAlign="BottomLeft,TopLeft"/>
 
-                        <Button Grid.Column="1" 
-                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
-                                Command="{Binding Path=TakePictureCommand}">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="OverridesDefaultStyle" Value="True" />
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}" CornerRadius="40" HorizontalAlignment="Center">
-                                                    <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/take_picture.png">
-                                                        <Image.RenderTransform>
-                                                            <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
-                                                        </Image.RenderTransform>
-                                                        <Image.RenderTransformOrigin>
-                                                            <Point X="0.5" Y="0.5" />
-                                                        </Image.RenderTransformOrigin>
-                                                    </Image>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                        <Border Grid.Column="1"  Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}" CornerRadius="40" HorizontalAlignment="Center">
+                            <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/take_picture.png">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
+                                </Image.RenderTransform>
+                                <Image.RenderTransformOrigin>
+                                    <Point X="0.5" Y="0.5" />
+                                </Image.RenderTransformOrigin>
+                            </Image>
+                        </Border>
                     </Grid>
                 </Border>
             </Grid>

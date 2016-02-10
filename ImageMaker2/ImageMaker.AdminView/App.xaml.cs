@@ -12,6 +12,7 @@ using ImageMaker.AdminViewModels.Ninject;
 using ImageMaker.AdminViewModels.ViewModels;
 using ImageMaker.CommonViewModels.Ninject;
 using Ninject;
+using NLog;
 
 namespace ImageMaker.AdminView
 {
@@ -26,7 +27,11 @@ namespace ImageMaker.AdminView
             Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
 
-            Dispatcher.UnhandledException += (sender, args) => MessageBox.Show(args.Exception.ToString());
+            Dispatcher.UnhandledException += (sender, args) =>
+            {
+                MessageBox.Show(args.Exception.ToString());
+                LogManager.GetCurrentClassLogger().Error(args.Exception);
+            };
             InitApp();
         }
 

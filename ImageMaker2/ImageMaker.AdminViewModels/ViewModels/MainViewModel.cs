@@ -9,6 +9,7 @@ using ImageMaker.CommonViewModels.Messenger;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using NLog;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -117,7 +118,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private void StartMain()
         {
             RaiseRequestClose(WindowState.Hidden);
-            if (_process != null)
+            //Если процесс завершился аварийно то он останется в VM
+            if (_process != null && Process.GetProcessesByName(CMain).Length > 0)
             {
                 _communicationManager.SendHideCommand();
                 return;
@@ -129,17 +131,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 try
                 {
-                    _process = Process.Start(new ProcessStartInfo(CMain)
-                    {
-                    });
+                    _process = Process.Start(new ProcessStartInfo(CMain));
                     _process.ErrorDataReceived += ErorHandle;
                     _process.WaitForExit();
-                    var s = 0;
                 }
                 catch (Exception ex)
                 {
-                    
-                    throw;
+
+                    LogManager.GetCurrentClassLogger().Error(ex);
                 }
                 
             });
@@ -147,7 +146,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void ErorHandle(object sender, DataReceivedEventArgs e)
         {
-            
+            LogManager.GetCurrentClassLogger().Error(e.Data);
         }
 
         public event EventHandler<bool> StateChanged;

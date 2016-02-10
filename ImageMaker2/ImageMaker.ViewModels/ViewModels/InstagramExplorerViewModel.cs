@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Monads;
@@ -29,6 +27,7 @@ namespace ImageMaker.ViewModels.ViewModels
 {
     public class InstagramExplorerViewModel : BaseViewModel, ISearch
     {
+        #region Properties And Fields
         private readonly IViewModelNavigator _navigator;
         private readonly ImagePrinter _printer;
         private readonly PatternViewModelProvider _patternVmProvider;
@@ -37,26 +36,23 @@ namespace ImageMaker.ViewModels.ViewModels
         private readonly InstagramExplorer _instagramExplorer;
         private readonly string _printerName;
 
-        public InstagramExplorerViewModel(
-            IViewModelNavigator navigator,
-            InstagramExplorer instagramExplorer,
-            SettingsProvider settings,
-            ImagePrinter printer, PatternViewModelProvider patternVMProvider,
-            ImageUtils imageUtils, IMappingEngine mappingEngine)
-        {
-            _navigator = navigator;
-            _printer = printer;
-            _patternVmProvider = patternVMProvider;
-            _imageUtils = imageUtils;
-            _mappingEngine = mappingEngine;
-            _instagramExplorer = instagramExplorer;
-            AppSettingsDto appSettings = settings.GetAppSettings();
-            if (appSettings != null)
-                _printerName = appSettings.PrinterName;
+        private RelayCommand _goBackCommand;
+        private bool _isHashTag;
+        private bool _isUserName;
+        private ObservableCollection<InstagramImageViewModel> _images;
+        private RelayCommand<string> _searchCommand;
+        private bool _isBusy;
+        private ICollectionView _imagesView;
 
-            IsHashTag = true;
+        private string _nextUrl;
+        private string _previousSearch;
 
-        }
+        private InstagramImageViewModel _checkedImage;
+        private RelayCommand<InstagramImageViewModel> _checkCommand;
+
+        private string _textSearch;
+        private string _lastInstagramImageId;
+
 
         public bool IsHashTag
         {
@@ -88,74 +84,6 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public ICollectionView ImagesView
-        {
-            get { return _imagesView ?? (_imagesView = CollectionViewSource.GetDefaultView(Images)); }
-        }
-
-        public RelayCommand PrintCommand
-        {
-            get { return _printCommand ?? (_printCommand = new RelayCommand(Print, () => _checkedImages.IsValueCreated && _checkedImages.Value.Count > 0)); }
-        }
-
-        private async void Print()
-        {
-            var result = await _patternVmProvider.GetPatternsAsync();
-
-            TemplateViewModel instaTemplate = result.SingleOrDefault(x => x.IsInstaPrinterTemplate);
-            Action<byte[]> print = null;
-            if (!string.IsNullOrEmpty(_printerName))
-                print = (data) => _printer.Print(data, _printerName);
-            else
-            {
-                print = (data) => _printer.Print(data);
-            }
-
-            foreach (var image in _checkedImages.Value)
-            {
-                byte[] imageData = new byte[] { };
-                Size imageStreamSize;
-
-                using (var stream = new MemoryStream(image.Data))
-                {
-                    var img = Image.FromStream(stream);
-                    imageStreamSize = img.Size;
-                }
-
-                if (instaTemplate != null)
-                    imageData = _imageUtils.ProcessImages(new List<byte[]> { image.Data }, imageStreamSize,
-                        _mappingEngine.Map<EntityTemplate>(instaTemplate));
-
-                else
-                {
-                    imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
-                }
-                print(imageData);
-            }
-        }
-
-        public ObservableCollection<InstagramImageViewModel> Images
-        {
-            get { return _images ?? (_images = new ObservableCollection<InstagramImageViewModel>()); }
-        }
-
-        private RelayCommand _goBackCommand;
-        private bool _isHashTag;
-        private bool _isUserName;
-        private ObservableCollection<InstagramImageViewModel> _images;
-        private RelayCommand<string> _searchCommand;
-        private bool _isBusy;
-        private ICollectionView _imagesView;
-
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack, () => !IsBusy)); }
-        }
-
-        public RelayCommand<string> SearchCommand
-        {
-            get { return _searchCommand ?? (_searchCommand = new RelayCommand<string>(Search, (s) => !IsBusy)); }
-        }
 
         public bool IsBusy
         {
@@ -170,27 +98,87 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        private string _nextUrl;
-        private string _previousSearch;
-        private RelayCommand _printCommand;
-
-        public RelayCommand<InstagramImageViewModel> CheckCommand
+        public string TextSearch
         {
-            get { return _checkCommand ?? (_checkCommand = new RelayCommand<InstagramImageViewModel>(Check)); }
+            get
+            {
+                return _textSearch;
+            }
+            set
+            {
+                _textSearch = value;
+                RaisePropertyChanged();
+            }
         }
 
-        private readonly Lazy<List<InstagramImageViewModel>> _checkedImages = new Lazy<List<InstagramImageViewModel>>();
-        private RelayCommand<InstagramImageViewModel> _checkCommand;
+        public ICollectionView ImagesView => _imagesView ?? (_imagesView = CollectionViewSource.GetDefaultView(Images));
+        public ObservableCollection<InstagramImageViewModel> Images => _images ?? (_images = new ObservableCollection<InstagramImageViewModel>());
 
-        private void Check(InstagramImageViewModel image)
+        #endregion
+        
+        public InstagramExplorerViewModel(
+            IViewModelNavigator navigator,
+            InstagramExplorer instagramExplorer,
+            SettingsProvider settings,
+            ImagePrinter printer, PatternViewModelProvider patternVMProvider,
+            ImageUtils imageUtils, IMappingEngine mappingEngine)
         {
-            if (_checkedImages.Value.Contains(image))
+            _navigator = navigator;
+            _printer = printer;
+            _patternVmProvider = patternVMProvider;
+            _imageUtils = imageUtils;
+            _mappingEngine = mappingEngine;
+            _instagramExplorer = instagramExplorer;
+            AppSettingsDto appSettings = settings.GetAppSettings();
+            if (appSettings != null)
+                _printerName = appSettings.PrinterName;
+
+            IsHashTag = true;
+
+        }
+
+        #region Methods
+        private async void Print()
+        {
+            var result = await _patternVmProvider.GetPatternsAsync();
+
+            TemplateViewModel instaTemplate = result.SingleOrDefault(x => x.IsInstaPrinterTemplate);
+            Action<byte[]> print = null;
+            if (!string.IsNullOrEmpty(_printerName))
+                print = (data) => _printer.Print(data, _printerName);
+            else
             {
-                _checkedImages.Value.Remove(image);
-                return;
+                print = (data) => _printer.Print(data);
             }
 
-            _checkedImages.Value.Add(image);
+            byte[] imageData = new byte[] { };
+            Size imageStreamSize;
+
+            using (var stream = new MemoryStream(_checkedImage.Data))
+            {
+                var img = Image.FromStream(stream);
+                imageStreamSize = img.Size;
+            }
+
+            if (instaTemplate != null)
+                imageData = _imageUtils.ProcessImages(new List<byte[]> { _checkedImage.Data }, imageStreamSize,
+                    _mappingEngine.Map<EntityTemplate>(instaTemplate));
+
+            else
+            {
+                imageData = _imageUtils.GetCaptureForInstagramControl(_checkedImage.Data, _checkedImage.FullName, DateTime.Now, _checkedImage.ProfilePictureData);
+            }
+            print(imageData);
+
+            _navigator.NavigateForward<SelectActivityViewModel>(this, null);
+        }
+        private void Check(InstagramImageViewModel image)
+        {
+            _checkedImage = image;
+            foreach (var imageViewModel in Images.Where(x=>x!=_checkedImage))
+            {
+                imageViewModel.IsChecked = false;
+            }
             PrintCommand.RaiseCanExecuteChanged();
         }
 
@@ -252,21 +240,27 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             _navigator.NavigateBack(this);
         }
+        #endregion
 
-        private string _textSearch;
-        private string _lastInstagramImageId;
-
-        public string TextSearch
+        #region Commands
+        public RelayCommand PrintCommand
         {
-            get
-            {
-                return _textSearch;
-            }
-            set
-            {
-                _textSearch = value;
-                RaisePropertyChanged();
-            }
+            get { return _printCommand ?? (_printCommand = new RelayCommand(Print, () => _checkedImage != null && Images.Any(x=>x.IsChecked))); }
         }
+
+        public RelayCommand GoBackCommand
+        {
+            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack, () => !IsBusy)); }
+        }
+
+        public RelayCommand<string> SearchCommand
+        {
+            get { return _searchCommand ?? (_searchCommand = new RelayCommand<string>(Search, (s) => !IsBusy)); }
+        }
+        private RelayCommand _printCommand;
+
+        public RelayCommand<InstagramImageViewModel> CheckCommand => _checkCommand ?? (_checkCommand = new RelayCommand<InstagramImageViewModel>(Check));
+
+        #endregion
     }
 }

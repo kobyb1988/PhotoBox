@@ -214,9 +214,11 @@
                                 PageSize="15"
                                 PagesInRow="3"
                                 Background="#4ecdc4"/>
-                        <customControls:BlueButton Command="{Binding Path=SelectPatternCommand}"
-                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                        
+                        <!--Кнопка заглушка....Оставлена в целях дизайна.-->
+                        <customControls:BlueButton IsEnabled="False"
+                                Background="Gray"
+                                Foreground="Gray" AdvBackground="Gray"
                                 CornerRadius="40"
                                 InnerCornerRadius="60"
                                 Padding="8"
@@ -226,7 +228,8 @@
                                 HorizontalAlignment="Stretch"
                                 Grid.Column="2"
                                 CornerAlign="TopRight,BottomRight"
-                                Content="Далее"/>
+                                Content="" />
+                        <!--Кнопка заглушка....Оставлена в целях дизайна.-->
                     </Grid>
                 </Border>
             </Grid>

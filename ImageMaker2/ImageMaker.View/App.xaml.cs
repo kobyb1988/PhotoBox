@@ -7,6 +7,7 @@ using ImageMaker.Themes;
 using ImageMaker.ViewModels.Ninject;
 using ImageMaker.ViewModels.ViewModels;
 using Ninject;
+using NLog;
 
 namespace ImageMaker.View
 {
@@ -15,10 +16,15 @@ namespace ImageMaker.View
     /// </summary>
     public partial class App : Application
     {
+        private MainViewModel MainViewModel;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Dispatcher.UnhandledException += (sender, args) => MessageBox.Show(args.Exception.ToString());
+            Dispatcher.UnhandledException += (sender, args) => {
+                MessageBox.Show(args.Exception.ToString());
+                LogManager.GetCurrentClassLogger().Error(args.Exception);
+                MainViewModel.ShowAdminCommand.Execute(null);
+            };
             InitApp();
         }
 
@@ -30,13 +36,19 @@ namespace ImageMaker.View
             if (theme != null)
             foreach (var property in typeof(ThemeSettingsDto).GetProperties())
             {
-                this.Properties.Add(property.Name, property.GetValue(theme));
+                Properties.Add(property.Name, property.GetValue(theme));
             }
 
             MainViewModel mainViewModel = kernel.Get<MainViewModel>();
+            MainViewModel = mainViewModel;
             MainWindow = new MainWindow() {DataContext = mainViewModel};
-            MainWindow.Closed += (o, args) => mainViewModel.Dispose();
+            MainWindow.Closed += (o, args) =>
+            {
+                mainViewModel.Dispose();
+                MainViewModel.ShowAdminCommand.Execute(null);
+            };
             MainWindow.Show();
+
         }
     }
 }

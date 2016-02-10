@@ -87,6 +87,14 @@ namespace ImageMaker.ViewModels.ViewModels
             }
 
             StartLiveView();
+            if (TakePictureCommand.CanExecute(null))
+                TakePictureCommand.Execute(null);
+            else
+            {
+                _dialogService.ShowInfo("Упс... С камерой возникли неполатки. Приносим свои извенения. =(");
+                GoBack();
+            }
+
         }
 
         private void ImageProcessorOnImageNumberChanged(object sender, int newValue)
@@ -191,6 +199,7 @@ namespace ImageMaker.ViewModels.ViewModels
             if (!result)
             {
                 _dialogService.ShowInfo("Камера отсутствует или не готова");
+                GoBack();
                 return;
             }
 

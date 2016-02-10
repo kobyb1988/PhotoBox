@@ -35,6 +35,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public override void Initialize()
         {
+            SelectedPattern = null;
             if (Patterns.Count > 0)
                 return;
 
@@ -47,20 +48,9 @@ namespace ImageMaker.ViewModels.ViewModels
                 }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        public ICollectionView PatternsView
-        {
-            get { return _patternsView ?? (_patternsView = CollectionViewSource.GetDefaultView(Patterns)); }
-        }
+        public ICollectionView PatternsView => _patternsView ?? (_patternsView = CollectionViewSource.GetDefaultView(Patterns));
 
-        //public IList<CompositionViewModel> Patterns
-        //{
-        //    get { return _patterns ?? (_patterns = new ObservableCollection<CompositionViewModel>()); }
-        //}
-
-        public IList<TemplateViewModel> Patterns
-        {
-            get { return _patterns ?? (_patterns = new ObservableCollection<TemplateViewModel>()); }
-        }
+        public IList<TemplateViewModel> Patterns => _patterns ?? (_patterns = new ObservableCollection<TemplateViewModel>());
 
         public TemplateViewModel SelectedPattern
         {
@@ -72,7 +62,8 @@ namespace ImageMaker.ViewModels.ViewModels
                 
                 _selectedPattern = value;
                 RaisePropertyChanged();
-                SelectPatternCommand.RaiseCanExecuteChanged();
+                if (value!=null)
+                    _navigator.NavigateForward<CameraViewModel>(this, SelectedPattern);
             }
         }
 
@@ -89,36 +80,12 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        //public RelayCommand<TemplateViewModel> SelectPatternCommand
-        //{
-        //    get
-        //    {
-        //        return _selectPatternCommand ?? (_selectPatternCommand = new RelayCommand<TemplateViewModel>(SelectPattern));
-        //    }
-        //}
-
-        public RelayCommand SelectPatternCommand
-        {
-            get
-            {
-                return _selectPatternCommand ?? (_selectPatternCommand = new RelayCommand(SelectPattern, () => SelectedPattern != null));
-            }
-        }
-
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
         private void GoBack()
         {
             _navigator.NavigateBack(this);
         }
 
-        void SelectPattern()
-        {
-            //todo
-            _navigator.NavigateForward<CameraViewModel>(this, SelectedPattern);
-        }
     }
 }
