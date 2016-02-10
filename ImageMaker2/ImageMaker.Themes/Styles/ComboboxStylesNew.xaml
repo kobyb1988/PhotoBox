@@ -318,7 +318,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="CornerAlign" Value="BottomLeft,TopLeft,TopRight,BottomRight" />
-        <Setter Property="MaxDropDownHeight" Value="70" />
+        <Setter Property="MaxDropDownHeight" Value="175" />
         <Setter Property="CornerRadius" Value="25" />
         <Setter Property="Padding" Value="3" />
         <Setter Property="Foreground" Value="#777777" />
