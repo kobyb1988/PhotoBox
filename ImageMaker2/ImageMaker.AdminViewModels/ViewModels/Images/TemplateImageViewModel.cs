@@ -25,7 +25,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             _x = x;
             _y = y;
             _width = width;
-            _height = height;
+            //_height = height;
+            _height = GetCorrectHeight(_width);
         }
 
         public TemplateImageViewModel(double parentWidth, double parentHeight)
@@ -35,7 +36,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             _x = 0;
             _y = 0;
             _width = 0.1;
-            _height = 0.1;
+            //_height = 0.1;
+            _height = GetCorrectHeight(_width);
         }
 
         public double X
@@ -204,7 +206,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             Y = testY;
 
             Width = testW;
-            Height = testH;
+            //Height = testH;
+            Height = GetCorrectHeight(testW);
         }
 
         public Type DataType { get { return typeof(TemplateImageViewModel); } }
@@ -218,6 +221,12 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
             X = testX;
             Y = testY;
+        }
+
+        private double GetCorrectHeight(double width)
+        {
+            //default camera resolution is 1056w x 704h
+            return width/1056.0*704;
         }
     }
 }

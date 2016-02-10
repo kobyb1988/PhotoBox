@@ -228,9 +228,9 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
             {
                 return new Point(double.NaN, double.NaN);
             }
-
+            //return new Point(1, 1);
             FrameworkElement child = viewbox.Child as FrameworkElement;
-            return new Point(viewbox.ActualWidth / child.ActualWidth, viewbox.ActualHeight / child.ActualHeight);
+            return new Point(child.ActualWidth / viewbox.ActualWidth, child.ActualHeight / viewbox.ActualHeight);
         }
     }
 }

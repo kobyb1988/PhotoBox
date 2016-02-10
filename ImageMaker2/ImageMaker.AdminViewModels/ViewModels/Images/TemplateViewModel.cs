@@ -21,14 +21,14 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public TemplateViewModel(string name, uint width, uint height, int id, IEnumerable<TemplateImageViewModel> children, ImageViewModel background, ImageViewModel overlay, bool isInstaPrinterTemplate)
         {
+            _width = width;
+            _height = height;
             Background = background;
             Overlay = overlay;
 
             Name = name;
             Id = id;
             IsInstaPrinterTemplate = isInstaPrinterTemplate;
-            _width = width;
-            _height = height;
             foreach (var child in children)
             {
                 Children.Add(child);
@@ -136,6 +136,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             set
             {
                 _background = value;
+                Width = (uint) _background.Width;
+                Height = (uint) _background.Height;
                 RaisePropertyChanged();
             }
         }
