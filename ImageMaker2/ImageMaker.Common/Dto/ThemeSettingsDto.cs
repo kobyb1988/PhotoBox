@@ -21,6 +21,12 @@ namespace ImageMaker.Common.Dto
 
         public Color OtherBorderColor { get; set; }
 
+        public Color OtherButtonColor { set; get; }
+
+        public Color OtherForegroundButtonColor { set; get; }
+
+        public Color OtherBackgroundCircleColor { set; get; }
+
         public byte[] BackgroundImage { get; set; }
 
         public byte[] OtherBackgroundImage { get; set; }

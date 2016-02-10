@@ -67,8 +67,9 @@
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
-                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}"
+                                AdvBackground="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundCircleButtonColorKey}}"
                                 CornerRadius="40"
                                 InnerCornerRadius="60"
                                 Padding="8"
@@ -80,7 +81,8 @@
                                 CornerAlign="BottomLeft,TopLeft"/>
 
                         <customControls:ContentButton Grid.Column="1" 
-                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundColorKey}}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}"
                                 Content="1"
                                 CornerRadius="50"
                                 HorizontalAlignment="Stretch"
@@ -189,8 +191,9 @@
                             </customControls:ContentButton.RenderTransformOrigin>
                         </customControls:ContentButton>
                         <customControls:BlueButton Command="{Binding Path=PrintImageCommand}"
-                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}"
+                                AdvBackground="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundCircleButtonColorKey}}"
                                 CornerRadius="40"
                                 InnerCornerRadius="60"
                                 Padding="8"

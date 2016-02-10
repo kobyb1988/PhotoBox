@@ -343,6 +343,8 @@ namespace ImageMaker.Themes.CustomControls
 
         private void CalculateWidths()
         {
+            if (PagesView == null)
+                return;
             var visibleItems = PagesView.OfType<PageItemWrapper>().ToList();
             if (this.Template == null)
                 return;
