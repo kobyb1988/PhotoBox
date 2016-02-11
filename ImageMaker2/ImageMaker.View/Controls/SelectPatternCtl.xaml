@@ -70,8 +70,8 @@
                                                                 Background="Transparent"
                                                                 BorderBrush="Transparent"
                                                                 BorderThickness="2"
-                                                                Width="157.4"
-                                                                Height="157.4">
+                                                                Width="157"
+                                                                Height="157">
                                                             <Grid x:Name="rootGrid" >
                                                                 <Grid.RowDefinitions>
                                                                     <RowDefinition Height="7*"/>
@@ -91,7 +91,7 @@
                                                                     </Image.Source>
                                                                 </Image>
 
-                                                                <Rectangle Fill="#4ecdc4" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
+                                                                <Rectangle Fill="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" x:Name="overlay"/>
                                                                 <ToggleButton Grid.Row="1"
                                                                         Grid.Column="1"
                                                                         x:Name="toggle"
@@ -108,8 +108,8 @@
                                                                                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                                                                                         <Border>
                                                                                             <Grid>
-                                                                                                <Ellipse Stretch="Fill" Fill="#ffffff" />
-                                                                                                <Ellipse Stretch="Fill" Fill="#4ecdc4">
+                                                                                                <Ellipse Stretch="Fill" Fill="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}" />
+                                                                                                <Ellipse Stretch="Fill" Fill="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}">
                                                                                                     <Ellipse.RenderTransform>
                                                                                                         <ScaleTransform ScaleX="0.85" ScaleY="0.85" />
                                                                                                     </Ellipse.RenderTransform>
@@ -132,7 +132,7 @@
                                                                                         </Border>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <Trigger Property="IsChecked" Value="True">
-                                                                                                <Setter TargetName="Tick" Property="Stroke" Value="#ffffff" />
+                                                                                                <Setter TargetName="Tick" Property="Stroke" Value="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}" />
                                                                                             </Trigger>
                                                                                         </ControlTemplate.Triggers>
                                                                                     </ControlTemplate>
@@ -146,11 +146,11 @@
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="UIElement.IsMouseOver" Value="True">
                                                                 <Setter TargetName="overlay" Property="Opacity" Value="0.2" />
-                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="#4ecdc4" />
+                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}" />
                                                             </Trigger>
                                                             <Trigger Property="IsChecked" Value="True">
                                                                 <Setter TargetName="overlay" Property="Opacity" Value="0.2" />
-                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="#4ecdc4" />
+                                                                <Setter TargetName="RootBorder" Property="BorderBrush" Value="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
                                                     </ControlTemplate>
@@ -173,8 +173,7 @@
                                 SelectedItem="{Binding Path=SelectedPattern}"
                                 SelectionMode="Single">
                             <ListBox.Resources>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#00000000"/>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#00000000"/>
+                               
                             </ListBox.Resources>
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -199,7 +198,9 @@
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
-                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}"
+                                AdvBackground="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundCircleButtonColorKey}}"
                                 CornerRadius="40"
                                 InnerCornerRadius="60"
                                 Padding="8"
@@ -213,8 +214,8 @@
                                 ItemsView="{Binding Source={StaticResource Patterns}}" 
                                 PageSize="15"
                                 PagesInRow="3"
-                                Background="#4ecdc4"/>
-                        
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}"/>
                         <!--Кнопка заглушка....Оставлена в целях дизайна.-->
                         <customControls:BlueButton IsEnabled="False"
                                 Background="Gray"

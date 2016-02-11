@@ -16,6 +16,12 @@ namespace ImageMaker.Themes
 
         public static ResourceKey OtherForegroundColorKey { get { return new ComponentResourceKey(typeof(ThemeManager), "OtherForegroundColorKey"); } }
 
+        public static ResourceKey OtherForegroundButtonColorKey { get { return new ComponentResourceKey(typeof(ThemeManager), "OtherForegroundButtonColorKey"); } }
+
+        public static ResourceKey OtherBackgroundCircleButtonColorKey { get { return new ComponentResourceKey(typeof(ThemeManager), "OtherBackgroundCircleButtonColorKey"); } }
+
+        public static ResourceKey OtherButtonColorKey { get { return new ComponentResourceKey(typeof(ThemeManager), "OtherButtonColorKey"); } }
+
         public static ResourceKey MainImageKey { get { return new ComponentResourceKey(typeof(ThemeManager), "MainImageKey"); } }
 
         public static ResourceKey OtherImagesKey { get { return new ComponentResourceKey(typeof(ThemeManager), "OtherImagesKey"); } }

@@ -143,6 +143,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\PreviewMainWindowCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PreviewOtherWindowCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\StatsCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,6 +218,12 @@
     </Compile>
     <Compile Include="Controls\PasswordPromptCtl.xaml.cs">
       <DependentUpon>PasswordPromptCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PreviewMainWindowCtl.xaml.cs">
+      <DependentUpon>PreviewMainWindowCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PreviewOtherWindowCtl.xaml.cs">
+      <DependentUpon>PreviewOtherWindowCtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StatsCtl.xaml.cs">
       <DependentUpon>StatsCtl.xaml</DependentUpon>
