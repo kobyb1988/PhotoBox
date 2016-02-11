@@ -6,6 +6,7 @@ using ImageMaker.Common.Helpers;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.Data.Repositories;
 using ImageMaker.Entities;
+using NLog;
 
 namespace ImageMaker.CommonViewModels.Providers
 {
@@ -40,6 +41,26 @@ namespace ImageMaker.CommonViewModels.Providers
         public virtual bool ValidatePassword(string password)
         {
             return _hashBuilder.ValidatePassword(password, _user.Value.Password);
+        }
+
+        public virtual bool ChangePassword(string password, string newpassword)
+        {
+            if (!_hashBuilder.ValidatePassword(password, _user.Value.Password))
+            {
+                return false;
+            }
+            try
+            {
+                newpassword = _hashBuilder.HashPassword(newpassword);
+                _user.Value.Password = newpassword;
+                _userRepository.UpdateUser(_user.Value);
+                _userRepository.Commit();
+                return true;
+            }
+            catch(Exception ex) {
+                LogManager.GetCurrentClassLogger().Error(ex);
+                return false;
+            }
         }
 
         public virtual void SaveCameraSettings(CameraSettingsDto settings)

@@ -68,5 +68,9 @@
     <DataTemplate DataType="{x:Type viewModels:ColorPickerViewModel}">
         <controls:ColorSelectionCtl />
     </DataTemplate>
-    
+
+    <DataTemplate DataType="{x:Type viewModels:ChangePasswordViewModel}">
+        <controls:ChangePasswordCtl />
+    </DataTemplate>
+
 </ResourceDictionary>

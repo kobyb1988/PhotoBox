@@ -15,6 +15,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private readonly IDialogService _dialogService;
 
         private RelayCommand _submitCommand;
+        private RelayCommand<string> _touchCommand;
         private string _password;
 
         public PasswordPromptViewModel(
@@ -32,13 +33,28 @@ namespace ImageMaker.AdminViewModels.ViewModels
         {
             get { return _submitCommand ?? (_submitCommand = new RelayCommand(Submit)); }
         }
-
+        public RelayCommand<string> TouchNumber {
+            get { return _touchCommand ?? (_touchCommand = new RelayCommand<string>(TouchNumberPw)); }
+        }
+        private RelayCommand _removeChar;
+        public RelayCommand RemoveChar { get { return _removeChar ?? (_removeChar = new RelayCommand(RemoveCharAction)); } }
+        private void RemoveCharAction()
+        {
+            if (Password.Length == 0)
+                return;
+            Password = Password.Substring(0, Password.Length - 1);
+        }
+        private void TouchNumberPw(string p)
+        {
+            Password += p; 
+        }
         private void Submit()
         {
             bool result = _settingsProvider.ValidatePassword(Password);
             if (!result)
             {
                 _dialogService.ShowInfo(@"Неверный пароль");
+                Password = "";
                 return;
             }
 

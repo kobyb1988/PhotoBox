@@ -112,6 +112,7 @@ namespace ImageMaker.AdminViewModels.Ninject
                                            x.Kernel.Get<CompositionsExplorerViewModelFactory>(),
                                            x.Kernel.Get<ThemeManagerViewModelFactory>(),
                                            x.Kernel.Get<CurrentSessionViewModelFactory>(),
+                                           x.Kernel.Get<ChangePasswordViewModelFactory>()
                                        };
 
                         return new ChildrenViewModelsFactory(children);

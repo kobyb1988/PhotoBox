@@ -24,7 +24,7 @@ namespace ImageMaker.DataContext.Migrations
                 return;
 
             var hashBuilder = new HashBuilder();
-            string defaultPassword = hashBuilder.HashPassword("qwerty");
+            string defaultPassword = hashBuilder.HashPassword("123456");
             users.AddOrUpdate(x => x.Name, new User { Name = "admin", Password = defaultPassword});
             //todo
             //context.Set<Pattern>().AddOrUpdate(x => x.PatternType, Enum.GetValues(typeof (PatternType))

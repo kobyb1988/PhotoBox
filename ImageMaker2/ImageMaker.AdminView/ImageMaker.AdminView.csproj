@@ -103,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ChangePasswordCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ColorSelectionCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,7 +123,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\CustomPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NumericKeyboardCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ObjectNameCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PasswordBoxWithNumericKeyboardCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,6 +181,9 @@
     <Compile Include="Controls\AppSettingsExplorerCtl.xaml.cs">
       <DependentUpon>AppSettingsExplorerCtl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChangePasswordCtl.xaml.cs">
+      <DependentUpon>ChangePasswordCtl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ColorSelectionCtl.xaml.cs">
       <DependentUpon>ColorSelectionCtl.xaml</DependentUpon>
     </Compile>
@@ -177,8 +196,17 @@
     <Compile Include="Controls\CurrentSessionCtl.xaml.cs">
       <DependentUpon>CurrentSessionCtl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomPasswordBox.xaml.cs">
+      <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumericKeyboardCtl.xaml.cs">
+      <DependentUpon>NumericKeyboardCtl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ObjectNameCtl.xaml.cs">
       <DependentUpon>ObjectNameCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PasswordBoxWithNumericKeyboardCtl.xaml.cs">
+      <DependentUpon>PasswordBoxWithNumericKeyboardCtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PasswordPromptCtl.xaml.cs">
       <DependentUpon>PasswordPromptCtl.xaml</DependentUpon>

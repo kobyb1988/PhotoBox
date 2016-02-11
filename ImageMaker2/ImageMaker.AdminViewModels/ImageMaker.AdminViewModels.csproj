@@ -105,6 +105,7 @@
     <Compile Include="ViewModels\AllSessionsViewModel.cs" />
     <Compile Include="ViewModels\AppSettingsExplorerViewModel.cs" />
     <Compile Include="ViewModels\CameraSettingsExplorerViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\CompositionsEditorViewModel.cs" />
     <Compile Include="ViewModels\CompositionsExplorerViewModel.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ViewModels\Images\TemplateViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ObjectNameViewModel.cs" />
+    <Compile Include="ViewModels\PasswordBoxViewModel.cs" />
     <Compile Include="ViewModels\PasswordPromptViewModel.cs" />
     <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\TemplateEditorViewModel.cs" />
