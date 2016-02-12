@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using AutoMapper;
 using ImageMaker.AdminViewModels.Helpers;
 using ImageMaker.AdminViewModels.Providers;
@@ -256,6 +257,23 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
         protected override CurrentSessionViewModel GetViewModel(object param)
         {
             return new CurrentSessionViewModel(_navigator, _sessionService, _printer, _settings);
+        }
+    }
+
+    public class ChangePasswordViewModelFactory : ViewModelBaseFactory<ChangePasswordViewModel>
+    {
+        private readonly IDialogService _dialogService;
+        private readonly IViewModelNavigator _navigator;
+        private readonly SettingsProvider _settings;
+        public ChangePasswordViewModelFactory(IViewModelNavigator navigator,SettingsProvider settings,IDialogService dialogService)
+        {
+            _dialogService = dialogService;
+            _settings = settings;
+            _navigator = navigator;
+        }
+        protected override ChangePasswordViewModel GetViewModel(object param)
+        {
+            return new ChangePasswordViewModel(_navigator, _settings, _dialogService);
         }
     }
 }

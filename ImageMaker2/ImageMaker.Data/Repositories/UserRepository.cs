@@ -35,6 +35,7 @@ namespace ImageMaker.Data.Repositories
 
             dbUser.AppSettings = user.AppSettings;
             dbUser.CameraSettings = user.CameraSettings;
+            dbUser.Password = user.Password;
         }
 
         public User GetUser(Expression<Func<User, bool>> selector)

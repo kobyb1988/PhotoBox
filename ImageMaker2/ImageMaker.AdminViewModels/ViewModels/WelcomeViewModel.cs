@@ -14,12 +14,17 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand _manageCameraSettingsCommand;
         private RelayCommand _manageThemesCommand;
         private RelayCommand _showStatsCommand;
+        private RelayCommand _changePasswordCommand;
 
         public WelcomeViewModel(
             IViewModelNavigator navigator
             )
         {
             _navigator = navigator;
+        }
+        public RelayCommand ChangePasswordCommand
+        {
+            get { return _changePasswordCommand ?? (_changePasswordCommand = new RelayCommand(ShowChangePassword)); }
         }
 
         public RelayCommand ManageAppSettingsCommand
@@ -55,6 +60,11 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public RelayCommand ShowStatsCommand
         {
             get { return _showStatsCommand ?? (_showStatsCommand = new RelayCommand(ShowStats)); }
+        }
+
+        private void ShowChangePassword()
+        {
+            _navigator.NavigateForward<ChangePasswordViewModel>(this, null);
         }
 
         private void ShowStats()

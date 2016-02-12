@@ -218,8 +218,9 @@
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
                         <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
-                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
-                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
+                                Background="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}"
+                                Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundButtonColorKey}}"
+                                AdvBackground="{DynamicResource {x:Static themes:ThemeManager.OtherBackgroundCircleButtonColorKey}}"
                                 CornerRadius="40"
                                 InnerCornerRadius="40"
                                 Padding="8"

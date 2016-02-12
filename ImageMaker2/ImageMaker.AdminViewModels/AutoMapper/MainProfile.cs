@@ -36,7 +36,10 @@ namespace ImageMaker.AdminViewModels.AutoMapper
                 .ForMember(x => x.MainForegroundColor, x => x.MapFrom(d => d.MainWindowForegroundColor))
                 .ForMember(x => x.OtherBackgroundColor, x => x.MapFrom(d => d.OtherWindowsBackgroundColor))
                 .ForMember(x => x.OtherBorderColor, x => x.MapFrom(d => d.OtherWindowsBorderColor))
-                .ForMember(x => x.OtherForegroundColor, x => x.MapFrom(d => d.OtherWindowsForegroundColor));
+                .ForMember(x => x.OtherForegroundColor, x => x.MapFrom(d => d.OtherWindowsForegroundColor))
+                .ForMember(x => x.OtherButtonColor, x => x.MapFrom(m => m.OtherWindowsButtonColor))
+                .ForMember(x => x.OtherForegroundButtonColor, x => x.MapFrom(m => m.OtherWindowsForegroundButtonColor))
+                .ForMember(x => x.OtherBackgroundCircleColor, x => x.MapFrom(m => m.OtherWindowsBackgroundCircleColor));
 
             CreateMap<Template, TemplateViewModel>()
                 .ConvertUsing(FromTemplate);

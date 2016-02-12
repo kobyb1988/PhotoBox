@@ -85,7 +85,9 @@
     <Compile Include="Controls\Dialogs\ResultDialogCtl.xaml.cs">
       <DependentUpon>ResultDialogCtl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ByteArrayToImageBrushConverter.cs" />
     <Compile Include="Converters\ByteArrayToImageConverter.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\CombinedImageToViewConverter.cs" />
     <Compile Include="Converters\DoubleValueConverterExt.cs" />
     <Compile Include="Helpers\ImageExtensions.cs" />

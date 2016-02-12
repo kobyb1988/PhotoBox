@@ -9,6 +9,8 @@ using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using System.Windows;
+using System.Collections.Generic;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -26,6 +28,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private Color _otherWindowsBackgroundColor;
         private Color _otherWindowsForegroundColor;
         private Color _otherWindowsBorderColor;
+        private Color _otherWindowsButtonColor;
+        private Color _otherWindowsForegroundButtonColor;
+        private Color _otherWindowsBackgroundCircleColor;
 
         private bool _isBackToDefaultTheme;
         private ImageViewModel _mainWindowImage;
@@ -38,6 +43,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand _selectOtherWindowsImageCommand;
         private ImageViewModel _backgroundImage;
         private RelayCommand _selectBackgroundImageCommand;
+        private RelayCommand _previewCommand;
+
+        public Visibility ShowMainPreview { set; get; }
+        public Visibility ShowOtherPreview { set; get; }
 
         public ThemeManagerViewModel(
             IViewModelNavigator navigator,
@@ -52,7 +61,6 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _mappingEngine = mappingEngine;
             _imageLoadService = imageLoadService;
         }
-
         public override void Initialize()
         {
             ThemeSettingsDto settings = _settingsProvider.GetThemeSettings();
@@ -75,9 +83,13 @@ namespace ImageMaker.AdminViewModels.ViewModels
             OtherWindowsBackgroundColor = settings.OtherBackgroundColor;
             OtherWindowsBorderColor = settings.OtherBorderColor;
             OtherWindowsForegroundColor = settings.OtherForegroundColor;
+            OtherWindowsButtonColor = settings.OtherButtonColor;
+            OtherWindowsForegroundButtonColor = settings.OtherForegroundButtonColor;
+            OtherWindowsBackgroundCircleColor = settings.OtherBackgroundCircleColor;
+            GoPreview();
         }
 
-
+        public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(GoPreview));
         public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
         public RelayCommand SelectBackgroundImageCommand => _selectBackgroundImageCommand ?? (_selectBackgroundImageCommand = new RelayCommand(SelectBackgroundImage));
@@ -91,6 +103,22 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public RelayCommand SelectImageCommand => _selectImageCommand ?? (_selectImageCommand = new RelayCommand(SelectImage));
 
         public RelayCommand SelectOtherWindowsImageCommand => _selectOtherWindowsImageCommand ?? (_selectOtherWindowsImageCommand = new RelayCommand(SelectOtherWindowsImage));
+
+        private void GoPreview()
+        {
+            if (ShowMainPreview == Visibility.Visible)
+            {
+                ShowMainPreview = Visibility.Collapsed;
+                ShowOtherPreview = Visibility.Visible;
+            }
+            else
+            {
+                ShowMainPreview = Visibility.Visible;
+                ShowOtherPreview = Visibility.Collapsed;
+            }
+            RaisePropertyChanged(() => ShowMainPreview);
+            RaisePropertyChanged(() => ShowOtherPreview);
+        }
 
         private void SelectOtherWindowsImage()
         {
@@ -151,6 +179,18 @@ namespace ImageMaker.AdminViewModels.ViewModels
                     getColor = () => OtherWindowsForegroundColor;
                     setColor = (color) => OtherWindowsForegroundColor = color;
                     break;
+                case ColorType.OtherButton:
+                    getColor = () => OtherWindowsButtonColor;
+                    setColor = c => OtherWindowsButtonColor = c;
+                    break;
+                case ColorType.OtherForegroundButton:
+                    getColor = () => OtherWindowsForegroundButtonColor;
+                    setColor = c => OtherWindowsForegroundButtonColor = c;
+                    break;
+                case ColorType.OtherBackgroundCircleButton:
+                    getColor = () => OtherWindowsBackgroundCircleColor;
+                    setColor = c => OtherWindowsBackgroundCircleColor = c;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException("colorType");
             }
@@ -177,6 +217,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
             OtherWindowsBackgroundColor = Colors.Orange;
             OtherWindowsBorderColor = Colors.Orange;
             OtherWindowsForegroundColor = Colors.White;
+            OtherWindowsButtonColor = Colors.Orange;
+            OtherWindowsForegroundButtonColor = Colors.White;
+            OtherWindowsBackgroundCircleColor = Colors.Orange;
         }
 
         public bool IsBackToDefaultTheme
@@ -293,6 +336,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
             }
         }
 
+        public Color OtherWindowsButtonColor
+        {
+            get { return _otherWindowsButtonColor; }
+            set
+            {
+                if (_otherWindowsButtonColor == value)
+                    return;
+
+                _otherWindowsButtonColor = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public Color OtherWindowsBorderColor
         {
             get { return _otherWindowsBorderColor; }
@@ -305,6 +361,34 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public Color OtherWindowsForegroundButtonColor
+        {
+            get { return _otherWindowsForegroundButtonColor; }
+            set
+            {
+                if (_otherWindowsForegroundButtonColor == value)
+                    return;
+
+                _otherWindowsForegroundButtonColor = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Color OtherWindowsBackgroundCircleColor
+        {
+            get { return _otherWindowsBackgroundCircleColor; }
+            set
+            {
+                if (_otherWindowsBackgroundCircleColor == value)
+                    return;
+
+                _otherWindowsBackgroundCircleColor = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string TextCheck { get{ return "Проврека"; }}
     }
 
     public enum ColorType
@@ -314,6 +398,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
         MainForeground,
         OtherBackground,
         OtherBorder,
-        OtherForeground
+        OtherForeground,
+        OtherButton,
+        OtherForegroundButton,
+        OtherBackgroundCircleButton
     }
 }
