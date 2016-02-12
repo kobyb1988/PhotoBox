@@ -29,13 +29,13 @@
                              Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherForegroundColor], TargetNullValue=#ffffff}" />
 
             <SolidColorBrush x:Key="{x:Static themes:ThemeManager.OtherButtonColorKey}"
-                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherButtonColor], TargetNullValue=#ffffff}" />
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherButtonColor], TargetNullValue=#43beb5}" />
 
             <SolidColorBrush x:Key="{x:Static themes:ThemeManager.OtherForegroundButtonColorKey}"
-                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherForegroundButtonColor], TargetNullValue=#43beb5}" />
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherForegroundButtonColor], TargetNullValue=#fff}" />
 
             <SolidColorBrush x:Key="{x:Static themes:ThemeManager.OtherBackgroundCircleButtonColorKey}"
-                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherBackgroundCircleButtonColor], TargetNullValue=#ffffff}" />
+                             Color="{Binding Source={x:Static Application.Current}, Path=Properties[OtherBackgroundCircleColor], TargetNullValue=#43beb5}" />
 
             <ImageBrush x:Key="{x:Static themes:ThemeManager.MainImageKey}">
                 <ImageBrush.ImageSource>

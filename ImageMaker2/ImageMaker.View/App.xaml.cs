@@ -8,6 +8,7 @@ using ImageMaker.ViewModels.Ninject;
 using ImageMaker.ViewModels.ViewModels;
 using Ninject;
 using NLog;
+using System.Diagnostics;
 
 namespace ImageMaker.View
 {
@@ -31,14 +32,18 @@ namespace ImageMaker.View
         private void InitApp()
         {
             var kernel = NinjectBootstrapper.GetKernel(new MainModule(), new NinjectBaseModule());
+            
             var settings = kernel.Get<SettingsProvider>();
+            
+
             ThemeSettingsDto theme = settings.GetThemeSettings();
             if (theme != null)
-            foreach (var property in typeof(ThemeSettingsDto).GetProperties())
             {
-                Properties.Add(property.Name, property.GetValue(theme));
+                foreach (var property in typeof(ThemeSettingsDto).GetProperties())
+                {
+                    Properties.Add(property.Name, property.GetValue(theme));
+                }
             }
-
             MainViewModel mainViewModel = kernel.Get<MainViewModel>();
             MainViewModel = mainViewModel;
             MainWindow = new MainWindow() {DataContext = mainViewModel};

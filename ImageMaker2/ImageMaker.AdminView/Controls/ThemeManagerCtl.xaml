@@ -694,7 +694,7 @@
                                 <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
                             </controls:PreviewOtherWindowCtl.LayoutTransform>
                         </controls:PreviewOtherWindowCtl>
-                        
+
                     </Grid>
                     <customControls:RoundedButton  Command="{Binding PreviewCommand}" CornerRadius="25" Width="50" Height="50" Content="&gt;"  Grid.Column="2" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
