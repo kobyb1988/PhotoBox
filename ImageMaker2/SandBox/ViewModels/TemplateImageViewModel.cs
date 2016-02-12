@@ -195,10 +195,10 @@ namespace SandBox.ViewModels
 
         public void Resize(double deltaX, double deltaY, double offsetX, double offsetY)
         {
-            double testX = X + (offsetX / _parentWidth).ThreeDigits();
-            double testY = Y + (offsetY / _parentHeight).ThreeDigits();
-            double testW = Width + (deltaX / _parentWidth).ThreeDigits();
-            double testH = Height + (deltaY / _parentHeight).ThreeDigits();
+            double testX = X + (offsetX / _parentWidth);//.ThreeDigits();
+            double testY = Y + (offsetY / _parentHeight);//.ThreeDigits();
+            double testW = Width + (deltaX / _parentWidth);//.ThreeDigits();
+            double testH = Height + (deltaY / _parentHeight);//.ThreeDigits();
 
             if (testX < 0 || (testX + testW) > 1 || testY < 0 || (testY + testH) > 1)
                 return;
@@ -214,8 +214,8 @@ namespace SandBox.ViewModels
 
         public void Update(double x, double y)
         {
-            double testX = (x / _parentWidth).ThreeDigits() - (Width / 2).ThreeDigits();
-            double testY = (y / _parentHeight).ThreeDigits() - (Height / 2).ThreeDigits();
+            double testX = (x / _parentWidth)/*.ThreeDigits()*/ - (Width / 2);//.ThreeDigits();
+            double testY = (y / _parentHeight)/*.ThreeDigits()*/ - (Height / 2);//.ThreeDigits();
             if (testX < 0 || (testX + Width) > 1 || testY < 0 || (testY + Height) > 1)
                 return;
 

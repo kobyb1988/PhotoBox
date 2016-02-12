@@ -104,19 +104,23 @@ namespace ImageMaker.ViewModels.ViewModels
             get
             {
                 return _changeDownCommand ?? (_changeDownCommand = new RelayCommand(() =>
-                                                                              {
-                                                                                  CopiesCount--;
-                                                                                  ChangeDownCommand.RaiseCanExecuteChanged();
-                                                                              }, () => CopiesCount > 1)); }
+                {
+                    CopiesCount--;
+                    ChangeDownCommand.RaiseCanExecuteChanged();
+                }, () => CopiesCount > 1));
+            }
         }
 
         public RelayCommand ChangeUpCommand
         {
-            get { return _changeUpCommand ?? (_changeUpCommand = new RelayCommand(() =>
-                                                                                  {
-                                                                                      CopiesCount++;
-                                                                                      ChangeUpCommand.RaiseCanExecuteChanged();
-                                                                                  }, () => CopiesCount < _maxCopies)); }
+            get
+            {
+                return _changeUpCommand ?? (_changeUpCommand = new RelayCommand(() =>
+                {
+                    CopiesCount++;
+                    ChangeUpCommand.RaiseCanExecuteChanged();
+                }, () => CopiesCount < _maxCopies));
+            }
         }
 
 

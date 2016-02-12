@@ -87,14 +87,18 @@ namespace ImageMaker.ViewModels.ViewModels
             }
 
             StartLiveView();
-            if (TakePictureCommand.CanExecute(null))
-                TakePictureCommand.Execute(null);
-            else
+            Task.Run(async () =>
             {
-                _dialogService.ShowInfo("Упс... С камерой возникли неполатки. Приносим свои извенения. =(");
-                GoBack();
-            }
+                await Task.Delay(2000);
 
+                if (TakePictureCommand.CanExecute(null))
+                    TakePictureCommand.Execute(null);
+                else
+                {
+                    _dialogService.ShowInfo("Упс... С камерой возникли неполатки. Приносим свои извенения. =(");
+                    GoBack();
+                }
+            });
         }
 
         private void ImageProcessorOnImageNumberChanged(object sender, int newValue)
@@ -160,18 +164,23 @@ namespace ImageMaker.ViewModels.ViewModels
             TakingPicture = true;
             UpdateCommands();
 
-            //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
-            _imageProcessor.TakePicture(LiveViewImageStream, _settings.SelectedAeMode, _settings.SelectedAvValue, 
-                _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed, _settings.SelectedWhiteBalance)
-                .ContinueWith(task =>
-                {
-                    //TakingPicture = false;
-                    UpdateCommands();
+            Task.Run(async () =>
+            {
+                //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
+                var stream =
+                    await
+                        _imageProcessor.TakePicture(LiveViewImageStream, _settings.SelectedAeMode,
+                            _settings.SelectedAvValue,
+                            _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed,
+                            _settings.SelectedWhiteBalance);
+                    
+                //TakingPicture = false;
+                UpdateCommands();
 
-                    SetWindowStatus(true);
+                SetWindowStatus(true);
 
-                    _navigator.NavigateForward<CameraResultViewModel>(this, task.Result);
-                }, TaskScheduler.FromCurrentSynchronizationContext());
+                _navigator.NavigateForward<CameraResultViewModel>(this, stream);
+            });
         }
 
         private void StartLiveView()

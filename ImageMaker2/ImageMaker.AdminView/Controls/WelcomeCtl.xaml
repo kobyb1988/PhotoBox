@@ -37,7 +37,7 @@
                     </Viewbox>
                 </Border>
                 <Viewbox Grid.Row="1" Stretch="Uniform" Margin="60,30">
-                    <Grid  Width="400" Height="150">
+                    <Grid  Width="400" Height="180">
                         <Grid.Resources>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource OpaqueButtonStyle}">
                                 <Setter Property="Margin" Value="3" />
