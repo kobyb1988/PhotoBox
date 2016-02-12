@@ -44,9 +44,32 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private ImageViewModel _backgroundImage;
         private RelayCommand _selectBackgroundImageCommand;
         private RelayCommand _previewCommand;
-
-        public Visibility ShowMainPreview { set; get; }
-        public Visibility ShowOtherPreview { set; get; }
+        private Visibility _showMainPreview;
+        private Visibility _showOtherPreview;
+        public Visibility ShowMainPreview
+        {
+            set
+            {
+                _showMainPreview = value;
+                RaisePropertyChanged();
+            }
+            get
+            {
+                return _showMainPreview;
+            }
+        }
+        public Visibility ShowOtherPreview
+        {
+            set
+            {
+                _showOtherPreview = value;
+                RaisePropertyChanged();
+            }
+            get
+            {
+                return _showOtherPreview;
+            }
+        }
 
         public ThemeManagerViewModel(
             IViewModelNavigator navigator,
@@ -64,6 +87,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public override void Initialize()
         {
             ThemeSettingsDto settings = _settingsProvider.GetThemeSettings();
+            ShowOtherPreview = Visibility.Collapsed;
             if (settings == null)
             {
                 BackToDefaultTheme();
@@ -75,7 +99,6 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             if (settings.OtherBackgroundImage != null)
                 OtherWindowsImage = new ImageViewModel(settings.OtherBackgroundImage);
-
             MainWindowBackgroundColor = settings.MainBackgroundColor;
             MainWindowBorderColor = settings.MainBorderColor;
             MainWindowForegroundColor = settings.MainForegroundColor;
@@ -86,7 +109,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             OtherWindowsButtonColor = settings.OtherButtonColor;
             OtherWindowsForegroundButtonColor = settings.OtherForegroundButtonColor;
             OtherWindowsBackgroundCircleColor = settings.OtherBackgroundCircleColor;
-            GoPreview();
+            
         }
 
         public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(GoPreview));
@@ -116,8 +139,6 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 ShowMainPreview = Visibility.Visible;
                 ShowOtherPreview = Visibility.Collapsed;
             }
-            RaisePropertyChanged(() => ShowMainPreview);
-            RaisePropertyChanged(() => ShowOtherPreview);
         }
 
         private void SelectOtherWindowsImage()
