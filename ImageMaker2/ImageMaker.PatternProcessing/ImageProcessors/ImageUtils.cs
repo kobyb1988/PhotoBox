@@ -72,25 +72,19 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         public byte[] ProcessImages(List<byte[]> images, Size liveViewImageStreamSize, Template pattern)
         {
 
-            int defWidth = liveViewImageStreamSize.Width;//840;
-            int defHeight = liveViewImageStreamSize.Height;//420; //768;
+            var defWidth = liveViewImageStreamSize.Width;
+            var defHeight = liveViewImageStreamSize.Height;
 
-            bool hasBackground = pattern.Background != null;
-            bool hasOverlay = pattern.Overlay != null;
+            var hasBackground = pattern.Background != null;
+            var hasOverlay = pattern.Overlay != null;
 
-            MemoryStream backgroundStream = hasBackground ? new MemoryStream(pattern.Background.Data) : null;
-            MemoryStream overlayStream = hasOverlay ? new MemoryStream(pattern.Overlay.Data) : null;
-            Image backgroundImage = backgroundStream.Return(Image.FromStream, null);
-            Image overlayImage = overlayStream.Return(Image.FromStream, null);
-
-            //int width = Math.Max(defWidth,
-            //    Math.Max(backgroundImage.Return(x => x.Width, defWidth), overlayImage.Return(x => x.Width, defWidth)));
-
-            //int height = Math.Max(defHeight,
-            //    Math.Max(backgroundImage.Return(x => x.Height, defHeight), overlayImage.Return(x => x.Height, defHeight)));
-
-            int width = Math.Max(backgroundImage.Return(x => x.Width, 0), overlayImage.Return(x => x.Width, 0));
-            int height = Math.Max(backgroundImage.Return(x => x.Height, 0), overlayImage.Return(x => x.Height, 0));
+            var backgroundStream = hasBackground ? new MemoryStream(pattern.Background.Data) : null;
+            var overlayStream = hasOverlay ? new MemoryStream(pattern.Overlay.Data) : null;
+            var backgroundImage = backgroundStream.Return(Image.FromStream, null);
+            var overlayImage = overlayStream.Return(Image.FromStream, null);
+            
+            var width = Math.Max(backgroundImage.Return(x => x.Width, 0), overlayImage.Return(x => x.Width, 0));
+            var height = Math.Max(backgroundImage.Return(x => x.Height, 0), overlayImage.Return(x => x.Height, 0));
 
             if (width == 0 && height == 0)
             {
@@ -98,9 +92,9 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 height = defHeight;
             }
 
-            using (Bitmap backgroundBitmap = new Bitmap(width, height))
+            using (var backgroundBitmap = new Bitmap(width, height))
             {
-                using (Graphics canvas = Graphics.FromImage(backgroundBitmap))
+                using (var canvas = Graphics.FromImage(backgroundBitmap))
                 {
                     canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
@@ -109,16 +103,16 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                         new Rectangle(0, 0, width, height),
                         new Rectangle(0, 0, x.Width, x.Height), GraphicsUnit.Pixel));
 
-                    List<TemplateImage> templates = pattern.Images.ToList();
+                    var templates = pattern.Images.ToList();
 
-                    for (int i = 0; i < images.Count; i++)
+                    for (var i = 0; i < images.Count; i++)
                     {
-                        TemplateImage template = templates[i];
+                        var template = templates[i];
 
-                        int destWidth = (int)(width * template.Width);
-                        int destHeight = (int)(height * template.Height);
-                        int stepX = (int)(width * template.X);
-                        int stepY = (int)(height * template.Y);
+                        var destWidth = (int)Math.Round(width * template.Width);
+                        var destHeight = (int)Math.Round(height * template.Height);
+                        var stepX = (int)Math.Round(width * template.X);
+                        var stepY = (int)Math.Round(height * template.Y);
 
                         FillCanvas(canvas, images[i], new Point(stepX, stepY), destWidth, destHeight, 0, 0);
                     }
@@ -139,10 +133,10 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         {
             using (var imageStream = new MemoryStream(buffer))
             {
-                Image image = Image.FromStream(imageStream);
+                var image = Image.FromStream(imageStream);
                 canvas.DrawImage(image,
-                new Rectangle(position.X + offsetX, position.Y + offsetY, destWidth, destHeight),
-                new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+                    new Rectangle(position.X + offsetX, position.Y + offsetY, destWidth, destHeight),
+                    new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
             }
         }
 

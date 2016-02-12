@@ -305,6 +305,8 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemContainerStyle>
                                     <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
                                         <Setter Property="Canvas.ZIndex" Value="{Binding Path=Z}"/>
                                         <Setter Property="Canvas.Left">
                                             <Setter.Value>

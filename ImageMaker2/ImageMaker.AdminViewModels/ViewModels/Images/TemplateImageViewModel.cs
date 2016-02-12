@@ -79,12 +79,13 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             get { return _width; }
             set
             {
-                if (_width == value)
+                if (Math.Abs(_width - value) < double.Epsilon)
                     return;
                 
                 PushState();
 
                 _width = value;
+                Height = GetCorrectHeight(_width);
                 RaisePropertyChanged(() => Width);
                 RaiseSelectionChanged();
             }
@@ -95,12 +96,13 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             get { return _height; }
             set
             {
-                if (_height == value)
+                if (Math.Abs(_height - value) < double.Epsilon)
                     return;
 
                 
                 PushState();
                 _height = value;
+                Width = GetCorrectWidth(_height);
                 RaisePropertyChanged(() => Height);
                 RaiseSelectionChanged();
             }
@@ -194,39 +196,58 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public void Resize(double deltaX, double deltaY, double offsetX, double offsetY)
         {
-            double testX = X + (offsetX / _parentWidth).ThreeDigits();
-            double testY = Y + (offsetY / _parentHeight).ThreeDigits();
-            double testW = Width + (deltaX / _parentWidth).ThreeDigits();
-            double testH = Height + (deltaY / _parentHeight).ThreeDigits();
+            double tmpX = X,
+                tmpY = Y,
+                tmpW = Width,
+                tmpH = Height;
+            if (Math.Abs(offsetX) < double.Epsilon && Math.Abs(offsetY) < double.Epsilon)
+            {
+                tmpW = Width + (deltaX/_parentWidth); //.ThreeDigits();
+                tmpH = Height + (deltaY/_parentHeight); //.ThreeDigits();
+            }
+            else
+            {
+                var tmpRightX = X + Width;
+                var tmpRightY = Y + Height;
+                tmpX = X + (offsetX/_parentWidth); //.ThreeDigits();
+                tmpW = tmpRightX - tmpX;
+                tmpH = GetCorrectHeight(tmpW);
+                tmpY = tmpRightY - tmpH;
+            }
 
-            if (testX < 0 || (testX + testW) > 1 || testY < 0 || (testY + testH) > 1)
+            if (tmpX < 0 || tmpW <= 0 || (tmpX + tmpW) > 1 || tmpY < 0 || tmpH <= 0 || (tmpY + tmpH) > 1)
                 return;
 
-            X = testX;
-            Y = testY;
+            X = tmpX;
+            Y = tmpY;
 
-            Width = testW;
-            //Height = testH;
-            Height = GetCorrectHeight(testW);
+            Width = tmpW;
+            Height = tmpH;
+            //Height = GetCorrectHeight(tmpW);
         }
 
         public Type DataType { get { return typeof(TemplateImageViewModel); } }
 
         public void Update(double x, double y)
         {
-            double testX = (x / _parentWidth).ThreeDigits() - (Width / 2).ThreeDigits();
-            double testY = (y / _parentHeight).ThreeDigits() - (Height / 2).ThreeDigits();
-            if (testX < 0 || (testX + Width) > 1 || testY < 0 || (testY + Height) > 1)
+            var tmpX = (x / _parentWidth)/*.ThreeDigits()*/ - (Width / 2);//.ThreeDigits();
+            var tmpY = (y / _parentHeight)/*.ThreeDigits()*/ - (Height / 2);//.ThreeDigits();
+            if (tmpX < 0 || (tmpX + Width) > 1 || tmpY < 0 || (tmpY + Height) > 1)
                 return;
 
-            X = testX;
-            Y = testY;
+            X = tmpX;
+            Y = tmpY;
         }
 
         private double GetCorrectHeight(double width)
         {
             //default camera resolution is 1056w x 704h
-            return width/1056.0*704;
+            return (width*_parentWidth/1056.0*704)/_parentHeight;
+        }
+        private double GetCorrectWidth(double height)
+        {
+            //default camera resolution is 1056w x 704h
+            return (height*_parentHeight/704.0*1056)/_parentWidth;
         }
     }
 }

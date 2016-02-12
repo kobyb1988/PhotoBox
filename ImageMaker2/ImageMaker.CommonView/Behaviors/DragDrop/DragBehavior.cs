@@ -35,9 +35,12 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
             this.AssociatedObject.PreviewGiveFeedback += AssociatedObjectOnGiveFeedback;
         }
 
+        private Point pos;
+
         private void AssociatedObjectOnMouseMove(object sender, MouseEventArgs mouseEventArgs)
         {
             Point currentPosition = mouseEventArgs.GetPosition(RelativeElement);
+            pos = mouseEventArgs.GetPosition(this.AssociatedObject);
 
             //Point currentPosition = mouseEventArgs.GetPosition(Window.GetWindow(this.AssociatedObject));
             if (!_isMousePressed || !this.AssociatedObject.IsMouseOver)
@@ -53,7 +56,7 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
 
 
             Debug.WriteLine("Mouse leave");
-            _adorner = new DefaultAdorner(this.AssociatedObject, new Point(0, 0), RelativeElement);
+            _adorner = new DefaultAdorner(this.AssociatedObject, mouseEventArgs.GetPosition(null), RelativeElement);
 
             DataObject data = new DataObject();
             data.SetData(context.DataType, context);
@@ -86,9 +89,11 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
             var towindow = RelativeElement.TranslatePoint(mousePosition, Window.GetWindow(this.AssociatedObject));
             Debug.WriteLine("relative to layer x: {0}; y: {1}", towindow.X, towindow.Y);
             //Point mousePosition = Window.GetWindow(this.AssociatedObject).PointFromScreen(Extensions.GetMouseCoordinates());
+            var rel = new Point(mousePosition.X - pos.X + this.AssociatedObject.RenderSize.Width/2,
+                mousePosition.Y - pos.Y + this.AssociatedObject.RenderSize.Height/2);
             if (_adorner != null)
             {
-                _adorner.SetMousePosition(mousePosition, factor);
+                _adorner.SetMousePosition(rel, factor);
             }
         }
 
@@ -133,25 +138,26 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
         public DefaultAdorner(UIElement adornedElement, Point origin, FrameworkElement relative)
             : base(adornedElement)
         {
-            Rectangle rect = new Rectangle();
-            rect.Width = adornedElement.RenderSize.Width;
-            rect.Height = adornedElement.RenderSize.Height;
+            var rect = new Rectangle
+            {
+                Width = adornedElement.RenderSize.Width,
+                Height = adornedElement.RenderSize.Height
+            };
 
-            VisualBrush visualBrush = new VisualBrush(adornedElement);
-            visualBrush.Opacity = 0.5;
-            visualBrush.Stretch = Stretch.None;
+            var visualBrush = new VisualBrush(adornedElement)
+            {
+                Opacity = 0.5,
+                Stretch = Stretch.None
+            };
             rect.Fill = visualBrush;
-
             
             this._child = rect;
-
-            this._adornerOrigin = new Point(0, 0);
-                
-            this._adornerOffset = origin;
+            this._adornerOrigin = origin;
+            this._adornerOffset = new Point(0, 0);
             _relative = relative;
-            AdornerLayer layer = AdornerLayer.GetAdornerLayer(adornedElement);
+            var layer = AdornerLayer.GetAdornerLayer(adornedElement);
 
-            Adorner[] adorners = layer.GetAdorners(adornedElement);
+            var adorners = layer.GetAdorners(adornedElement);
             if (adorners != null)
             {
                 Array.ForEach(adorners, layer.Remove);   
@@ -170,9 +176,12 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
         {
             Debug.WriteLine("x: {0}; y: {1}", position.X, position.Y);
             Debug.WriteLine("x: {0}; y: {1}", position.X, position.Y);
-            this._adornerOffset.X = (position.X * factor.X) - this._adornerOrigin.X - (_child.Width * factor.X) / 2;
-            this._adornerOffset.Y = (position.Y * factor.Y) - this._adornerOrigin.Y - (_child.Height * factor.Y) / 2;
-
+            //this._adornerOffset.X = (position.X * factor.X) - this._adornerOrigin.X - (_child.Width * factor.X) / 2;
+            //this._adornerOffset.Y = (position.Y * factor.Y) - this._adornerOrigin.Y - (_child.Height * factor.Y) / 2;
+            var cursor = Extensions.GetMouseCoordinates();
+            this._adornerOffset.X = cursor.X - this._adornerOrigin.X;
+            this._adornerOffset.Y = cursor.Y - this._adornerOrigin.Y;
+            
             UpdatePosition();
         }
 
