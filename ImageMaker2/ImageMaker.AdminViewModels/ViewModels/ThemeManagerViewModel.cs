@@ -64,6 +64,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public override void Initialize()
         {
             ThemeSettingsDto settings = _settingsProvider.GetThemeSettings();
+            GoPreview();
             if (settings == null)
             {
                 BackToDefaultTheme();
@@ -86,7 +87,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             OtherWindowsButtonColor = settings.OtherButtonColor;
             OtherWindowsForegroundButtonColor = settings.OtherForegroundButtonColor;
             OtherWindowsBackgroundCircleColor = settings.OtherBackgroundCircleColor;
-            GoPreview();
+            
         }
 
         public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(GoPreview));
