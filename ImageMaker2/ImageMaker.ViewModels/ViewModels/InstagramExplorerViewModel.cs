@@ -6,10 +6,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Monads;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using AutoMapper;
 using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.CommonViewModels.Async;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
@@ -84,21 +86,17 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
+        private NotifyTaskCompletion<ImageResponse> _searchAsyncOperation;
 
-        public bool IsBusy
+        public NotifyTaskCompletion<ImageResponse> SearchAsyncOperation
         {
-            get { return _isBusy; }
-            set
-            {
-                if (_isBusy == value)
-                    return;
-
-                Set(() => IsBusy, ref _isBusy, value);
-                UpdateCommands();
-            }
+            get { return _searchAsyncOperation; }
+            set { Set(ref _searchAsyncOperation, value); }
         }
 
-        public string TextSearch
+        private CancellationTokenSource _searchTokenSource;
+
+       public string TextSearch
         {
             get
             {
@@ -115,7 +113,7 @@ namespace ImageMaker.ViewModels.ViewModels
         public ObservableCollection<InstagramImageViewModel> Images => _images ?? (_images = new ObservableCollection<InstagramImageViewModel>());
 
         #endregion
-        
+
         public InstagramExplorerViewModel(
             IViewModelNavigator navigator,
             InstagramExplorer instagramExplorer,
@@ -134,7 +132,8 @@ namespace ImageMaker.ViewModels.ViewModels
                 _printerName = appSettings.PrinterName;
 
             IsHashTag = true;
-
+            SearchAsyncOperation= new NotifyTaskCompletion<ImageResponse>(Task.FromResult(default(ImageResponse)));
+            _searchTokenSource= new CancellationTokenSource();
         }
 
         #region Methods
@@ -175,7 +174,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private void Check(InstagramImageViewModel image)
         {
             _checkedImage = image;
-            foreach (var imageViewModel in Images.Where(x=>x!=_checkedImage))
+            foreach (var imageViewModel in Images.Where(x => x != _checkedImage))
             {
                 imageViewModel.IsChecked = false;
             }
@@ -192,43 +191,52 @@ namespace ImageMaker.ViewModels.ViewModels
                     Images.Clear();
                 }
             }
-
             _previousSearch = text;
-
-            IsBusy = true;
             SearchCommand.RaiseCanExecuteChanged();
-            Task<ImageResponse> task = IsHashTag
-                ? (string.IsNullOrEmpty(_nextUrl)
-                    ? _instagramExplorer.GetImagesByHashTag(text, null)
-                    : _instagramExplorer.GetImagesFromUrl(_nextUrl))
-                : (string.IsNullOrEmpty(_nextUrl)
-                    ? _instagramExplorer.GetImagesByUserName(text, null)
-                    : _instagramExplorer.GetImagesFromUrl(_nextUrl));
 
-            task.ContinueWith(t =>
-            {
-                // _images.Clear();
-                _nextUrl = task.Result.Return(x => x.NextUrl, null);
+            _searchTokenSource.Cancel();
+            _searchTokenSource= new CancellationTokenSource();
 
-                if (_nextUrl == null && _lastInstagramImageId == task.Result.MinTagId)
-                {
-                    IsBusy = false;
-                    SearchCommand.RaiseCanExecuteChanged();
-                    return;
-                }
-
-                _lastInstagramImageId = task.Result.MinTagId;
-                foreach (var image in task.Result.Return(x => x.Images, Enumerable.Empty<WebBrowsing.Image>()))
-                {
-                    InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data,
-                        image.Width, image.Height, image.Url, image.FullName, image.ProfilePictureData, image.UrlAvatar);
-                    _images.Add(viewModel);
-                }
-
-                IsBusy = false;
-                SearchCommand.RaiseCanExecuteChanged();
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            SearchAsyncOperation = new NotifyTaskCompletion<ImageResponse>(SearchUpdateImages(text, _searchTokenSource.Token));
         }
+
+        private async Task<ImageResponse> SearchUpdateImages(string text, CancellationToken cancellationToken)
+        {
+            var imageResponce = await GetImagesAsync(text, cancellationToken);
+            // _images.Clear();
+            _nextUrl = imageResponce.Return(x => x.NextUrl, null);
+
+            if (_nextUrl == null && _lastInstagramImageId == imageResponce.MinTagId)
+            {
+                SearchCommand.RaiseCanExecuteChanged();
+                await Task.FromResult(imageResponce);
+            }
+
+            _lastInstagramImageId = imageResponce.MinTagId;
+            foreach (var image in imageResponce.Return(x => x.Images, Enumerable.Empty<WebBrowsing.Image>()))
+            {
+                InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data,
+                    image.Width, image.Height, image.Url, image.FullName, image.ProfilePictureData, image.UrlAvatar);
+                _images.Add(viewModel);
+            }
+
+            SearchCommand.RaiseCanExecuteChanged();
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return await Task.FromResult(imageResponce);
+        }
+
+        private async Task<ImageResponse> GetImagesAsync(string text, CancellationToken cancellationToken)
+        {
+            return await (IsHashTag
+                ? (string.IsNullOrEmpty(_nextUrl)
+                    ? _instagramExplorer.GetImagesByHashTag(text, null, cancellationToken)
+                    : _instagramExplorer.GetImagesFromUrl(_nextUrl, cancellationToken))
+                : (string.IsNullOrEmpty(_nextUrl)
+                    ? _instagramExplorer.GetImagesByUserName(text, null,cancellationToken)
+                    : _instagramExplorer.GetImagesFromUrl(_nextUrl, cancellationToken)));
+        }
+
 
         private void UpdateCommands()
         {
@@ -238,6 +246,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void GoBack()
         {
+            _searchTokenSource.Cancel();
             _navigator.NavigateBack(this);
         }
         #endregion
@@ -245,18 +254,12 @@ namespace ImageMaker.ViewModels.ViewModels
         #region Commands
         public RelayCommand PrintCommand
         {
-            get { return _printCommand ?? (_printCommand = new RelayCommand(Print, () => _checkedImage != null && Images.Any(x=>x.IsChecked))); }
+            get { return _printCommand ?? (_printCommand = new RelayCommand(Print, () => _checkedImage != null && Images.Any(x => x.IsChecked))); }
         }
 
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack, () => !IsBusy)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
-        public RelayCommand<string> SearchCommand
-        {
-            get { return _searchCommand ?? (_searchCommand = new RelayCommand<string>(Search, (s) => !IsBusy)); }
-        }
+        public RelayCommand<string> SearchCommand => _searchCommand ?? (_searchCommand = new RelayCommand<string>(Search));
         private RelayCommand _printCommand;
 
         public RelayCommand<InstagramImageViewModel> CheckCommand => _checkCommand ?? (_checkCommand = new RelayCommand<InstagramImageViewModel>(Check));

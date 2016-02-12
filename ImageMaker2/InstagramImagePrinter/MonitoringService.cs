@@ -77,8 +77,8 @@ namespace InstagramImagePrinter
                         Task.Delay(TimeSpan.FromSeconds(10)).Wait();
 
                         ImageResponse result = string.IsNullOrEmpty(nextUrl)
-                            ? _instagramExplorer.GetImagesByHashTag(hashTag, "", 1).Result
-                            : _instagramExplorer.GetImagesFromUrl(nextUrl).Result;
+                            ? _instagramExplorer.GetImagesByHashTag(hashTag, "", tokenSource.Token, 1).Result
+                            : _instagramExplorer.GetImagesFromUrl(nextUrl, tokenSource.Token).Result;
 
                         nextUrl = result.Return(x => x.NextUrl, null);
 

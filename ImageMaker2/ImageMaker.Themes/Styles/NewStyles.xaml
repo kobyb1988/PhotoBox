@@ -19,6 +19,7 @@
         <ResourceDictionary Source="DateTimePickerStyles.xaml" />
         <ResourceDictionary Source="ImageStyles.xaml"/>
         <ResourceDictionary Source="SliderStyle.xaml" />
+        <ResourceDictionary Source="ErrorHandlingControlStyles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
     

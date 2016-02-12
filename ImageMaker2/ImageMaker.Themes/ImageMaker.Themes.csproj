@@ -121,6 +121,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\ErrorHandlingControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\ImageStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +199,7 @@
     <Compile Include="CustomControls\CustomRepeatButton.cs" />
     <Compile Include="CustomControls\CustomScrollViewer.cs" />
     <Compile Include="CustomControls\DataPagerCtl.cs" />
+    <Compile Include="CustomControls\ErrorHandlingControl.cs" />
     <Compile Include="CustomControls\RoundedButton.cs" />
     <Compile Include="CustomControls\SearchBoxCtl.cs" />
     <Compile Include="CustomControls\TimeSelector.cs" />

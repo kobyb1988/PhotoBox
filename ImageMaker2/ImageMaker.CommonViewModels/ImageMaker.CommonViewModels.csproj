@@ -66,6 +66,7 @@
       <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -80,6 +81,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Async\AsyncCommand.cs" />
+    <Compile Include="Async\AsyncCommandBase.cs" />
+    <Compile Include="Async\AsyncCommandWrapper.cs" />
+    <Compile Include="Async\DelegateCommand.cs" />
+    <Compile Include="Async\IAsyncCommand.cs" />
+    <Compile Include="Async\NotifyTaskCompletion.cs" />
     <Compile Include="AutoMapper\MappingEngineConfiguration.cs" />
     <Compile Include="Behaviors\ICloseable.cs" />
     <Compile Include="Behaviors\IPassword.cs" />

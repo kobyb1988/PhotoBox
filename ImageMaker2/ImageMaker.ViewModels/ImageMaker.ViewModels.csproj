@@ -88,6 +88,8 @@
   <ItemGroup>
     <Compile Include="Abstract\ISearch.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Converters\BoolToVisibleConverter.cs" />
+    <Compile Include="Converters\InvertBoolConverter.cs" />
     <Compile Include="Ninject\MainModule.cs" />
     <Compile Include="Providers\PatternManageViewModelProvider.cs" />
     <Compile Include="Providers\PrinterMessageProvider.cs" />

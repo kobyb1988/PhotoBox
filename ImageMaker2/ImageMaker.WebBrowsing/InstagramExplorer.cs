@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
@@ -14,7 +15,7 @@ namespace ImageMaker.WebBrowsing
         private const string cUserName = @"george.39reg";
         private const string cClientToken = @"fd2a555e04d54f1db8423c0e133fad91";
 
-        public async Task<ImageResponse> GetImagesFromUrl(string url)
+        public async Task<ImageResponse> GetImagesFromUrl(string url, CancellationToken cancellationToken)
         {
             ImageResponse imageResponse = null;
             List<Image> images = new List<Image>();
@@ -23,20 +24,23 @@ namespace ImageMaker.WebBrowsing
                 using (var client = new WebClient())
                 {
                     string data = await client.DownloadStringTaskAsync(new Uri(url));
+                    cancellationToken.ThrowIfCancellationRequested();
                     JObject token = JObject.Parse(data);
 
                     JObject paginationToken = JObject.FromObject(token.SelectToken("pagination"));
                     imageResponse = paginationToken.ToObject<ImageResponse>();
                     foreach (var tokenData in token.SelectToken("data"))
                     {
+                        cancellationToken.ThrowIfCancellationRequested();
+
                         JObject jObject = JObject.FromObject(new { id = tokenData.SelectToken("id").Value<string>() });
                         JToken imageToken = tokenData.SelectToken("images").SelectToken("standard_resolution");
                         JObject imageObject = JObject.FromObject(imageToken);
-                        JToken userDataToken =JObject.FromObject(tokenData.SelectToken("user"));
+                        JToken userDataToken = JObject.FromObject(tokenData.SelectToken("user"));
                         string fullName = userDataToken.SelectToken("full_name").Value<string>();
-                        JObject userObject=JObject.FromObject(new
+                        JObject userObject = JObject.FromObject(new
                         {
-                            fullname=string.IsNullOrEmpty(fullName) ? userDataToken.SelectToken("username").Value<string>() : fullName,
+                            fullname = string.IsNullOrEmpty(fullName) ? userDataToken.SelectToken("username").Value<string>() : fullName,
                         });
                         long created = tokenData.SelectToken("created_time").Value<long>();
                         var dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -45,7 +49,7 @@ namespace ImageMaker.WebBrowsing
                         {
                             createdtime = dt.Ticks
                         });
-                        JObject profilepictureObject = JObject.FromObject(new {profilepictureobject= userDataToken.SelectToken("profile_picture").Value<string>() });
+                        JObject profilepictureObject = JObject.FromObject(new { profilepictureobject = userDataToken.SelectToken("profile_picture").Value<string>() });
                         JObject avatarData = JObject.FromObject(new
                         {
                             profilepicturedata = await client.DownloadDataTaskAsync(new Uri(userDataToken.SelectToken("profile_picture").Value<string>()))
@@ -68,26 +72,28 @@ namespace ImageMaker.WebBrowsing
                     imageResponse.Images = images;
                 }
             }
-            catch (Exception ex)
+            catch (OperationCanceledException ex)
             {
+                //TODO запись в лог   
+                return default(ImageResponse);
             }
 
             return imageResponse;
         }
-        
-        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string maxTagId, byte count=15)
+
+        public async Task<ImageResponse> GetImagesByHashTag(string hashTag, string maxTagId, CancellationToken cancellationToken, byte count = 15)
         {
             if (string.IsNullOrEmpty(hashTag))
                 return await Task.FromResult<ImageResponse>(null);
 
-            string url = string.Format(@"https://api.instagram.com/v1/tags/{0}/media/recent?count={3}&client_id={1}{2}", 
+            string url = string.Format(@"https://api.instagram.com/v1/tags/{0}/media/recent?count={3}&client_id={1}{2}",
                 hashTag, cClientToken,
-                string.IsNullOrEmpty(maxTagId) ? string.Empty : string.Format("&max_tag_id={0}", maxTagId),count);
+                string.IsNullOrEmpty(maxTagId) ? string.Empty : string.Format("&max_tag_id={0}", maxTagId), count);
 
-            return await GetImagesFromUrl(url);
+            return await GetImagesFromUrl(url, cancellationToken);
         }
 
-        public async Task<ImageResponse> GetImagesByUserName(string userName, string minTagId)
+        public async Task<ImageResponse> GetImagesByUserName(string userName, string minTagId, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(userName))
                 return await Task.FromResult<ImageResponse>(null);
@@ -102,6 +108,8 @@ namespace ImageMaker.WebBrowsing
                 using (var client = new WebClient())
                 {
                     string userData = await client.DownloadStringTaskAsync(new Uri(userSearchUrl));
+                    cancellationToken.ThrowIfCancellationRequested();
+
                     JObject dataToken = JObject.Parse(userData);
                     JToken child = dataToken.SelectToken("data").Children().FirstOrDefault();
                     if (child != null)
@@ -111,7 +119,7 @@ namespace ImageMaker.WebBrowsing
                             cClientToken,
                             string.IsNullOrEmpty(minTagId) ? string.Empty : string.Format("&min_tag_id={0}", minTagId));
 
-                        return await GetImagesFromUrl(dataRetrieveUrl);
+                        return await GetImagesFromUrl(dataRetrieveUrl, cancellationToken);
                         string data = await client.DownloadStringTaskAsync(new Uri(dataRetrieveUrl));
                         JObject token = JObject.Parse(data);
                         JObject paginationToken = JObject.FromObject(token.SelectToken("pagination"));
@@ -143,7 +151,7 @@ namespace ImageMaker.WebBrowsing
             }
             catch (Exception)
             {
-                
+
             }
 
 

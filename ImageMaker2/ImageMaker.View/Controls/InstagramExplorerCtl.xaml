@@ -12,6 +12,7 @@
              xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
              xmlns:converters="clr-namespace:ImageMaker.View.Converters"
              xmlns:helpers="clr-namespace:ImageMaker.View.Helpers"
+             xmlns:converters2="clr-namespace:ImageMaker.ViewModels.Converters;assembly=ImageMaker.ViewModels"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:InstagramExplorerViewModel}"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -276,9 +277,16 @@
                             </ItemsControl.ItemContainerStyle>
                         </ListBox>
                         <spinningWheel:SpinningWheel HorizontalAlignment="Center"
-                                IsSpinning="{Binding Path=IsBusy}" 
-                                Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                IsSpinning="{Binding Path=SearchAsyncOperation.IsNotCompleted,TargetNullValue=false}" 
+                                Visibility="{Binding Path=SearchAsyncOperation.IsNotCompleted, Converter={converters2:BoolToVisibleConverter},TargetNullValue={x:Static Visibility.Hidden}}"/>
+                        <customControls:ErrorHandlingControl Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchBoxCtl,Path=SearchText}"
+                                          Style="{StaticResource ErrorHandlingControlStyle}"
+                                          Visibility="{Binding SearchAsyncOperation.IsFaulted,
+                                                               FallbackValue={x:Static Visibility.Collapsed},
+                                                               TargetNullValue={x:Static Visibility.Collapsed},
+                                                               Converter={converters2:BoolToVisibleConverter}}" />
                     </Grid>
+                    
                 </Border>
                 <Border  Padding="0" Grid.Row="2">
                     <Grid  Width="890" Height="85">
@@ -287,6 +295,7 @@
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
+                        
                         <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
                                 Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
                                 Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
@@ -307,6 +316,7 @@
                                 PageSize="15"
                                 PagesInRow="3"
                                 Background="#4ecdc4"/>
+
                         <customControls:BlueButton Command="{Binding Path=PrintCommand}"
                                 Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}"
                                 Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherForegroundColorKey}}"
