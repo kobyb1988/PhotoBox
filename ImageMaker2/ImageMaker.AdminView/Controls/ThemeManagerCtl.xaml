@@ -21,7 +21,7 @@
             <ImageBrush ImageSource="../Resources/blur.jpg" Stretch="UniformToFill" />
         </Border.Background>
         <Viewbox Stretch="Uniform">
-            <Grid Width="900" Height="730">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.16*"/>
                     <RowDefinition Height="*"/>
@@ -41,7 +41,7 @@
                 <Grid Grid.Row="1">
                     <Grid.Resources>
                         <Style TargetType="{x:Type customControls:ContentButton}" BasedOn="{StaticResource ContentButtonBaseStyle}">
-                            <Setter Property="CornerRadius" Value="40" />
+                            <Setter Property="CornerRadius" Value="20" />
                             <Setter Property="Margin" Value="10"></Setter>
                             <Setter Property="Height" Value="55"/>
                         </Style>
@@ -51,14 +51,14 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <customControls:RoundedButton Command="{Binding PreviewCommand}" CornerRadius="25" Width="50" Height="50" Content="&lt;" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <customControls:RoundedButton Command="{Binding PreviewCommand}" CornerRadius="25" Width="50" Height="50" Content="&lt;" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                     <Grid Grid.Column="1" Visibility="{Binding ShowMainPreview, UpdateSourceTrigger=PropertyChanged}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="AUTO"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -252,7 +252,7 @@
                                             <ColumnDefinition Width="0.65*"/>
                                             <ColumnDefinition Width="0.35*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <!--<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
                                         <Button Grid.Column="1" 
                                             Command="{Binding Path=DataContext.SelectImageCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}">
                                             <Button.Style>
@@ -286,10 +286,7 @@
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
                         <CheckBox Grid.Row="3" Content="Вернуть первоначальную тему" IsChecked="{Binding IsBackToDefaultTheme}" Height="60"/>
-                        <controls:PreviewMainWindowCtl Grid.Row="4" Grid.ColumnSpan="2">
-                            <controls:PreviewMainWindowCtl.LayoutTransform>
-                                <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
-                            </controls:PreviewMainWindowCtl.LayoutTransform>
+                        <controls:PreviewMainWindowCtl Grid.Row="4" Grid.ColumnSpan="2" Width="350">
                         </controls:PreviewMainWindowCtl>
                     </Grid>
                     <Grid Visibility="{Binding ShowOtherPreview, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1">
@@ -530,7 +527,7 @@
                         <customControls:ContentButton Grid.Row="3" 
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
-                            Title="Цвет текста кнопок:" 
+                            Title="Цвет&#10;текста кнопок:" 
                             Content="{Binding Path=OtherWindowsForegroundButtonColor}">
                             <customControls:ContentButton.IconBrush>
                                 <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
@@ -584,7 +581,7 @@
                         <customControls:ContentButton Grid.Row="3" Grid.Column="1"
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
-                            Title="Цвет круглых кнопок:" 
+                            Title="Цвет&#10;круглых кнопок:" 
                             Content="{Binding Path=OtherWindowsBackgroundCircleColor}">
                             <customControls:ContentButton.IconBrush>
                                 <ImageBrush ImageSource="../Resources/icons_3.png" Viewbox="0.50,0.45,0.5,0.5">
@@ -657,7 +654,7 @@
                                             <ColumnDefinition Width="0.65*"/>
                                             <ColumnDefinition Width="0.35*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <!--<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
                                         <Button Grid.Column="1"  
                                             Command="{Binding Path=DataContext.SelectOtherWindowsImageCommand, RelativeSource={RelativeSource AncestorType=customControls:ContentButton}}">
                                             <Button.Style>
@@ -689,14 +686,11 @@
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
-                        <controls:PreviewOtherWindowCtl  Grid.Row="5" Grid.ColumnSpan="2">
-                            <controls:PreviewOtherWindowCtl.LayoutTransform>
-                                <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
-                            </controls:PreviewOtherWindowCtl.LayoutTransform>
+                        <controls:PreviewOtherWindowCtl  Grid.Row="5" Grid.ColumnSpan="2" Width="350">
                         </controls:PreviewOtherWindowCtl>
 
                     </Grid>
-                    <customControls:RoundedButton  Command="{Binding PreviewCommand}" CornerRadius="25" Width="50" Height="50" Content="&gt;"  Grid.Column="2" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <customControls:RoundedButton  Command="{Binding PreviewCommand}" CornerRadius="25" Width="50" Height="50" Content="&gt;"  Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
 
                 <Border Padding="10" Grid.Row="2">
