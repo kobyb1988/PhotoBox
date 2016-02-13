@@ -16,6 +16,9 @@ namespace ImageMaker.AppServer
         [OperationContract(IsOneWay = true)]
         void Connect();
 
+        [OperationContract(IsOneWay = true)]
+        void Ping();
+
         // TODO: Add your service operations here
     }
 

@@ -37,14 +37,33 @@ namespace ImageMaker.AppClient.ServiceHosting
                              {
                                  _client.SendCommand(command);
                              }
-                             catch (Exception)
+                             catch (Exception ex)
                              {
+                                 NLog.LogManager.GetCurrentClassLogger().Error(ex);
                              }
                          }).ContinueWith(x =>
                                          {
                                              if (abort)
                                                  Abort();
                                          });
+            }
+        }
+
+        public virtual void Ping()
+        {
+            if (_client != null)
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        _client.Ping();
+                    }
+                    catch (Exception ex)
+                    {
+                        NLog.LogManager.GetCurrentClassLogger().Error(ex);
+                    }
+                });
             }
         }
 
