@@ -21,6 +21,11 @@ namespace ImageMaker.Runner
             Server.Instance.AddSession(Callback, OperationContext.Current.SessionId);
         }
 
+        public void Ping()
+        {
+            Console.WriteLine("Ping SessionId:{0}", OperationContext.Current.SessionId);
+        }
+
         ICallbackContract Callback
         {
             get { return OperationContext.Current.GetCallbackChannel<ICallbackContract>(); }

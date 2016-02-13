@@ -6,5 +6,8 @@ namespace ImageMaker.AppServer
     {
         [OperationContract(IsOneWay = true)]
         void SendCommand(BaseCommand command);
+        [OperationContract(IsOneWay = true)]
+        void Ping();
+
     }
 }

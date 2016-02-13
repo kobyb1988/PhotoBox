@@ -10,6 +10,7 @@ using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using NLog;
+using System.Windows.Threading;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -17,6 +18,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
     {
         private readonly SessionService _sessionService;
         private readonly CommunicationManager _communicationManager;
+        private readonly DispatcherTimer _timer;
 
         public MainViewModel(
             IViewModelNavigator navigator,
@@ -38,8 +40,16 @@ namespace ImageMaker.AdminViewModels.ViewModels
             messenger.Register<CommandMessage>(this, OnOpenCommand);
             messenger.Register<CloseCommandMessage>(this, OnCloseCommand);
             communicationManager.Connect();
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 15);
+            _timer.IsEnabled = true;
+            _timer.Tick += SendPing;
+            _timer.Start();
         }
-
+        private void SendPing(object sender, EventArgs e)
+        {
+            _communicationManager.Ping();
+        }
         private void OnCloseCommand(CloseCommandMessage command)
         {
             _process = null;
@@ -155,6 +165,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public void OnClose()
         {
             _communicationManager.SendCloseCommand();
+            _timer.Tick -= SendPing;
+            _timer.Stop();
+            _communicationManager.SendHideCommand();
             Thread.Sleep(3000); //todo to wait for main window to close, find the better way
         }
 

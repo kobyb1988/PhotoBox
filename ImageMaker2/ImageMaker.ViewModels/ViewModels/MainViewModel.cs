@@ -6,22 +6,24 @@ using ImageMaker.CommonViewModels.Messenger;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using System.Windows.Threading;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
     public class MainViewModel : BaseViewModel, ICloseable, IWindowContainer
     {
         private readonly CommunicationManager _communicationManager;
+        private readonly DispatcherTimer _timer;
 
         public MainViewModel(
-            IViewModelNavigator navigator, 
+            IViewModelNavigator navigator,
             IMessenger messenger,
             CommunicationManager communicationManager
             )
         {
             _communicationManager = communicationManager;
             messenger.Register<ShowChildWindowMessage>(this, RaiseShowWindow);
-            
+
             messenger.Register<WindowStateMessage>(this, state => RaiseStateChanged(state.State));
 
             messenger.Register<ContentChangedMessage>(this, OnContentChanged);
@@ -30,8 +32,16 @@ namespace ImageMaker.ViewModels.ViewModels
             messenger.Register<CommandMessage>(this, OnOpenCommand);
             messenger.Register<CloseCommandMessage>(this, OnCloseCommand);
             communicationManager.Connect();
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 15);
+            _timer.IsEnabled = true;
+            _timer.Tick += SendPing;
+            _timer.Start();
         }
-
+        private void SendPing(object sender, EventArgs e)
+        {
+            _communicationManager.Ping();
+        }
         private void OnCloseCommand(CloseCommandMessage command)
         {
             RaiseRequestClose(WindowState.Closed);
@@ -101,7 +111,9 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void ShowAdmin()
         {
-            RaiseRequestClose(WindowState.Hidden);
+            RaiseRequestClose(WindowState.Closed);
+            _timer.Tick -= SendPing;
+            _timer.Stop();
             _communicationManager.SendHideCommand();
         }
 
@@ -110,6 +122,9 @@ namespace ImageMaker.ViewModels.ViewModels
         public void OnClose()
         {
             _communicationManager.SendCloseCommand();
+            _timer.Tick -= SendPing;
+            _timer.Stop();
+
         }
 
         public event EventHandler<ShowWindowEventArgs> ShowWindow;

@@ -64,5 +64,10 @@ namespace ImageMaker.AppClient.ServiceHosting
         {
             this.Channel.Connect();
         }
+
+        public void Ping()
+        {
+            Channel.Ping();
+        }
     }
 }

@@ -14,6 +14,11 @@ namespace ImageMaker.AppClient.ServiceHosting
 
         public Action<BaseCommand> OnCommandReceived { get; private set; }
 
+        public void Ping()
+        {
+            
+        }
+
         public void SendCommand(BaseCommand command)
         {
             OnCommandReceived(command);

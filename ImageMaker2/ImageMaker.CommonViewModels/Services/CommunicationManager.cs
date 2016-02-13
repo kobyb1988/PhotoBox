@@ -31,6 +31,10 @@ namespace ImageMaker.CommonViewModels.Services
         {
             _clientFactory.SendCommand(new CloseCommand(), true);
         }
+        public virtual void Ping()
+        {
+            _clientFactory.Ping();
+        }
 
     }
 
