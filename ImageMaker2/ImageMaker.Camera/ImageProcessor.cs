@@ -155,7 +155,7 @@ namespace ImageMaker.Camera
             CameraHandler.StopLiveView();
 
             var source = new TaskCompletionSource<byte[]>();
-
+            
             CameraHandler.TakePhoto(result => source.TrySetResult(result), SelectedCamera); //todo test comment
 
             return source.Task;

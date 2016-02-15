@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Monads;
+using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.CommonViewModels.Async;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
+using ImageMaker.PatternProcessing;
 using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.SDKData.Enums;
@@ -35,7 +39,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private RelayCommand _closeSessionCommand;
         private RelayCommand _refreshCameraCommand;
         private RelayCommand _startLiveViewCommand;
-        private RelayCommand _takePictureCommand;
+        private IAsyncCommand _takePictureCommand;
         private RelayCommand<uint> _setFocusCommand;
 
         private byte[] _liveViewImageStream;
@@ -45,6 +49,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private bool _isLiveViewOn;
         private int _counter;
 
+        static AutoResetEvent _cameraStreamSynchronize;
         public CameraViewModel(
             SettingsProvider settingsProvider,
             IDialogService dialogService,
@@ -78,27 +83,23 @@ namespace ImageMaker.ViewModels.ViewModels
 
             if (_settings != null)
             {
-                _imageProcessor.SetSetting((uint) PropertyId.AEMode, (uint)_settings.SelectedAeMode);
-                _imageProcessor.SetSetting((uint) PropertyId.WhiteBalance, (uint)_settings.SelectedWhiteBalance);
-                _imageProcessor.SetSetting((uint) PropertyId.Av, (uint)_settings.SelectedAvValue);
-                _imageProcessor.SetSetting((uint) PropertyId.ExposureCompensation, (uint)_settings.SelectedCompensation);
-                _imageProcessor.SetSetting((uint) PropertyId.ISOSpeed, (uint)_settings.SelectedIsoSensitivity);
-                _imageProcessor.SetSetting((uint) PropertyId.Tv, (uint)_settings.SelectedShutterSpeed);
+                _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)_settings.SelectedAeMode);
+                _imageProcessor.SetSetting((uint)PropertyId.WhiteBalance, (uint)_settings.SelectedWhiteBalance);
+                _imageProcessor.SetSetting((uint)PropertyId.Av, (uint)_settings.SelectedAvValue);
+                _imageProcessor.SetSetting((uint)PropertyId.ExposureCompensation, (uint)_settings.SelectedCompensation);
+                _imageProcessor.SetSetting((uint)PropertyId.ISOSpeed, (uint)_settings.SelectedIsoSensitivity);
+                _imageProcessor.SetSetting((uint)PropertyId.Tv, (uint)_settings.SelectedShutterSpeed);
             }
-
+            _cameraStreamSynchronize = new AutoResetEvent(false);
             StartLiveView();
-            Task.Run(async () =>
+            var cancellTokenSource = new CancellationTokenSource();
+            if (TakePictureCommand.CanExecute(cancellTokenSource.Token))
+                TakePictureCommand.Execute(cancellTokenSource.Token);
+            else
             {
-                await Task.Delay(2000);
-
-                if (TakePictureCommand.CanExecute(null))
-                    TakePictureCommand.Execute(null);
-                else
-                {
-                    _dialogService.ShowInfo("Упс... С камерой возникли неполатки. Приносим свои извенения. =(");
-                    GoBack();
-                }
-            });
+                _dialogService.ShowInfo("Упс... С камерой возникли неполатки. Приносим свои извенения. =(");
+                GoBack();
+            }
         }
 
         private void ImageProcessorOnImageNumberChanged(object sender, int newValue)
@@ -146,41 +147,44 @@ namespace ImageMaker.ViewModels.ViewModels
                         Dispose();
                         Initialize();
                     }
-                    
+
                     break;
             }
         }
-
 
         private void ImageProcessorOnStreamChanged(object sender, ImageDto image)
         {
             Width = image.Width;
             Height = image.Height;
             LiveViewImageStream = image.ImageData;
+            if (LiveViewImageStream.Length>0)
+                _cameraStreamSynchronize.Set();
         }
 
-        private void TakePicture()
+        private async Task<CompositionProcessingResult> TakePicture(CancellationToken token)
         {
-            TakingPicture = true;
-            UpdateCommands();
-
-            Task.Run(async () =>
+            return await Task.Run(async () =>
             {
+                TakingPicture = true;
+                UpdateCommands();
+
+                token.ThrowIfCancellationRequested();
+                _cameraStreamSynchronize.WaitOne();
                 //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
-                var stream =
-                    await
-                        _imageProcessor.TakePicture(LiveViewImageStream, _settings.SelectedAeMode,
-                            _settings.SelectedAvValue,
-                            _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed,
-                            _settings.SelectedWhiteBalance);
-                    
+                var stream = await _imageProcessor.TakePictureAsync(LiveViewImageStream, _settings.SelectedAeMode,
+                    _settings.SelectedAvValue,
+                    _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed,
+                    _settings.SelectedWhiteBalance, token);
+
+                token.ThrowIfCancellationRequested();
                 //TakingPicture = false;
                 UpdateCommands();
 
                 SetWindowStatus(true);
 
                 _navigator.NavigateForward<CameraResultViewModel>(this, stream);
-            });
+                return stream;
+            }, token);
         }
 
         private void StartLiveView()
@@ -220,7 +224,7 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             OpenSessionCommand.RaiseCanExecuteChanged();
             CloseSessionCommand.RaiseCanExecuteChanged();
-            TakePictureCommand.RaiseCanExecuteChanged();
+            //TakePictureCommand.RaiseCanExecuteChanged();//TODO перепроверить
             StartLiveViewCommand.RaiseCanExecuteChanged();
             RefreshCameraCommand.RaiseCanExecuteChanged();
 
@@ -236,6 +240,11 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             SetWindowStatus(true);
 
+            _cameraStreamSynchronize.Do(x=>x.Set());
+
+            AsyncCommand<Task<CompositionProcessingResult>> takePictireCmd = ((AsyncCommand<Task<CompositionProcessingResult>>)TakePictureCommand);
+            if (takePictireCmd.CancelCommand.CanExecute(null))
+                takePictireCmd.CancelCommand.Execute(null);
             _navigator.NavigateBack(this);
         }
 
@@ -299,9 +308,9 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public RelayCommand TakePictureCommand
+        public IAsyncCommand TakePictureCommand
         {
-            get { return _takePictureCommand ?? (_takePictureCommand = new RelayCommand(TakePicture, () => _sessionOpened && !TakingPicture)); }
+            get { return _takePictureCommand ?? (_takePictureCommand = AsyncCommand.Create<Task<CompositionProcessingResult>>(t => TakePicture(t), () => _sessionOpened && !TakingPicture)); }
         }
 
         #region unused
@@ -313,7 +322,7 @@ namespace ImageMaker.ViewModels.ViewModels
         }
 
         private IList<uint> _focusPoints;
-       
+
 
         public IList<uint> FocusPoints
         {
@@ -331,7 +340,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public RelayCommand GoBackCommand
         {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack, () => !TakingPicture)); }
+            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
         }
 
         public RelayCommand OpenSessionCommand

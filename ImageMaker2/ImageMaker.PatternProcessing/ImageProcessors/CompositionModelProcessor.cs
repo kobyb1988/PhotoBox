@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Monads;
+using System.Threading;
 using System.Threading.Tasks;
 using ImageMaker.Camera;
 using ImageMaker.CommonView.Helpers;
@@ -56,50 +57,40 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 handler(this, cameraError);
         }
 
-        public virtual async Task<CompositionProcessingResult> TakePicture(byte[] liveViewImageStream,
-            AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance)
+        public virtual async Task<CompositionProcessingResult> TakePictureAsync(byte[] liveViewImageStream, AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance, CancellationToken token)
         {
             Size liveViewImageStreamSize;
             using (var stream = new MemoryStream(liveViewImageStream))
             {
-                var img = Image.FromStream(stream);
-                liveViewImageStreamSize = img.Size;
+                    var img = Image.FromStream(stream);
+                    liveViewImageStreamSize = img.Size;
             }
 
-            return new CompositionProcessingResult(_pattern, await TakePictureInternal(liveViewImageStreamSize, selectedAeMode, selectedAvValue, selectedIsoSensitivity, selectedShutterSpeed, selectedWhiteBalance));
+            return new CompositionProcessingResult(_pattern, await TakePictureInternal(liveViewImageStreamSize, selectedAeMode, selectedAvValue, selectedIsoSensitivity, selectedShutterSpeed, selectedWhiteBalance, token));
         }
 
-        protected async Task<byte[]> TakePictureInternal(Size liveViewImageStreamSize, AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance)
+        protected async Task<byte[]> TakePictureInternal(Size liveViewImageStreamSize, AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance, CancellationToken token)
         {
-            return await Task.Run(() => Run(liveViewImageStreamSize, selectedAeMode, selectedAvValue, selectedIsoSensitivity, selectedShutterSpeed, selectedWhiteBalance));
+            return await Task.Run(() => Run(liveViewImageStreamSize, selectedAeMode, selectedAvValue, selectedIsoSensitivity, selectedShutterSpeed, selectedWhiteBalance, token), token);
         }
 
-        private async Task<byte[]> Run(Size liveViewImageStreamSize, AEMode selectedAeMode, ApertureValue selectedAvValue,
-            CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance)
+        private async Task<byte[]> Run(Size liveViewImageStreamSize, AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance, CancellationToken token)
         {
-            //CameraSettingsDto settings = new CameraSettingsDto()
-            //{
-            //    SelectedAeMode = AEMode.Manual,
-            //    SelectedAvValue = ApertureValue.AV_8,
-            //    SelectedIsoSensitivity = CameraISOSensitivity.ISO_400,
-            //    SelectedWhiteBalance = WhiteBalance.Daylight,
-            //    SelectedShutterSpeed = ShutterSpeed.TV_200
-            //};
+            var settings = GetCameraPhotoSettings();
 
-            var settings=GetCameraPhotoSettings();
-            
             List<byte[]> pictures = new List<byte[]>();
 
             for (int i = 0; i < _pattern.Images.Count; i++)
             {
+                token.ThrowIfCancellationRequested();
                 RaiseImageNumberChanged(i + 1);
                 RaiseTimerElapsed(4);
-                await Task.Delay(TimeSpan.FromSeconds(2));
+                await Task.Delay(TimeSpan.FromSeconds(2), token);
 
                 for (int j = 3; j >= 0; j--)
                 {
                     RaiseTimerElapsed(j);
-                    await Task.Delay(TimeSpan.FromSeconds(1));
+                    await Task.Delay(TimeSpan.FromSeconds(1), token);
                 }
 
                 SetCameraSettings(Enum.Parse(typeof(AEMode), settings.SelectedAeMode),
@@ -110,17 +101,13 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
                 //RaiseImageNumberChanged(i + 1);
-                await Task.Delay(TimeSpan.FromSeconds(1));
-                try
-                {
-                    byte[] picture = await _imageProcessor.DoTakePicture();
-                    pictures.Add(picture);
-                }
-                catch (Exception ex)
-                {
+               // await Task.Delay(TimeSpan.FromSeconds(1), token);
+                token.ThrowIfCancellationRequested();
+                byte[] picture = await _imageProcessor.DoTakePicture();
+                pictures.Add(picture);
 
-                }
-                await Task.Delay(TimeSpan.FromSeconds(3)); //todo
+                token.ThrowIfCancellationRequested();
+               // await Task.Delay(TimeSpan.FromSeconds(3), token); //todo
 
                 SetCameraSettings(selectedAeMode, selectedWhiteBalance,
                     selectedAvValue, selectedIsoSensitivity,
@@ -153,7 +140,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             var lines = File.ReadAllLines(Path.Combine(baseDir, "CameraPhotoSettings.txt"));
             return new
             {
-                SelectedAeMode= lines.SingleOrDefault(x => x.Contains("SelectedAeMode")).With(x => x.Replace("SelectedAeMode=", "")),
+                SelectedAeMode = lines.SingleOrDefault(x => x.Contains("SelectedAeMode")).With(x => x.Replace("SelectedAeMode=", "")),
                 SelectedAvValue = lines.SingleOrDefault(x => x.Contains("SelectedAvValue")).With(x => x.Replace("SelectedAvValue=", "")),
                 SelectedIsoSensitivity = lines.SingleOrDefault(x => x.Contains("SelectedIsoSensitivity")).With(x => x.Replace("SelectedIsoSensitivity=", "")),
                 SelectedWhiteBalance = lines.SingleOrDefault(x => x.Contains("SelectedWhiteBalance")).With(x => x.Replace("SelectedWhiteBalance=", "")),

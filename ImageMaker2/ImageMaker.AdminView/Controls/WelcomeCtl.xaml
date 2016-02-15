@@ -59,10 +59,11 @@
                         <Button Content="Редактор шаблонов" Grid.Row="2" Command="{Binding Path=ManageTemplatesCommand}"/>
                         <Button Content="Настройка интерфейса" Grid.Column="1" Command="{Binding Path=ManageThemesCommand}"/>
                         <Button Content="Статистика и Сессия" Grid.Column="1" Grid.Row="1" Command="{Binding Path=ShowStatsCommand}"/>
-                        <Button Content="Начать сессию" Grid.Column="1" Grid.Row="2" 
-                                Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
-                        <Button Content="Сменить пароль" Grid.Row="3" Grid.ColumnSpan="2" Width="200"
+                        
+                        <Button Content="Сменить пароль" Grid.Row="2" Grid.Column="1" 
                                 Command="{Binding Path=ChangePasswordCommand}"/>
+                        <Button Content="Начать сессию" Grid.ColumnSpan="2" Grid.Row="3" Width="200"
+                                Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
                     </Grid>
                 </Viewbox>
             </Grid>
