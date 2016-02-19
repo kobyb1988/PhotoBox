@@ -25,7 +25,7 @@ namespace ImageMaker.ViewModels.ViewModels
             ImageService imageService,
             CompositionProcessingResult result)
         {
-            _maxCopies = 5;
+            _maxCopies = 3;
 
             _navigator = navigator;
             _printer = printer;

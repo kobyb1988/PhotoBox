@@ -9,6 +9,7 @@ using System.Linq;
 using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using ImageMaker.Camera;
 using ImageMaker.CommonView.Helpers;
 using ImageMaker.Entities;
@@ -78,19 +79,20 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         {
             var settings = GetCameraPhotoSettings();
 
-            List<byte[]> pictures = new List<byte[]>();
+            var pictures = new List<byte[]>();
 
-            for (int i = 0; i < _pattern.Images.Count; i++)
+            for (var i = 0; i < _pattern.Images.Count; i++)
             {
                 token.ThrowIfCancellationRequested();
                 RaiseImageNumberChanged(i + 1);
-                RaiseTimerElapsed(4);
-                await Task.Delay(TimeSpan.FromSeconds(2), token);
 
-                for (int j = 3; j >= 0; j--)
+                await Task.Delay(TimeSpan.FromSeconds(1), token);
+
+                for (var j = 5; j >= 0; j--)
                 {
-                    RaiseTimerElapsed(j);
-                    await Task.Delay(TimeSpan.FromSeconds(1), token);
+                        var j1 = j;
+                        RaiseTimerElapsed(j1);
+                        await Task.Delay(TimeSpan.FromSeconds(1), token);
                 }
 
                 SetCameraSettings(Enum.Parse(typeof(AEMode), settings.SelectedAeMode),
@@ -101,13 +103,13 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
                 //RaiseImageNumberChanged(i + 1);
-               // await Task.Delay(TimeSpan.FromSeconds(1), token);
+                //await Task.Delay(TimeSpan.FromSeconds(1), token);
                 token.ThrowIfCancellationRequested();
                 byte[] picture = await _imageProcessor.DoTakePicture();
                 pictures.Add(picture);
 
                 token.ThrowIfCancellationRequested();
-               // await Task.Delay(TimeSpan.FromSeconds(3), token); //todo
+                //await Task.Delay(TimeSpan.FromSeconds(3), token); //todo
 
                 SetCameraSettings(selectedAeMode, selectedWhiteBalance,
                     selectedAvValue, selectedIsoSensitivity,

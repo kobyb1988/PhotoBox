@@ -113,12 +113,12 @@
                             </customControls:ContentButton.IconBrush>
                             <customControls:ContentButton.ContentTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="0.65*"/>
                                             <ColumnDefinition Width="0.35*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <TextBlock Foreground="{DynamicResource {x:Static themes:ThemeManager.OtherButtonColorKey}}" Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CameraResultCtl}}, Path=DataContext.CopiesCount}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Grid Grid.Column="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition />
