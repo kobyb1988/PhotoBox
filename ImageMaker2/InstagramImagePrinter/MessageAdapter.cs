@@ -29,14 +29,15 @@ namespace InstagramImagePrinter
             _imageService = imageService;
         }
 
-        public async Task ProcessImages(IEnumerable<Image> images, string printerName)
+        public void ProcessImages(IEnumerable<Image> images, string printerName)
         {
             foreach (var image in images)
             {
                 InstagramMessageDto imageDto = _mappingEngine.Map<InstagramMessageDto>(image);
                 _imageService.SaveImage(new ImageViewModel(image.Data));
                 _imagePrinter.Print(imageDto.Data, printerName);
-                await _queueUtilizer.SendMessage(imageDto);
+
+                //await _queueUtilizer.SendMessage(imageDto);
             }
         }
     }

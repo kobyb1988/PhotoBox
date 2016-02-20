@@ -61,55 +61,50 @@ namespace InstagramImagePrinter
             StartMonitoring(tokenSource, _startTime, _endTime, _hashTag, stopService);
         }
         //TODO передать токен для отмены ниже по стеку
-        public  void StartMonitoring(CancellationTokenSource tokenSource, DateTime startDate, DateTime endDate, string hashTag, Action stopService)
+        public void StartMonitoring(CancellationTokenSource tokenSource, DateTime startDate, DateTime endDate, string hashTag, Action stopService)
         {
-            var thread = new Thread( () =>
-            {
-                var printed = new List<string>();
-                try
-                {
-                    string nextUrl = null;
-                    while (!tokenSource.IsCancellationRequested)
-                    {
-                        if (DateTime.Now.Ticks >= endDate.Ticks)
-                            break;
+            var thread = new Thread(() =>
+           {
+              
+               var printed = new List<string>();
+               string nextUrl = null;
+               while (!tokenSource.IsCancellationRequested)
+               {
+                   if (DateTime.Now.Ticks >= endDate.Ticks)
+                       break;
 
-                        Task.Delay(TimeSpan.FromSeconds(10)).Wait();
+                   Task.Delay(TimeSpan.FromSeconds(10)).Wait();
 
-                        ImageResponse result = string.IsNullOrEmpty(nextUrl)
-                            ? _instagramExplorer.GetImagesByHashTag(hashTag, "", tokenSource.Token, 1).Result
-                            : _instagramExplorer.GetImagesFromUrl(nextUrl, tokenSource.Token).Result;
+                   ImageResponse result = string.IsNullOrEmpty(nextUrl)
+                        ? _instagramExplorer.GetImagesByHashTag(hashTag, "", tokenSource.Token, 1).Result
+                        : _instagramExplorer.GetImagesFromUrl(nextUrl, tokenSource.Token).Result;
 
-                        nextUrl = result.Return(x => x.NextUrl, null);
+                   nextUrl = result.Return(x => x.NextUrl, null);
 
-                        foreach (var image in result.Images)
-                        {
-                            if (image.CreatedTime < startDate.Ticks)
-                            {
-                                nextUrl = null;
-                                printed.Add(image.Url);
-                            }
+                   foreach (var image in result.Images)
+                   {
+                       if (image.CreatedTime < startDate.Ticks)
+                       {
+                           nextUrl = null;
+                           printed.Add(image.Url);
+                       }
 
-                            if (printed.Contains(image.Url))
-                                continue;
+                       if (printed.Contains(image.Url))
+                           continue;
 
-                            printed.Add(image.Url);
-                            var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
+                       printed.Add(image.Url);
+                       var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
 
-                            image.Data = imageData;
-                            _messageAdapter.ProcessImages(new List<Image>() { image }, _printerName).Wait();
-                        }
-                    }
-                }
-                catch( Exception ec)
-                {
+                       image.Data = imageData;
+                       _messageAdapter.ProcessImages(new List<Image>() {image}, _printerName);
+                   }
+           }
 
-                }
-                
+
                 stopService();
-            });
+        });
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
-    }
+}
 }
