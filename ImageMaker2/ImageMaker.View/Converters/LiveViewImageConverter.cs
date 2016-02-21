@@ -26,18 +26,33 @@ namespace ImageMaker.View.Converters
                 WriteableBitmap wb = values[1] as WriteableBitmap;
 
                 int width = 640;
-                
+
                 int.TryParse(values[2].ToString(), out width);
 
                 int height = 480;
 
                 int.TryParse(values[3].ToString(), out height);
 
+                if (width == 0 || height == 0)
+                {
+                    width = 1056;
+                    height = 704;
+                }
+
                 bool isNew = false;
                 if (wb == null)
                 {
                     isNew = true;
-                    wb = new WriteableBitmap(width, height, 96, 96, PixelFormats.Bgr24, null);
+                    try
+                    {
+
+                        wb = new WriteableBitmap(width, height, 96, 96, PixelFormats.Bgr24, null);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
                 }
                 else
                 {

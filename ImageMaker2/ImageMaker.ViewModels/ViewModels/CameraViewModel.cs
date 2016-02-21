@@ -94,10 +94,20 @@ namespace ImageMaker.ViewModels.ViewModels
             StartLiveView();
             var cancellTokenSource = new CancellationTokenSource();
             if (TakePictureCommand.CanExecute(cancellTokenSource.Token))
-                TakePictureCommand.Execute(cancellTokenSource.Token);
+            {
+                try
+                {
+                    TakePictureCommand.Execute(cancellTokenSource.Token);
+                }
+                catch
+                {
+                    //_dialogService.ShowInfo("Упс... С камерой возникли неполадки. Приносим свои извинения. =(");
+                    GoBack();
+                }
+            }
             else
             {
-                _dialogService.ShowInfo("Упс... С камерой возникли неполатки. Приносим свои извенения. =(");
+                //_dialogService.ShowInfo("Упс... С камерой возникли неполадки. Приносим свои извинения. =(");
                 GoBack();
             }
         }
@@ -147,6 +157,12 @@ namespace ImageMaker.ViewModels.ViewModels
                         Dispose();
                         Initialize();
                     }
+                    else
+                    {
+                        // _dialogService.ShowInfo("Упс... Что-то пошло не так =(");//TODO разобраться как перезапустить камеру
+                     
+                    }
+                    GoBack();
 
                     break;
             }
@@ -157,7 +173,7 @@ namespace ImageMaker.ViewModels.ViewModels
             Width = image.Width;
             Height = image.Height;
             LiveViewImageStream = image.ImageData;
-            if (LiveViewImageStream.Length>0)
+            if (LiveViewImageStream.Length > 0)
                 _cameraStreamSynchronize.Set();
         }
 
@@ -165,25 +181,42 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             return await Task.Run(async () =>
             {
-                TakingPicture = true;
-                UpdateCommands();
+                try
+                {
+                    TakingPicture = true;
+                    UpdateCommands();
 
-                token.ThrowIfCancellationRequested();
-                _cameraStreamSynchronize.WaitOne();
-                //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
-                var stream = await _imageProcessor.TakePictureAsync(LiveViewImageStream, _settings.SelectedAeMode,
-                    _settings.SelectedAvValue,
-                    _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed,
-                    _settings.SelectedWhiteBalance, token);
+                    token.ThrowIfCancellationRequested();
 
-                token.ThrowIfCancellationRequested();
-                //TakingPicture = false;
-                UpdateCommands();
+                    //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
+                    _cameraStreamSynchronize.WaitOne();
+                    var copyLiveViewStream = LiveViewImageStream;
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    var stream = await _imageProcessor.TakePictureAsync(copyLiveViewStream,
+                        _settings.SelectedAeMode,
+                        _settings.SelectedAvValue,
+                        _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed,
+                        _settings.SelectedWhiteBalance, token);
 
-                SetWindowStatus(true);
+                    token.ThrowIfCancellationRequested();
+                    //TakingPicture = false;
+                    UpdateCommands();
 
-                _navigator.NavigateForward<CameraResultViewModel>(this, stream);
-                return stream;
+                    SetWindowStatus(true);
+
+                    _navigator.NavigateForward<CameraResultViewModel>(this, stream);
+                    return stream;
+                }
+                catch (OperationCanceledException e)
+                {
+                    return new CompositionProcessingResult(null, LiveViewImageStream);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+
             }, token);
         }
 
@@ -240,11 +273,12 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             SetWindowStatus(true);
 
-            _cameraStreamSynchronize.Do(x=>x.Set());
-
-            AsyncCommand<Task<CompositionProcessingResult>> takePictireCmd = ((AsyncCommand<Task<CompositionProcessingResult>>)TakePictureCommand);
+            _cameraStreamSynchronize.Do(x => x.Set());
+            var takePictireCmd = (AsyncCommand<Task<CompositionProcessingResult>>)TakePictureCommand;
             if (takePictireCmd.CancelCommand.CanExecute(null))
                 takePictireCmd.CancelCommand.Execute(null);
+
+            Dispose();
             _navigator.NavigateBack(this);
         }
 
@@ -310,7 +344,13 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public IAsyncCommand TakePictureCommand
         {
-            get { return _takePictureCommand ?? (_takePictureCommand = AsyncCommand.Create<Task<CompositionProcessingResult>>(t => TakePicture(t), () => _sessionOpened && !TakingPicture)); }
+            get
+            {
+                return _takePictureCommand ??
+                       (_takePictureCommand =
+                           AsyncCommand.Create<Task<CompositionProcessingResult>>(t => TakePicture(t),
+                               () => _sessionOpened && !TakingPicture));
+            }
         }
 
         #region unused

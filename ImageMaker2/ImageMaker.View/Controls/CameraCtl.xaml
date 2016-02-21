@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:ImageMaker.ViewModels.ViewModels;assembly=ImageMaker.ViewModels"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
+             xmlns:converters1="clr-namespace:ImageMaker.ViewModels.Converters;assembly=ImageMaker.ViewModels"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:CameraViewModel}"
              d:DesignHeight="800" d:DesignWidth="1000">
@@ -70,9 +71,10 @@
 
                         <Border HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
-                                Visibility="{Binding TakingPicture, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Visibility="{Binding TakingPicture, Converter={converters1:BoolToVisibleConverter}}"   
                                 Background="Transparent"
                                 Opacity="0.6">
+                           
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -111,7 +113,7 @@
                                                     BlurRadius="0.0" />
                                         </Path.Effect>
                                     </Path>
-                                    <TextBlock Foreground="White" FontSize="80" Grid.Row="1">
+                                    <TextBlock Foreground="White" FontSize="70" Grid.Row="1">
                                         <TextBlock.Style>
                                             <Style TargetType="{x:Type TextBlock}">
                                                 <Setter Property="Text" Value="Посмотрите в камеру" />
@@ -124,7 +126,7 @@
                                                     </Setter.Value>
                                                 </Setter>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                    <DataTrigger Binding="{Binding Path=Counter}" Value="5">
                                                         <Setter Property="Text" Value="Приготовьтесь!" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Path=Counter}" Value="0">
@@ -163,7 +165,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="6">
                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Path=Counter}" Value="0">
@@ -176,7 +178,7 @@
 
                                 <TextBlock Grid.Row="2"
                                         Padding="0,10,0,0"
-                                        Text="{Binding ImageNumber, StringFormat='Фото № {0}'}"
+                                        Text="{Binding ImageNumber, StringFormat='Фото {0}'}"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Center"
                                         FontSize="50"
@@ -192,7 +194,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Counter}" Value="4">
+                                                <DataTrigger Binding="{Binding Path=Counter}" Value="6">
                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Path=Counter}" Value="0">
