@@ -96,7 +96,7 @@ namespace InstagramImagePrinter
                        var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
 
                        image.Data = imageData;
-                       _messageAdapter.ProcessImages(new List<Image>() {image}, _printerName);
+                       _messageAdapter.ProcessImages(new List<Image> {image}, _printerName);
                    }
            }
 

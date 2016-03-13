@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -59,12 +61,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Resources\EDSDK_API.pdf" />
+    <None Include="Resources\OLD\EDSDK_API.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\EDSDK.dll" />
-    <Content Include="Resources\EdsImage.dll" />
-    <Content Include="Resources\Readme.txt" />
+    <Content Include="Resources\OLD\EDSDK.dll" />
+    <Content Include="Resources\OLD\EdsImage.dll" />
+    <Content Include="Resources\OLD\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImageMaker.SDKData\ImageMaker.SDKData.csproj">
@@ -72,10 +74,20 @@
       <Name>ImageMaker.SDKData</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\NEW\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy "$(SolutionDir).\EDSDKLib\Resources\*.dll" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I</PreBuildEvent>
+    <PreBuildEvent>xcopy "$(SolutionDir).\EDSDKLib\Resources\NEW\*.dll" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I</PreBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets" Condition="Exists('..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

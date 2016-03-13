@@ -17,22 +17,23 @@ namespace ImageMaker.MessageQueueing.MessageQueueing
         {
             await Task.Factory.StartNew(() =>
             {
-                if (!MessageQueue.Exists(_queueName))
-                    MessageQueue.Create(_queueName, true);
+                //TODO временно закоментированно.
+                //if (!MessageQueue.Exists(_queueName))
+                //    MessageQueue.Create(_queueName, true);
 
-                MessageQueue messageQueue = new MessageQueue(@"FormatName:Direct=OS:" + _queueName);
-                Message msg = new Message();
-                msg.Body = message;
+                //MessageQueue messageQueue = new MessageQueue(@"FormatName:Direct=OS:" + _queueName);
+                //Message msg = new Message();
+                //msg.Body = message;
 
-                //Create a transaction scope.
-                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
-                {
-                    messageQueue.Send(msg, MessageQueueTransactionType.Automatic);
-                    // Complete the transaction.
-                    scope.Complete();
-                }
+                ////Create a transaction scope.
+                //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+                //{
+                //    messageQueue.Send(msg, MessageQueueTransactionType.Automatic);
+                //    // Complete the transaction.
+                //    scope.Complete();
+                //}
 
-                messageQueue.Close();
+                //messageQueue.Close();
             });
         }
     }

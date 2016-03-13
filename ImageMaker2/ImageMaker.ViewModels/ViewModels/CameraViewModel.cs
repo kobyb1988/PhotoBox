@@ -157,6 +157,8 @@ namespace ImageMaker.ViewModels.ViewModels
                         Dispose();
                         Initialize();
                     }
+                    if (ev!=null && ev.ErrorCode == ReturnValue.NotSupported)
+                        return;
                     else
                     {
                         // _dialogService.ShowInfo("Упс... Что-то пошло не так =(");//TODO разобраться как перезапустить камеру
