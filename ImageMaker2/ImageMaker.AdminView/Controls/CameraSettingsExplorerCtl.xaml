@@ -5,97 +5,109 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:converters="clr-namespace:ImageMaker.AdminView.Converters"
+             xmlns:converters1="clr-namespace:ImageMaker.CommonView.Converters;assembly=ImageMaker.CommonView"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800"
+             d:DesignHeight="600" d:DesignWidth="1400"
              d:DataContext="{d:DesignInstance viewModels:CameraSettingsExplorerViewModel}">
-    <Border Padding="85,25">
+    <UserControl.Resources>
+        <converters1:ByteArrayToImageConverter x:Key="ByteArrayToImageSourceConverter"/>
+    </UserControl.Resources>
+    <Border>
+        <!--Padding="85,25"-->
         <Border.Background>
             <ImageBrush ImageSource="../Resources/blur.jpg" Stretch="UniformToFill" />
         </Border.Background>
-        <Viewbox Stretch="Uniform">
-            <Grid Width="900" Height="800">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.4*"/>
-                    <RowDefinition Height="0.51*"/>
-                    <RowDefinition Height="0.2*" />
-                </Grid.RowDefinitions>
-                <Border Padding="25">
-                    <Viewbox>
-                        <Image Source="../Resources/top.png"></Image>
-                    </Viewbox>
-                </Border>
-                <Border Grid.Row="1" Padding="25,5">
-                    <Grid Width="700" Height="250">
-                        <Grid.Resources>
-                            <Style TargetType="{x:Type customControls:CustomComboBox}" BasedOn="{StaticResource DefComboBoxStyle}">
-                                <Setter Property="Margin" Value="5" />
-                                <Setter Property="CornerRadius" Value="32" />
-                            </Style>
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+        <!--<Viewbox Stretch="Uniform">-->
+        <!--<Grid Width="900" Height="800">-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.2*" />
+            </Grid.RowDefinitions>
+            <Image Source="../Resources/templates.png" Margin="12,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" />
+            <TextBlock Text="Настроки LiveView" Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <customControls:RoundedButton Grid.Row="1" Grid.Column="1" Width="200" Foreground="#777777"  FontSize="15"
+                                          Content="Тестовое фото" Style="{StaticResource RoundedBtnStyle}" 
+                                          Background="#d7d7d7" Command="{Binding TakePhotoCommand}">
+            </customControls:RoundedButton>
+            <Border Grid.Row="2" Grid.Column="0" Padding="25,5">
+                <Grid Width="280" HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type customControls:CustomComboBox}" BasedOn="{StaticResource DefComboBoxStyle}">
+                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="CornerRadius" Value="32" />
+                        </Style>
+                    </Grid.Resources>
+
+                    <StackPanel Orientation="Vertical"  Grid.Column="0">
                         <customControls:CustomComboBox ItemsSource="{Binding Path=AEModeValues}" 
                                 SelectedValue="{Binding Path=SelectedAeMode}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Режим&#10;съемки:"
-                                Margin="5,5,15,10">
+                                >
                         </customControls:CustomComboBox>
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=AvValues}" 
-                                SelectedValue="{Binding Path=SelectedAvValue}"
-                                DisplayMemberPath="Value"
-                                SelectedValuePath="Key"
-                                Title="Диафрагма:"
-                                Grid.Row="1" 
-                                Margin="5,5,15,10"/>
                         <customControls:CustomComboBox ItemsSource="{Binding Path=ExposureValues}" 
                                 SelectedValue="{Binding Path=SelectedCompensation}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Экспо-&#10;коррекция:"
-                                Grid.Row="2"
-                                Margin="5,5,15,10"/>
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=ISOValues}" 
-                                SelectedValue="{Binding Path=SelectedIsoSensitivity}"
-                                DisplayMemberPath="Value"
-                                SelectedValuePath="Key"
-                                Title="ISO:"
-                                Grid.Column="1"
-                                Margin="15,5,5,10"/>
+                                />
                         <customControls:CustomComboBox ItemsSource="{Binding Path=WhiteBalanceValues}" 
                                 SelectedValue="{Binding Path=SelectedWhiteBalance}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Баланс &#10;белого:"
-                                Grid.Column="1"
-                                Grid.Row="1"
-                                Margin="15,5,5,10"/>
+                                />
+
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=ISOValues}" 
+                                SelectedValue="{Binding Path=SelectedIsoSensitivity}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="ISO:"
+                               />
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=AvValues}" 
+                                SelectedValue="{Binding Path=SelectedAvValue}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="Диафрагма:"
+                                />
                         <customControls:CustomComboBox ItemsSource="{Binding Path=ShutterSpeedValues}" 
                                 SelectedValue="{Binding Path=SelectedShutterSpeed}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Выдержка:"
-                                Grid.Column="1"
-                                Grid.Row="2"
-                                Margin="15,5,5,10"/>
-                    </Grid>
-                </Border>
-
-                <Border Padding="10" Grid.Row="2">
-                    <Grid Width="880" Height="85">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.25*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="0.25*"/>
-                        </Grid.ColumnDefinitions>
-                        <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
+                                />
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <TextBlock Grid.Row="2" Grid.Column="1"
+                       Visibility="{Binding PreviewReady,Converter={converters1:BoolToVisibleConverter} ,ConverterParameter=Invert}" Text="Камера отсутствует!" 
+                           Foreground="White" FontSize="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image Grid.Row="2" Grid.Column="1" Margin="0,10,0,0"
+                Source="{Binding Path=LiveViewImageStream, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ByteArrayToImageSourceConverter}}" Visibility="{Binding PreviewReady,Converter={converters1:BoolToVisibleConverter}}" Stretch="Uniform" Height="400">
+                   <!--Source="C:\Users\Алексей\Pictures\IMG_25022016_192656.png">-->
+            </Image>
+            <Border Padding="10" Grid.Row="3" Grid.Column="1">
+                <Grid  Height="85">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                    </Grid.ColumnDefinitions>
+                    <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
                                 Grid.Column="0"
                                 Padding="7"
                                 FontSize="18"
@@ -105,7 +117,7 @@
                                 Content="Назад" 
                                 ShowBackButton="True" 
                                 CornerAlign="BottomLeft,TopLeft"/>
-                        <customControls:BlueButton Command="{Binding Path=SaveSettings}"
+                    <customControls:BlueButton Command="{Binding Path=SaveSettings}"
                                 CornerRadius="40"
                                 InnerCornerRadius="60"
                                 FontSize="18"
@@ -113,9 +125,64 @@
                                 Grid.Column="2"
                                 CornerAlign="TopRight,BottomRight"
                                 Content="Сохранить"/>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Viewbox>
+                </Grid>
+            </Border>
+            <TextBlock Text="Настроки фотографии" Grid.Row="1" Grid.Column="2" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <Border Grid.Row="2" Grid.Column="2" Padding="25,5">
+                <Grid Width="280" HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type customControls:CustomComboBox}" BasedOn="{StaticResource DefComboBoxStyle}">
+                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="CornerRadius" Value="32" />
+                        </Style>
+                    </Grid.Resources>
+
+                    <StackPanel Orientation="Vertical"   Grid.Column="0">
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=AEModeValues}" 
+                                SelectedValue="{Binding Path=SelectedPhotoAeMode}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="Режим&#10;съемки:"
+                                >
+                        </customControls:CustomComboBox>
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=ExposureValues}" 
+                                SelectedValue="{Binding Path=SelectedPhotoCompensation}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="Экспо-&#10;коррекция:"
+                                />
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=WhiteBalanceValues}" 
+                                SelectedValue="{Binding Path=SelectedPhotoWhiteBalance}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="Баланс &#10;белого:"
+                                />
+
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=ISOValues}" 
+                                SelectedValue="{Binding Path=SelectedPhotoIsoSensitivity}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="ISO:"
+                               />
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=AvValues}" 
+                                SelectedValue="{Binding Path=SelectedPhotoAvValue}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="Диафрагма:"
+                                />
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=ShutterSpeedValues}" 
+                                SelectedValue="{Binding Path=SelectedPhotoShutterSpeed}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
+                                Title="Выдержка:"
+                                />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <!--</Viewbox>-->
     </Border>
 </UserControl>

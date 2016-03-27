@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\MainProfile.cs" />
+    <Compile Include="Helpers\IEnumerableHelpers.cs" />
     <Compile Include="Helpers\StateStack.cs" />
     <Compile Include="Ninject\MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,6 +157,10 @@
     <ProjectReference Include="..\ImageMaker.MessageQueueing\ImageMaker.MessageQueueing.csproj">
       <Project>{2BF0867E-B87F-4A10-B13C-18EA156A2C4C}</Project>
       <Name>ImageMaker.MessageQueueing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageMaker.PatternProcessing\ImageMaker.ImageProcessing.csproj">
+      <Project>{D97626B4-643E-4B4E-AB84-E626C45D38CD}</Project>
+      <Name>ImageMaker.ImageProcessing</Name>
     </ProjectReference>
     <ProjectReference Include="..\ImageMaker.SDKData\ImageMaker.SDKData.csproj">
       <Project>{1679c88b-2e63-41c0-8672-f1ba1ead5378}</Project>

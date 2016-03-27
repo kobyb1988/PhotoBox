@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ImageMaker.View.Converters
+namespace ImageMaker.CommonView.Converters
 {
     public class TestBindingConverter:BaseConverter<TestBindingConverter>
     {

@@ -158,7 +158,6 @@ namespace EDSDKLib.Invokes
         [DllImport("EDSDK.dll", EntryPoint = "EdsGetPropertyDesc")]
         public extern static UInt32 GetPropertyDescription(IntPtr inRef, UInt32 inPropertyID,
              out PropertyDescription outPropertyDesc);
-
         #endregion
 
         #region Device-list and device operating Functions

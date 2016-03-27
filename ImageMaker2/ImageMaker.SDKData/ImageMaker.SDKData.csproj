@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CameraSettingsDto.cs" />
     <Compile Include="Enums\Access.cs" />
     <Compile Include="Enums\AEMode.cs" />
     <Compile Include="Enums\AFMode.cs" />

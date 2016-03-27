@@ -124,7 +124,6 @@
     <Compile Include="ViewModels\Images\ImageViewModel.cs" />
     <Compile Include="ViewModels\Navigation\ViewModelStorage.cs" />
     <Compile Include="ViewModels\Settings\AppSettingsDto.cs" />
-    <Compile Include="ViewModels\Settings\CameraSettingsDto.cs" />
     <Compile Include="ViewModels\Validation\ICustomValidationRule.cs" />
     <Compile Include="ViewModels\Navigation\IViewModelNavigator.cs" />
     <Compile Include="ViewModels\Navigation\ViewModelNavigator.cs" />

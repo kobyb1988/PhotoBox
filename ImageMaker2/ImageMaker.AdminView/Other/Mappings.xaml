@@ -3,7 +3,8 @@
                     xmlns:controls="clr-namespace:ImageMaker.AdminView.Controls"
                     xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
                     xmlns:dialogs="clr-namespace:ImageMaker.CommonViewModels.ViewModels.Dialogs;assembly=ImageMaker.CommonViewModels"
-                    xmlns:dialogs1="clr-namespace:ImageMaker.CommonView.Controls.Dialogs;assembly=ImageMaker.CommonView">
+                    xmlns:dialogs1="clr-namespace:ImageMaker.CommonView.Controls.Dialogs;assembly=ImageMaker.CommonView"
+                    xmlns:oldCtrls="clr-namespace:ImageMaker.AdminView.Controls.OldCtrls">
 
     <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
         <controls:WelcomeCtl />
@@ -26,11 +27,11 @@
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type viewModels:CompositionsExplorerViewModel}">
-        <controls:CompositionsExplorerCtl />
+        <oldCtrls:CompositionsExplorerCtl />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:CompositionsEditorViewModel}">
-        <controls:CompositionsEditorCtl />
+        <oldCtrls:CompositionsEditorCtl />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:AppSettingsExplorerViewModel}">
@@ -42,7 +43,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:StatsViewModel}">
-        <controls:StatsCtl />
+        <oldCtrls:StatsCtl />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:CurrentSessionViewModel}">

@@ -111,14 +111,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\CompositionsEditorCtl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CompositionsExplorerCtl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\CurrentSessionCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +127,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\OldCtrls\CompositionsEditorCtl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OldCtrls\CompositionsExplorerCtl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OldCtrls\StatsCtl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\PasswordBoxWithNumericKeyboardCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,10 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PreviewOtherWindowCtl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\StatsCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,12 +195,6 @@
     <Compile Include="Controls\ColorSelectionCtl.xaml.cs">
       <DependentUpon>ColorSelectionCtl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CompositionsEditorCtl.xaml.cs">
-      <DependentUpon>CompositionsEditorCtl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CompositionsExplorerCtl.xaml.cs">
-      <DependentUpon>CompositionsExplorerCtl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CurrentSessionCtl.xaml.cs">
       <DependentUpon>CurrentSessionCtl.xaml</DependentUpon>
     </Compile>
@@ -213,6 +207,15 @@
     <Compile Include="Controls\ObjectNameCtl.xaml.cs">
       <DependentUpon>ObjectNameCtl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OldCtrls\CompositionsEditorCtl.xaml.cs">
+      <DependentUpon>CompositionsEditorCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OldCtrls\CompositionsExplorerCtl.xaml.cs">
+      <DependentUpon>CompositionsExplorerCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OldCtrls\StatsCtl.xaml.cs">
+      <DependentUpon>StatsCtl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PasswordBoxWithNumericKeyboardCtl.xaml.cs">
       <DependentUpon>PasswordBoxWithNumericKeyboardCtl.xaml</DependentUpon>
     </Compile>
@@ -224,9 +227,6 @@
     </Compile>
     <Compile Include="Controls\PreviewOtherWindowCtl.xaml.cs">
       <DependentUpon>PreviewOtherWindowCtl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\StatsCtl.xaml.cs">
-      <DependentUpon>StatsCtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TemplateEditorCtl.xaml.cs">
       <DependentUpon>TemplateEditorCtl.xaml</DependentUpon>

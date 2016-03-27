@@ -16,6 +16,6 @@ namespace ImageMaker.SDKData.Structs
 
         // TODO - rename this member
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = GlobalConstants.PROPERTY_DESCRIPTIONS_ARRAY_SIZE)]
-        public int[] Elements;
+        public UInt32[] Elements;
     }
 }

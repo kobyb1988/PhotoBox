@@ -9,6 +9,7 @@ using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.Utils.Services;
 
 namespace ImageMaker.AdminViewModels.ViewModels.Factories
@@ -147,21 +148,24 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
     {
         private readonly SettingsProvider _settingsProvider;
         private readonly IViewModelNavigator _navigator;
+        private readonly CompositionModelProcessor _imageProcessor;
         private readonly IMappingEngine _mappingEngine;
 
         public CameraSettingsExplorerViewModelFactory(
             SettingsProvider settingsProvider,
             IViewModelNavigator navigator,
+            CompositionModelProcessor imageProcessor,
             IMappingEngine mappingEngine)
         {
             _settingsProvider = settingsProvider;
             _navigator = navigator;
+            _imageProcessor = imageProcessor;
             _mappingEngine = mappingEngine;
         }
 
         protected override CameraSettingsExplorerViewModel GetViewModel(object param)
         {
-            return new CameraSettingsExplorerViewModel(_navigator, _settingsProvider, _mappingEngine);
+            return new CameraSettingsExplorerViewModel(_navigator, _settingsProvider, _imageProcessor,_mappingEngine);
         }
     }
 

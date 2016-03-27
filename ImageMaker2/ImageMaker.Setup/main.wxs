@@ -2,7 +2,10 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="Main">
-            <Component Id="cmpDE95CC0363DB4301DF8F556E5214C270" Guid="9F2617B5-7768-4859-B4FA-2622318AEEF2">
+            <Component Id="cmp9405BA157846AD8D3B3945A0CE193EE9" Guid="278FEAD7-5900-435B-9BB4-47C037722935">
+                <File Id="filE7F36ACCD4FE4CDB02E0665FE6E887A5" KeyPath="yes" Source="SourceDir\AFC_Manager.dll" />
+            </Component>
+            <Component Id="cmpDE95CC0363DB4301DF8F556E5214C270" Guid="BB96980F-0193-41CA-A7A3-DA5680AF8EFB">
                 <Class Id="{04772569-8E37-3DF5-A603-959455E15278}" Context="InprocServer32" Description="AutoMapper.IgnoreMapAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.IgnoreMapAttribute" Description="AutoMapper.IgnoreMapAttribute" />
                 </Class>
@@ -518,7 +521,7 @@
                 <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{C6B7A013-0493-3E2C-AF82-0F1040E3E761}\3.3.1.0" Name="CodeBase" Value="file:///[#filBA70081CD5CCB7EA6ABC1E7C379ECABC]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp4FCFD3107CFCD8758AAFA30C4CF830F4" Guid="7949BCAE-0B24-429B-AD33-EE704BCDD7F5">
+            <Component Id="cmp4FCFD3107CFCD8758AAFA30C4CF830F4" Guid="222B265A-B018-43DE-84F6-8D0CF625380A">
                 <Class Id="{135A0B14-E206-3D22-8B03-FF271C2D8582}" Context="InprocServer32" Description="AutoMapper.Mappers.NameValueCollectionMapper" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AutoMapper.Mappers.NameValueCollectionMapper" Description="AutoMapper.Mappers.NameValueCollectionMapper" />
                 </Class>
@@ -677,163 +680,293 @@
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{F45CA915-D717-35E4-8AB7-6D42866EEF8D}\InprocServer32" Name="CodeBase" Value="file:///[#fil546E63238C6CEED8A03F14509FBEEB3F]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp9F72431D52754004177B3A6F8A89807D" Guid="6A052B75-4852-4650-A1CD-F8C61AE56B62">
+            <Component Id="cmp9F72431D52754004177B3A6F8A89807D" Guid="A87A1705-A4CC-4532-A639-92E7047E0E9A">
                 <File Id="fil3B7603346C3BA132DC6D60FC65DC14A9" KeyPath="yes" Source="SourceDir\AutoMapper.xml" />
             </Component>
-            <Component Id="cmp36DD3258436BAB7823E85ADB220C6436" Guid="47FD5D9C-22B8-40FD-9DD8-C142734BCB1D">
+            <Component Id="cmp36DD3258436BAB7823E85ADB220C6436" Guid="871D0A43-6A77-447C-9143-04C78FFBF7AC">
                 <File Id="filEE9A149841837F79E9F56D6576D4120B" KeyPath="yes" Source="SourceDir\BCrypt.Net.dll" />
             </Component>
-            <Component Id="cmpBDA03D0A6F2242DA3ADF5CF509AFCF00" Guid="833448E3-F7C8-4911-AD55-E081C4E71534">
+            <Component Id="cmpBDA03D0A6F2242DA3ADF5CF509AFCF00" Guid="1C3F6042-2E44-470E-9456-456451638FE4">
                 <File Id="filC104CE95BFEADC0308762674361EC70F" KeyPath="yes" Source="SourceDir\BCrypt.Net.xml" />
             </Component>
-            <Component Id="cmpF9B8731D2FE384B04CA73116EBAEA34B" Guid="33929AAA-F003-463D-83D4-9E48D9139E0C">
+            <Component Id="cmpF9B8731D2FE384B04CA73116EBAEA34B" Guid="B5F9CC31-7F48-45C6-AE3C-65F98740F441">
                 <File Id="fil9F72D835D3178A6F2BD8364BB48BA912" KeyPath="yes" Source="SourceDir\CameraPhotoSettings.txt" />
             </Component>
-            <Component Id="cmp6745A582FDA208E73B26129E0825F9B8" Guid="09787DBA-28BB-46B7-A9C2-BF58D522AB7B">
+            <Component Id="cmp6745A582FDA208E73B26129E0825F9B8" Guid="881ED486-699A-4398-918C-42882E531270">
                 <File Id="fil3DEE1774A998EABD7EC743057B4A7B78" KeyPath="yes" Source="SourceDir\ConcurrentPriorityQueue.dll" />
             </Component>
-            <Component Id="cmpE903A0CC7403A4D729B166A3908AD7CC" Guid="7ADDA3FB-D517-475D-84BE-2E6E6CE9307E">
+            <Component Id="cmp90C478A21E41F65032A54D0FEA6DFDA9" Guid="BD96CF6D-1509-4E08-A9C8-47EF0A999998">
+                <File Id="fil674BAF633B18F9D019ADB510CAF3D3CE" KeyPath="yes" Source="SourceDir\EdsAFC.dll" />
+            </Component>
+            <Component Id="cmpDF450ACA7F5513DBDD7BE1D62AAD4C1D" Guid="5396C4AB-4F59-4387-A338-9FE158277EAA">
+                <File Id="filF2F540EEFB333BD4A3042FA2780C3570" KeyPath="yes" Source="SourceDir\EdsCFParse.dll" />
+            </Component>
+            <Component Id="cmpE903A0CC7403A4D729B166A3908AD7CC" Guid="0960806A-F254-4DA0-A473-13E3326E6C18">
                 <File Id="fil45F044C9C106010F685939FA5FDFFF8E" KeyPath="yes" Source="SourceDir\EDSDK.dll" />
             </Component>
-            <Component Id="cmp24A3CE40834AFF2500AB7DB9DE2F568E" Guid="D61C34BF-9BBB-4AC8-9F29-91E89C776523">
+            <Component Id="cmp24A3CE40834AFF2500AB7DB9DE2F568E" Guid="6E0B9A7B-B3DE-4DBA-8E5F-6D6126B7AAAE">
                 <File Id="fil8FD99D2BF65809099DD624BFD86A47CF" KeyPath="yes" Source="SourceDir\EDSDKLib.dll" />
             </Component>
-            <Component Id="cmpAF9044A29826C8836D98FF34A5D53638" Guid="72C20C7E-CC31-4E02-982E-9E7A0658F9E5">
+            <Component Id="cmpAF9044A29826C8836D98FF34A5D53638" Guid="5680F444-20A9-431E-BD94-A97252169844">
                 <File Id="filB68CF1F865CE3D5D5618673191CB9BCC" KeyPath="yes" Source="SourceDir\EdsImage.dll" />
             </Component>
-            <Component Id="cmp96C09ECE344A9C01D2E4CB0680501554" Guid="23EE2B1E-07F2-4E73-B95C-E0208BE2875D">
+            <Component Id="cmp96C09ECE344A9C01D2E4CB0680501554" Guid="3279D439-E48C-4CB2-B9BE-63D20EF9F223">
                 <File Id="filC98144C2F1208BC0D0F459F9DC1761DC" KeyPath="yes" Source="SourceDir\EntityFramework.dll" />
             </Component>
-            <Component Id="cmpBCF8FE9A3E3E66A695E0D9F911287C17" Guid="30476095-710E-44FD-89AF-D8B62F926ABB">
+            <Component Id="cmpBCF8FE9A3E3E66A695E0D9F911287C17" Guid="1E7C5A39-0A2C-4660-9D3B-E02F9C3DE89F">
                 <File Id="fil48879B399DC1E3264778814DC3C3EA75" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.dll" />
             </Component>
-            <Component Id="cmpF4F90C83158C56D938F41A8221317786" Guid="85FB9FE3-C1E6-41F3-9D1E-516797E9ABC5">
+            <Component Id="cmpF4F90C83158C56D938F41A8221317786" Guid="2789A190-89C5-4CC6-81F4-065A8BD7BB8A">
                 <File Id="fil1DBAD72FCA5D38FFA61DC55FEE4F1AF0" KeyPath="yes" Source="SourceDir\EntityFramework.SqlServer.xml" />
             </Component>
-            <Component Id="cmp3EB84CB60335EC878A3D6185BE4B4B35" Guid="30F3241C-DE3F-4B0C-B902-011CC6B1E6D5">
+            <Component Id="cmp3EB84CB60335EC878A3D6185BE4B4B35" Guid="D500620E-7E12-4A74-ABF7-19887C7583C6">
                 <File Id="fil9CAEDD948218B4A0B1449E9667C771DA" KeyPath="yes" Source="SourceDir\EntityFramework.xml" />
             </Component>
-            <Component Id="cmpB12F7BDDF7CBD4674D71CE366ECA8877" Guid="6338AA16-6329-4AE5-8BA0-A8BA52D47483">
+            <Component Id="cmp0E28F16AA58D2E3F66330C1A1961BFFF" Guid="336B9383-0F21-4C92-9943-CC2AE04CB493">
+                <File Id="fil16E13709F1BF8C8119D33FDD977BB2B1" KeyPath="yes" Source="SourceDir\EOSPTPIP.dll" />
+            </Component>
+            <Component Id="cmpB12F7BDDF7CBD4674D71CE366ECA8877" Guid="9E8862B1-D82F-4768-ADD1-00BEF98C6F9C">
                 <File Id="filA027BDED0D8C36AA710D436007F73456" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.dll" />
             </Component>
-            <Component Id="cmp108DC132D7428136506EBB9BBD1EFCA0" Guid="0E92D38E-164E-47AA-BB1D-FB48F27A83E2">
+            <Component Id="cmp108DC132D7428136506EBB9BBD1EFCA0" Guid="039E36E8-3A40-454F-9F90-79E56ADD4761">
                 <File Id="filB544D34E084094CBB34188279DE90B2A" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.dll" />
             </Component>
-            <Component Id="cmp395B3DE4FE09C4021E3DD6F827E022CD" Guid="81EC5208-A3A4-4AE7-B2A8-8E24FD055A0E">
+            <Component Id="cmp395B3DE4FE09C4021E3DD6F827E022CD" Guid="F2F51DBF-4B97-4365-83FD-D8BA8E8450CD">
                 <File Id="fil8329CC5D03B7AD99B518325D2489EE6D" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Extras.xml" />
             </Component>
-            <Component Id="cmp5F4E0FA71BA4DC8DB965A6AF05EC7F95" Guid="0B84768D-90EB-4360-BD02-E80BF534D050">
+            <Component Id="cmp5F4E0FA71BA4DC8DB965A6AF05EC7F95" Guid="C99F89E2-729E-4AF9-BAA7-BBB981DE779E">
                 <File Id="fil8C0A84C5E3492FA8BA0AF2E667A2FB35" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.dll" />
             </Component>
-            <Component Id="cmp139CEC88D8DE3FF309A17459A2398299" Guid="95274772-775A-4C68-B978-C860EFBAF2D4">
+            <Component Id="cmp139CEC88D8DE3FF309A17459A2398299" Guid="22C1C1F7-AEA3-48F2-99A7-2C51BABE9F6E">
                 <File Id="fil38434A88E8C20D46C0EC6927C2C3BEC9" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.Platform.xml" />
             </Component>
-            <Component Id="cmp56DF90EE600C88C6E1982E90A7026DD9" Guid="985BB5B7-5858-42FE-A852-E01DDBEDF029">
+            <Component Id="cmp56DF90EE600C88C6E1982E90A7026DD9" Guid="BAD526D6-FA7F-4E1F-A7C0-07A59FAD8104">
                 <File Id="filD2AF34244FDF8DA55E60F06BCC18038E" KeyPath="yes" Source="SourceDir\GalaSoft.MvvmLight.xml" />
             </Component>
-            <Component Id="cmp9D316BEA722349C2D791617048DBA934" Guid="31D05D82-988B-4109-ADEA-FB73FAF6B763">
+            <Component Id="cmp9D316BEA722349C2D791617048DBA934" Guid="F7250FE3-F133-4BB8-B89E-F152006930AE">
                 <File Id="fil6781F62979212DBA5BF28F138DDE0AFD" KeyPath="yes" Source="SourceDir\Hammer.SpinningWheel.dll" />
             </Component>
-            <Component Id="cmp0068428326F0A41F5452DC741F499685" Guid="F2DDB4D6-C654-4779-856C-DA4526109678">
+            <Component Id="cmp0068428326F0A41F5452DC741F499685" Guid="36B22A52-5E96-48A1-B7EE-761F7195C5CB">
                 <File Id="fil55CCBDA5E65A9D24A63F4D403FFF3961" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe" />
             </Component>
-            <Component Id="cmp19F45E434453B71F1ABA9CA701F89A5F" Guid="576C4FD8-7A25-4593-BE56-93FD3FE840C6">
+            <Component Id="cmp19F45E434453B71F1ABA9CA701F89A5F" Guid="55651204-E00B-47A4-9439-4293116EF4C8">
                 <File Id="filDC876B0746B44DB7C5F766D28A35E3FD" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.exe.config" />
             </Component>
-            <Component Id="cmpDD68FCBADC54CA781FB4A4E62D09023A" Guid="F3A6B605-E9FA-4A37-9E18-2DEC3BF0850F">
+            <Component Id="cmpDD68FCBADC54CA781FB4A4E62D09023A" Guid="05E60498-B5DA-457E-BEB8-439DC653272D">
                 <File Id="fil919E2C5BE8A3963AAD3F107C46A1060C" KeyPath="yes" Source="SourceDir\ImageMaker.AdminView.suo" />
             </Component>
-            <Component Id="cmp500FF85F27619FD21E5B4A3354DA9024" Guid="D06E405C-084E-41C4-BBDA-CE3733D515ED">
+            <Component Id="cmp500FF85F27619FD21E5B4A3354DA9024" Guid="6B712C87-3014-4A59-9EB2-A2D2F9974F28">
                 <File Id="filDD18A65C2BCD58B1E400E7ABDF8CAB74" KeyPath="yes" Source="SourceDir\ImageMaker.AdminViewModels.dll" />
             </Component>
-            <Component Id="cmpD6F84051227B800E74CFEC17230ED075" Guid="DFEA5A51-E2D8-42FE-9B86-9F04363057C2">
+            <Component Id="cmpD6F84051227B800E74CFEC17230ED075" Guid="77EAED73-7ACD-43D2-8F8A-F21975D0C723">
                 <File Id="filCB34A87858476E4F08F9F818F318A73C" KeyPath="yes" Source="SourceDir\ImageMaker.AppClient.dll" />
             </Component>
-            <Component Id="cmp8238B7DF4C2582409F193623C4A93840" Guid="5C8578C0-011D-4667-9F42-656E613E35F5">
+            <Component Id="cmp8238B7DF4C2582409F193623C4A93840" Guid="EF09C699-DEF8-4E15-9B47-0C935726D5D1">
                 <File Id="fil26973F7D8ECC586083069BE4BBE031DD" KeyPath="yes" Source="SourceDir\ImageMaker.AppServer.dll" />
             </Component>
-            <Component Id="cmpD1794B22756920312EE3C7C6C863BC6C" Guid="04048E89-3798-4DDD-B36E-6C6331CF8450">
+            <Component Id="cmpD1794B22756920312EE3C7C6C863BC6C" Guid="65C3E28E-06D9-4027-92F6-1343F608014E">
                 <File Id="filE2F999AF26C88DF6455732BE3F4046DB" KeyPath="yes" Source="SourceDir\ImageMaker.Camera.dll" />
             </Component>
-            <Component Id="cmpBA3C65F12DE41EF1E8451DA35BBBEC7E" Guid="6C779AFF-2D66-4B7F-A9A8-96CA07EF9AF3">
+            <Component Id="cmpBA3C65F12DE41EF1E8451DA35BBBEC7E" Guid="CC1CD651-493A-4EF1-81EF-6143DF93AA2B">
                 <File Id="filAEC961F758C2D8FD6AE04C5A0811DE13" KeyPath="yes" Source="SourceDir\ImageMaker.Common.dll" />
             </Component>
-            <Component Id="cmp8C4F8C1FE286FD22DFE28F74B5191612" Guid="BFDE49AE-C9EC-49F7-BF29-A08232F8C6C2">
+            <Component Id="cmp8C4F8C1FE286FD22DFE28F74B5191612" Guid="0B6C5754-0ECA-4D62-8460-8627D078AB5B">
                 <File Id="fil903A0DD2A57346011B9D61BD4467A311" KeyPath="yes" Source="SourceDir\ImageMaker.CommonView.dll" />
             </Component>
-            <Component Id="cmpE59E6DC2C48D287734E2BBBA13ED8045" Guid="00EE8D28-D95E-480A-AA3C-D07FA1B84578">
+            <Component Id="cmpE59E6DC2C48D287734E2BBBA13ED8045" Guid="A4178594-1F30-4D59-8287-E50EFA64D5FB">
                 <File Id="fil82612E19CA7CCC87CF364D16CBD7B457" KeyPath="yes" Source="SourceDir\ImageMaker.CommonViewModels.dll" />
             </Component>
-            <Component Id="cmp1BC22B771ABC3546920D30B8968548A0" Guid="8F314148-4AC1-44DA-A7C0-CFFA79A87515">
+            <Component Id="cmp1BC22B771ABC3546920D30B8968548A0" Guid="8335EE2F-35EC-4ED8-8BDF-342ABF835656">
                 <File Id="fil3D070FC09D8D35C4A2E83256FD90114F" KeyPath="yes" Source="SourceDir\ImageMaker.Data.dll" />
             </Component>
-            <Component Id="cmpE8B250FEACBD56A18D4B77BC054F981D" Guid="C2444D22-3174-4952-B349-B3D03C6C8F06">
+            <Component Id="cmpE8B250FEACBD56A18D4B77BC054F981D" Guid="B7D9EE3F-C9CC-4A0B-82A8-0DD13C493103">
                 <File Id="fil1DA45219C4CDFA7681FC3BF48AF5D420" KeyPath="yes" Source="SourceDir\ImageMaker.DataContext.dll" />
             </Component>
-            <Component Id="cmpC0E30C0D1259431CF997042BB0C0C2E8" Guid="7ADA80DC-E766-42E6-BE37-C0C7D0C73A77">
+            <Component Id="cmpC0E30C0D1259431CF997042BB0C0C2E8" Guid="9284DAD6-202F-4824-B7F3-D139CC06B180">
                 <File Id="fil45326C948198F8033CF761C66BE22801" KeyPath="yes" Source="SourceDir\ImageMaker.Entities.dll" />
             </Component>
-            <Component Id="cmp195639064E0D29A4B770FD116924F92E" Guid="1EDC5F9C-4066-4BBD-88B7-41E0731105BC">
+            <Component Id="cmp195639064E0D29A4B770FD116924F92E" Guid="7BE8F4FD-5596-418C-B67C-5BB8EC364542">
                 <File Id="filABBD550C85F7693C1F176CE730557D16" KeyPath="yes" Source="SourceDir\ImageMaker.InstagramMonitoring.exe" />
             </Component>
-            <Component Id="cmp0D31380B1B4F6D7E6099099109AF29AC" Guid="338DBD47-D088-4495-B7A1-0F79D31CD503">
+            <Component Id="cmp0D31380B1B4F6D7E6099099109AF29AC" Guid="0707D803-9650-445C-BA17-30DA8666BCED">
                 <File Id="fil38EDCAD6867B2309DDB8BE8F6B161D12" KeyPath="yes" Source="SourceDir\ImageMaker.InstagramMonitoring.exe.config" />
             </Component>
-            <Component Id="cmp77D9AA608EE8620684A57B06BE28B31D" Guid="974AC1A5-7522-4925-AF5C-C08CF5550CA5">
+            <Component Id="cmp77D9AA608EE8620684A57B06BE28B31D" Guid="2126AFD7-88C1-40C0-BC88-9633EE3E9448">
                 <File Id="filC64E51B57AF679FA2EEF3ED958BFFD22" KeyPath="yes" Source="SourceDir\ImageMaker.MessageQueueing.dll" />
             </Component>
-            <Component Id="cmpE1FDB9B9DAC511A4D24A8705C2AC8B50" Guid="FC15FA87-CB4A-41E9-81A9-B0170F763BEC">
+            <Component Id="cmpE1FDB9B9DAC511A4D24A8705C2AC8B50" Guid="1DF5109A-CB73-4220-BB77-0E703318C76C">
                 <File Id="filACB18EFE44F8B9187B1D9B40839D24A5" KeyPath="yes" Source="SourceDir\ImageMaker.PatternProcessing.dll" />
             </Component>
-            <Component Id="cmp7F8A5AAE3040295E6601FEED9ACBEB25" Guid="6813752C-D4C0-482C-B797-55C215511F96">
+            <Component Id="cmp7F8A5AAE3040295E6601FEED9ACBEB25" Guid="09AD10D9-439A-4C32-ACFE-611FE9CCE7A1">
                 <File Id="fil16C0B0E7D44090B2BB504E476A6333FD" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.exe" />
             </Component>
-            <Component Id="cmp6F2E99FEAA9E9BAE2ECE8EA08C0E5A1C" Guid="54D11E25-B7A3-4E89-8A60-03E03DBE36EA">
+            <Component Id="cmp6F2E99FEAA9E9BAE2ECE8EA08C0E5A1C" Guid="40A017B0-DCA5-4343-8A4A-150968A83079">
                 <File Id="fil6A5AD650CE024854C8E187B4220C8DAA" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.exe.config" />
             </Component>
-            <Component Id="cmp15F0A4E0052C2433C09A86891F5AFFF2" Guid="E26FB0C1-9E2E-417F-A554-ACB76ED4E39C">
+            <Component Id="cmp15F0A4E0052C2433C09A86891F5AFFF2" Guid="801301B5-ED62-4A37-B793-F05D1B9DD61D">
                 <File Id="fil38DBC24977A60AF0DCDC095F1E825346" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.vshost.exe" />
             </Component>
-            <Component Id="cmp750CC5F16ABF87369D5D8784A286CA91" Guid="A6E0A0C9-8A18-4DAA-BF53-145372139891">
+            <Component Id="cmp750CC5F16ABF87369D5D8784A286CA91" Guid="7AC30249-4671-43C1-8710-4DE6DD1F9250">
                 <File Id="filEF9FF0E9BB39541B1440CADCDBD13B0E" KeyPath="yes" Source="SourceDir\ImageMaker.Runner.vshost.exe.config" />
             </Component>
-            <Component Id="cmp3A7B83B2BB43AC9C3EBF075863389C03" Guid="9E21F736-E6E2-460B-A9AE-C043CE8F1DF4">
+            <Component Id="cmp3A7B83B2BB43AC9C3EBF075863389C03" Guid="A393AC62-A07E-464D-866D-67CC3C545A7E">
                 <File Id="fil82D685CAB7AD21BC54793EB7A7F50B18" KeyPath="yes" Source="SourceDir\ImageMaker.SDKData.dll" />
             </Component>
-            <Component Id="cmpF561C4977B4B9F4D1FDF3C107F5F9F8B" Guid="6F3FDCA9-B2EF-4984-99AA-739D2490A71C">
+            <Component Id="cmpF561C4977B4B9F4D1FDF3C107F5F9F8B" Guid="AD8C2E0F-93A1-4383-9438-43DD71349D97">
                 <File Id="fil97A75FB3E9F37E8187C7C1156AC40E74" KeyPath="yes" Source="SourceDir\ImageMaker.Themes.dll" />
             </Component>
-            <Component Id="cmpCD53F9ECA6BD7CB7944BFC8B13A48F9D" Guid="6F700DE3-6A5B-4675-A557-7D0A6888A64D">
+            <Component Id="cmpCD53F9ECA6BD7CB7944BFC8B13A48F9D" Guid="034C8F1F-3A58-44CC-A621-DE79C4A6F45D">
                 <File Id="filA0BA33018FE5C0A3E076C4690418D64C" KeyPath="yes" Source="SourceDir\ImageMaker.Utils.dll" />
             </Component>
-            <Component Id="cmp42B66761D5A5B33004A88CE2B44D940E" Guid="E6178D7E-A721-4744-8370-8693625E98BC">
+            <Component Id="cmp42B66761D5A5B33004A88CE2B44D940E" Guid="6029C3A2-15D8-4402-957C-686122D3B5F4">
                 <File Id="fil03E3B7839662B2B7087DD419F1725BF0" KeyPath="yes" Source="SourceDir\ImageMaker.View.exe" />
             </Component>
-            <Component Id="cmp3A5AD75EC9A57ED660B7E5958B9CDEFF" Guid="EBD12EA4-3B0F-4B21-BC27-63EF8123EAD2">
+            <Component Id="cmp3A5AD75EC9A57ED660B7E5958B9CDEFF" Guid="A06DDA67-1BF8-432A-A5BD-19600F728334">
                 <File Id="filCF2B017013F67024EAD14323E1185CBA" KeyPath="yes" Source="SourceDir\ImageMaker.View.exe.config" />
             </Component>
-            <Component Id="cmpD1E0C29A23ED6C4025FF32474C755E5A" Guid="B29E18A3-3561-4F2B-9DC7-00F8132FECF4">
+            <Component Id="cmpD1E0C29A23ED6C4025FF32474C755E5A" Guid="A7A5253F-6A4F-454E-9B9D-A0CC82215149">
                 <File Id="fil1F36C403CA5BB4765930750FC966D31E" KeyPath="yes" Source="SourceDir\ImageMaker.View.suo" />
             </Component>
-            <Component Id="cmp03CA6DF9F81B29E06B3877A4E62C127F" Guid="D6B6AE43-8763-4EAD-AA8C-7972074C6B6E">
+            <Component Id="cmp03CA6DF9F81B29E06B3877A4E62C127F" Guid="16633D73-6497-4A9D-AD96-B17FE7913DA7">
                 <File Id="fil193FF1F7B6101FF57B56055366E8912C" KeyPath="yes" Source="SourceDir\ImageMaker.View.vshost.exe" />
             </Component>
-            <Component Id="cmp056A4EC6C80398DE641A74256FF80944" Guid="5D132FE5-A98F-49DE-9F82-D4E882FBFECA">
+            <Component Id="cmp056A4EC6C80398DE641A74256FF80944" Guid="71904F0D-25D4-43C9-B8CB-7C3FB674C6AE">
                 <File Id="fil9F2AF8051D69F4084E798DD52ED38DED" KeyPath="yes" Source="SourceDir\ImageMaker.View.vshost.exe.config" />
             </Component>
-            <Component Id="cmpBAA55677611E6105421F2706649E9B11" Guid="42781662-6788-4DE4-9606-4F33E3869D81">
+            <Component Id="cmpBAA55677611E6105421F2706649E9B11" Guid="A06444DA-A61F-431A-AF03-0CA940FB3868">
                 <File Id="filC1CB7B958DFB1388B20BF59AA36C19C3" KeyPath="yes" Source="SourceDir\ImageMaker.View.vshost.exe.manifest" />
             </Component>
-            <Component Id="cmp46485E87E965B488E8A50B6430798813" Guid="A34B2BCD-F8C9-4E88-9735-2B009AF78FB3">
+            <Component Id="cmp46485E87E965B488E8A50B6430798813" Guid="AE938EF2-47E9-452E-8736-46E5FCD570A4">
                 <File Id="filB232353706482341B868EA1E06F6B2F8" KeyPath="yes" Source="SourceDir\ImageMaker.ViewModels.dll" />
             </Component>
-            <Component Id="cmp384BCB7BE89584BC802BD516E013EA18" Guid="E63E0A4E-19BF-47A8-9988-B17089350E83">
+            <Component Id="cmp384BCB7BE89584BC802BD516E013EA18" Guid="4D0EF1B5-25EA-456E-BBC0-A83391D20BBA">
                 <File Id="fil76C455272A4229F8055A0D48A0DFDCA9" KeyPath="yes" Source="SourceDir\ImageMaker.WebBrowsing.dll" />
             </Component>
-            <Component Id="cmpB10EF4AE1EFD05A1ACF57D10AF500B2A" Guid="2E066061-5EDA-4822-BD6D-581C12A458C2">
+            <Component Id="cmpB10EF4AE1EFD05A1ACF57D10AF500B2A" Guid="784EA9E3-7A02-475C-AB15-C0C7DDACE4C0">
                 <File Id="filE87C6613B5F4F20CBC38D0922061B19A" KeyPath="yes" Source="SourceDir\InstagramImagePrinter.dll" />
             </Component>
-            <Component Id="cmpDE21CD7C0E0D1F188E3127A0F273B9A2" Guid="B16E6432-7BF5-46C2-99A1-AC803EBF3C12">
+            <Component Id="cmp453D103AFA898BBFB614F9C206C0C0C6" Guid="6CFDDFE8-E946-4BBF-AC7F-02E6DA9790B6">
+                <File Id="fil291F237B77CAA77368DB5FE33F4C3E50" KeyPath="yes" Source="SourceDir\Interop.IWshRuntimeLibrary.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.WshNetworkClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32" Name="Class" Value="IWshRuntimeLibrary.WshNetworkClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{093FF999-1EA0-4079-9525-9614C3504B74}\InprocServer32" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.FileSystemObjectClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32" Name="Class" Value="IWshRuntimeLibrary.FileSystemObjectClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D43FE01-F093-11CF-8940-00A0C9054228}\InprocServer32" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.WshShellClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32" Name="Class" Value="IWshRuntimeLibrary.WshShellClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{72C24DD5-D70A-438B-8A42-98424B88AFB8}\InprocServer32" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.IWshShell_ClassClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="Class" Value="IWshRuntimeLibrary.IWshShell_ClassClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.IWshNetwork_ClassClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="Class" Value="IWshRuntimeLibrary.IWshNetwork_ClassClass" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F935DC26-1CF0-11D0-ADB9-00C04FD58A0B}\InprocServer32" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{24F83B9F-933F-3BD8-9DCF-0E84F1A73D7C}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.__MIDL___MIDL_itf_iwshom_0000_0000_0002" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{24F83B9F-933F-3BD8-9DCF-0E84F1A73D7C}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{24F83B9F-933F-3BD8-9DCF-0E84F1A73D7C}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{24F83B9F-933F-3BD8-9DCF-0E84F1A73D7C}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{27D4BE33-B4CC-3E80-B5CB-42735D930F36}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.DriveTypeConst" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{27D4BE33-B4CC-3E80-B5CB-42735D930F36}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{27D4BE33-B4CC-3E80-B5CB-42735D930F36}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{27D4BE33-B4CC-3E80-B5CB-42735D930F36}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{3B798305-DFA1-31D7-BCE2-8DB6CE497420}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.__MIDL___MIDL_itf_iwshom_0001_0008_0001" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{3B798305-DFA1-31D7-BCE2-8DB6CE497420}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{3B798305-DFA1-31D7-BCE2-8DB6CE497420}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{3B798305-DFA1-31D7-BCE2-8DB6CE497420}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{45B878D1-CA9A-35E6-8CBE-D4E72AB2D074}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.WshExecStatus" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{45B878D1-CA9A-35E6-8CBE-D4E72AB2D074}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{45B878D1-CA9A-35E6-8CBE-D4E72AB2D074}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{45B878D1-CA9A-35E6-8CBE-D4E72AB2D074}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{577B8843-5486-3520-BCCC-3E6E6096BA5C}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.__MIDL___MIDL_itf_iwshom_0000_0000_0001" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{577B8843-5486-3520-BCCC-3E6E6096BA5C}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{577B8843-5486-3520-BCCC-3E6E6096BA5C}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{577B8843-5486-3520-BCCC-3E6E6096BA5C}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5AE6F1B8-4D88-33F4-88BF-AA1F3F95929B}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.__MIDL___MIDL_itf_iwshom_0001_0017_0001" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5AE6F1B8-4D88-33F4-88BF-AA1F3F95929B}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5AE6F1B8-4D88-33F4-88BF-AA1F3F95929B}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5AE6F1B8-4D88-33F4-88BF-AA1F3F95929B}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FC70597-E511-3BCC-8DFD-5C7E6B0AA2BC}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.__MIDL___MIDL_itf_iwshom_0000_0000_0003" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FC70597-E511-3BCC-8DFD-5C7E6B0AA2BC}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FC70597-E511-3BCC-8DFD-5C7E6B0AA2BC}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FC70597-E511-3BCC-8DFD-5C7E6B0AA2BC}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{92D34728-1BC5-3B36-86F9-020F4CE20172}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.StandardStreamTypes" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{92D34728-1BC5-3B36-86F9-020F4CE20172}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{92D34728-1BC5-3B36-86F9-020F4CE20172}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{92D34728-1BC5-3B36-86F9-020F4CE20172}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{9417AC4A-E6DF-386D-AB1A-41D66974335B}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.CompareMethod" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{9417AC4A-E6DF-386D-AB1A-41D66974335B}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{9417AC4A-E6DF-386D-AB1A-41D66974335B}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{9417AC4A-E6DF-386D-AB1A-41D66974335B}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D0035859-9CA5-3575-8CA0-18D907BB67EB}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.SpecialFolderConst" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D0035859-9CA5-3575-8CA0-18D907BB67EB}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D0035859-9CA5-3575-8CA0-18D907BB67EB}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D0035859-9CA5-3575-8CA0-18D907BB67EB}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D2E28123-09F8-33B8-B253-8A71A1617EC6}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.__MIDL___MIDL_itf_iwshom_0000_0000_0004" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D2E28123-09F8-33B8-B253-8A71A1617EC6}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D2E28123-09F8-33B8-B253-8A71A1617EC6}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D2E28123-09F8-33B8-B253-8A71A1617EC6}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D3C7B769-54A4-3A46-B12F-753D11AFF69B}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.FileAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D3C7B769-54A4-3A46-B12F-753D11AFF69B}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D3C7B769-54A4-3A46-B12F-753D11AFF69B}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D3C7B769-54A4-3A46-B12F-753D11AFF69B}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D66E686D-2B11-3056-BE17-FDCC4EFF3993}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.Tristate" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D66E686D-2B11-3056-BE17-FDCC4EFF3993}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D66E686D-2B11-3056-BE17-FDCC4EFF3993}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{D66E686D-2B11-3056-BE17-FDCC4EFF3993}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{E768FB07-B02E-3E6F-915B-0ACD3EA06C65}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.IOMode" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{E768FB07-B02E-3E6F-915B-0ACD3EA06C65}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{E768FB07-B02E-3E6F-915B-0ACD3EA06C65}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{E768FB07-B02E-3E6F-915B-0ACD3EA06C65}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F935DC1F-1CF0-11D0-ADB9-00C04FD58A0B}\1.0.0.0" Name="Class" Value="IWshRuntimeLibrary.WshWindowStyle" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F935DC1F-1CF0-11D0-ADB9-00C04FD58A0B}\1.0.0.0" Name="Assembly" Value="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F935DC1F-1CF0-11D0-ADB9-00C04FD58A0B}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F935DC1F-1CF0-11D0-ADB9-00C04FD58A0B}\1.0.0.0" Name="CodeBase" Value="file:///[#fil291F237B77CAA77368DB5FE33F4C3E50]" Type="string" Action="write" />
+            </Component>
+            <Component Id="cmpE815DB2BDBB2B0208A22B3B90BBFC235" Guid="46168EC0-49AC-4BEA-9EB1-236832DDC833">
+                <File Id="fil894F63A6B764D8416935E86D4BDA79EF" KeyPath="yes" Source="SourceDir\log.log" />
+            </Component>
+            <Component Id="cmp7A02540955416844F189956300384F4B" Guid="6D2D3946-58B9-4EEC-AE3C-B96DB77A5F63">
+                <File Id="fil5402EF29BD86106876651700A7364F8E" KeyPath="yes" Source="SourceDir\log_2016-02-13.00.log" />
+            </Component>
+            <Component Id="cmpB5F18F3258CC91BD1085074E70BB4365" Guid="EE06AFD3-9D17-4D09-83FB-60E92BF68132">
+                <File Id="fil18CA36E5739F3E9CF3BE3F1BA033716C" KeyPath="yes" Source="SourceDir\log_2016-02-20.00.log" />
+            </Component>
+            <Component Id="cmp91FE436AA4439B5A51AE1020AAC0F69B" Guid="C73B89F6-8957-482E-B5C0-A9C9F1CF77D4">
+                <File Id="filB16226B905B01E2D66C727138F12EA29" KeyPath="yes" Source="SourceDir\log_2016-02-21.00.log" />
+            </Component>
+            <Component Id="cmpB988D7F317F4B20A4E0FFDADB02326F5" Guid="E118496A-1957-40C4-911D-5E20BDF271B7">
+                <File Id="filC14E09DECC7993808E0285767F3323FB" KeyPath="yes" Source="SourceDir\log_2016-03-14.00.log" />
+            </Component>
+            <Component Id="cmpDBBDC376950D7DEB42D4974726581E57" Guid="5D200FDD-49E4-4FD5-8704-DB6A367C4023">
+                <File Id="fil89E703603A25B25712488A647BE48205" KeyPath="yes" Source="SourceDir\log_2016-03-15.00.log" />
+            </Component>
+            <Component Id="cmpDE21CD7C0E0D1F188E3127A0F273B9A2" Guid="DF11DC06-B8E0-4483-BBE3-11F1EF886D05">
                 <Class Id="{3CA2611C-F83B-3F7C-B26C-DEA377803521}" Context="InprocServer32" Description="Microsoft.Practices.ServiceLocation.ActivationException" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Microsoft.Practices.ServiceLocation.ActivationException" Description="Microsoft.Practices.ServiceLocation.ActivationException" />
                 </Class>
@@ -848,73 +981,94 @@
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3CA2611C-F83B-3F7C-B26C-DEA377803521}\InprocServer32" Name="CodeBase" Value="file:///[#fil1412185555A5FB9CC36A0842DFD16192]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp879EF891041694F3C5F65B0F198D792E" Guid="2F3F9857-8B88-44EC-AD4B-BF85319F3E11">
+            <Component Id="cmp879EF891041694F3C5F65B0F198D792E" Guid="F815DD41-BBA1-4969-8682-C9A631A63E28">
                 <File Id="fil7AF86FEC5A40D9D7CD8014F96FE82C50" KeyPath="yes" Source="SourceDir\Microsoft.Practices.ServiceLocation.xml" />
             </Component>
-            <Component Id="cmp83DA3B24EAEE6114D4373E4D4F1DC552" Guid="A071E8C1-EE97-4AD2-B90B-09FCDBD70ED2">
+            <Component Id="cmp83DA3B24EAEE6114D4373E4D4F1DC552" Guid="44D396FB-D222-4B26-8215-F72AD6422ED8">
                 <File Id="fil9CDB743566628445E34695E3CD219110" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.dll" />
             </Component>
-            <Component Id="cmp34CCBF05E6E8F01CC96A25C6032B134E" Guid="9F4844AB-AAB7-436C-889C-F989EB0DA01B">
+            <Component Id="cmp34CCBF05E6E8F01CC96A25C6032B134E" Guid="28F0A8C3-6F96-43F9-8354-2C78E93CFDD5">
                 <File Id="filBDE0B79A5F21254202AE93CF7C3E56FC" KeyPath="yes" Source="SourceDir\Microsoft.Win32.TaskScheduler.xml" />
             </Component>
-            <Component Id="cmpB00E63C839DFA4FFD4AC3C1D265067DC" Guid="55871896-D306-4599-B055-7C1574481ED9">
+            <Component Id="cmp67C080C3EFEB351476BB5F29D16B4A2B" Guid="9BBBA760-8D57-4AEC-B9E4-FDF62FB7EDCA">
+                <File Id="fil0022E934DDC8EA64049A899FD91A4D03" KeyPath="yes" Source="SourceDir\MLib.dll" />
+            </Component>
+            <Component Id="cmpB00E63C839DFA4FFD4AC3C1D265067DC" Guid="89B897C7-8A95-49C6-BB22-6336F5A840A2">
                 <File Id="fil0A370EC0325BF70C1D0BABF2D00E4463" KeyPath="yes" Source="SourceDir\Monads.dll" />
             </Component>
-            <Component Id="cmpB2AAFE727B686EBD6B96A6830CC78501" Guid="FC7F6193-E28F-4180-ACF2-06572E61D0A8">
+            <Component Id="cmpB2AAFE727B686EBD6B96A6830CC78501" Guid="F127141D-CD32-4665-9405-D8FDADF14EC4">
                 <File Id="fil3032413F8B6D3B203B63051C75322D7F" KeyPath="yes" Source="SourceDir\Monads.xml" />
             </Component>
-            <Component Id="cmpB6749B9EE8073AED416A4BEE193678C7" Guid="6F7DCE8B-180F-43F0-99D1-B51034475E83">
+            <Component Id="cmpB6749B9EE8073AED416A4BEE193678C7" Guid="D6CF6898-E839-4F3F-8AA2-697DC900F1E4">
                 <File Id="fil27CDCBC89F7D0F209432E5D6449B5F88" KeyPath="yes" Source="SourceDir\Newtonsoft.Json.dll" />
             </Component>
-            <Component Id="cmpB4515FD827B688B867CDF2379D6ED538" Guid="4DB2274B-50DE-4494-B305-2B2BABB393C2">
+            <Component Id="cmpB4515FD827B688B867CDF2379D6ED538" Guid="D16B2515-FD1D-44D8-9660-47552FCE6F19">
                 <File Id="filAA00973CC61A8E4FF37F2DBD5CE2931A" KeyPath="yes" Source="SourceDir\Newtonsoft.Json.xml" />
             </Component>
-            <Component Id="cmpF0F9CB9C99F6640C80B1B96E4C3631B7" Guid="5894D200-1553-485E-A839-22177BE66BDE">
+            <Component Id="cmpF0F9CB9C99F6640C80B1B96E4C3631B7" Guid="7638DD36-3BE5-477E-91F3-49D93EBCBA4C">
                 <File Id="fil743CDF3AB2B2F21AA21E4AAF5727B8F5" KeyPath="yes" Source="SourceDir\Ninject.dll" />
             </Component>
-            <Component Id="cmp6AA3127F4A348DD5156A75A49250CDC5" Guid="5C7E4370-7A83-45A9-800D-1FF94AB92404">
+            <Component Id="cmp6AA3127F4A348DD5156A75A49250CDC5" Guid="48D0AAAA-C545-4447-81D3-9B147B5E3359">
                 <File Id="filCE80836912D9DF4ED3F81015DCF027F1" KeyPath="yes" Source="SourceDir\Ninject.xml" />
             </Component>
-            <Component Id="cmpFF0853B33BD98924C9AB9984E98A78A1" Guid="D3AE6A83-8050-4316-9C94-F7A8F7058AE7">
+            <Component Id="cmpFF0853B33BD98924C9AB9984E98A78A1" Guid="826523C0-49CE-4930-A76F-854593E7CC2D">
                 <File Id="fil9CF60E2FB9BFFA4C8ED1A553F186FA07" KeyPath="yes" Source="SourceDir\NLog.config" />
             </Component>
-            <Component Id="cmp5E89F95509521D1B86C01CC01CD404E5" Guid="5AA026BE-20B6-451E-9474-8CEDDDE07D38">
+            <Component Id="cmp5E89F95509521D1B86C01CC01CD404E5" Guid="8B3C15E3-113A-4563-9557-4FF0EFD5E7B1">
                 <File Id="fil637BD90F8EC8704133B5C72649DCD897" KeyPath="yes" Source="SourceDir\NLog.dll" />
             </Component>
-            <Component Id="cmpAD805200EDD238AD0D6E65FDAA9C8BF6" Guid="5B99CC9F-BFA9-4BB0-A887-4EBFD812A13C">
+            <Component Id="cmpAD805200EDD238AD0D6E65FDAA9C8BF6" Guid="5BFDC3CA-3CF8-4C29-A0AD-7831438FEC63">
                 <File Id="fil9A1F701634242022CC99E23168C87454" KeyPath="yes" Source="SourceDir\NLog.xml" />
             </Component>
-            <Component Id="cmp10B84D3DCBE010DCD871F3663B0BD0CF" Guid="CF674FB5-F361-4D4F-9BA0-632A50387753">
+            <Component Id="cmp10B84D3DCBE010DCD871F3663B0BD0CF" Guid="A8EC88DB-74D3-4A1E-A165-FA3DC064F2B7">
                 <File Id="fil712FEBCE51C4B0BF5E91DACF42C3B0DB" KeyPath="yes" Source="SourceDir\startService.bat" />
             </Component>
-            <Component Id="cmp84751FE786634351D32B652FCF91CC45" Guid="5AA45641-3D6F-4DBE-9792-064C160CF375">
+            <Component Id="cmp84751FE786634351D32B652FCF91CC45" Guid="0D9092B2-3481-409B-8D2F-C1A5762C737F">
                 <File Id="filFB07C7A6E2D9D2540FE9C38B4E16F82A" KeyPath="yes" Source="SourceDir\startService_admin.lnk" />
             </Component>
-            <Component Id="cmp8D2D76E8D696D320680312095B7E2E66" Guid="F096A852-E68A-470A-A3A4-E59BDF5AC164">
+            <Component Id="cmp8D2D76E8D696D320680312095B7E2E66" Guid="ED916E91-850B-4950-859D-5D40C70D7907">
                 <File Id="filC1685F1EA69D194F170B0BF849664200" KeyPath="yes" Source="SourceDir\stopService.bat" />
             </Component>
-            <Component Id="cmp3FE4BBCCD005CE8EAE6F2D955C6F8716" Guid="6A9E6C34-2491-48D6-ACB0-1DDE16B06494">
+            <Component Id="cmp3FE4BBCCD005CE8EAE6F2D955C6F8716" Guid="F79514FF-7B4D-4A44-A4AB-0EEE2A9481F1">
                 <File Id="filD3BFD405067BE9FCFBF0563BBA2CAD35" KeyPath="yes" Source="SourceDir\stopService_admin.lnk" />
             </Component>
-            <Component Id="cmp70712FCDCB52A2DDE03B743455D8F338" Guid="3AD0A679-E4A1-4A7E-BA34-AFCCEA67BA7B">
+            <Component Id="cmp70712FCDCB52A2DDE03B743455D8F338" Guid="B57A5B4E-8A15-42C6-A30D-DC3B799E960C">
                 <File Id="fil897463EAC14C1480B7849BF5F73D7D36" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Input.Toolkit.dll" />
             </Component>
-            <Component Id="cmpA2560771212EDE4A33849D702FE5AC77" Guid="6D5E086E-DB88-422A-BC77-FB5A55AA84C5">
+            <Component Id="cmpA2560771212EDE4A33849D702FE5AC77" Guid="64CF2B0E-2DA8-4D91-BEFD-4F18983DE810">
                 <File Id="filFAC5477CFE6EAC205BDDD26E1A71A299" KeyPath="yes" Source="SourceDir\System.Windows.Controls.Layout.Toolkit.dll" />
             </Component>
-            <Component Id="cmpABAA94D9A211CBB7C230453A1104075F" Guid="EF0DEE74-986F-4753-9CD6-8CF0DFB20D83">
+            <Component Id="cmpABAA94D9A211CBB7C230453A1104075F" Guid="DB753016-F59B-426D-ABAA-436C05639409">
                 <File Id="filDCD3E7EDA6FCF106B61CF15A165D109E" KeyPath="yes" Source="SourceDir\System.Windows.Interactivity.dll" />
             </Component>
-            <Component Id="cmp91AD46FA8235CCC0D256E177D68EC53E" Guid="D45F1279-60F6-4500-8AD8-95F3BE686997">
+            <Component Id="cmp245EE5878818EE36790B44A0935D9FA1" Guid="6EEEA350-8C91-4F15-BEC3-F92EEBD256D2">
+                <File Id="filD387DCEB5270588EDE4B650ED7B8E79F" KeyPath="yes" Source="SourceDir\Ucs32.dll" />
+            </Component>
+            <Component Id="cmpCDC301CEAAB808393350A24EA2464D3F" Guid="B2DF0D4D-4A30-4472-8A5F-FEB16743ED5E">
+                <File Id="fil2E0DFC496D54C3F29D37BAB41676B5D5" KeyPath="yes" Source="SourceDir\Ucs32P.dll" />
+            </Component>
+            <Component Id="cmp91AD46FA8235CCC0D256E177D68EC53E" Guid="C6886C88-2972-4D32-BACE-B94FDCA040DA">
                 <File Id="fil59DDA49C01E4C4CE31C89AEB87636176" KeyPath="yes" Source="SourceDir\WPFToolkit.dll" />
             </Component>
-            <Component Id="cmp91ECCAC9888CF52F6E6950C847E06DC6" Guid="C6B212FB-881A-4BEF-98FE-BFC5B80384C3">
+            <Component Id="cmp91ECCAC9888CF52F6E6950C847E06DC6" Guid="3900A844-F2B2-4697-9AD3-40EE312DECF3">
                 <File Id="filABE27200655351687D519265383A0EA2" KeyPath="yes" Source="SourceDir\Xceed.Wpf.Toolkit.dll" />
+            </Component>
+            <Component Id="cmp856CC95CAA422F25D5ACC451C69DDBF1" Guid="77C4F616-925B-4FBD-A7A1-639588BACDF6">
+                <File Id="fil153C9FC9B9A4536CF26492F0FD0D5943" KeyPath="yes" Source="SourceDir\ZbTaskEOSUtility.dll">
+                    <TypeLib Id="{8CCE4B92-88FB-431E-A2F0-234BD26A5B6A}" Description="ZbTaskEOSUtility 1.0 АІМЯ ЧІМЮЧШ" HelpDirectory="Main" Language="0" MajorVersion="1" MinorVersion="0">
+                        <Class Id="{4B08BE8F-0430-4822-AAF2-A554C199BFFD}" Context="InprocServer32" Description="TEU_EOSUtilityTask Class" ThreadingModel="both">
+                            <ProgId Id="ZbTaskEOSUtility.TEU_EOSUtilityTask.1" Description="TEU_EOSUtilityTask Class">
+                                <ProgId Id="ZbTaskEOSUtility.TEU_EOSUtilityTask" Description="TEU_EOSUtilityTask Class" />
+                            </ProgId>
+                        </Class>
+                    </TypeLib>
+                </File>
             </Component>
         </DirectoryRef>
     </Fragment>
     <Fragment>
         <ComponentGroup Id="MainGroup">
+            <ComponentRef Id="cmp9405BA157846AD8D3B3945A0CE193EE9" />
             <ComponentRef Id="cmpDE95CC0363DB4301DF8F556E5214C270" />
             <ComponentRef Id="cmp4FCFD3107CFCD8758AAFA30C4CF830F4" />
             <ComponentRef Id="cmp9F72431D52754004177B3A6F8A89807D" />
@@ -922,6 +1076,8 @@
             <ComponentRef Id="cmpBDA03D0A6F2242DA3ADF5CF509AFCF00" />
             <ComponentRef Id="cmpF9B8731D2FE384B04CA73116EBAEA34B" />
             <ComponentRef Id="cmp6745A582FDA208E73B26129E0825F9B8" />
+            <ComponentRef Id="cmp90C478A21E41F65032A54D0FEA6DFDA9" />
+            <ComponentRef Id="cmpDF450ACA7F5513DBDD7BE1D62AAD4C1D" />
             <ComponentRef Id="cmpE903A0CC7403A4D729B166A3908AD7CC" />
             <ComponentRef Id="cmp24A3CE40834AFF2500AB7DB9DE2F568E" />
             <ComponentRef Id="cmpAF9044A29826C8836D98FF34A5D53638" />
@@ -929,6 +1085,7 @@
             <ComponentRef Id="cmpBCF8FE9A3E3E66A695E0D9F911287C17" />
             <ComponentRef Id="cmpF4F90C83158C56D938F41A8221317786" />
             <ComponentRef Id="cmp3EB84CB60335EC878A3D6185BE4B4B35" />
+            <ComponentRef Id="cmp0E28F16AA58D2E3F66330C1A1961BFFF" />
             <ComponentRef Id="cmpB12F7BDDF7CBD4674D71CE366ECA8877" />
             <ComponentRef Id="cmp108DC132D7428136506EBB9BBD1EFCA0" />
             <ComponentRef Id="cmp395B3DE4FE09C4021E3DD6F827E022CD" />
@@ -969,10 +1126,18 @@
             <ComponentRef Id="cmp46485E87E965B488E8A50B6430798813" />
             <ComponentRef Id="cmp384BCB7BE89584BC802BD516E013EA18" />
             <ComponentRef Id="cmpB10EF4AE1EFD05A1ACF57D10AF500B2A" />
+            <ComponentRef Id="cmp453D103AFA898BBFB614F9C206C0C0C6" />
+            <ComponentRef Id="cmpE815DB2BDBB2B0208A22B3B90BBFC235" />
+            <ComponentRef Id="cmp7A02540955416844F189956300384F4B" />
+            <ComponentRef Id="cmpB5F18F3258CC91BD1085074E70BB4365" />
+            <ComponentRef Id="cmp91FE436AA4439B5A51AE1020AAC0F69B" />
+            <ComponentRef Id="cmpB988D7F317F4B20A4E0FFDADB02326F5" />
+            <ComponentRef Id="cmpDBBDC376950D7DEB42D4974726581E57" />
             <ComponentRef Id="cmpDE21CD7C0E0D1F188E3127A0F273B9A2" />
             <ComponentRef Id="cmp879EF891041694F3C5F65B0F198D792E" />
             <ComponentRef Id="cmp83DA3B24EAEE6114D4373E4D4F1DC552" />
             <ComponentRef Id="cmp34CCBF05E6E8F01CC96A25C6032B134E" />
+            <ComponentRef Id="cmp67C080C3EFEB351476BB5F29D16B4A2B" />
             <ComponentRef Id="cmpB00E63C839DFA4FFD4AC3C1D265067DC" />
             <ComponentRef Id="cmpB2AAFE727B686EBD6B96A6830CC78501" />
             <ComponentRef Id="cmpB6749B9EE8073AED416A4BEE193678C7" />
@@ -989,8 +1154,11 @@
             <ComponentRef Id="cmp70712FCDCB52A2DDE03B743455D8F338" />
             <ComponentRef Id="cmpA2560771212EDE4A33849D702FE5AC77" />
             <ComponentRef Id="cmpABAA94D9A211CBB7C230453A1104075F" />
+            <ComponentRef Id="cmp245EE5878818EE36790B44A0935D9FA1" />
+            <ComponentRef Id="cmpCDC301CEAAB808393350A24EA2464D3F" />
             <ComponentRef Id="cmp91AD46FA8235CCC0D256E177D68EC53E" />
             <ComponentRef Id="cmp91ECCAC9888CF52F6E6950C847E06DC6" />
+            <ComponentRef Id="cmp856CC95CAA422F25D5ACC451C69DDBF1" />
         </ComponentGroup>
     </Fragment>
 </Wix>

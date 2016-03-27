@@ -9,6 +9,7 @@ using ImageMaker.Common.Dto;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.Entities;
+using ImageMaker.SDKData;
 
 namespace ImageMaker.AdminViewModels.AutoMapper
 {

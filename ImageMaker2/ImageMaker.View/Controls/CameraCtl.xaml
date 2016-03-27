@@ -8,6 +8,7 @@
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
              xmlns:converters1="clr-namespace:ImageMaker.ViewModels.Converters;assembly=ImageMaker.ViewModels"
+             xmlns:converters2="clr-namespace:ImageMaker.CommonView.Converters;assembly=ImageMaker.CommonView"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:CameraViewModel}"
              d:DesignHeight="800" d:DesignWidth="1000">
@@ -71,7 +72,7 @@
 
                         <Border HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
-                                Visibility="{Binding TakingPicture, Converter={converters1:BoolToVisibleConverter}}"   
+                                Visibility="{Binding TakingPicture, Converter={converters2:BoolToVisibleConverter}}"   
                                 Background="Transparent"
                                 Opacity="0.6">
                            

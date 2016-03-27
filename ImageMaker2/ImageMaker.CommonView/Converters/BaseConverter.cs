@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace ImageMaker.View.Converters
+namespace ImageMaker.CommonView.Converters
 {
     public abstract class BaseConverter<T> : MarkupExtension, IValueConverter
     where T : class, new()

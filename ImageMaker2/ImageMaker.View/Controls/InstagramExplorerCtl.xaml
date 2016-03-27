@@ -278,13 +278,13 @@
                         </ListBox>
                         <spinningWheel:SpinningWheel HorizontalAlignment="Center"
                                 IsSpinning="{Binding Path=SearchAsyncOperation.IsNotCompleted,TargetNullValue=false}" 
-                                Visibility="{Binding Path=SearchAsyncOperation.IsNotCompleted, Converter={converters2:BoolToVisibleConverter},TargetNullValue={x:Static Visibility.Hidden}}"/>
+                                Visibility="{Binding Path=SearchAsyncOperation.IsNotCompleted, Converter={converters1:BoolToVisibleConverter},TargetNullValue={x:Static Visibility.Hidden}}"/>
                         <customControls:ErrorHandlingControl Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchBoxCtl,Path=SearchText}"
                                           Style="{StaticResource ErrorHandlingControlStyle}"
                                           Visibility="{Binding SearchAsyncOperation.IsFaulted,
                                                                FallbackValue={x:Static Visibility.Collapsed},
                                                                TargetNullValue={x:Static Visibility.Collapsed},
-                                                               Converter={converters2:BoolToVisibleConverter}}" />
+                                                               Converter={converters1:BoolToVisibleConverter}}" />
                     </Grid>
                     
                 </Border>

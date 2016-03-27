@@ -7,6 +7,8 @@ namespace ImageMaker.SDKData.Enums
     /// </summary>
     public enum CameraISOSensitivity : uint
     {
+        [Description("Aвто")]
+        Auto=0,
         [Description("ISO 6")]
         ISO_6 = 0x00000028,
         [Description("ISO 12")]

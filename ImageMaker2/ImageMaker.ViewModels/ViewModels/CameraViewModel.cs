@@ -15,6 +15,7 @@ using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.PatternProcessing;
 using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.PatternProcessing.ImageProcessors;
+using ImageMaker.SDKData;
 using ImageMaker.SDKData.Enums;
 using ImageMaker.SDKData.Events;
 
@@ -195,10 +196,7 @@ namespace ImageMaker.ViewModels.ViewModels
                     var copyLiveViewStream = LiveViewImageStream;
                     await Task.Delay(TimeSpan.FromSeconds(2));
                     var stream = await _imageProcessor.TakePictureAsync(copyLiveViewStream,
-                        _settings.SelectedAeMode,
-                        _settings.SelectedAvValue,
-                        _settings.SelectedIsoSensitivity, _settings.SelectedShutterSpeed,
-                        _settings.SelectedWhiteBalance, token);
+                        _settings, token);
 
                     token.ThrowIfCancellationRequested();
                     //TakingPicture = false;

@@ -11,6 +11,7 @@
         Title="Главное окно" MinHeight="600" MinWidth="500" Content="{Binding Path=CurrentContent}"
         WindowStyle="None" ResizeMode="NoResize"  
     WindowStartupLocation="CenterScreen" WindowState="Maximized">
+
     <i:Interaction.Behaviors>
         <behaviors:WindowClosingBehavior />
         <behaviors:WindowContainerBehavior />

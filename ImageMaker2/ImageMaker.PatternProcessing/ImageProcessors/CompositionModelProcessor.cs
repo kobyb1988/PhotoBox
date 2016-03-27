@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using ImageMaker.Camera;
+using ImageMaker.Common.Extensions;
 using ImageMaker.CommonView.Helpers;
 using ImageMaker.Entities;
 using ImageMaker.PatternProcessing.Dto;
+using ImageMaker.SDKData;
 using ImageMaker.SDKData.Enums;
 using ImageMaker.SDKData.Events;
 using Image = System.Drawing.Image;
+using Size = System.Drawing.Size;
 
 namespace ImageMaker.PatternProcessing.ImageProcessors
 {
@@ -30,6 +33,9 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         public event EventHandler<int> TimerElapsed;
         public event EventHandler<int> ImageNumberChanged;
         public event EventHandler<CameraEventBase> CameraErrorEvent;
+        public event EventHandler CameraRemoveEvent;
+        public event EventHandler CameraAddEvent;
+        public bool CameraExist => _imageProcessor.CameraExist;
 
         public CompositionModelProcessor(Template pattern, ImageProcessor imageProcessor, ImageUtils imageUtils)
         {
@@ -47,8 +53,16 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
             _imageProcessor.Initialize();
             _imageProcessor.CameraErrorEvent += ImageProcessorOnCameraErrorEvent;
+            _imageProcessor.AddCamera += OnAddCamera;
+            _imageProcessor.RemoveCamera += OnRemoveCamera;
 
             _initialized = true;
+        }
+
+        public void SubscribeToCameraAddEvent()
+        {
+            // _imageProcessor.AddCamera += OnAddCamera;
+            _imageProcessor.SubscribeToCameraAddEvent();
         }
 
         private void ImageProcessorOnCameraErrorEvent(object sender, CameraEventBase cameraError)
@@ -58,27 +72,42 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 handler(this, cameraError);
         }
 
-        public virtual async Task<CompositionProcessingResult> TakePictureAsync(byte[] liveViewImageStream, AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance, CancellationToken token)
+        public async Task<byte[]> TakeTestPictureAsync(byte[] liveViewImageStream, CameraSettingsDto settings)
+        {
+
+            SetCameraSettings(AEMode.Bulb, settings.SelectedPhotoWhiteBalance,
+             settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
+             settings.SelectedPhotoShutterSpeed);
+
+            byte[] picture = await Task.Run(async () =>
+            {
+            //    await Task.Delay(500);//TODO Костыль, не понятно почему, но камере реально необходимо время, что бы свойства установились
+                var res = await _imageProcessor.DoTakePictureAsync();
+                return res;
+            });
+
+            return picture;
+        }
+
+        public virtual async Task<CompositionProcessingResult> TakePictureAsync(byte[] liveViewImageStream, CameraSettingsDto settings, CancellationToken token)
         {
             Size liveViewImageStreamSize;
             using (var stream = new MemoryStream(liveViewImageStream))
             {
-                    var img = Image.FromStream(stream);
-                    liveViewImageStreamSize = img.Size;
+                var img = Image.FromStream(stream);
+                liveViewImageStreamSize = img.Size;
             }
 
-            return new CompositionProcessingResult(_pattern, await TakePictureInternal(liveViewImageStreamSize, selectedAeMode, selectedAvValue, selectedIsoSensitivity, selectedShutterSpeed, selectedWhiteBalance, token));
+            return new CompositionProcessingResult(_pattern, await TakePictureInternal(liveViewImageStreamSize, settings, token));
         }
 
-        protected async Task<byte[]> TakePictureInternal(Size liveViewImageStreamSize, AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance, CancellationToken token)
+        protected async Task<byte[]> TakePictureInternal(Size liveViewImageStreamSize, CameraSettingsDto settings, CancellationToken token)
         {
-            return await Task.Run(() => Run(liveViewImageStreamSize, selectedAeMode, selectedAvValue, selectedIsoSensitivity, selectedShutterSpeed, selectedWhiteBalance, token), token);
+            return await Task.Run(() => Run(liveViewImageStreamSize, settings, token), token);
         }
 
-        private async Task<byte[]> Run(Size liveViewImageStreamSize, AEMode selectedAeMode, ApertureValue selectedAvValue, CameraISOSensitivity selectedIsoSensitivity, ShutterSpeed selectedShutterSpeed, WhiteBalance selectedWhiteBalance, CancellationToken token)
+        private async Task<byte[]> Run(Size liveViewImageStreamSize, CameraSettingsDto settings, CancellationToken token)
         {
-            var settings = GetCameraPhotoSettings();
-
             var pictures = new List<byte[]>();
 
             for (var i = 0; i < _pattern.Images.Count; i++)
@@ -90,30 +119,35 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
                 for (var j = 5; j >= 0; j--)
                 {
-                        var j1 = j;
-                        RaiseTimerElapsed(j1);
-                        await Task.Delay(TimeSpan.FromSeconds(1), token);
+                    var j1 = j;
+                    RaiseTimerElapsed(j1);
+                    await Task.Delay(TimeSpan.FromSeconds(1), token);
                 }
 
-                SetCameraSettings(Enum.Parse(typeof(AEMode), settings.SelectedAeMode),
-                    Enum.Parse(typeof(WhiteBalance), settings.SelectedWhiteBalance),
-                    Enum.Parse(typeof(ApertureValue), settings.SelectedAvValue),
-                    Enum.Parse(typeof(CameraISOSensitivity), settings.SelectedIsoSensitivity),
-                    Enum.Parse(typeof(ShutterSpeed), settings.SelectedShutterSpeed));
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    SetCameraSettings(settings.SelectedPhotoAeMode, settings.SelectedPhotoWhiteBalance,
+                     settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
+                     settings.SelectedPhotoShutterSpeed);
+                }));
+
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
                 //RaiseImageNumberChanged(i + 1);
                 //await Task.Delay(TimeSpan.FromSeconds(1), token);
                 token.ThrowIfCancellationRequested();
-                byte[] picture = await _imageProcessor.DoTakePicture();
+                byte[] picture = await _imageProcessor.DoTakePictureAsync();
                 pictures.Add(picture);
 
                 token.ThrowIfCancellationRequested();
                 //await Task.Delay(TimeSpan.FromSeconds(3), token); //todo
 
-                SetCameraSettings(selectedAeMode, selectedWhiteBalance,
-                    selectedAvValue, selectedIsoSensitivity,
-                    selectedShutterSpeed);
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    SetCameraSettings(settings.SelectedAeMode, settings.SelectedWhiteBalance,
+                    settings.SelectedAvValue, settings.SelectedIsoSensitivity,
+                    settings.SelectedShutterSpeed);
+                }));
                 StopLiveView();
                 StartLiveView();
             }
@@ -133,21 +167,14 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             _imageProcessor.SetSetting((uint)PropertyId.Tv, (uint)shutterSpeed);
         }
 
-        private dynamic GetCameraPhotoSettings()
+        private void OnRemoveCamera(object sender, EventArgs e)
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            var filePath = Path.Combine(baseDir, "CameraPhotoSettings.txt");
-            if (!File.Exists(filePath)) return null;
+            CameraRemoveEvent?.Invoke(sender, e);
+        }
 
-            var lines = File.ReadAllLines(Path.Combine(baseDir, "CameraPhotoSettings.txt"));
-            return new
-            {
-                SelectedAeMode = lines.SingleOrDefault(x => x.Contains("SelectedAeMode")).With(x => x.Replace("SelectedAeMode=", "")),
-                SelectedAvValue = lines.SingleOrDefault(x => x.Contains("SelectedAvValue")).With(x => x.Replace("SelectedAvValue=", "")),
-                SelectedIsoSensitivity = lines.SingleOrDefault(x => x.Contains("SelectedIsoSensitivity")).With(x => x.Replace("SelectedIsoSensitivity=", "")),
-                SelectedWhiteBalance = lines.SingleOrDefault(x => x.Contains("SelectedWhiteBalance")).With(x => x.Replace("SelectedWhiteBalance=", "")),
-                SelectedShutterSpeed = lines.SingleOrDefault(x => x.Contains("SelectedShutterSpeed")).With(x => x.Replace("SelectedShutterSpeed=", ""))
-            };
+        private void OnAddCamera(object sender, EventArgs e)
+        {
+            CameraAddEvent?.Invoke(sender, e);
         }
 
         private void RaiseImageNumberChanged(int newNumber)
@@ -180,6 +207,9 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         {
             _initialized = false;
             _imageProcessor.CameraErrorEvent -= ImageProcessorOnCameraErrorEvent;
+            _imageProcessor.RemoveCamera -= OnRemoveCamera;
+            _imageProcessor.AddCamera -= OnAddCamera;
+
             _imageProcessor.Dispose();
         }
 
@@ -221,6 +251,13 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             InitializeProcessor();
 
             return _imageProcessor.DoOpenSession();
+        }
+
+        public IEnumerable<EnumType> GetSupportedEnumProperties<EnumType>(PropertyId propertyId)
+            where EnumType : struct, IConvertible
+        {
+            IEnumerable<EnumType> uintProperties = _imageProcessor.GetSettingList(propertyId).Cast<EnumType>();
+            return uintProperties;
         }
     }
 }

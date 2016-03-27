@@ -90,7 +90,7 @@ namespace EDSDKLib
         /// For video recording, SaveTo has to be set to Camera. This is to store the previous setting until after the filming.
         /// </summary>
         private uint PrevSaveTo;
-      
+
         /// <summary>
         /// If true, the live view will be shut off completely. If false, live view will go back to the camera.
         /// </summary>
@@ -113,7 +113,7 @@ namespace EDSDKLib
         #region Custom Events
 
         public event EventHandler<ErrorEvent> ErrorEvent;
- 
+
         public delegate void CameraAddedHandler();
         public delegate void ProgressHandler(int Progress);
         public delegate void StreamUpdate(Stream img);
@@ -161,7 +161,7 @@ namespace EDSDKLib
 
         static SDKHandler()
         {
-            AddEnvironmentPaths(new[] {AppDomain.CurrentDomain.BaseDirectory});
+            AddEnvironmentPaths(new[] { AppDomain.CurrentDomain.BaseDirectory });
         }
 
         static void AddEnvironmentPaths(IEnumerable<string> paths)
@@ -182,7 +182,7 @@ namespace EDSDKLib
                 EdsdkInvokes.TerminateSDK();
                 _actionFactory.Clear();
             };
-            
+
             if (isAsync)
                 QueueItem(terminate, MainCamera, PriorityValue.Critical);
             else
@@ -228,9 +228,15 @@ namespace EDSDKLib
             //    SDKPropertyEvent += Camera_SDKPropertyEvent;
             //    SDKProgressCallbackEvent += Camera_SDKProgressCallbackEvent;
             //    SDKObjectEvent += Camera_SDKObjectEvent;
-                
+
             //    DequeueItem();
             //}, null, PriorityValue.Critical);
+        }
+
+        public void SubscribeToCameraAddEvet()
+        {
+            SDKCameraAddedEvent += SDKHandler_CameraAddedEvent;
+            _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetCameraAddedHandler(SDKCameraAddedEvent, IntPtr.Zero));
         }
 
         [HandleProcessCorruptedStateExceptions]
@@ -285,7 +291,7 @@ namespace EDSDKLib
                             })) return null;
 
                             byte[] buffer = new byte[imageBlobLength];
-                            Marshal.Copy(imageBlob, buffer, 0, (int) imageBlobLength);
+                            Marshal.Copy(imageBlob, buffer, 0, (int)imageBlobLength);
 
                             return buffer;
                         }
@@ -355,29 +361,27 @@ namespace EDSDKLib
             if (CameraSessionOpen) CloseSession();
             if (newCamera != null)
             {
-                QueueItem((camera) =>
-                {
-                    MainCamera = camera;
 
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetCameraStateEventHandler(
-                        camera.Ref, (uint)StateEvent.All, SDKStateEvent, IntPtr.Zero));
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetObjectEventHandler(camera.Ref,
-                        (uint)ObjectEvent.All, SDKObjectEvent, IntPtr.Zero));
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyEventHandler(camera.Ref,
-                        (uint)PropertyEvent.All, SDKPropertyEvent, IntPtr.Zero));
-                    //open a session
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.OpenSession(camera.Ref));
+                MainCamera = newCamera;
 
-                    //subscribe to the camera events (for the SDK)
+                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetCameraStateEventHandler(
+                    newCamera.Ref, (uint)StateEvent.All, SDKStateEvent, IntPtr.Zero));
+                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetObjectEventHandler(newCamera.Ref,
+                    (uint)ObjectEvent.All, SDKObjectEvent, IntPtr.Zero));
+                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyEventHandler(newCamera.Ref,
+                    (uint)PropertyEvent.All, SDKPropertyEvent, IntPtr.Zero));
+                //open a session
+                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.OpenSession(newCamera.Ref));
 
-                    ImageSaveDirectory =
-                        System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
-                            "RemotePhoto");
+                //subscribe to the camera events (for the SDK)
 
-                    //Error = EDSDK.OpenSession(MainCamera.Ref);
-                    CameraSessionOpen = true;
-                    DequeueItem();
-                }, newCamera, PriorityValue.Critical);
+                ImageSaveDirectory =
+                    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                        "RemotePhoto");
+
+                //Error = EDSDK.OpenSession(MainCamera.Ref);
+                CameraSessionOpen = true;
+                //    DequeueItem();
 
                 SetSettingInternal((uint)PropertyId.SaveTo, (uint)SaveTo.Host, newCamera);
                 SetCapacity(newCamera);
@@ -443,7 +447,7 @@ namespace EDSDKLib
         public void ShutDown()
         {
             _block = true;
-    
+
             _actionFactory.Clear();
 
             Dispose();
@@ -462,7 +466,7 @@ namespace EDSDKLib
         {
             //Handle new camera here
             if (CameraAdded != null) CameraAdded();
-            return (uint) ReturnValue.Ok;
+            return (uint)ReturnValue.Ok;
         }
 
         private event Action<byte[]> ItemDownloaded;
@@ -491,7 +495,7 @@ namespace EDSDKLib
         private uint Camera_SDKObjectEvent(uint inEvent, IntPtr inRef, IntPtr inContext)
         {
             //handle object event here
-            switch ((ObjectEvent) inEvent)
+            switch ((ObjectEvent)inEvent)
             {
                 case ObjectEvent.All:
                     break;
@@ -528,7 +532,7 @@ namespace EDSDKLib
             }
 
             //DequeueItem();
-            return (uint) ReturnValue.Ok;
+            return (uint)ReturnValue.Ok;
         }
 
         /// <summary>
@@ -542,7 +546,7 @@ namespace EDSDKLib
         {
             //Handle progress here
             if (ProgressChanged != null) ProgressChanged((int)inPercent);
-            return (uint) ReturnValue.Ok;
+            return (uint)ReturnValue.Ok;
         }
 
         /// <summary>
@@ -566,7 +570,7 @@ namespace EDSDKLib
                     break;
             }
 
-            switch ((PropertyId) inPropertyID)
+            switch ((PropertyId)inPropertyID)
             {
                 case PropertyId.AEBracket:
                     break;
@@ -752,7 +756,7 @@ namespace EDSDKLib
             }
 
             //DequeueItem();
-            return (uint) ReturnValue.Ok;
+            return (uint)ReturnValue.Ok;
         }
 
         /// <summary>
@@ -765,7 +769,7 @@ namespace EDSDKLib
         private uint Camera_SDKStateEvent(uint inEvent, uint inParameter, IntPtr inContext)
         {
             //Handle state event here
-            switch ((StateEvent) inEvent)
+            switch ((StateEvent)inEvent)
             {
                 case StateEvent.All:
                     break;
@@ -787,7 +791,7 @@ namespace EDSDKLib
                 case StateEvent.WillSoonShutDown:
                     break;
             }
-            return (uint) ReturnValue.Ok;
+            return (uint)ReturnValue.Ok;
         }
 
         #endregion
@@ -846,7 +850,7 @@ namespace EDSDKLib
 
                 byte[] buffer = new byte[length];
                 Marshal.Copy(jpgPointer, buffer, 0, (int)length);
-                
+
                 //release data
                 _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.Release(streamRef));
 
@@ -1017,24 +1021,27 @@ namespace EDSDKLib
 
         #region Get Settings
 
+
         /// <summary>
         /// Gets the list of possible values for the current camera to set.
         /// Only the PropertyIDs "AEModeSelect", "ISO", "Av", "Tv", "MeteringMode" and "ExposureCompensation" are allowed.
         /// </summary>
         /// <param name="propId">The property ID</param>
+        /// <param name="selectedCamera"></param>
         /// <returns>A list of available values for the given property ID</returns>
-        public List<int> GetSettingsList(PropertyId propId)
+        public IEnumerable<UInt32> GetSettingsList(PropertyId propId)
         {
-            if (MainCamera.Ref != IntPtr.Zero)
+            if (MainCamera != null && MainCamera.Ref != IntPtr.Zero)
             {
                 //a list of settings can only be retrieved for following properties
                 if (propId == PropertyId.AEMode || propId == PropertyId.ISOSpeed || propId == PropertyId.Av
                     || propId == PropertyId.Tv || propId == PropertyId.MeteringMode || propId == PropertyId.ExposureCompensation)
                 {
+                    PropertyDescription propertyDescription = new PropertyDescription();
+
                     //get the list of possible values
-                    PropertyDescription des = new PropertyDescription();
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertyDescription(MainCamera.Ref, (uint) propId, out des));
-                    return des.Elements.Take(des.NumberOfElements).ToList();
+                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertyDescription(MainCamera.Ref, (uint)propId, out propertyDescription));
+                    return propertyDescription.Elements.Take(propertyDescription.NumberOfElements).ToList();
                 }
                 else throw new ArgumentException("Method cannot be used with this Property ID");
             }
@@ -1146,22 +1153,23 @@ namespace EDSDKLib
         {
             //if (MainCamera.Ref != IntPtr.Zero)
             {
-                SendSDKCommand((cam) =>
+                //SendSDKCommand((cam) =>
+                //{
+                var s = MainCamera.Ref;
+                if (camera.Ref != IntPtr.Zero)
                 {
-                    if (cam.Ref != IntPtr.Zero)
-                    {
-                        int propsize;
-                        DataType proptype;
-                        //get size of property
+                    int propsize;
+                    DataType proptype;
+                    //get size of property
 
-                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertySize(cam.Ref, PropID, 0, out proptype, out propsize));
-                        //set given property
-                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyData(cam.Ref, PropID, 0, propsize, Value));
-                    }
-                    else { throw new ArgumentNullException("Camera or camera reference is null/zero"); }
-                }, camera);
+                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertySize(camera.Ref, PropID, 0, out proptype, out propsize));
+                    //set given property
+                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyData(camera.Ref, PropID, 0, propsize, Value));
+                }
+                else { throw new ArgumentNullException("Camera or camera reference is null/zero"); }
+                //}, camera, PriorityValue.Critical);
             }
-            
+
         }
 
         /// <summary>
@@ -1201,7 +1209,7 @@ namespace EDSDKLib
                 SendSDKCommand(
                     (cam) =>
                         _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyData(cam.Ref,
-                            propId, 0, Marshal.SizeOf(typeof (T)), value)), MainCamera);
+                            propId, 0, Marshal.SizeOf(typeof(T)), value)), MainCamera);
             }
             else { throw new ArgumentNullException("Camera or camera reference is null/zero"); }
         }
@@ -1222,12 +1230,12 @@ namespace EDSDKLib
 
                 WrapCommand(() =>
                 {
-                    SetSetting((uint) PropertyId.LiveViewOutputDevice, (uint) LiveViewOutputDevice.Computer, camera);
+                    SetSetting((uint)PropertyId.LiveViewOutputDevice, (uint)LiveViewOutputDevice.Computer, camera);
                 });
 
-                WrapCommand(() => SetSetting((uint) PropertyId.LiveViewMode, 1, camera));
+                WrapCommand(() => SetSetting((uint)PropertyId.LiveViewMode, 1, camera));
                 DownloadEvf(camera);
-                
+
                 //DownloadEvf();
             }
         }
@@ -1296,20 +1304,20 @@ namespace EDSDKLib
                     }, camera, PriorityValue.Normal);
                 }
 
-                SetSetting((uint) PropertyId.LiveViewOutputDevice,
-                    (uint) (LVoff ? LiveViewOutputDevice.Computer : LiveViewOutputDevice.Camera), camera);
+                SetSetting((uint)PropertyId.LiveViewOutputDevice,
+                    (uint)(LVoff ? LiveViewOutputDevice.Computer : LiveViewOutputDevice.Camera), camera);
             }, token, TaskCreationOptions.None,
                 TaskScheduler.Default
                 ).ContinueWith(t =>
                 {
                     if (!CameraSessionOpen)
-                    QueueItem((cam) =>
-                    {
-                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.CloseSession(cam.Ref));
-                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.Release(cam.Ref));
-                        DequeueItem();
-                    }, camera, PriorityValue.Critical);
-                    
+                        QueueItem((cam) =>
+                        {
+                            _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.CloseSession(cam.Ref));
+                            _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.Release(cam.Ref));
+                            DequeueItem();
+                        }, camera, PriorityValue.Critical);
+
                     if (_dispose)
                         Terminate();
                 }, TaskContinuationOptions.None);
@@ -1346,7 +1354,7 @@ namespace EDSDKLib
         {
             int size = Marshal.SizeOf(typeof(Rectangle));
             IntPtr ptr = Marshal.AllocHGlobal(size);
-            ReturnValue err = (ReturnValue) EdsdkInvokes.GetPropertyData(imgRef, (uint) PropertyId.LiveViewZoomRectangle, 0, size, ptr);
+            ReturnValue err = (ReturnValue)EdsdkInvokes.GetPropertyData(imgRef, (uint)PropertyId.LiveViewZoomRectangle, 0, size, ptr);
             Rectangle rect = (Rectangle)Marshal.PtrToStructure(ptr, typeof(Rectangle));
             Marshal.FreeHGlobal(ptr);
             if (err == ReturnValue.Ok) return rect;
@@ -1362,7 +1370,7 @@ namespace EDSDKLib
         {
             int size = Marshal.SizeOf(typeof(Size));
             IntPtr ptr = Marshal.AllocHGlobal(size);
-            ReturnValue err = (ReturnValue) EdsdkInvokes.GetPropertyData(imgRef, (uint) PropertyId.LiveViewCoordinateSystem, 0, size, ptr);
+            ReturnValue err = (ReturnValue)EdsdkInvokes.GetPropertyData(imgRef, (uint)PropertyId.LiveViewCoordinateSystem, 0, size, ptr);
             _returnValueManager.HandleFunctionReturnValue(err);
             Size coord = (Size)Marshal.PtrToStructure(ptr, typeof(Size));
             Marshal.FreeHGlobal(ptr);
@@ -1378,7 +1386,7 @@ namespace EDSDKLib
         {
             int size = Marshal.SizeOf(typeof(Point));
             IntPtr ptr = Marshal.AllocHGlobal(size);
-            ReturnValue error = (ReturnValue) EdsdkInvokes.GetPropertyData(imgRef, propId, 0, size, ptr);
+            ReturnValue error = (ReturnValue)EdsdkInvokes.GetPropertyData(imgRef, propId, 0, size, ptr);
             _returnValueManager.HandleFunctionReturnValue(error);
             Point data = (Point)Marshal.PtrToStructure(ptr, typeof(Point));
             Marshal.FreeHGlobal(ptr);
@@ -1418,7 +1426,7 @@ namespace EDSDKLib
                 IsFilming = true;
 
                 //to restore the current setting after recording
-                PrevSaveTo = GetSetting((uint) PropertyId.SaveTo);
+                PrevSaveTo = GetSetting((uint)PropertyId.SaveTo);
                 //when recording videos, it has to be saved on the camera internal memory
                 //SetSetting(EDSDK.PropID_SaveTo, (uint)SaveTo.Camera);
                 this.DownloadVideo = false;
@@ -1466,7 +1474,7 @@ namespace EDSDKLib
             SendSDKCommand(
                 (cam) =>
                     _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref,
-                        (uint) CameraCommand.PressShutterButton, (int) state)), MainCamera);
+                        (uint)CameraCommand.PressShutterButton, (int)state)), MainCamera);
         }
 
         public void CancelTakingPicture(Camera camera)
@@ -1485,12 +1493,12 @@ namespace EDSDKLib
 
                 SendSDKCommand(cam => EdsdkInvokes.SendCommand(cam.Ref, (uint)CameraCommand.PressShutterButton, 3), MainCamera, PriorityValue.Critical);
 
-                
+
             }
             finally
             {
                 SendSDKCommand(cam => EdsdkInvokes.SendCommand(cam.Ref, (uint)CameraCommand.PressShutterButton, 0), MainCamera, PriorityValue.Critical);
-                
+
             }
         }
 
@@ -1510,7 +1518,7 @@ namespace EDSDKLib
 
             //send command to camera
             SendSDKCommand((cam) => WrapCommand(() => _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref,
-                                (uint) CameraCommand.TakePicture, 0))), camera);
+                                (uint)CameraCommand.TakePicture, 0))), camera);
         }
 
         private void QueueItem(Action<Camera> queueAction, Camera camera, PriorityValue priority)
@@ -1533,9 +1541,9 @@ namespace EDSDKLib
             if (BulbTime < 1000) { throw new ArgumentException("Bulbtime has to be bigger than 1000ms"); }
 
             //start thread to not block everything
-            new Thread(delegate()
+            new Thread(delegate ()
             {
-                SendSDKCommand((cam) => 
+                SendSDKCommand((cam) =>
                 {
                     //open the shutter
                     _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref, (uint)CameraCommand.BulbStart, 0));
@@ -1556,7 +1564,7 @@ namespace EDSDKLib
         /// This method does not use the actual free space!
         /// </summary>
         public void SetCapacity(Camera camera)
-        {            
+        {
             //create new capacity struct
             Capacity capacity = new Capacity();
 
@@ -1599,10 +1607,10 @@ namespace EDSDKLib
         /// <param name="speed">Speed and direction of focus movement</param>
         public void SetFocus(uint speed)
         {
-            if (IsLiveViewOn) SendSDKCommand((cam) => 
+            if (IsLiveViewOn) SendSDKCommand((cam) =>
             {
-                WrapCommand(() => _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref, (uint) CameraCommand.DriveLensEvf, (int) speed)));
-                
+                WrapCommand(() => _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref, (uint)CameraCommand.DriveLensEvf, (int)speed)));
+
                 DequeueItem();
             }, MainCamera);
         }
@@ -1623,7 +1631,7 @@ namespace EDSDKLib
                     byte[] ya = BitConverter.GetBytes(y);
                     uint coord = BitConverter.ToUInt32(new byte[] { xa[0], xa[1], ya[0], ya[1] }, 0);
                     //send command to camera
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref, (uint) CameraCommand.DoClickWBEvf, (int) coord));
+                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref, (uint)CameraCommand.DoClickWBEvf, (int)coord));
                 }, MainCamera);
             }
         }
@@ -1675,7 +1683,7 @@ namespace EDSDKLib
         {
             SendSDKCommand((cam) =>
             {
-                if (lockState == true) _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendStatusCommand(cam.Ref, (uint) CameraState.UILock, 0));
+                if (lockState == true) _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendStatusCommand(cam.Ref, (uint)CameraState.UILock, 0));
                 else _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendStatusCommand(cam.Ref, (uint)CameraState.UILock, 0));
             }, MainCamera);
         }

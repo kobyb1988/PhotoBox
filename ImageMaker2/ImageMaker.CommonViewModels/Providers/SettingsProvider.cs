@@ -6,6 +6,7 @@ using ImageMaker.Common.Helpers;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.Data.Repositories;
 using ImageMaker.Entities;
+using ImageMaker.SDKData;
 using NLog;
 
 namespace ImageMaker.CommonViewModels.Providers

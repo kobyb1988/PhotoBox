@@ -13,8 +13,10 @@ namespace ImageMaker.Camera
     public class ImageProcessor : IDisposable
     {
         public event EventHandler<byte[]> StreamChanged;
-
+        public event EventHandler AddCamera;
+        public event EventHandler RemoveCamera;
         protected SDKHandler CameraHandler;
+        public bool CameraExist => Cameras.Any();
 
         public event EventHandler<CameraEventBase> CameraErrorEvent;
         List<EDSDKLib.Camera> CamList;
@@ -23,7 +25,7 @@ namespace ImageMaker.Camera
 
         public ImageProcessor()
         {
-            Cameras = new ObservableCollection<EDSDKLib.Camera>();    
+            Cameras = new ObservableCollection<EDSDKLib.Camera>();
 
             CameraHandler = new SDKHandler();
         }
@@ -55,6 +57,12 @@ namespace ImageMaker.Camera
             IsInit = true;
         }
 
+        public void SubscribeToCameraAddEvent()
+        {
+            CameraHandler.CameraAdded += SDK_CameraAdded;
+            CameraHandler.Initialize();
+        }
+
         private void CameraHandlerOnErrorEvent(object sender, ErrorEvent errorInfo)
         {
             OnErrorEvent(errorInfo);
@@ -76,6 +84,7 @@ namespace ImageMaker.Camera
             RaiseCameraEvent(new ShutdownEvent());
         }
 
+
         protected virtual void RaiseCameraEvent(CameraEventBase eventBase)
         {
             EventHandler<CameraEventBase> handler = CameraErrorEvent;
@@ -89,11 +98,11 @@ namespace ImageMaker.Camera
                 return;
 
             Terminate();
-            
-            
+
+
             CameraHandler.Dispose();
         }
-    
+
         #region SDK Events
 
         private void SDK_ProgressChanged(int progress)
@@ -113,14 +122,17 @@ namespace ImageMaker.Camera
         private void SDK_CameraAdded()
         {
             RefreshCamera();
+            AddCamera?.Invoke(this, new EventArgs());
         }
 
         private void SDK_CameraHasShutdown(object sender, EventArgs e)
         {
             Terminate();
             CameraHandler.ShutDown();
+            //RefreshCamera();//TODO если что-то сломается, то убрать
 
             OnShutdownEvent();
+            RemoveCamera?.Invoke(this, new EventArgs());
         }
 
         #endregion
@@ -146,19 +158,30 @@ namespace ImageMaker.Camera
         public void DoTakePicture(Action<byte[]> callback)
         {
             CameraHandler.StopLiveView();
-            
+
             CameraHandler.TakePhoto(callback, SelectedCamera); //todo test comment
         }
 
-        public Task<byte[]> DoTakePicture()
+        public Task<byte[]> DoTakePictureAsync()
         {
             CameraHandler.StopLiveView();
 
             var source = new TaskCompletionSource<byte[]>();
-            
+
             CameraHandler.TakePhoto(result => source.TrySetResult(result), SelectedCamera); //todo test comment
 
             return source.Task;
+        }
+
+        public byte[] DoTakePicture()
+        {
+            CameraHandler.StopLiveView();
+
+            var res = new byte[] {};
+
+            CameraHandler.TakePhoto(result => { res= result; }, SelectedCamera); //todo test comment
+
+            return res;
         }
 
         #endregion
@@ -176,7 +199,7 @@ namespace ImageMaker.Camera
             else
             {
                 CameraHandler.StopLiveView();
-                OnStreamChanged(null);
+                OnStreamChanged(new byte[] {});
             }
         }
 
@@ -186,9 +209,14 @@ namespace ImageMaker.Camera
             CameraHandler.SetFocus(focus);
         }
 
+        public IEnumerable<UInt32> GetSettingList(PropertyId propertuId)
+        {
+            return CameraHandler.GetSettingsList(propertuId);
+        }
+
         public void SetSetting(uint settingId, uint settingValue)
         {
-            CameraHandler.SetSetting(settingId, settingValue, SelectedCamera);    
+            CameraHandler.SetSetting(settingId, settingValue, SelectedCamera);
         }
 
         #region Subroutines
