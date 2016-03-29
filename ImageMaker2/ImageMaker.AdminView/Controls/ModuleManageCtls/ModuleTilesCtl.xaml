@@ -1,0 +1,202 @@
+﻿<UserControl x:Class="ImageMaker.AdminView.Controls.ModuleManageCtls.ModuleTilesCtl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:converters="clr-namespace:ImageMaker.CommonView.Converters;assembly=ImageMaker.CommonView"
+             xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:ModuleManagedViewModel}"
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid  >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Настройки SelfyBox-->
+        <Grid>
+            <Border Background="#FFF4F4F4" Height="352" Width="302" CornerRadius="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid  Margin="0,5,0,0">
+                        <Border Height="213" Background="#FFD7D7D7" Width="292" Opacity="0.4" CornerRadius="30">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4" Color="#FF55616F" Direction="-60" Opacity="0.2" ShadowDepth="2"/>
+                            </Border.Effect>
+                        </Border>
+                        <Path   Height="159" Width="159" Style="{StaticResource SelfyBoxLogo}"/>
+                    </Grid>
+
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" TextAlignment="Center"  Padding="0,10"
+                                   Height="70" Style="{StaticResource GrayTitleTxtBlock}">
+                        <Run FontSize="30" Text="SelfyBox&#xA;"/>
+                        <Run FontSize="16" Text="(фотобудка)"/>
+                    </TextBlock>
+                </Grid>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="4" Color="#FF55616F" Direction="-60" Opacity="0.2" ShadowDepth="2"/>
+                </Border.Effect>
+            </Border>
+            <customControls:RoundedButton x:Name="SelfyRoundedBtn" CornerRadius="40" Width="83" Height="83"
+                                                Margin="0,314,0,-44" Command="{Binding SelfyBoxCheckCommand}">
+                <customControls:RoundedButton.Style>
+                    <Style TargetType="{x:Type customControls:RoundedButton}" BasedOn="{StaticResource RoundedBtnWithCustomContentStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=SelfyRoundedBtn ,Path=DataContext.SelfyBoxSuccess,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="Content" >
+                                    <Setter.Value>
+                                        <Path Style="{StaticResource AccessPathStyle}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" Value="#FFB3E150"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=SelfyRoundedBtn ,Path=DataContext.SelfyBoxSuccess,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Path Style="{StaticResource CrossPathStyle}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" Value="#FFFF6B6B"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </customControls:RoundedButton.Style>
+            </customControls:RoundedButton>
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="0.56" ScaleY="0.56"/>
+            </Grid.LayoutTransform>
+        </Grid>
+        <!--Настройки SelfyBox-->
+
+        <!--Настройки InstaBox-->
+        <Grid Grid.Column="1">
+            <Border Background="#FFF4F4F4" Height="352" Width="302" CornerRadius="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Margin="0,5,0,0">
+                        <Border Height="213" Background="#FFD7D7D7" Width="292" Opacity="0.4" CornerRadius="30">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4" Color="#FF55616F" Direction="-60" Opacity="0.2" ShadowDepth="2"/>
+                            </Border.Effect>
+                        </Border>
+                        <Path   Height="159" Width="159" Style="{StaticResource InstaBoxLogo}"/>
+                        <Path  Data="F1M3.313,3.14C5.266,1.187 8.431,1.187 10.384,3.14 10.384,3.14 56.367,49.122 56.367,49.122 58.319,51.075 58.319,54.241 56.367,56.194 54.414,58.146 51.248,58.146 49.296,56.194 49.296,56.194 3.313,10.211 3.313,10.211 1.36,8.258 1.36,5.092 3.313,3.14z" Fill="#FFE34040" 
+                                   Height="55"
+                                   Opacity="0.4"
+                                   Width="55" Margin="162,120.928,80,35.071"/>
+                        <Path  Data="F1M6.848,12.675C8.128,12.675 9.407,13.163 10.384,14.14 10.384,14.14 68.367,72.122 68.367,72.122 70.319,74.075 70.319,77.241 68.367,79.194 66.414,81.146 63.248,81.146 61.296,79.194 61.296,79.194 3.313,21.211 3.313,21.211 1.36,19.258 1.36,16.092 3.313,14.14 4.289,13.163 5.569,12.675 6.848,12.675z M21.848,1.675C23.128,1.675 24.408,2.164 25.384,3.14 25.384,3.14 83.367,61.122 83.367,61.122 85.319,63.075 85.319,66.241 83.367,68.194 81.414,70.146 78.248,70.146 76.296,68.194 76.296,68.194 18.313,10.211 18.313,10.211 16.36,8.258 16.36,5.092 18.313,3.14 19.289,2.164 20.569,1.675 21.848,1.675z" Fill="#FFE34040" Height="83"
+                                   Opacity="0.4"  Width="87" Margin="163,110,48,-10"/>
+                    </Grid>
+
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Padding="0,10" Style="{StaticResource GrayTitleTxtBlock}" 
+                                   Height="70" VerticalAlignment="Top" TextAlignment="Center">
+                        <Run FontSize="30" Text="InstaBox&#xA;"/>
+                        <Run FontSize="16" Text="(поиск и печать фото из Instagram)"/>
+                    </TextBlock>
+                </Grid>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="4" Color="#FF55616F" Direction="-60" Opacity="0.2" ShadowDepth="2"/>
+                </Border.Effect>
+            </Border>
+            <customControls:RoundedButton x:Name="InstaRoundedBtn"  CornerRadius="40" Width="83" Height="83" 
+                                                Margin="0,314,0,-44" Command="{Binding InstaBoxCheckCommand}" >
+                <customControls:RoundedButton.Style>
+                    <Style TargetType="{x:Type customControls:RoundedButton}" BasedOn="{StaticResource RoundedBtnWithCustomContentStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=InstaRoundedBtn ,Path=DataContext.InstaBoxSuccess,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Converter={converters:TestBindingConverter}}" Value="True">
+                                <Setter Property="Content" >
+                                    <Setter.Value>
+                                        <Path Style="{StaticResource AccessPathStyle}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" Value="#FFB3E150"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=InstaRoundedBtn ,Path=DataContext.InstaBoxSuccess,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Converter={converters:TestBindingConverter}}" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Path Style="{StaticResource CrossPathStyle}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" Value="#FFFF6B6B"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </customControls:RoundedButton.Style>
+            </customControls:RoundedButton>
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="0.56" ScaleY="0.56"/>
+            </Grid.LayoutTransform>
+        </Grid>
+        <!--Настройки InstaBox-->
+
+        <!--Настройки InstaPrinter-->
+        <Grid Grid.Column="2">
+            <Border Background="#FFF4F4F4" Height="352" Width="302" CornerRadius="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid  Margin="0,5,0,0">
+                        <Border Height="213" Background="#FFD7D7D7" Width="292" Opacity="0.4" CornerRadius="30">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4" Color="#FF55616F" Direction="-60" Opacity="0.2" ShadowDepth="2"/>
+                            </Border.Effect>
+                        </Border>
+                        <Path   Height="159" Width="215" Style="{StaticResource InstaPrinterLogo}"/>
+                    </Grid>
+
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" TextAlignment="Center" 
+                               Padding="0,10" Height="70" Style="{StaticResource GrayTitleTxtBlock}">
+                        <Run FontSize="30" Text="InstaPrinter&#xA;"/>
+                        <Run FontSize="16" Text="(автопечать по хэштегу из Instagram)"/>
+                    </TextBlock>
+                </Grid>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="4" Color="#FF55616F" Direction="-60" Opacity="0.2" ShadowDepth="2"/>
+                </Border.Effect>
+            </Border>
+            <customControls:RoundedButton x:Name="InstaPrinterRoundedBtn"  CornerRadius="40" Width="83" Height="83"
+                                              Margin="0,314,0,-44" Command="{Binding InstaPrinterCheckCommand}" >
+                <customControls:RoundedButton.Style>
+                    <Style TargetType="{x:Type customControls:RoundedButton}" BasedOn="{StaticResource RoundedBtnWithCustomContentStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=InstaPrinterRoundedBtn ,Path=DataContext.InstaPrinterSuccess,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Converter={converters:TestBindingConverter}}" Value="True">
+                                <Setter Property="Content" >
+                                    <Setter.Value>
+                                        <Path Style="{StaticResource AccessPathStyle}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" Value="#FFB3E150"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=InstaPrinterRoundedBtn ,Path=DataContext.InstaPrinterSuccess,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Converter={converters:TestBindingConverter}}" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Path Style="{StaticResource CrossPathStyle}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" Value="#FFFF6B6B"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </customControls:RoundedButton.Style>
+            </customControls:RoundedButton>
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="0.56" ScaleY="0.56"/>
+            </Grid.LayoutTransform>
+        </Grid>
+        <!--Настройки SelfyBox-->
+    </Grid>
+</UserControl>

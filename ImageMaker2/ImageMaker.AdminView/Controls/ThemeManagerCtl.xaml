@@ -285,7 +285,16 @@
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
-                        <CheckBox Grid.Row="3" Content="Вернуть первоначальную тему" IsChecked="{Binding IsBackToDefaultTheme}" Height="60"/>
+                        
+                        <!--<CheckBox  Content="Вернуть первоначальную тему" IsChecked="{Binding IsBackToDefaultTheme}" Height="60"/>-->
+                        <ToggleButton Grid.Row="3" IsChecked="{Binding Path=IsBackToDefaultTheme}"
+                                Content="Показывать кнопку печати" 
+                                Style="{StaticResource ToggleBaseStyle}">
+                            <ToggleButton.LayoutTransform>
+                                <ScaleTransform ScaleX="2" ScaleY="2" />
+                            </ToggleButton.LayoutTransform>
+                        </ToggleButton>
+                        
                         <controls:PreviewMainWindowCtl Grid.Row="4" Grid.ColumnSpan="2" Width="350">
                         </controls:PreviewMainWindowCtl>
                     </Grid>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Monads;
@@ -6,6 +7,7 @@ using AutoMapper;
 using ImageMaker.AdminViewModels.ViewModels;
 using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.Common.Dto;
+using ImageMaker.Common.Enums;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.Entities;
@@ -50,21 +52,37 @@ namespace ImageMaker.AdminViewModels.AutoMapper
 
             CreateMap<Image, ImageViewModel>()
                 .ConvertUsing(FromImage);
+
+            CreateMap<ModuleManagedViewModel, ModuleSettingDto>().ConvertUsing(FromModuleManagedViewModel);
             //CreateMap<Composition, CompositionViewModel>()
             //    .ConvertUsing(x => new CompositionViewModel(x.Name, x.Id, FromTemplate(x.Template), FromImage(x.Background), FromImage(x.Overlay)));
 
             //CreateMap<CompositionViewModel, Composition>()
             //    .ConvertUsing(FromCompositionViewModel);
+
+
+        }
+
+        private ModuleSettingDto FromModuleManagedViewModel(ModuleManagedViewModel vm)
+        {
+            List<AppModules> res = new List<AppModules>();
+            if (vm.InstaBoxSuccess)
+                res.Add(AppModules.InstaBox);
+            if (vm.InstaPrinterSuccess)
+                res.Add(AppModules.InstaPrinter);
+            if (vm.SelfyBoxSuccess)
+                res.Add(AppModules.SelfyBox);
+            return new ModuleSettingDto {AvailableModules = res};
         }
 
         private TemplateViewModel FromTemplate(Template template)
         {
             var background = template.Background.With(FromImage);
-            return new TemplateViewModel(template.Name, (uint) template.Width, (uint) template.Height, template.Id,
+            return new TemplateViewModel(template.Name, (uint)template.Width, (uint)template.Height, template.Id,
                 template.Images.Select(c =>
-                    new TemplateImageViewModel( c.X, c.Y,  c.Width, c.Height, c.Id, background.Width, background.Height)),
-                    background, 
-                    template.Overlay.With(FromImage),template.IsInstaPrinterTemplate);
+                    new TemplateImageViewModel(c.X, c.Y, c.Width, c.Height, c.Id, background.Width, background.Height)),
+                    background,
+                    template.Overlay.With(FromImage), template.IsInstaPrinterTemplate);
         }
 
         private ImageViewModel FromImage(FileData image)
@@ -119,15 +137,15 @@ namespace ImageMaker.AdminViewModels.AutoMapper
             return new Template()
             {
                 Id = template.Id,
-                Height = (int) template.Height,
-                Width = (int) template.Width,
+                Height = (int)template.Height,
+                Width = (int)template.Width,
                 Name = template.Name,
                 Images = template.Children.Select(c => new TemplateImage()
                 {
                     Width = c.Width,
-                    Height =  c.Height,
-                    X =  c.X,
-                    Y =  c.Y,
+                    Height = c.Height,
+                    X = c.X,
+                    Y = c.Y,
                     Id = c.Id,
                     TemplateId = template.Id
                 }).ToList(),

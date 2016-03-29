@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageMaker.CommonViewModels.ViewModels.Settings
 {
@@ -17,5 +13,7 @@ namespace ImageMaker.CommonViewModels.ViewModels.Settings
         public string HashTag { get; set; }
 
         public string PrinterName { get; set; }
+
+        public byte MaxPrinterCopies { get; set; }
     }
 }

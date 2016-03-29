@@ -17,10 +17,7 @@ namespace ImageMaker.ViewModels.ViewModels
             _navigator = navigator;
         }
 
-        public RelayCommand BeginCommand
-        {
-            get { return _beginCommand ?? (_beginCommand = new RelayCommand(Begin)); }
-        }
+        public RelayCommand BeginCommand => _beginCommand ?? (_beginCommand = new RelayCommand(Begin));
 
         private void Begin()
         {

@@ -15,7 +15,7 @@ namespace ImageMaker.CommonViewModels.Providers
     {
         private readonly IUserRepository _userRepository;
         private readonly IHashBuilder _hashBuilder;
-        private readonly Lazy<User> _user;
+        private Lazy<User> _user;
 
         public SettingsProvider(IUserRepository userRepository, IHashBuilder hashBuilder)
         {
@@ -27,6 +27,11 @@ namespace ImageMaker.CommonViewModels.Providers
         public virtual AppSettingsDto GetAppSettings()
         {
             return _user.Value.AppSettings.Deserialize<AppSettingsDto>();
+        }
+
+        public virtual ModuleSettingDto GetAvailableModules()
+        {
+            return _user.Value.AvailableModules.Deserialize<ModuleSettingDto>();
         }
 
         public virtual CameraSettingsDto GetCameraSettings()
@@ -71,9 +76,18 @@ namespace ImageMaker.CommonViewModels.Providers
             _userRepository.Commit();
         }
 
+
+
         public virtual void SaveAppSettings(AppSettingsDto settings)
         {
             _user.Value.AppSettings = settings.Serialize();
+            _userRepository.UpdateUser(_user.Value);
+            _userRepository.Commit();
+        }
+
+        public virtual void SaveModuleSettings(ModuleSettingDto settings)
+        {
+            _user.Value.AvailableModules = settings.Serialize();
             _userRepository.UpdateUser(_user.Value);
             _userRepository.Commit();
         }

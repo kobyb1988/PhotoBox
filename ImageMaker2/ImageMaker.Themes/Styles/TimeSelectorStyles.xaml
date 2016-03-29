@@ -5,6 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ComboboxStylesNew.xaml" />
+        <ResourceDictionary Source="Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="ScrollBarCustomButton" TargetType="{x:Type local:CustomRepeatButton}">
@@ -69,7 +70,7 @@
         <Setter Property="MaxDropDownHeight" Value="175" />
         <Setter Property="CornerRadius" Value="25" />
         <Setter Property="Padding" Value="3" />
-        <Setter Property="Foreground" Value="#777777" />
+        <Setter Property="Foreground" Value="{StaticResource ForegraundGrayTextColor}" />
         <Setter Property="FontSize" Value="25" />
         <Setter Property="TitleFontSize" Value="15" />
         

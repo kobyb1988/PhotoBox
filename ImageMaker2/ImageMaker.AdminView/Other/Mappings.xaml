@@ -4,7 +4,9 @@
                     xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
                     xmlns:dialogs="clr-namespace:ImageMaker.CommonViewModels.ViewModels.Dialogs;assembly=ImageMaker.CommonViewModels"
                     xmlns:dialogs1="clr-namespace:ImageMaker.CommonView.Controls.Dialogs;assembly=ImageMaker.CommonView"
-                    xmlns:oldCtrls="clr-namespace:ImageMaker.AdminView.Controls.OldCtrls">
+                    xmlns:oldCtrls="clr-namespace:ImageMaker.AdminView.Controls.OldCtrls"
+                    xmlns:moduleManageCtls="clr-namespace:ImageMaker.AdminView.Controls.ModuleManageCtls"
+                    xmlns:appSettingsCtls="clr-namespace:ImageMaker.AdminView.Controls.AppSettingsCtls">
 
     <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
         <controls:WelcomeCtl />
@@ -35,7 +37,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:AppSettingsExplorerViewModel}">
-        <controls:AppSettingsExplorerCtl />
+        <appSettingsCtls:AppSettingsExplorerCtl />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:CameraSettingsExplorerViewModel}">
@@ -72,6 +74,10 @@
 
     <DataTemplate DataType="{x:Type viewModels:ChangePasswordViewModel}">
         <controls:ChangePasswordCtl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:ModuleManagedViewModel}">
+        <moduleManageCtls:ModuleManagedCtl/>
     </DataTemplate>
 
 </ResourceDictionary>

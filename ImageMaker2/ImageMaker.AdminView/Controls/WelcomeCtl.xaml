@@ -26,7 +26,7 @@
                 </Grid.RowDefinitions>
                 <Border Padding="45">
                     <Viewbox >
-                        <Image Source="../Resources/logo.png" >
+                        <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/logo.png" >
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
                             </Image.RenderTransform>
@@ -62,7 +62,9 @@
                         
                         <Button Content="Сменить пароль" Grid.Row="2" Grid.Column="1" 
                                 Command="{Binding Path=ChangePasswordCommand}"/>
-                        <Button Content="Начать сессию" Grid.ColumnSpan="2" Grid.Row="3" Width="200"
+                        <Button Content="Управление модулями" Grid.Column="0" Grid.Row="3"
+                                Command="{Binding Path=ModuleManagedCommand}"/>
+                        <Button Content="Начать сессию"  Grid.Row="3" Grid.Column="1" 
                                 Command="{Binding RelativeSource={RelativeSource AncestorType=adminView:MainWindow}, Path=DataContext.ShowMainCommand}"/>
                     </Grid>
                 </Viewbox>

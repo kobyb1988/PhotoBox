@@ -25,27 +25,21 @@ namespace ImageMaker.ViewModels.ViewModels
             ImageService imageService,
             CompositionProcessingResult result)
         {
-            _maxCopies = 3;
-
             _navigator = navigator;
             _printer = printer;
             _imageService = imageService;
             Image = result.ImageResult;
             _copiesCount = 1;
             AppSettingsDto appSettings = settingsProvider.GetAppSettings();
+            _maxCopies = appSettings.MaxPrinterCopies;
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             if (appSettings != null)
                 _printerName = appSettings.PrinterName;
         }
 
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
-        public RelayCommand CompleteCommand
-        {
-            get { return _completeCommand ?? (_completeCommand = new RelayCommand(Complete)); }
-        }
+        public RelayCommand CompleteCommand => _completeCommand ?? (_completeCommand = new RelayCommand(Complete));
 
         private void Complete()
         {

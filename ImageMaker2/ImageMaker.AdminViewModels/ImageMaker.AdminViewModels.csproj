@@ -124,6 +124,7 @@
     <Compile Include="ViewModels\Images\TemplateImageViewModel.cs" />
     <Compile Include="ViewModels\Images\TemplateViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ModuleManagedViewModel.cs" />
     <Compile Include="ViewModels\ObjectNameViewModel.cs" />
     <Compile Include="ViewModels\PasswordBoxViewModel.cs" />
     <Compile Include="ViewModels\PasswordPromptViewModel.cs" />

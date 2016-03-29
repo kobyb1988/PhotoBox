@@ -20,6 +20,9 @@
         <ResourceDictionary Source="ImageStyles.xaml"/>
         <ResourceDictionary Source="SliderStyle.xaml" />
         <ResourceDictionary Source="ErrorHandlingControlStyles.xaml"/>
+        <ResourceDictionary Source="PathStyles.xaml"/>
+        <ResourceDictionary Source="TextBlockStyles.xaml"/>
+        <ResourceDictionary Source="Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
     

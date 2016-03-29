@@ -1,9 +1,9 @@
-﻿using System;
-using System.Data.Entity.Infrastructure;
+﻿using System.Linq;
 using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.Common.Dto;
+using ImageMaker.Common.Enums;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
-using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 
@@ -19,6 +19,8 @@ namespace ImageMaker.ViewModels.ViewModels
         private RelayCommand _instagramSurfCommand;
         private bool _isPrinterVisible;
         private RelayCommand _checkPrintingStatusCommand;
+        private bool _selfyBoxVisible;
+        private bool _instaBoxVisible;
 
         public SelectActivityViewModel(
             SettingsProvider settingsProvider,
@@ -30,16 +32,16 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public override void Initialize()
         {
+            ModuleSettingDto moduleSettings = _settingsProvider.GetAvailableModules();
+            if (moduleSettings != null)
+            {
+                SelfyBoxVisible = moduleSettings.AvailableModules.Any(x => x == AppModules.SelfyBox);
+                InstaBoxVisible = moduleSettings.AvailableModules.Any(x => x == AppModules.InstaBox);
+            }
+
             AppSettingsDto settings = _settingsProvider.GetAppSettings();
 
-            if (settings != null)
-            {
-                IsPrinterVisible = settings.ShowPrinterOnStartup;
-            }
-            else
-            {
-                IsPrinterVisible = false;
-            }
+            IsPrinterVisible = settings != null && settings.ShowPrinterOnStartup;
         }
 
         public bool IsPrinterVisible
@@ -55,26 +57,26 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public RelayCommand ImportPatternsCommand
+        public bool SelfyBoxVisible
         {
-            get { return _importPatternsCommand ?? (_importPatternsCommand = new RelayCommand(ImportPatterns)); }
+            get { return _selfyBoxVisible; }
+            set { Set(() => SelfyBoxVisible, ref _selfyBoxVisible, value); }
         }
 
-        public RelayCommand ProceedToPatternSelectionCommand
+        public bool InstaBoxVisible
         {
-            get { return _proceedToPatternSelectionCommand ?? (_proceedToPatternSelectionCommand = new RelayCommand(ProceedToPatternSelection)); }
+            get { return _instaBoxVisible; }
+            set { Set(() => InstaBoxVisible, ref _instaBoxVisible, value); }
         }
 
-        public RelayCommand InstagramSurfCommand
-        {
-            get { return _instagramSurfCommand ?? (_instagramSurfCommand = new RelayCommand(InstagramSurf)); }
-        }
+        public RelayCommand ImportPatternsCommand => _importPatternsCommand ?? (_importPatternsCommand = new RelayCommand(ImportPatterns));
+
+        public RelayCommand ProceedToPatternSelectionCommand => _proceedToPatternSelectionCommand ?? (_proceedToPatternSelectionCommand = new RelayCommand(ProceedToPatternSelection));
+
+        public RelayCommand InstagramSurfCommand => _instagramSurfCommand ?? (_instagramSurfCommand = new RelayCommand(InstagramSurf));
 
 
-        public RelayCommand CheckPrintingStatusCommand
-        {
-            get { return _checkPrintingStatusCommand ?? (_checkPrintingStatusCommand = new RelayCommand(CheckPrintingStatus)); }
-        }
+        public RelayCommand CheckPrintingStatusCommand => _checkPrintingStatusCommand ?? (_checkPrintingStatusCommand = new RelayCommand(CheckPrintingStatus));
 
         private void CheckPrintingStatus()
         {

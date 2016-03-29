@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ImageMaker.AdminView.Controls
+namespace ImageMaker.AdminView.Controls.AppSettingsCtls
 {
     /// <summary>
-    /// Interaction logic for AppSettingsCtl.xaml
+    /// Interaction logic for InstaPrinterCtl.xaml
     /// </summary>
-    public partial class AppSettingsExplorerCtl : UserControl
+    public partial class InstaPrinterCtl : UserControl
     {
-        public AppSettingsExplorerCtl()
+        public InstaPrinterCtl()
         {
             InitializeComponent();
         }

@@ -9,12 +9,18 @@ namespace ImageMaker.CommonView.Converters
        
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == DependencyProperty.UnsetValue || value == null) return Visibility.Hidden;
+            Visibility notVisibleState = Visibility.Hidden;
+            if (parameter != null && parameter.ToString().ToLower() == "Collapsed")
+                notVisibleState = Visibility.Collapsed;
+
+            if (value == DependencyProperty.UnsetValue || value == null) return notVisibleState;
 
             bool boolVal = (bool)value;
+            
+
             if (parameter!=null && parameter.ToString().ToLower()== "invert")
-                return boolVal ? Visibility.Hidden : Visibility.Visible;
-            return boolVal ? Visibility.Visible : Visibility.Hidden;
+                return boolVal ? notVisibleState : Visibility.Visible;
+            return boolVal ? Visibility.Visible : notVisibleState;
         }
     }
 }

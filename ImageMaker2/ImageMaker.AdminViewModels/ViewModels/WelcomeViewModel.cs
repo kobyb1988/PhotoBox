@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿using System.Linq;
+using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
@@ -8,6 +10,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
     public class WelcomeViewModel : BaseViewModel
     {
         private readonly IViewModelNavigator _navigator;
+        private readonly SettingsProvider _settingsProvider;
         private RelayCommand _manageTemplatesCommand;
         private RelayCommand _manageCompositionsCommand;
         private RelayCommand _manageAppSettingsCommand;
@@ -15,51 +18,51 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand _manageThemesCommand;
         private RelayCommand _showStatsCommand;
         private RelayCommand _changePasswordCommand;
+        private RelayCommand _moduleManagedCommand;
+        private bool _appSettingsVisible;
 
-        public WelcomeViewModel(
-            IViewModelNavigator navigator
-            )
+        public WelcomeViewModel(IViewModelNavigator navigator, SettingsProvider settingsProvider)
         {
             _navigator = navigator;
-        }
-        public RelayCommand ChangePasswordCommand
-        {
-            get { return _changePasswordCommand ?? (_changePasswordCommand = new RelayCommand(ShowChangePassword)); }
+            _settingsProvider = settingsProvider;
         }
 
-        public RelayCommand ManageAppSettingsCommand
+        public override void Initialize()
         {
-            get { return _manageAppSettingsCommand ?? (_manageAppSettingsCommand = new RelayCommand(OpenSettingsExplorer)); }
+            var moduleSettings = _settingsProvider.GetAvailableModules();
+            _appSettingsVisible = moduleSettings.AvailableModules.Any();
         }
 
-        public RelayCommand ManageCameraSettingsCommand
+        public RelayCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new RelayCommand(ShowChangePassword));
+
+        public RelayCommand ManageAppSettingsCommand => _manageAppSettingsCommand ?? (_manageAppSettingsCommand = new RelayCommand(OpenSettingsExplorer,CanOpenSettingsExplorer));
+
+        public RelayCommand ManageCameraSettingsCommand => _manageCameraSettingsCommand ?? (_manageCameraSettingsCommand = new RelayCommand(OpenCameraSettingsExplorer));
+
+        public RelayCommand ManageTemplatesCommand => _manageTemplatesCommand ?? (_manageTemplatesCommand = new RelayCommand(OpenTemplateExplorer));
+
+        public RelayCommand ManageCompositionsCommand => _manageCompositionsCommand ?? (_manageCompositionsCommand = new RelayCommand(OpenCompositionsExplorer));
+
+        public RelayCommand ManageThemesCommand => _manageThemesCommand ?? (_manageThemesCommand = new RelayCommand(ManageThemes));
+
+        public RelayCommand ShowStatsCommand => _showStatsCommand ?? (_showStatsCommand = new RelayCommand(ShowStats));
+
+        public RelayCommand ModuleManagedCommand
+            => _moduleManagedCommand ?? (_moduleManagedCommand = new RelayCommand(ModuleManaged));
+
+        private bool CanOpenSettingsExplorer()
         {
-            get { return _manageCameraSettingsCommand ?? (_manageCameraSettingsCommand = new RelayCommand(OpenCameraSettingsExplorer)); }
+            return _appSettingsVisible;
+        }
+
+        private void ModuleManaged()
+        {
+            _navigator.NavigateForward<ModuleManagedViewModel>(this, null);
         }
 
         private void OpenCameraSettingsExplorer()
         {
             _navigator.NavigateForward<CameraSettingsExplorerViewModel>(this, null);
-        }
-
-        public RelayCommand ManageTemplatesCommand
-        {
-            get { return _manageTemplatesCommand ?? (_manageTemplatesCommand = new RelayCommand(OpenTemplateExplorer)); }
-        }
-
-        public RelayCommand ManageCompositionsCommand
-        {
-            get { return _manageCompositionsCommand ?? (_manageCompositionsCommand = new RelayCommand(OpenCompositionsExplorer)); }
-        }
-
-        public RelayCommand ManageThemesCommand
-        {
-            get { return _manageThemesCommand ?? (_manageThemesCommand = new RelayCommand(ManageThemes)); }
-        }
-
-        public RelayCommand ShowStatsCommand
-        {
-            get { return _showStatsCommand ?? (_showStatsCommand = new RelayCommand(ShowStats)); }
         }
 
         private void ShowChangePassword()

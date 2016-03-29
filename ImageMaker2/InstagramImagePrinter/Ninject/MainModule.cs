@@ -29,7 +29,7 @@ namespace InstagramImagePrinter.Ninject
             Bind<ImageService>().ToSelf();
             Bind<MessageAdapter>().ToSelf();
             Bind<ImageContextFactory>().ToSelf();
-            Bind<IUserRepository>().To<UserRepository>();
+            Bind<IUserRepository>().To<UserRepository>().InSingletonScope();
             Bind<SettingsProvider>().ToSelf();
             Bind<ImagePrinter>().ToSelf();
             Bind<InstagramExplorer>().ToSelf();

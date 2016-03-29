@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:ImageMaker.ViewModels.ViewModels;assembly=ImageMaker.ViewModels"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              xmlns:themes="clr-namespace:ImageMaker.Themes;assembly=ImageMaker.Themes"
+             xmlns:converters="clr-namespace:ImageMaker.CommonView.Converters;assembly=ImageMaker.CommonView"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:SelectActivityViewModel}"
              d:DesignHeight="800" d:DesignWidth="1000">
@@ -62,7 +63,8 @@
                                     Command="{Binding Path=ProceedToPatternSelectionCommand}"
                                     BorderBrush="{DynamicResource {x:Static themes:ThemeManager.MainBorderColorKey}}"
                                     Foreground="{DynamicResource {x:Static themes:ThemeManager.MainForegroundColorKey}}"
-                                    Background="{DynamicResource {x:Static themes:ThemeManager.MainBackgroundColorKey}}"/>
+                                    Background="{DynamicResource {x:Static themes:ThemeManager.MainBackgroundColorKey}}"
+                                                          Visibility="{Binding SelfyBoxVisible,Converter={converters:BoolToVisibleConverter}}"/>
                             <customControls:RoundedButton  
                                     Command="{Binding Path=InstagramSurfCommand}"
                                     BorderBrush="{DynamicResource {x:Static themes:ThemeManager.MainBorderColorKey}}"
@@ -70,7 +72,7 @@
                                     Background="{DynamicResource {x:Static themes:ThemeManager.MainBackgroundColorKey}}"
                                     Content="Загрузка фото из INSTAGRAM"
                                     Grid.Row="1"
-                                    Visibility="Hidden"/>
+                                    Visibility="{Binding InstaBoxVisible,Converter={converters:BoolToVisibleConverter}}"/>
                             <TextBlock Grid.Row="2"
                                        FontSize="22"
                                        Text="    мгновенная обработка&#10;и печать ваших фотографий" 

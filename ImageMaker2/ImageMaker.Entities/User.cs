@@ -20,6 +20,10 @@ namespace ImageMaker.Entities
 
         public byte[] ThemeSettings { get; set; }
 
+        public byte[] AvailableModules { get; set; }
+
+        public byte MaxPrinterCopies { get; set; }
+
         public string Password { get; set; }
     }
 }

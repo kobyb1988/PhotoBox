@@ -32,7 +32,7 @@ namespace ImageMaker.ViewModels.Ninject
             Bind<IPatternDataProvider>().To<PatternDataProvider>();
             Bind<IImageDataProvider>().To<ImageDataProvider>();
             Bind<IImageRepository>().To<ImageRepository>();
-            Bind<IUserRepository>().To<UserRepository>();
+            Bind<IUserRepository>().To<UserRepository>().InSingletonScope();
 
             Bind<SettingsProvider>().ToSelf();
             Bind<PatternViewModelProvider>().ToSelf();

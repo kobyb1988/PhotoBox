@@ -43,7 +43,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="-100,0,0,0" Source="../rita.jpg">
+            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="-100,0,0,0" >
                 <Image.Clip>
                     <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="70" />
                 </Image.Clip>

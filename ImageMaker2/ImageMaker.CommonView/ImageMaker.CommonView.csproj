@@ -95,6 +95,7 @@
     <Compile Include="Converters\TestBindingConverter.cs" />
     <Compile Include="Helpers\ImageExtensions.cs" />
     <Compile Include="Helpers\WindowInteropService.cs" />
+    <Compile Include="Helpers\WPFControlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\DialogChildWindow.xaml.cs">
       <DependentUpon>DialogChildWindow.xaml</DependentUpon>

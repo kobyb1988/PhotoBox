@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ImageMaker.AdminViewModels.ViewModels;
+using ImageMaker.CommonView.Helpers;
+using ImageMaker.CommonViewModels.Providers;
 
 namespace ImageMaker.AdminView.Controls
 {
@@ -23,6 +14,8 @@ namespace ImageMaker.AdminView.Controls
         public WelcomeCtl()
         {
             InitializeComponent();
+            var mainViewModel = (MainViewModel)Application.Current.MainWindow?.DataContext;
+            mainViewModel?.UpdateSessionStart();
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -11,6 +13,8 @@ using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using NLog;
 using System.Windows.Threading;
+using ImageMaker.Common.Enums;
+using ImageMaker.CommonViewModels.Providers;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -18,16 +22,19 @@ namespace ImageMaker.AdminViewModels.ViewModels
     {
         private readonly SessionService _sessionService;
         private readonly CommunicationManager _communicationManager;
+        private readonly SettingsProvider _settingsProvider;
         private readonly DispatcherTimer _timer;
-
+        private bool _startSessionEnabled;
         public MainViewModel(
             IViewModelNavigator navigator,
             IMessenger messenger,
             SessionService sessionService,
-            CommunicationManager communicationManager)
+            CommunicationManager communicationManager,
+            SettingsProvider settingsProvider)
         {
             _sessionService = sessionService;
             _communicationManager = communicationManager;
+            _settingsProvider = settingsProvider;
             messenger.Register<ShowChildWindowMessage>(this, RaiseShowWindow);
 
             messenger.Register<WindowStateMessage>(this, state => RaiseStateChanged(state.State));
@@ -39,6 +46,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             messenger.Register<CommandMessage>(this, OnOpenCommand);
             messenger.Register<CloseCommandMessage>(this, OnCloseCommand);
+            UpdateSessionStart();
             communicationManager.Connect();
             _timer = new DispatcherTimer();
             _timer.Interval = new TimeSpan(0, 0, 15);
@@ -111,9 +119,16 @@ namespace ImageMaker.AdminViewModels.ViewModels
             }
         }
 
-        public RelayCommand ShowMainCommand
+        public RelayCommand ShowMainCommand => _showMainCommand ?? (_showMainCommand = new RelayCommand(ShowMain, CanSessionStart));
+
+        public void UpdateSessionStart()
         {
-            get { return _showMainCommand ?? (_showMainCommand = new RelayCommand(ShowMain)); }
+            _startSessionEnabled=_settingsProvider.GetAvailableModules().AvailableModules.With(x => x.Any(y => y!=AppModules.InstaPrinter));
+        }
+
+        private bool CanSessionStart()
+        {
+            return _startSessionEnabled;
         }
 
         private void ShowMain()

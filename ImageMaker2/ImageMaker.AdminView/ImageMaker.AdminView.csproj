@@ -99,7 +99,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppSettingsExplorerCtl.xaml">
+    <Page Include="Controls\AppSettingsCtls\AppSettingsExplorerCtl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AppSettingsCtls\InstaPrinterCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppSettingsCtls\SelfyPrinterCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +124,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CustomPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ModuleManageCtls\ModuleManagedCtl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ModuleManageCtls\ModuleTilesCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,8 +202,14 @@
     <Compile Include="Controls\AllSessionsCtl.xaml.cs">
       <DependentUpon>AllSessionsCtl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppSettingsExplorerCtl.xaml.cs">
+    <Compile Include="Controls\AppSettingsCtls\AppSettingsExplorerCtl.xaml.cs">
       <DependentUpon>AppSettingsExplorerCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppSettingsCtls\InstaPrinterCtl.xaml.cs">
+      <DependentUpon>InstaPrinterCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppSettingsCtls\SelfyPrinterCtl.xaml.cs">
+      <DependentUpon>SelfyPrinterCtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ChangePasswordCtl.xaml.cs">
       <DependentUpon>ChangePasswordCtl.xaml</DependentUpon>
@@ -200,6 +222,12 @@
     </Compile>
     <Compile Include="Controls\CustomPasswordBox.xaml.cs">
       <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModuleManageCtls\ModuleManagedCtl.xaml.cs">
+      <DependentUpon>ModuleManagedCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModuleManageCtls\ModuleTilesCtl.xaml.cs">
+      <DependentUpon>ModuleTilesCtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\NumericKeyboardCtl.xaml.cs">
       <DependentUpon>NumericKeyboardCtl.xaml</DependentUpon>

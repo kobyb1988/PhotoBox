@@ -167,7 +167,6 @@
     <Compile Include="Converters\BorderToSearchTextBoxChildConverter.cs" />
     <Compile Include="Converters\LiveViewImageConverter.cs" />
     <Compile Include="Helpers\Proxy.cs" />
-    <Compile Include="Helpers\WPFControlHelpers.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

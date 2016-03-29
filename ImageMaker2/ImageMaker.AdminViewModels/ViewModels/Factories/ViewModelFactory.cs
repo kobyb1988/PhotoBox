@@ -17,16 +17,19 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
     public class WelcomeViewModelFactory : ViewModelBaseFactory<WelcomeViewModel>
     {
         private readonly IViewModelNavigator _navigator;
+        private readonly SettingsProvider _settingsProvider;
 
         public WelcomeViewModelFactory(
-            IViewModelNavigator navigator)
+            IViewModelNavigator navigator,
+            SettingsProvider settingsProvider)
         {
             _navigator = navigator;
+            _settingsProvider = settingsProvider;
         }
 
         protected override WelcomeViewModel GetViewModel(object param)
         {
-            return new WelcomeViewModel(_navigator);
+            return new WelcomeViewModel(_navigator,_settingsProvider);
         }
     }
 
@@ -141,6 +144,28 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
         protected override AppSettingsExplorerViewModel GetViewModel(object param)
         {
             return new AppSettingsExplorerViewModel(_navigator, _settingsProvider, _mappingEngine, _schedulerService, _imagePrinter);
+        }
+    }
+
+    public class ModuleManagedViewModelFactory : ViewModelBaseFactory<ModuleManagedViewModel>
+    {
+        private readonly SettingsProvider _settingsProvider;
+        private readonly IMappingEngine _mappingEngine;
+        private readonly IViewModelNavigator _navigator;
+
+        public ModuleManagedViewModelFactory(
+            SettingsProvider settingsProvider,
+            IMappingEngine mappingEngine,
+            IViewModelNavigator navigator)
+        {
+            _settingsProvider = settingsProvider;
+            _mappingEngine = mappingEngine;
+            _navigator = navigator;
+        }
+
+        protected override ModuleManagedViewModel GetViewModel(object param)
+        {
+            return new ModuleManagedViewModel(_settingsProvider,_navigator,_mappingEngine);
         }
     }
 

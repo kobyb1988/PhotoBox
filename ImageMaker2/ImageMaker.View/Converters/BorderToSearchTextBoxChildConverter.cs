@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using ImageMaker.CommonView.Converters;
+using ImageMaker.CommonView.Helpers;
 using ImageMaker.Themes.CustomControls;
-using ImageMaker.View.Helpers;
 
 namespace ImageMaker.View.Converters
 {

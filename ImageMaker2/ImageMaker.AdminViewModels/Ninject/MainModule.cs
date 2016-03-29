@@ -32,7 +32,7 @@ namespace ImageMaker.AdminViewModels.Ninject
             Bind<TemplateProviderFactory>().ToSelf();
 
             Bind<IImageRepository>().To<ImageRepository>();
-            Bind<IUserRepository>().To<UserRepository>();
+            Bind<IUserRepository>().To<UserRepository>().InSingletonScope();
 
             Bind<SchedulerService>().ToSelf();
 
@@ -42,6 +42,7 @@ namespace ImageMaker.AdminViewModels.Ninject
             Bind<MainViewModel>().ToSelf();
             Bind<WelcomeViewModel>().ToSelf();
             Bind<WelcomeViewModelFactory>().ToSelf();
+            Bind<ModuleManagedViewModel>().ToSelf();
 
             Bind<TemplateExplorerViewModel>().ToSelf();
             Bind<TemplateExplorerViewModelFactory>().ToSelf();
@@ -112,7 +113,8 @@ namespace ImageMaker.AdminViewModels.Ninject
                                            x.Kernel.Get<CompositionsExplorerViewModelFactory>(),
                                            x.Kernel.Get<ThemeManagerViewModelFactory>(),
                                            x.Kernel.Get<CurrentSessionViewModelFactory>(),
-                                           x.Kernel.Get<ChangePasswordViewModelFactory>()
+                                           x.Kernel.Get<ChangePasswordViewModelFactory>(),
+                                           x.Kernel.Get<ModuleManagedViewModelFactory>()
                                        };
 
                         return new ChildrenViewModelsFactory(children);
