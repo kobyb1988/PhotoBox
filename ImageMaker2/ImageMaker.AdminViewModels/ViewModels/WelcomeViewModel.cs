@@ -30,12 +30,13 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public override void Initialize()
         {
             var moduleSettings = _settingsProvider.GetAvailableModules();
-            _appSettingsVisible = moduleSettings.AvailableModules.Any();
+            if (moduleSettings != null)
+                _appSettingsVisible = moduleSettings.AvailableModules.Any();
         }
 
         public RelayCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new RelayCommand(ShowChangePassword));
 
-        public RelayCommand ManageAppSettingsCommand => _manageAppSettingsCommand ?? (_manageAppSettingsCommand = new RelayCommand(OpenSettingsExplorer,CanOpenSettingsExplorer));
+        public RelayCommand ManageAppSettingsCommand => _manageAppSettingsCommand ?? (_manageAppSettingsCommand = new RelayCommand(OpenSettingsExplorer, CanOpenSettingsExplorer));
 
         public RelayCommand ManageCameraSettingsCommand => _manageCameraSettingsCommand ?? (_manageCameraSettingsCommand = new RelayCommand(OpenCameraSettingsExplorer));
 

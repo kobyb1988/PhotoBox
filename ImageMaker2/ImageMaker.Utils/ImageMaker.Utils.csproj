@@ -34,6 +34,7 @@
       <HintPath>..\packages\TaskScheduler.2.3.2\lib\net40\Microsoft.Win32.TaskScheduler.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />

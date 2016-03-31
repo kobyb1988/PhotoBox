@@ -271,6 +271,12 @@
   <ItemGroup>
     <Resource Include="Resources\InstagramLogotype.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\kia_footer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\avatarDesignMode.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I

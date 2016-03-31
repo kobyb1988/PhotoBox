@@ -123,7 +123,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         public void UpdateSessionStart()
         {
-            _startSessionEnabled=_settingsProvider.GetAvailableModules().AvailableModules.With(x => x.Any(y => y!=AppModules.InstaPrinter));
+            var moduls = _settingsProvider.GetAvailableModules();
+            if (moduls!=null)
+            _startSessionEnabled =moduls.AvailableModules.With(x => x.Any(y => y!=AppModules.InstaPrinter));
         }
 
         private bool CanSessionStart()

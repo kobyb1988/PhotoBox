@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="ImageMaker.PatternProcessing.ProcessingViews.InstagramDefaultCtrl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Width="1290" Height="1766" >
+             Width="1290" Height="2029" >
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="183"/>
@@ -35,38 +35,53 @@
         <Grid Grid.Row="1" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="463"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="-100,0,0,0" >
+            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="30,5,0,5"  Source="pack://application:,,,/ImageMaker.Themes;component/Resources/avatarDesignMode.jpg">
                 <Image.Clip>
-                    <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="70" />
+                    <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
                 </Image.Clip>
             </Image>
-            <TextBlock x:Name="PublishAuthorTxt" Grid.Row="0" Grid.Column="1" Margin="-105,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF0A5183" FontWeight="Bold" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
+            <TextBlock x:Name="PublishAuthorTxt" Grid.Row="0" Grid.Column="1" Margin="105,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF0A5183" FontWeight="Bold" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
                         TextAlignment="Left" TextWrapping="Wrap" Text="Alexey Palatkin"/>
             <TextBlock x:Name="TimeUpdateTxt" Grid.Row="0" Grid.Column="2" Margin="0,0,30,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FFA3A3A3" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
                         TextAlignment="Left" TextWrapping="Wrap" Text="3min"/>
 
-            <Image x:Name="BodyImage"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="1290" Width="1290"/>
+            <Image x:Name="BodyImage" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="1230" Width="1230"/>
             <!--<Rectangle Fill="Black" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="1130" Width="1130"/>-->
 
-            <StackPanel Margin="30,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">
-                <Path Margin="0,10,15,0" Data="F1M24.012,37.997C12.609,34.461 1.601,21.107 1.997,14.297 2.389,7.486 7.105,2.253 13.791,1.989 20.473,1.726 24.012,6.703 24.012,6.703 24.012,6.703 27.552,1.726 34.232,1.989 40.916,2.253 45.631,7.486 46.027,14.297 46.42,21.107 35.412,34.461 24.012,37.997z" Fill="#FF095183"/>
-                <TextBlock x:Name="LikesTxt" Foreground="#FF0A5183" FontWeight="Bold" FontSize="50" FontFamily="Arial"  TextAlignment="Left" TextWrapping="Wrap" Text="Нравится"/>
-            </StackPanel>
-            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,0,30,0"
+            <Border Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" >
+                <Border.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/kia_footer.jpg"/>
+                    <!--<ImageBrush ImageSource="../kia_footer.jpg"/>-->
+
+                </Border.Background>
+                <Grid Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="30,0,0,0" Orientation="Horizontal" VerticalAlignment="Center"  Grid.Column="0">
+                        <Path Margin="0,10,15,0" Data="F1M24.012,37.997C12.609,34.461 1.601,21.107 1.997,14.297 2.389,7.486 7.105,2.253 13.791,1.989 20.473,1.726 24.012,6.703 24.012,6.703 24.012,6.703 27.552,1.726 34.232,1.989 40.916,2.253 45.631,7.486 46.027,14.297 46.42,21.107 35.412,34.461 24.012,37.997z" Fill="#FF095183"/>
+                        <TextBlock x:Name="LikesTxt" Foreground="#FF0A5183" FontWeight="Bold" FontSize="50" FontFamily="Arial"  TextAlignment="Left" TextWrapping="Wrap" Text="Нравится"/>
+                    </StackPanel>
+                    <TextBlock  Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,0,30,0"
                        HorizontalAlignment="Right" Foreground="#F12938" FontWeight="Bold" FontSize="50" FontFamily="Arial" TextWrapping="Wrap" Text="www.selfy-box.ru"/>
-            <StackPanel Visibility="Hidden" Orientation="Horizontal" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
-                <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
-                <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
-            </StackPanel>
+                    <StackPanel Visibility="Hidden" Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
+                        <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
+                        <Ellipse Stroke="Gray" StrokeThickness="4" Width="22" Height="22"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
 
 
         </Grid>

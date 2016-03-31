@@ -160,9 +160,11 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public override void Initialize()
         {
             ModuleSettingDto moduleSetting = _settingsProvider.GetAvailableModules();
-            InstaPrinterVisible = moduleSetting.AvailableModules.Any(x => x == AppModules.InstaPrinter);
-            SelfyPrinterVisible = moduleSetting.AvailableModules.Any(x => x != AppModules.InstaPrinter);
-
+            if (moduleSetting != null)
+            {
+                InstaPrinterVisible = moduleSetting.AvailableModules.Any(x => x == AppModules.InstaPrinter);
+                SelfyPrinterVisible = moduleSetting.AvailableModules.Any(x => x != AppModules.InstaPrinter);
+            }
 
             AppSettingsDto settings = _settingsProvider.GetAppSettings();
             if (settings == null)
