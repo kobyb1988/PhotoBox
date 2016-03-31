@@ -156,9 +156,9 @@ namespace ImageMaker.Utils.Services
             // Set some preferences, our method should print a box with any 
             // combination of these properties being true/false.
             _printDocument.DefaultPageSettings.Landscape = _image.Height > _image.Width;
-            _printDocument.DefaultPageSettings.Margins.Top = 100;
+            _printDocument.DefaultPageSettings.Margins.Top = 0;
             _printDocument.DefaultPageSettings.Margins.Left = 0;
-            _printDocument.DefaultPageSettings.Margins.Right = 50;
+            _printDocument.DefaultPageSettings.Margins.Right = 0;
             _printDocument.DefaultPageSettings.Margins.Bottom = 0;
         }
 
@@ -202,27 +202,25 @@ namespace ImageMaker.Utils.Services
 
             // Draw the printable area rectangle in PURPLE
             Rectangle printedPrintableArea = Rectangle.Truncate(realPrintableArea);
-            printedPrintableArea.Width--;
-            printedPrintableArea.Height--;
-            g.DrawImage(_image, new Rectangle(0, 0, printedPrintableArea.Width, printedPrintableArea.Height), new Rectangle(0, 0, _image.Width, _image.Height), GraphicsUnit.Pixel);
+            g.DrawImage(_image, new Rectangle(0, 0, printedPrintableArea.Width-7, printedPrintableArea.Height-7), new Rectangle(0, 0, _image.Width, _image.Height), GraphicsUnit.Pixel);
             //g.DrawRectangle(Pens.Purple, printedPrintableArea);
 
-            // Grab a copy of our "soft margins" (configured printer settings)
-            // Defaults to 1 inch margins, but could be configured otherwise by 
-            // the end user. You can also specify some default page margins in 
-            // your printDocument.DefaultPageSetting properties.
-            RectangleF marginBounds = e.MarginBounds;
+            //// Grab a copy of our "soft margins" (configured printer settings)
+            //// Defaults to 1 inch margins, but could be configured otherwise by 
+            //// the end user. You can also specify some default page margins in 
+            //// your printDocument.DefaultPageSetting properties.
+            //RectangleF marginBounds = e.MarginBounds;
 
-            // This intersects the desired margins with the printable area rectangle. 
-            // If the margins go outside the printable area on any edge, it will be 
-            // brought in to the appropriate printable area.
-            marginBounds.Intersect(realPrintableArea);
+            //// This intersects the desired margins with the printable area rectangle. 
+            //// If the margins go outside the printable area on any edge, it will be 
+            //// brought in to the appropriate printable area.
+            //marginBounds.Intersect(realPrintableArea);
 
-            // Draw the margin rectangle in RED
-            Rectangle printedMarginArea = Rectangle.Truncate(marginBounds);
-            printedMarginArea.Width--;
-            printedMarginArea.Height--;
-            // g.DrawRectangle(Pens.Red, printedMarginArea);
+            //// Draw the margin rectangle in RED
+            //Rectangle printedMarginArea = Rectangle.Truncate(marginBounds);
+            //printedMarginArea.Width--;
+            //printedMarginArea.Height--;
+            //// g.DrawRectangle(Pens.Red, printedMarginArea);
         }
     }
 }
