@@ -26,6 +26,7 @@ namespace ImageMaker.Utils.Services
                 {
                     td = t.Definition;
                     td.Triggers[0].StartBoundary = startTime;
+                    
                     ts.RootFolder.RegisterTaskDefinition(taskName, td); 
                 }
                 else
@@ -38,6 +39,8 @@ namespace ImageMaker.Utils.Services
         public void StartInstagramMonitoring(DateTime startTime)
         {
             const string cTask = @"InstagramService";
+            const string cTaskScreenSaver = @"ScreenSaver";
+
             const string cAction = @"%windir%\System32\cmd.exe";
             const string cStartService = @"startService";
             const string cStartServiceShortcut = @"startService_admin";
@@ -48,10 +51,17 @@ namespace ImageMaker.Utils.Services
 
             //string path = @"C:\Users\phantomer\Documents\visual studio 2013\Projects\ImageMaker\Scripts";
             string cParams = string.Format("/c start /d \"{0}\" {1}", baseDir, "startService_admin");
+            string cParamsForScreenSaver = string.Format("/c start /d \"{0}\" {1}", baseDir, "ImageMaker.ScreenSaver.exe");
             StartNew(startTime, 
                 cAction,
                 cParams,
                 cTask
+                );
+
+            StartNew(startTime,
+                cAction,
+                cParamsForScreenSaver,
+                cTaskScreenSaver
                 );
         }
 

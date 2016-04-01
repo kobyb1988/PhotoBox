@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Monads;
 using System.Threading;
@@ -27,6 +28,7 @@ namespace InstagramImagePrinter
         private readonly DateTime _endTime;
         private readonly string _printerName;
         private string _lastInstagramImageId;
+        private Process screenSaver;
 
         public MonitoringService(
             SettingsProvider settingsProvider,
@@ -60,12 +62,13 @@ namespace InstagramImagePrinter
         {
             StartMonitoring(tokenSource, _startTime, _endTime, _hashTag, stopService);
         }
+
         //TODO передать токен для отмены ниже по стеку
         public void StartMonitoring(CancellationTokenSource tokenSource, DateTime startDate, DateTime endDate, string hashTag, Action stopService)
         {
             var thread = new Thread(() =>
            {
-              
+
                var printed = new List<string>();
                string nextUrl = null;
                while (!tokenSource.IsCancellationRequested)
@@ -96,15 +99,15 @@ namespace InstagramImagePrinter
                        var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
 
                        image.Data = imageData;
-                       _messageAdapter.ProcessImages(new List<Image> {image}, _printerName);
+                       _messageAdapter.ProcessImages(new List<Image> { image }, _printerName);
                    }
-           }
+               }
 
 
-                stopService();
-        });
+               stopService();
+           });
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
-}
+    }
 }

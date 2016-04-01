@@ -277,6 +277,9 @@
   <ItemGroup>
     <Resource Include="Resources\avatarDesignMode.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\kia_ss.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\*.dll" "$(SolutionDir)Bin" /Y /I

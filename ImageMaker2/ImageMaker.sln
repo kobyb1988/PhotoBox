@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMaker.CommonData", "ImageMaker.Common\ImageMaker.CommonData.csproj", "{A464C7A6-84F3-4A44-8133-13EAFEFD8E24}"
 EndProject
@@ -92,6 +92,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMaker.CommonViewModelsTests", "ImageMaker.CommonViewModelsTests\ImageMaker.CommonViewModelsTests.csproj", "{406CF302-15ED-47BF-A929-65EAE5109C99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMaker.ViewModelsTests", "ImageMaker.ViewModelsTests\ImageMaker.ViewModelsTests.csproj", "{C6FEEEB5-9611-40E7-BC69-D4757549E79E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InstaPrinter", "InstaPrinter", "{E3B17307-9439-4147-89FC-2AA05E8174D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMaker.ScreenSaver", "ImageMaker.ScreenSaver\ImageMaker.ScreenSaver.csproj", "{1D38154D-04E6-43E1-93E2-24D483B5EF9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -413,6 +417,18 @@ Global
 		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C6FEEEB5-9611-40E7-BC69-D4757549E79E}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Debug|x86.Build.0 = Debug|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -449,5 +465,6 @@ Global
 		{DE8E8D60-19C9-49D9-AFF4-68A6AD700C3A} = {2670CA76-942A-48E1-A4C8-4584710A0452}
 		{406CF302-15ED-47BF-A929-65EAE5109C99} = {99F7516F-7BD2-4C2E-A8B4-EA15A003D318}
 		{C6FEEEB5-9611-40E7-BC69-D4757549E79E} = {99F7516F-7BD2-4C2E-A8B4-EA15A003D318}
+		{1D38154D-04E6-43E1-93E2-24D483B5EF9F} = {E3B17307-9439-4147-89FC-2AA05E8174D5}
 	EndGlobalSection
 EndGlobal
