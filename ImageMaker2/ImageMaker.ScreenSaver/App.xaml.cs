@@ -23,9 +23,6 @@ namespace ImageMaker.ScreenSaver
             Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
 
-            if (!Debugger.IsAttached)
-                Debugger.Launch();
-            Debugger.Break();
             Dispatcher.UnhandledException += (sender, args) =>
             {
                 MessageBox.Show(args.Exception.ToString());
