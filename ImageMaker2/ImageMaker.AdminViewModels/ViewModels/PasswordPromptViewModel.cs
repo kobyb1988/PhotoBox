@@ -1,5 +1,4 @@
-﻿using System.Security;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Behaviors;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
@@ -31,30 +30,45 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         public RelayCommand SubmitCommand
         {
-            get { return _submitCommand ?? (_submitCommand = new RelayCommand(Submit)); }
+            get { return _submitCommand ?? (_submitCommand = new RelayCommand(Submit, IsPasswordTyped)); }
         }
-        public RelayCommand<string> TouchNumber {
+
+        public RelayCommand<string> TouchNumber
+        {
             get { return _touchCommand ?? (_touchCommand = new RelayCommand<string>(TouchNumberPw)); }
         }
+
         private RelayCommand _removeChar;
-        public RelayCommand RemoveChar { get { return _removeChar ?? (_removeChar = new RelayCommand(RemoveCharAction)); } }
+
+        public RelayCommand RemoveChar
+        {
+            get { return _removeChar ?? (_removeChar = new RelayCommand(RemoveCharAction, IsPasswordTyped)); }
+        }
+
         private void RemoveCharAction()
         {
             if (Password.Length == 0)
                 return;
             Password = Password.Substring(0, Password.Length - 1);
         }
+
         private void TouchNumberPw(string p)
         {
             Password += p; 
         }
+
+        private bool IsPasswordTyped()
+        {
+            return !string.IsNullOrEmpty(Password);
+        }
+
         private void Submit()
         {
-            bool result = _settingsProvider.ValidatePassword(Password);
+            var result = _settingsProvider.ValidatePassword(Password);
             if (!result)
             {
                 _dialogService.ShowInfo(@"Неверный пароль");
-                Password = "";
+                Password = string.Empty;
                 return;
             }
 

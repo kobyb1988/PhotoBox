@@ -303,7 +303,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _imageProcessor.StartLiveView();
             SetupRealPropertiesFromCamera();
 
-            CameraSettingsDto settings = _settingsProvider.GetCameraSettings();
+            var settings = _settingsProvider.GetCameraSettings();
             if (settings == null)
             {
                 SelectedAeMode = AEModeValues.First().Key;
@@ -387,7 +387,6 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 PreviewReady = false;
                 _sessionOpened = false;
-                return;
             }
             else
             {
@@ -490,7 +489,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void ImageProcessorCameraRemoveEvent(object sender, EventArgs e)
         {
-            //Пытамся открыть ссесию если камера норм то показываем превью
+            //Пытаемся открыть сессию если камера норм то показываем превью
             //_imageProcessor.CameraErrorEvent += ImageProcessorOnCameraErrorEvent;
             //_imageProcessor.ImageChanged += ImageProcessorOnStreamChanged;
             //_imageProcessor.CameraAddEvent += ImageProcessorCameraAddEvent;
@@ -506,7 +505,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void ImageProcessorCameraAddEvent(object sender, EventArgs e)
         {
-            //Пытамся открыть ссесию если камера норм то показываем превью
+            //Пытаемся открыть сессию если камера норм то показываем превью
             _imageProcessor.InitializeProcessor();
             OpenSession();
             if (!_sessionOpened)
@@ -515,6 +514,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             StartLiveView();
             // Initialize();
         }
+
         public override void Dispose()
         {
             _imageProcessor.CameraErrorEvent -= ImageProcessorOnCameraErrorEvent;
@@ -534,11 +534,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
-        public RelayCommand TakePhotoCommand => _takePhotoCommand ?? (_takePhotoCommand = new RelayCommand(() => TakePhoto()))
-            ;
-
-
-
+        public RelayCommand TakePhotoCommand => _takePhotoCommand ?? (_takePhotoCommand = new RelayCommand(() => TakePhoto()));
         #endregion
     }
 }

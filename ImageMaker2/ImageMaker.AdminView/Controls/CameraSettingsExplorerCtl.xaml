@@ -33,7 +33,7 @@
                 <RowDefinition Height="0.2*" />
             </Grid.RowDefinitions>
             <Image Source="../Resources/templates.png" Margin="12,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" />
-            <TextBlock Text="Настроки LiveView" Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <TextBlock Text="Настройки LiveView" Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
             <customControls:RoundedButton Grid.Row="1" Grid.Column="1" Width="200" Foreground="#777777"  FontSize="15"
                                           Content="Тестовое фото" Style="{StaticResource RoundedBtnStyle}" 
                                           Background="#d7d7d7" Command="{Binding TakePhotoCommand}">
@@ -127,7 +127,7 @@
                                 Content="Сохранить"/>
                 </Grid>
             </Border>
-            <TextBlock Text="Настроки фотографии" Grid.Row="1" Grid.Column="2" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <TextBlock Text="Настройки фотографии" Grid.Row="1" Grid.Column="2" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
             <Border Grid.Row="2" Grid.Column="2" Padding="25,5">
                 <Grid Width="280" HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
