@@ -60,20 +60,24 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private bool _sessionOpened;
 
         #region CameraSettins Properties
-        public IList<KeyValuePair<ShutterSpeed, string>> ShutterSpeedValues => _shutterSpeedValues ??
-                                                                               (_shutterSpeedValues = GetEnumValues<ShutterSpeed>());
 
-        public IList<KeyValuePair<ApertureValue, string>> AvValues => _apertureValues ??
-                                                                      (_apertureValues = GetEnumValues<ApertureValue>());
+        public IList<KeyValuePair<ShutterSpeed, string>> ShutterSpeedValues
+            => _shutterSpeedValues ?? (_shutterSpeedValues = GetEnumValues<ShutterSpeed>());
 
-        public IList<KeyValuePair<AEMode, string>> AEModeValues => _aeModeValues ?? (_aeModeValues = GetEnumValues<AEMode>());
+        public IList<KeyValuePair<ApertureValue, string>> AvValues
+            => _apertureValues ?? (_apertureValues = GetEnumValues<ApertureValue>());
 
-        public IList<KeyValuePair<WhiteBalance, string>> WhiteBalanceValues => _whiteBalanceValues ?? (_whiteBalanceValues = GetEnumValues<WhiteBalance>());
+        public IList<KeyValuePair<AEMode, string>> AEModeValues
+            => _aeModeValues ?? (_aeModeValues = GetEnumValues<AEMode>());
+
+        public IList<KeyValuePair<WhiteBalance, string>> WhiteBalanceValues
+            => _whiteBalanceValues ?? (_whiteBalanceValues = GetEnumValues<WhiteBalance>());
 
         public IList<KeyValuePair<CameraISOSensitivity, string>> ISOValues
             => _isoValues ?? (_isoValues = GetEnumValues<CameraISOSensitivity>());
 
-        public IList<KeyValuePair<ExposureCompensation, string>> ExposureValues => _exposureValues ?? (_exposureValues = GetEnumValues<ExposureCompensation>());
+        public IList<KeyValuePair<ExposureCompensation, string>> ExposureValues
+            => _exposureValues ?? (_exposureValues = GetEnumValues<ExposureCompensation>());
 
         public ExposureCompensation SelectedCompensation
         {
@@ -530,11 +534,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
         #endregion
 
         #region Commands
+
         public RelayCommand SaveSettings => _saveSettings ?? (_saveSettings = new RelayCommand(Save));
 
         public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
-        public RelayCommand TakePhotoCommand => _takePhotoCommand ?? (_takePhotoCommand = new RelayCommand(() => TakePhoto()));
+        public RelayCommand TakePhotoCommand
+            => _takePhotoCommand ?? (_takePhotoCommand = new RelayCommand(async () => await TakePhoto()));
+
         #endregion
     }
 }

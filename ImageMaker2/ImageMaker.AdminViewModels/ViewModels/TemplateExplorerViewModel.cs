@@ -56,9 +56,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public ObservableCollection<CheckableTemplateViewModel> Children
-        {
-            get { return _children ?? (_children = new ObservableCollection<CheckableTemplateViewModel>()); }
-        }
+            => _children ?? (_children = new ObservableCollection<CheckableTemplateViewModel>());
 
         public RelayCommand AddTemplateCommand
         {
@@ -133,10 +131,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             get { return _saveCommand ?? (_saveCommand = new RelayCommand(Save, () => _canSave)); }
         }
 
-        public RelayCommand CheckCommand
-        {
-            get { return _checkCommand ?? (_checkCommand = new RelayCommand(CheckItem)); }
-        }
+        public RelayCommand CheckCommand => _checkCommand ?? (_checkCommand = new RelayCommand(CheckItem));
 
         private bool _canRemove;
         private bool _canSave;
@@ -193,10 +188,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _navigator.NavigateForward<TemplateEditorViewModel>(this, _updatedTemplate);
         }
 
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
         public CheckableTemplateViewModel SelectedTemplate
         {
@@ -213,13 +205,11 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public RelayCommand<FilterEventArgs> FilterCommand
-        {
-            get { return _filterCommand ?? (_filterCommand = new RelayCommand<FilterEventArgs>(Filter)); }
-        }
+            => _filterCommand ?? (_filterCommand = new RelayCommand<FilterEventArgs>(Filter));
 
         private void Filter(FilterEventArgs args)
         {
-            CheckableTemplateViewModel item = (CheckableTemplateViewModel)args.Item;
+            var item = (CheckableTemplateViewModel) args.Item;
             args.Accepted = item.State != ItemState.Removed;
         }
 

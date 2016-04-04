@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -16,8 +11,6 @@ using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.Common.Extensions;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
-using ImageMaker.CommonViewModels.ViewModels.Factories;
-using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 
 namespace ImageMaker.AdminViewModels.ViewModels
@@ -47,9 +40,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public ICollectionView TemplatesView
-        {
-            get { return _templatesView ?? (_templatesView = CollectionViewSource.GetDefaultView(Templates)); }
-        }
+            => _templatesView ?? (_templatesView = CollectionViewSource.GetDefaultView(Templates));
 
         public ICollectionView CompositionsView
         {
@@ -65,14 +56,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public ObservableCollection<TemplateViewModel> Templates
-        {
-            get { return _templates ?? (_templates = new ObservableCollection<TemplateViewModel>()); }
-        }
+            => _templates ?? (_templates = new ObservableCollection<TemplateViewModel>());
 
         public ObservableCollection<CheckableCompositionViewModel> Compositions
-        {
-            get { return _compositions ?? (_compositions = new ObservableCollection<CheckableCompositionViewModel>()); }
-        }
+            => _compositions ?? (_compositions = new ObservableCollection<CheckableCompositionViewModel>());
 
         public TemplateViewModel SelectedTemplate
         {
@@ -122,15 +109,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
             get { return _updateCompositionCommand ?? (_updateCompositionCommand = new RelayCommand(UpdateCompositions, () => SelectedComposition != null)); }
         }
 
-        public RelayCommand CheckCommand
-        {
-            get { return _checkCommand ?? (_checkCommand = new RelayCommand(CheckItem)); }
-        }
+        public RelayCommand CheckCommand => _checkCommand ?? (_checkCommand = new RelayCommand(CheckItem));
 
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
         //public RelayCommand<FilterEventArgs> FilterCommand
         //{
@@ -139,7 +120,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private bool Filter(object item)
         {
-            CheckableCompositionViewModel composition = (CheckableCompositionViewModel) item;
+            var composition = (CheckableCompositionViewModel) item;
             return composition.State != ItemState.Removed;
         }
 

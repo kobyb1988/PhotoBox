@@ -29,21 +29,15 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public RelayCommand SubmitCommand
-        {
-            get { return _submitCommand ?? (_submitCommand = new RelayCommand(Submit, IsPasswordTyped)); }
-        }
+            => _submitCommand ?? (_submitCommand = new RelayCommand(Submit, IsPasswordTyped));
 
         public RelayCommand<string> TouchNumber
-        {
-            get { return _touchCommand ?? (_touchCommand = new RelayCommand<string>(TouchNumberPw)); }
-        }
+            => _touchCommand ?? (_touchCommand = new RelayCommand<string>(TouchNumberPw));
 
         private RelayCommand _removeChar;
 
         public RelayCommand RemoveChar
-        {
-            get { return _removeChar ?? (_removeChar = new RelayCommand(RemoveCharAction, IsPasswordTyped)); }
-        }
+            => _removeChar ?? (_removeChar = new RelayCommand(RemoveCharAction, IsPasswordTyped));
 
         private void RemoveCharAction()
         {

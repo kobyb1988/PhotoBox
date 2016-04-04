@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using ImageMaker.Camera;
-using ImageMaker.Common.Extensions;
-using ImageMaker.CommonView.Helpers;
 using ImageMaker.Entities;
 using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.SDKData;
@@ -67,14 +60,11 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
         private void ImageProcessorOnCameraErrorEvent(object sender, CameraEventBase cameraError)
         {
-            var handler = CameraErrorEvent;
-            if (handler != null)
-                handler(this, cameraError);
+            CameraErrorEvent?.Invoke(this, cameraError);
         }
 
         public async Task<byte[]> TakeTestPictureAsync(byte[] liveViewImageStream, CameraSettingsDto settings)
         {
-
             SetCameraSettings(AEMode.Bulb, settings.SelectedPhotoWhiteBalance,
              settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
              settings.SelectedPhotoShutterSpeed);
@@ -124,12 +114,12 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                     await Task.Delay(TimeSpan.FromSeconds(1), token);
                 }
 
-                Application.Current.Dispatcher.Invoke(new Action(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     SetCameraSettings(settings.SelectedPhotoAeMode, settings.SelectedPhotoWhiteBalance,
-                     settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
-                     settings.SelectedPhotoShutterSpeed);
-                }));
+                        settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
+                        settings.SelectedPhotoShutterSpeed);
+                });
 
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -142,12 +132,12 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 token.ThrowIfCancellationRequested();
                 //await Task.Delay(TimeSpan.FromSeconds(3), token); //todo
 
-                Application.Current.Dispatcher.Invoke(new Action(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     SetCameraSettings(settings.SelectedAeMode, settings.SelectedWhiteBalance,
-                    settings.SelectedAvValue, settings.SelectedIsoSensitivity,
-                    settings.SelectedShutterSpeed);
-                }));
+                        settings.SelectedAvValue, settings.SelectedIsoSensitivity,
+                        settings.SelectedShutterSpeed);
+                });
                 StopLiveView();
                 StartLiveView();
             }
@@ -253,10 +243,10 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             return _imageProcessor.DoOpenSession();
         }
 
-        public IEnumerable<EnumType> GetSupportedEnumProperties<EnumType>(PropertyId propertyId)
-            where EnumType : struct, IConvertible
+        public IEnumerable<TEnumType> GetSupportedEnumProperties<TEnumType>(PropertyId propertyId)
+            where TEnumType : struct, IConvertible
         {
-            IEnumerable<EnumType> uintProperties = _imageProcessor.GetSettingList(propertyId).Cast<EnumType>();
+            var uintProperties = _imageProcessor.GetSettingList(propertyId).Cast<TEnumType>();
             return uintProperties;
         }
     }

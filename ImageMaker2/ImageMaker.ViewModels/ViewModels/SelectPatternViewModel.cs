@@ -62,7 +62,7 @@ namespace ImageMaker.ViewModels.ViewModels
                 
                 _selectedPattern = value;
                 RaisePropertyChanged();
-                if (value!=null)
+                if (value != null)
                     _navigator.NavigateForward<CameraViewModel>(this, SelectedPattern);
             }
         }

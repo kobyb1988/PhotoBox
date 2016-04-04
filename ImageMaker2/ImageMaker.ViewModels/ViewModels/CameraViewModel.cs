@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Monads;
 using System.Threading;
@@ -11,7 +10,6 @@ using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.PatternProcessing;
 using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.PatternProcessing.ImageProcessors;
@@ -147,23 +145,28 @@ namespace ImageMaker.ViewModels.ViewModels
                     UpdateCommands();
                     break;
                 case CameraEventType.Error:
+                    var oldCameraStatus = TakingPicture;
                     TakingPicture = false;
                     SetWindowStatus(true);
                     UpdateCommands();
 
-                    ErrorEvent ev = cameraErrorInfo as ErrorEvent;
+                    var ev = cameraErrorInfo as ErrorEvent;
                     if (ev != null && ev.ErrorCode == ReturnValue.TakePictureAutoFocusNG)
                     {
                         _dialogService.ShowInfo("Не удалось сфокусироваться. Пожалуйста, повторите попытку.");
                         Dispose();
                         Initialize();
                     }
-                    if (ev!=null && ev.ErrorCode == ReturnValue.NotSupported)
+                    if (ev != null && ev.ErrorCode == ReturnValue.NotSupported)
+                    {
+                        //camera is still in previous state, just some setting parameter is not supported
+                        TakingPicture = oldCameraStatus;
                         return;
+                    }
                     else
                     {
                         // _dialogService.ShowInfo("Упс... Что-то пошло не так =(");//TODO разобраться как перезапустить камеру
-                     
+
                     }
                     GoBack();
 
@@ -194,7 +197,7 @@ namespace ImageMaker.ViewModels.ViewModels
                     //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
                     _cameraStreamSynchronize.WaitOne();
                     var copyLiveViewStream = LiveViewImageStream;
-                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    await Task.Delay(TimeSpan.FromSeconds(2), token);
                     var stream = await _imageProcessor.TakePictureAsync(copyLiveViewStream,
                         _settings, token);
 
@@ -213,7 +216,6 @@ namespace ImageMaker.ViewModels.ViewModels
                 }
                 catch (Exception ex)
                 {
-
                     throw;
                 }
 
@@ -304,10 +306,7 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public bool NotTakingPicture
-        {
-            get { return !TakingPicture; }
-        }
+        public bool NotTakingPicture => !TakingPicture;
 
         public int Width
         {
@@ -365,23 +364,19 @@ namespace ImageMaker.ViewModels.ViewModels
 
 
         public IList<uint> FocusPoints
-        {
-            get { return _focusPoints ?? (_focusPoints = Enum.GetValues(typeof(LiveViewDriveLens)).OfType<uint>().ToList()); }
-        }
+            => _focusPoints ?? (_focusPoints = Enum.GetValues(typeof (LiveViewDriveLens)).OfType<uint>().ToList());
 
         public RelayCommand<uint> SetFocusCommand
         {
             get
             {
-                return _setFocusCommand ?? (_setFocusCommand = new RelayCommand<uint>(SetFocus,
-                    (x) => _sessionOpened && !TakingPicture && _isLiveViewOn));
+                return _setFocusCommand ??
+                       (_setFocusCommand =
+                           new RelayCommand<uint>(SetFocus, x => _sessionOpened && !TakingPicture && _isLiveViewOn));
             }
         }
 
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
         public RelayCommand OpenSessionCommand
         {

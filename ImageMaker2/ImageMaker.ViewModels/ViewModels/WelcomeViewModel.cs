@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.ViewModels;
-using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using ImageMaker.ViewModels.ViewModels.Factories;
 
 namespace ImageMaker.ViewModels.ViewModels
 {

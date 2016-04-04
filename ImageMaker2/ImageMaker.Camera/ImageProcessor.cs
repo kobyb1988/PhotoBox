@@ -70,8 +70,7 @@ namespace ImageMaker.Camera
 
         protected virtual void OnStreamChanged(byte[] imageBuffer)
         {
-            EventHandler<byte[]> handler = StreamChanged;
-            if (handler != null) handler(this, imageBuffer);
+            StreamChanged?.Invoke(this, imageBuffer);
         }
 
         protected virtual void OnErrorEvent(ErrorEvent error)
@@ -87,8 +86,7 @@ namespace ImageMaker.Camera
 
         protected virtual void RaiseCameraEvent(CameraEventBase eventBase)
         {
-            EventHandler<CameraEventBase> handler = CameraErrorEvent;
-            if (handler != null) handler(this, eventBase);
+            CameraErrorEvent?.Invoke(this, eventBase);
         }
         public ObservableCollection<EDSDKLib.Camera> Cameras { get; private set; }
 

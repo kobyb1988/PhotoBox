@@ -135,8 +135,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 if (_selectedObject == value)
                     return;
 
-                TemplateImageViewModel oldOne = (TemplateImageViewModel)_selectedObject;
-                TemplateImageViewModel newOne = (TemplateImageViewModel) value;
+                var oldOne = (TemplateImageViewModel) _selectedObject;
+                var newOne = (TemplateImageViewModel) value;
 
                 if (oldOne != null)
                 {
@@ -165,20 +165,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         public CheckableTemplateViewModel Template { get; private set; }
 
-        public RelayCommand AddImageCommand
-        {
-            get { return _addImageCommand ?? (_addImageCommand = new RelayCommand(AddImage)); }
-        }
+        public RelayCommand AddImageCommand => _addImageCommand ?? (_addImageCommand = new RelayCommand(AddImage));
 
         public RelayCommand RemoveImageCommand
         {
             get { return _removeImageCommand ?? (_removeImageCommand = new RelayCommand(RemoveImage, () => _canRemoveImage)); }
         }
 
-        public RelayCommand GoBackCommand
-        {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
-        }
+        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
         public RelayCommand UndoCommand
         {
@@ -196,9 +190,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public RelayCommand AddBackgroundCommand
-        {
-            get { return _addBackgroundCommand ?? (_addBackgroundCommand = new RelayCommand(AddBackground)); }
-        }
+            => _addBackgroundCommand ?? (_addBackgroundCommand = new RelayCommand(AddBackground));
 
         public RelayCommand RemoveBackgroundCommand
         {
@@ -230,7 +222,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public static ImageViewModel CreateDefaultBackground()
         {
             byte[] data = new byte[] { };
-            using (Bitmap backgroundBitmap = new Bitmap(500, 500))
+            using (var backgroundBitmap = new Bitmap(500, 500))
             {
                 using (Graphics canvas = Graphics.FromImage(backgroundBitmap))
                 {
@@ -253,7 +245,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 }
             }
 
-            ImageViewModel background = new ImageViewModel(data);
+            var background = new ImageViewModel(data);
             return background;
         }
 
@@ -264,7 +256,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void AddOverlay()
         {
-            ImageViewModel overlay = _imageLoadService.TryLoadImage();
+            var overlay = _imageLoadService.TryLoadImage();
             if (overlay == null)
                 return;
 
@@ -278,7 +270,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void AddBackground()
         {
-            ImageViewModel background = _imageLoadService.TryLoadImage();
+            var background = _imageLoadService.TryLoadImage();
             if (background == null)
                 return;
 
@@ -292,9 +284,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public RelayCommand AddOverlayCommand
-        {
-            get { return _addOverlayCommand ?? (_addOverlayCommand = new RelayCommand(AddOverlay)); }
-        }
+            => _addOverlayCommand ?? (_addOverlayCommand = new RelayCommand(AddOverlay));
 
 
         private void Save()
@@ -320,9 +310,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         }
 
         public RelayCommand<ISelectable> SelectObjectCommand
-        {
-            get { return _selectObjectCommand ?? (_selectObjectCommand = new RelayCommand<ISelectable>(SelectObject)); }
-        }
+            => _selectObjectCommand ?? (_selectObjectCommand = new RelayCommand<ISelectable>(SelectObject));
 
         private void SelectObject(ISelectable obj)
         {

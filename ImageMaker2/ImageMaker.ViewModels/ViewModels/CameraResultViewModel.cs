@@ -4,7 +4,6 @@ using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.PatternProcessing;
 using ImageMaker.Utils.Services;
 using System.IO;
@@ -30,11 +29,12 @@ namespace ImageMaker.ViewModels.ViewModels
             _imageService = imageService;
             Image = result.ImageResult;
             _copiesCount = 1;
-            AppSettingsDto appSettings = settingsProvider.GetAppSettings();
-            _maxCopies = appSettings.MaxPrinterCopies;
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            var appSettings = settingsProvider.GetAppSettings();
             if (appSettings != null)
+            {
+                _maxCopies = appSettings.MaxPrinterCopies;
                 _printerName = appSettings.PrinterName;
+            }
         }
 
         public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
@@ -74,14 +74,9 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public int Width
-        {
-            get { return _width; }
-        }
-        public int Height
-        {
-            get { return _height; }
-        }
+        public int Width => _width;
+
+        public int Height => _height;
 
         public int CopiesCount
         {
@@ -118,10 +113,7 @@ namespace ImageMaker.ViewModels.ViewModels
         }
 
 
-        public RelayCommand PrintImageCommand
-        {
-            get { return _printImageCommand ?? (_printImageCommand = new RelayCommand(Print)); }
-        }
+        public RelayCommand PrintImageCommand => _printImageCommand ?? (_printImageCommand = new RelayCommand(Print));
 
         private void Print()
         {

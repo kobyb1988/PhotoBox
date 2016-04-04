@@ -465,7 +465,7 @@ namespace EDSDKLib
         private uint SDKHandler_CameraAddedEvent(IntPtr inContext)
         {
             //Handle new camera here
-            if (CameraAdded != null) CameraAdded();
+            CameraAdded?.Invoke();
             return (uint)ReturnValue.Ok;
         }
 
@@ -473,16 +473,12 @@ namespace EDSDKLib
 
         private void RaiseItemDownloaded(byte[] stream)
         {
-            var handler = ItemDownloaded;
-            if (handler != null)
-                handler(stream);
+            ItemDownloaded?.Invoke(stream);
         }
 
         private void RaiseErrorEvent(ReturnValue errorCode)
         {
-            var handler = ErrorEvent;
-            if (handler != null)
-                handler(this, new ErrorEvent(errorCode));
+            ErrorEvent?.Invoke(this, new ErrorEvent(errorCode));
         }
 
         /// <summary>
