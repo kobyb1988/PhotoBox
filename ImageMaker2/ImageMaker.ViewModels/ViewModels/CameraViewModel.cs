@@ -45,6 +45,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private bool _sessionOpened;
         private bool _takingPicture;
+        private bool _capturing;
         private bool _isLiveViewOn;
         private int _counter;
 
@@ -132,6 +133,9 @@ namespace ImageMaker.ViewModels.ViewModels
         private void ImageProcessorOnTimerElapsed(object sender, int tick)
         {
             Counter = tick;
+
+            //костыль. камера падает, если возвращаться назад во время фотографирования
+            Capturing = Counter == 0;
         }
 
         private void ImageProcessorOnCameraErrorEvent(object sender, CameraEventBase cameraErrorInfo)
@@ -291,6 +295,11 @@ namespace ImageMaker.ViewModels.ViewModels
             set { Set(() => Counter, ref _counter, value); }
         }
 
+        public bool Capturing
+        {
+            get { return _capturing; }
+            set { Set(() => Capturing, ref _capturing, value); }
+        }
 
         public bool TakingPicture
         {
@@ -376,7 +385,8 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
+        public RelayCommand GoBackCommand
+            => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack, () => !Capturing));
 
         public RelayCommand OpenSessionCommand
         {

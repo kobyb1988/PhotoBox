@@ -22,8 +22,8 @@ namespace ImageMaker.View.Converters
                 if (values.Length < 4)
                     return null;
 
-                byte[] buffer = values[0] as byte[];
-                WriteableBitmap wb = values[1] as WriteableBitmap;
+                var buffer = values[0] as byte[];
+                var wb = values[1] as WriteableBitmap;
 
                 int width = 640;
 
@@ -39,18 +39,17 @@ namespace ImageMaker.View.Converters
                     height = 704;
                 }
 
-                bool isNew = false;
+                //из-за этой хрени бывает отсутствует лайввью (вместо него чёрный квадрат)
+                //bool isNew = false;
                 if (wb == null)
                 {
-                    isNew = true;
+                    //isNew = true;
                     try
                     {
-
                         wb = new WriteableBitmap(width, height, 96, 96, PixelFormats.Bgr24, null);
                     }
                     catch (Exception ex)
                     {
-
                         throw;
                     }
                 }
@@ -64,13 +63,14 @@ namespace ImageMaker.View.Converters
 
                 if (buffer == null || buffer.Length < 1)
                 {
-                    return isNew ? wb : Binding.DoNothing;
+                    //return isNew ? wb : Binding.DoNothing;
+                    return wb;
                 }
 
                 //stream.Seek(0, SeekOrigin.Begin);
-                using (MemoryStream stream = new MemoryStream(buffer))
+                using (var stream = new MemoryStream(buffer))
                 {
-                    using (Bitmap bmp = new Bitmap(stream))
+                    using (var bmp = new Bitmap(stream))
                     {
                         // In my situation, the images are always 640 x 480.
                         BitmapData data = bmp.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
@@ -79,7 +79,8 @@ namespace ImageMaker.View.Converters
                     }
                 }
 
-                return isNew ? wb : Binding.DoNothing;
+                //return isNew ? wb : Binding.DoNothing;
+                return wb;
             }
             catch (Exception e)
             {
