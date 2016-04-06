@@ -19,7 +19,9 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         private ImageViewModel _background;
         private ImageViewModel _overlay;
 
-        public TemplateViewModel(string name, uint width, uint height, int id, IEnumerable<TemplateImageViewModel> children, ImageViewModel background, ImageViewModel overlay, bool isInstaPrinterTemplate)
+        public TemplateViewModel(string name, uint width, uint height, int id,
+            IEnumerable<TemplateImageViewModel> children, ImageViewModel background, ImageViewModel overlay,
+            bool isInstaPrinterTemplate)
         {
             _width = width;
             _height = height;
@@ -38,15 +40,11 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         protected void RaiseSelectionChanged()
         {
-            var handler = SelectionChanged;
-            if (handler != null)
-                handler(this);
+            SelectionChanged?.Invoke(this);
         }
 
         public ObservableCollection<TemplateImageViewModel> Children
-        {
-            get { return _children ?? (_children = new ObservableCollection<TemplateImageViewModel>()); }
-        }
+            => _children ?? (_children = new ObservableCollection<TemplateImageViewModel>());
 
         public void AddNewChild()
         {
@@ -123,7 +121,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             RaisePropertyChanged(() => IsSelected);
         }
 
-        public Type DataType { get { return typeof (TemplateImageViewModel); } }
+        public Type DataType => typeof (TemplateImageViewModel);
 
         public void Drop(object data)
         {

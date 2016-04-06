@@ -59,7 +59,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             Init();
         }
 
-        void Init()
+        private void Init()
         {
             foreach (var child in Template.Children)
             {
@@ -119,7 +119,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             get { return _overlayOpacity; }
             set
             {
-                if (_overlayOpacity == value)
+                if (Math.Abs(_overlayOpacity - value) < 0.001)
                     return;
 
                 _overlayOpacity = value;
@@ -221,20 +221,20 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         public static ImageViewModel CreateDefaultBackground()
         {
-            byte[] data = new byte[] { };
+            var data = new byte[] {};
             using (var backgroundBitmap = new Bitmap(500, 500))
             {
-                using (Graphics canvas = Graphics.FromImage(backgroundBitmap))
+                using (var canvas = Graphics.FromImage(backgroundBitmap))
                 {
-                    System.Drawing.Color color = System.Drawing.Color.FromArgb(255, 55, 62, 70);
-                    System.Drawing.Brush pen = new SolidBrush(color);
+                    var color = System.Drawing.Color.FromArgb(255, 55, 62, 70);
+                    var pen = new SolidBrush(color);
 
                     canvas.FillRectangle(pen, 0, 0, 500, 500);
                 }
 
                 try
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    using (var ms = new MemoryStream())
                     {
                         backgroundBitmap.Save(ms, ImageFormat.Png);
                         data = ms.ToArray();
@@ -326,8 +326,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             if (SelectedObject != null && SelectedObject != obj)
             {
-                TemplateImageViewModel oldOne = (TemplateImageViewModel) SelectedObject;
-                TemplateImageViewModel newOne = (TemplateImageViewModel) obj;
+                var oldOne = (TemplateImageViewModel) SelectedObject;
+                var newOne = (TemplateImageViewModel) obj;
 
                 Stack.Value.Chain(oldOne).Add(newOne);
                 oldOne.SetSelected(false);
@@ -374,8 +374,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
             
             UnselectCurrent();
 
-            int index = Template.Children.IndexOf(image);
-            for (int i = index + 1; i <= Template.Children.Count - 1; i++)
+            var index = Template.Children.IndexOf(image);
+            for (var i = index + 1; i <= Template.Children.Count - 1; i++)
                 Template.Children.ElementAt(i).Index--;
 
             Template.Children.Remove(image);
@@ -386,5 +386,151 @@ namespace ImageMaker.AdminViewModels.ViewModels
             Stack.Value.Do(Template);
             Template.AddNewChild();
         }
+
+        private bool IsImageSelected()
+        {
+            return SelectedObject != null;
+        }
+
+        #region Move Commands
+
+        private RelayCommand _moveByOnePixelTopCommand;
+        private RelayCommand _moveByOnePixelRightCommand;
+        private RelayCommand _moveByOnePixelBottomCommand;
+        private RelayCommand _moveByOnePixelLeftCommand;
+
+        public RelayCommand MoveByOnePixelTopCommand
+            =>
+                _moveByOnePixelTopCommand ??
+                (_moveByOnePixelTopCommand = new RelayCommand(MoveByOnePixelTop, IsImageSelected));
+        public RelayCommand MoveByOnePixelRightCommand
+            =>
+                _moveByOnePixelRightCommand ??
+                (_moveByOnePixelRightCommand = new RelayCommand(MoveByOnePixelRight, IsImageSelected));
+        public RelayCommand MoveByOnePixelBottomCommand
+            =>
+                _moveByOnePixelBottomCommand ??
+                (_moveByOnePixelBottomCommand = new RelayCommand(MoveByOnePixelBottom, IsImageSelected));
+        public RelayCommand MoveByOnePixelLeftCommand
+            =>
+                _moveByOnePixelLeftCommand ??
+                (_moveByOnePixelLeftCommand = new RelayCommand(MoveByOnePixelLeft, IsImageSelected));
+
+        private void MoveByOnePixelTop()
+        {
+            var image = (TemplateImageViewModel) SelectedObject;
+            image.Move(0, -1);
+        }
+        private void MoveByOnePixelRight()
+        {
+            var image = (TemplateImageViewModel) SelectedObject;
+            image.Move(1, 0);
+        }
+        private void MoveByOnePixelBottom()
+        {
+            var image = (TemplateImageViewModel) SelectedObject;
+            image.Move(0, 1);
+        }
+        private void MoveByOnePixelLeft()
+        {
+            var image = (TemplateImageViewModel) SelectedObject;
+            image.Move(-1, 0);
+        }
+
+        #endregion
+
+        #region Increase Commands
+
+        private RelayCommand _increaseByOnePixelLtCommand;
+        private RelayCommand _increaseByOnePixelRtCommand;
+        private RelayCommand _increaseByOnePixelRbCommand;
+        private RelayCommand _increaseByOnePixelLbCommand;
+
+        public RelayCommand IncreaseByOnePixelLtCommand
+            =>
+                _increaseByOnePixelLtCommand ??
+                (_increaseByOnePixelLtCommand = new RelayCommand(IncreaseByOnePixelLt, IsImageSelected));
+        public RelayCommand IncreaseByOnePixelRtCommand
+            =>
+                _increaseByOnePixelRtCommand ??
+                (_increaseByOnePixelRtCommand = new RelayCommand(IncreaseByOnePixelRt, IsImageSelected));
+        public RelayCommand IncreaseByOnePixelRbCommand
+            =>
+                _increaseByOnePixelRbCommand ??
+                (_increaseByOnePixelRbCommand = new RelayCommand(IncreaseByOnePixelRb, IsImageSelected));
+        public RelayCommand IncreaseByOnePixelLbCommand
+            =>
+                _increaseByOnePixelLbCommand ??
+                (_increaseByOnePixelLbCommand = new RelayCommand(IncreaseByOnePixelLb, IsImageSelected));
+
+        private void IncreaseByOnePixelLt()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(1, 1, -1, -1);
+        }
+        private void IncreaseByOnePixelRt()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(1, 1, 0, -1);
+        }
+        private void IncreaseByOnePixelRb()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(1, 1, 0, 0);
+        }
+        private void IncreaseByOnePixelLb()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(1, 1, -1, 0);
+        }
+
+        #endregion
+
+        #region Decrease Commands
+
+        private RelayCommand _decreaseByOnePixelLtCommand;
+        private RelayCommand _decreaseByOnePixelRtCommand;
+        private RelayCommand _decreaseByOnePixelRbCommand;
+        private RelayCommand _decreaseByOnePixelLbCommand;
+
+        public RelayCommand DecreaseByOnePixelLtCommand
+            =>
+                _decreaseByOnePixelLtCommand ??
+                (_decreaseByOnePixelLtCommand = new RelayCommand(DecreaseByOnePixelLt, IsImageSelected));
+        public RelayCommand DecreaseByOnePixelRtCommand
+            =>
+                _decreaseByOnePixelRtCommand ??
+                (_decreaseByOnePixelRtCommand = new RelayCommand(DecreaseByOnePixelRt, IsImageSelected));
+        public RelayCommand DecreaseByOnePixelRbCommand
+            =>
+                _decreaseByOnePixelRbCommand ??
+                (_decreaseByOnePixelRbCommand = new RelayCommand(DecreaseByOnePixelRb, IsImageSelected));
+        public RelayCommand DecreaseByOnePixelLbCommand
+            =>
+                _decreaseByOnePixelLbCommand ??
+                (_decreaseByOnePixelLbCommand = new RelayCommand(DecreaseByOnePixelLb, IsImageSelected));
+
+        private void DecreaseByOnePixelLt()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(-1, -1, 1, 1);
+        }
+        private void DecreaseByOnePixelRt()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(-1, -1, 0, 1);
+        }
+        private void DecreaseByOnePixelRb()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(-1, -1, 0, 0);
+        }
+        private void DecreaseByOnePixelLb()
+        {
+            var image = (TemplateImageViewModel)SelectedObject;
+            image.Resize(-1, -1, 1, 0);
+        }
+
+        #endregion
     }
 }

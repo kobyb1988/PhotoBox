@@ -1,6 +1,5 @@
 ﻿using System;
 using ImageMaker.AdminViewModels.Helpers;
-using ImageMaker.Common.Extensions;
 using ImageMaker.CommonViewModels.DragDrop;
 using ImageMaker.CommonViewModels.ViewModels;
 
@@ -45,7 +44,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             get { return _x; }
             set
             {
-                if (_x == value)
+                if (Math.Abs(_x - value) < double.Epsilon)
                     return;
 
                 
@@ -62,7 +61,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             get { return _y; }
             set
             {
-                if (_y == value)
+                if (Math.Abs(_y - value) < double.Epsilon)
                     return;
 
                 
@@ -130,9 +129,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         protected void RaiseSelectionChanged()
         {
-            var handler = SelectionChanged;
-            if (handler != null)
-                handler(this);
+            SelectionChanged?.Invoke(this);
         }
 
         private void UpdateProperties()
@@ -198,21 +195,50 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         {
             double tmpX = X,
                 tmpY = Y,
-                tmpW = Width,
-                tmpH = Height;
+                tmpW,
+                tmpH;
+
+            var tmpRightX = X + Width;
+            var tmpRightY = Y + Height;
+
+            //не двигается левый верхний угол
             if (Math.Abs(offsetX) < double.Epsilon && Math.Abs(offsetY) < double.Epsilon)
             {
-                tmpW = Width + (deltaX/_parentWidth); //.ThreeDigits();
-                tmpH = Height + (deltaY/_parentHeight); //.ThreeDigits();
+                tmpW = Width + deltaX/_parentWidth;
+                //tmpH = Height + deltaY/_parentHeight;
+                tmpH = GetCorrectHeight(tmpW);
             }
-            else
+            //не двигается левый нижний угол
+            else if (Math.Abs(offsetX) < double.Epsilon)
             {
-                var tmpRightX = X + Width;
-                var tmpRightY = Y + Height;
-                tmpX = X + (offsetX/_parentWidth); //.ThreeDigits();
-                tmpW = tmpRightX - tmpX;
+                tmpW = Width + deltaX/_parentWidth;
                 tmpH = GetCorrectHeight(tmpW);
                 tmpY = tmpRightY - tmpH;
+            }
+            //не двигается правый верхний угол
+            else if (Math.Abs(offsetY) < double.Epsilon)
+            {
+                tmpH = Height + deltaY/_parentHeight;
+                tmpW = GetCorrectWidth(tmpH);
+                tmpX = tmpRightX - tmpW;
+            }
+            //не двигается правый нижний угол
+            else
+            {
+                if (Math.Abs(offsetX) > double.Epsilon)
+                {
+                    tmpX = X + offsetX/_parentWidth;
+                    tmpW = tmpRightX - tmpX;
+                    tmpH = GetCorrectHeight(tmpW);
+                    tmpY = tmpRightY - tmpH;
+                }
+                else
+                {
+                    tmpY = Y + offsetY/_parentHeight;
+                    tmpH = tmpRightY - tmpY;
+                    tmpW = GetCorrectWidth(tmpH);
+                    tmpX = tmpRightX - tmpW;
+                }
             }
 
             if (tmpX < 0 || tmpW <= 0 || (tmpX + tmpW) > 1 || tmpY < 0 || tmpH <= 0 || (tmpY + tmpH) > 1)
@@ -223,7 +249,21 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
             Width = tmpW;
             Height = tmpH;
-            //Height = GetCorrectHeight(tmpW);
+        }
+
+        public void Move(double deltaX, double deltaY)
+        {
+            if (Math.Abs(deltaX) < double.Epsilon && Math.Abs(deltaY) < double.Epsilon)
+                return;
+
+            var tmpX = X + deltaX / _parentWidth;
+            var tmpY = Y + deltaY / _parentHeight;
+
+            if (tmpX < 0 || (tmpX + Width) > 1 || tmpY < 0 || (tmpY + Height) > 1)
+                return;
+
+            X = tmpX;
+            Y = tmpY;
         }
 
         public Type DataType { get { return typeof(TemplateImageViewModel); } }

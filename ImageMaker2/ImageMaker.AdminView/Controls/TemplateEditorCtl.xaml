@@ -37,21 +37,21 @@
             <ImageBrush ImageSource="../Resources/blur.jpg" Stretch="UniformToFill" />
         </Border.Background>
         <Viewbox Stretch="Uniform">
-            <Grid  Width="900" Height="800">
+            <Grid Width="900" Height="800">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.14*"/>
                     <RowDefinition Height="600"/>
                     <RowDefinition Height="0.2*" />
                 </Grid.RowDefinitions>
 
-                <Grid >
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.6*"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="0.65*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="../Resources/templates.png" Margin="12,0,0,0" VerticalAlignment="Top"/>
-                    <Grid  Grid.Column="2" Margin="0,0,10,0">
+                    <Grid Grid.Column="2" Margin="0,0,10,0">
                         <Grid.Resources>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource OpaqueButtonStyle}">
                                 <Setter Property="Margin" Value="3" />
@@ -69,7 +69,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Button Content="" Background="#c7f464" Command="{Binding Path=AddImageCommand}"/>
-                            <Rectangle IsHitTestVisible="False">
+                            <Rectangle Grid.Row="0" IsHitTestVisible="False">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="../Resources/icons_2.png" Viewbox=".12,0.06,.35,.35">
                                         <ImageBrush.Transform>
@@ -91,7 +91,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Button Content="" Background="#4ecdc4" Command="{Binding Path=RedoCommand}"/>
-                            <Rectangle IsHitTestVisible="False">
+                            <Rectangle Grid.Row="0" IsHitTestVisible="False">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="../Resources/icons_2.png" Viewbox=".11,.64,.4,.4">
                                         <ImageBrush.Transform>
@@ -114,7 +114,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Button Content="" Background="#c44d58" Command="{Binding Path=RedoCommand}"/>
-                            <Rectangle IsHitTestVisible="False">
+                            <Rectangle Grid.Row="0" IsHitTestVisible="False">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="../Resources/icons_2.png" Viewbox=".43,.37,.35,.35">
                                         <ImageBrush.Transform>
@@ -136,7 +136,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Button Content="" Background="#ff6b6b" Command="{Binding Path=RemoveImageCommand}"/>
-                            <Rectangle IsHitTestVisible="False">
+                            <Rectangle Grid.Row="0" IsHitTestVisible="False">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="../Resources/icons_2.png" Viewbox=".45,0.09,.28,.28">
                                         <ImageBrush.Transform>
@@ -165,183 +165,189 @@
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.SelectObjectCommand}" 
                                     CommandParameter="{x:Null}" />
                         </Border.InputBindings>
-                        <Viewbox Stretch="Uniform">
-                            <ListBox SelectionMode="Single"
-                                    Padding="0"
-                                    Width="{Binding Path=Background.Width}"
-                                    Height="{Binding Path=Background.Height}"
-                                    DataContext="{Binding Path=Template}"
-                                    ItemsSource="{Binding Path=Children}"
-                                    SelectedItem="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.SelectedObject}">
-                                <ListBox.Background>
-                                    <ImageBrush ImageSource="{Binding Path=Background.Data, TargetNullValue={StaticResource GrayBrush}, FallbackValue={StaticResource GrayBrush}, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
-                                </ListBox.Background>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <Viewbox>
+                                <Viewbox.LayoutTransform>
+                                    <ScaleTransform ScaleX="{Binding ElementName=MainSlider, Path=Value}" ScaleY="{Binding ElementName=MainSlider, Path=Value}" />
+                                </Viewbox.LayoutTransform>
+                                
+                                <ListBox SelectionMode="Single"
+                                            Padding="0"
+                                            Width="{Binding Path=Background.Width}"
+                                            Height="{Binding Path=Background.Height}"
+                                            DataContext="{Binding Path=Template}"
+                                            ItemsSource="{Binding Path=Children}"
+                                            SelectedItem="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.SelectedObject}">
+                                    <ListBox.Background>
+                                        <ImageBrush ImageSource="{Binding Path=Background.Data, TargetNullValue={StaticResource GrayBrush}, FallbackValue={StaticResource GrayBrush}, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
+                                    </ListBox.Background>
 
-                                <ItemsControl.Resources>
-                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                                    <DataTemplate DataType="{x:Type images:TemplateImageViewModel}">
-                                        <Label Content="{Binding Path=Index}">
-                                            <i:Interaction.Behaviors>
-                                                <dragDrop:DragBehavior RelativeElement="{Binding ElementName=Viewbox}"/>
-                                            </i:Interaction.Behaviors>
-                                            <Label.Width>
-                                                <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding Path="Width" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                    <Binding Path="DataContext.Template.Width" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
-                                                </MultiBinding>
-                                            </Label.Width>
-                                            <Label.Height>
-                                                <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding Path="Height" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                    <Binding Path="DataContext.Template.Height" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
-                                                </MultiBinding>
-                                            </Label.Height>
-                                            <Label.Style>
-                                                <Style TargetType="{x:Type Label}">
-                                                    <Setter Property="BorderBrush" Value="Transparent" />
-                                                    <Setter Property="BorderThickness" Value="0" />
-                                                    <Setter Property="Foreground" Value="White" />
-                                                    <Setter Property="Padding" Value="0" />
-                                                    <Setter Property="FontSize" Value="16" />
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type Label}">
-                                                                <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                                                        Background="{TemplateBinding Background}" 
-                                                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                                                        Padding="{TemplateBinding Padding}"
-                                                                        Width="{TemplateBinding Width}"
-                                                                        Height="{TemplateBinding Height}">
+                                    <ItemsControl.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                        <DataTemplate DataType="{x:Type images:TemplateImageViewModel}">
+                                            <Label Content="{Binding Path=Index}">
+                                                <i:Interaction.Behaviors>
+                                                    <dragDrop:DragBehavior RelativeElement="{Binding ElementName=Viewbox}"/>
+                                                </i:Interaction.Behaviors>
+                                                <Label.Width>
+                                                    <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding Path="Width" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                        <Binding Path="DataContext.Template.Width" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
+                                                    </MultiBinding>
+                                                </Label.Width>
+                                                <Label.Height>
+                                                    <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding Path="Height" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                        <Binding Path="DataContext.Template.Height" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
+                                                    </MultiBinding>
+                                                </Label.Height>
+                                                <Label.Style>
+                                                    <Style TargetType="{x:Type Label}">
+                                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                                        <Setter Property="BorderThickness" Value="0" />
+                                                        <Setter Property="Foreground" Value="White" />
+                                                        <Setter Property="Padding" Value="0" />
+                                                        <Setter Property="FontSize" Value="16" />
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="{x:Type Label}">
+                                                                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                                                                Background="{TemplateBinding Background}" 
+                                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                                Padding="{TemplateBinding Padding}"
+                                                                                Width="{TemplateBinding Width}"
+                                                                                Height="{TemplateBinding Height}">
 
-                                                                    <Grid Margin="0">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="1*"/>
-                                                                            <ColumnDefinition Width="8*"/>
-                                                                            <ColumnDefinition Width="1*"/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <Grid.RowDefinitions>
-                                                                            <RowDefinition Height="1*"/>
-                                                                            <RowDefinition Height="8*"/>
-                                                                            <RowDefinition Height="1*"/>
-                                                                        </Grid.RowDefinitions>
-                                                                        <Thumb Background="#232323" Grid.Row="0" Grid.Column="0" Cursor="{x:Static Cursors.SizeNWSE}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Left,Top" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Thumb Background="#232323" Grid.Row="1" Grid.Column="0" Cursor="{x:Static Cursors.SizeWE}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Left" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Thumb Background="#232323" Grid.Row="2" Grid.Column="0" Cursor="{x:Static Cursors.SizeNESW}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Left,Bottom" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Thumb Background="#232323" Grid.Row="0" Grid.Column="2" Cursor="{x:Static Cursors.SizeNESW}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Right,Top" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Thumb Background="#232323" Grid.Row="1" Grid.Column="2" Cursor="{x:Static Cursors.SizeWE}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Right" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Thumb Background="#232323" Grid.Row="2" Grid.Column="2" Cursor="{x:Static Cursors.SizeNWSE}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Right,Bottom" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Thumb Background="#232323" Grid.Row="0" Grid.Column="1" Cursor="{x:Static Cursors.SizeNS}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Top" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Thumb Background="#232323" Grid.Row="2" Grid.Column="1" Cursor="{x:Static Cursors.SizeNS}">
-                                                                            <i:Interaction.Behaviors>
-                                                                                <dragDrop:ResizeBehavior ResizeDirection="Bottom" />
-                                                                            </i:Interaction.Behaviors>
-                                                                        </Thumb>
-                                                                        <Rectangle Fill="#232323" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" IsHitTestVisible="False"/>
-                                                                        <ContentPresenter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                                    </Grid>
+                                                                        <Grid Margin="0">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="1*"/>
+                                                                                <ColumnDefinition Width="8*"/>
+                                                                                <ColumnDefinition Width="1*"/>
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="1*"/>
+                                                                                <RowDefinition Height="8*"/>
+                                                                                <RowDefinition Height="1*"/>
+                                                                            </Grid.RowDefinitions>
+                                                                            <Thumb Background="#232323" Grid.Row="0" Grid.Column="0" Cursor="{x:Static Cursors.SizeNWSE}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Left,Top" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Thumb Background="#232323" Grid.Row="1" Grid.Column="0" Cursor="{x:Static Cursors.SizeWE}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Left" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Thumb Background="#232323" Grid.Row="2" Grid.Column="0" Cursor="{x:Static Cursors.SizeNESW}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Left,Bottom" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Thumb Background="#232323" Grid.Row="0" Grid.Column="2" Cursor="{x:Static Cursors.SizeNESW}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Right,Top" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Thumb Background="#232323" Grid.Row="1" Grid.Column="2" Cursor="{x:Static Cursors.SizeWE}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Right" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Thumb Background="#232323" Grid.Row="2" Grid.Column="2" Cursor="{x:Static Cursors.SizeNWSE}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Right,Bottom" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Thumb Background="#232323" Grid.Row="0" Grid.Column="1" Cursor="{x:Static Cursors.SizeNS}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Top" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Thumb Background="#232323" Grid.Row="2" Grid.Column="1" Cursor="{x:Static Cursors.SizeNS}">
+                                                                                <i:Interaction.Behaviors>
+                                                                                    <dragDrop:ResizeBehavior ResizeDirection="Bottom" />
+                                                                                </i:Interaction.Behaviors>
+                                                                            </Thumb>
+                                                                            <Rectangle Fill="#232323" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" IsHitTestVisible="False"/>
+                                                                            <ContentPresenter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                        </Grid>
 
-                                                                </Border>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=IsSelected, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                                                            <Setter Property="BorderBrush" Value="Red" />
-                                                            <Setter Property="BorderThickness" Value="2" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Label.Style>
-                                        </Label>
+                                                                    </Border>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsSelected, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                                                <Setter Property="BorderBrush" Value="Red" />
+                                                                <Setter Property="BorderThickness" Value="2" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Style>
+                                            </Label>
 
-                                    </DataTemplate>
-                                </ItemsControl.Resources>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <Canvas IsItemsHost="True" 
-                                                x:Name="canvas"
-                                                AllowDrop="True"
-                                                MinWidth="{Binding Path=Width}" 
-                                                MinHeight="{Binding Path=Height}">
-                                            <Canvas.Background>
-                                                <ImageBrush Opacity="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.OverlayOpacity}" 
-                                                        ImageSource="{Binding Path=Overlay.Data, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
-                                            </Canvas.Background>
+                                        </DataTemplate>
+                                    </ItemsControl.Resources>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <Canvas IsItemsHost="True" 
+                                                        x:Name="canvas"
+                                                        AllowDrop="True"
+                                                        MinWidth="{Binding Path=Width}" 
+                                                        MinHeight="{Binding Path=Height}">
+                                                <Canvas.Background>
+                                                    <ImageBrush Opacity="{Binding RelativeSource={RelativeSource AncestorType=controls:TemplateEditorCtl}, Path=DataContext.OverlayOpacity}" 
+                                                                ImageSource="{Binding Path=Overlay.Data, Converter={StaticResource ByteArrayToImageConverter}}" Stretch="Uniform" />
+                                                </Canvas.Background>
 
-                                            <i:Interaction.Behaviors>
-                                                <dragDrop:DropBehavior RelativeElement="{Binding ElementName=canvas}"/>
-                                            </i:Interaction.Behaviors>
-                                        </Canvas>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemContainerStyle>
-                                    <Style TargetType="{x:Type ListBoxItem}">
-                                        <Setter Property="Padding" Value="0"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Canvas.ZIndex" Value="{Binding Path=Z}"/>
-                                        <Setter Property="Canvas.Left">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding Path="X" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                    <Binding Path="DataContext.Template.Width" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Canvas.Top">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding Path="Y" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                                    <Binding Path="DataContext.Template.Height" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ItemsControl.ItemContainerStyle>
-                                <ItemsControl.Template>
-                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                        <Border Padding="{TemplateBinding Padding}"
-                                                Width="{TemplateBinding Width}"
-                                                Height="{TemplateBinding Height}"
-                                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                                Background="{TemplateBinding Background}">
-                                            <Viewbox Stretch="Uniform" x:Name="Viewbox">
-                                                <ItemsPresenter />
-                                            </Viewbox>
-                                        </Border>
-                                    </ControlTemplate>
-                                </ItemsControl.Template>
-                            </ListBox>
-                        </Viewbox>
+                                                <i:Interaction.Behaviors>
+                                                    <dragDrop:DropBehavior RelativeElement="{Binding ElementName=canvas}"/>
+                                                </i:Interaction.Behaviors>
+                                            </Canvas>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Canvas.ZIndex" Value="{Binding Path=Z}"/>
+                                            <Setter Property="Canvas.Left">
+                                                <Setter.Value>
+                                                    <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding Path="X" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                        <Binding Path="DataContext.Template.Width" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
+                                                    </MultiBinding>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Canvas.Top">
+                                                <Setter.Value>
+                                                    <MultiBinding Converter="{StaticResource UintValueConverterExt}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding Path="Y" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                        <Binding Path="DataContext.Template.Height" RelativeSource="{RelativeSource AncestorType={x:Type controls:TemplateEditorCtl}}" />
+                                                    </MultiBinding>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+                                    <ItemsControl.Template>
+                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                            <Border Padding="{TemplateBinding Padding}"
+                                                        Width="{TemplateBinding Width}"
+                                                        Height="{TemplateBinding Height}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                                        BorderThickness="{TemplateBinding BorderThickness}" 
+                                                        Background="{TemplateBinding Background}">
+                                                <Viewbox Stretch="Uniform" x:Name="Viewbox">
+                                                    <ItemsPresenter />
+                                                </Viewbox>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </ItemsControl.Template>
+                                </ListBox>
+                            </Viewbox>
+                        </ScrollViewer>
                     </Border>
                     <Grid Grid.Column="1" Width="200" Height="600">
                         <Grid.Resources>
@@ -358,6 +364,7 @@
                             <RowDefinition Height="0.175*"/>
                             <RowDefinition Height="0.175*"/>
                             <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="0.6*"/>
                         </Grid.RowDefinitions>
                         <customControls1:RoundedButton  Content=" Добавить&#10;подложку:" Grid.Row="0" Command="{Binding Path=AddBackgroundCommand}"/>
                         <customControls1:RoundedButton  Content=" Удалить&#10;подложку:" Grid.Row="1" Command="{Binding Path=RemoveBackgroundCommand}"/>
@@ -369,8 +376,71 @@
                                     Text="Прозрачность&#10;  перекрытия"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"/>
-                            <Slider Margin="15" Minimum="0" Maximum="1" Value="{Binding Path=OverlayOpacity}" Grid.Row="4"/>
+                            <Slider Margin="15" Minimum="0" Maximum="1" Value="{Binding Path=OverlayOpacity}" />
                         </StackPanel>
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="1.5*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="6*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.ColumnSpan="2" Text="Масштаб" HorizontalAlignment="Center" Foreground="White" />
+                            <Slider Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="MainSlider" Minimum="0.1" Maximum="10" Value="1" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Переместить" HorizontalAlignment="Center" Foreground="White" />
+                            <Grid Grid.Row="3" Grid.Column="0" Width="90px" Height="90px" VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Row="0" Grid.Column="1" FontSize="20" Content="↑" Background="#c7f464" Command="{Binding Path=MoveByOnePixelTopCommand}"/>
+                                <Button Grid.Row="1" Grid.Column="2" FontSize="20" Content="→" Background="#c7f464" Command="{Binding Path=MoveByOnePixelRightCommand}"/>
+                                <Button Grid.Row="2" Grid.Column="1" FontSize="20" Content="↓" Background="#c7f464" Command="{Binding Path=MoveByOnePixelBottomCommand}"/>
+                                <Button Grid.Row="1" Grid.Column="0" FontSize="20" Content="←" Background="#c7f464" Command="{Binding Path=MoveByOnePixelLeftCommand}"/>
+                            </Grid>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2">
+                                <TextBlock Text="Увеличить" HorizontalAlignment="Center" Foreground="White" />
+                                <Grid Width="60px" Height="60px">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button FontSize="20" Content="↖" Background="#c7f464" Command="{Binding Path=IncreaseByOnePixelLtCommand}"/>
+                                    <Button Grid.Row="0" Grid.Column="1" FontSize="20" Content="↗" Background="#c7f464" Command="{Binding Path=IncreaseByOnePixelRtCommand}"/>
+                                    <Button Grid.Row="1" Grid.Column="1" FontSize="20" Content="↘" Background="#c7f464" Command="{Binding Path=IncreaseByOnePixelRbCommand}"/>
+                                    <Button Grid.Row="1" Grid.Column="0" FontSize="20" Content="↙" Background="#c7f464" Command="{Binding Path=IncreaseByOnePixelLbCommand}"/>
+                                </Grid>
+                                <TextBlock Text="Уменьшить" HorizontalAlignment="Center" Foreground="White" />
+                                <Grid Width="60px" Height="60px">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button FontSize="20" Content="↘" Background="#c7f464" Command="{Binding Path=DecreaseByOnePixelLtCommand}"/>
+                                    <Button Grid.Row="0" Grid.Column="1" FontSize="20" Content="↙" Background="#c7f464" Command="{Binding Path=DecreaseByOnePixelRtCommand}"/>
+                                    <Button Grid.Row="1" Grid.Column="1" FontSize="20" Content="↖" Background="#c7f464" Command="{Binding Path=DecreaseByOnePixelRbCommand}"/>
+                                    <Button Grid.Row="1" Grid.Column="0" FontSize="20" Content="↗" Background="#c7f464" Command="{Binding Path=DecreaseByOnePixelLbCommand}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </Grid>
                 <Border Padding="10" Grid.Row="2">
