@@ -11,6 +11,7 @@ using ImageMaker.CommonViewModels.ViewModels.Factories;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.Utils.Services;
+using NLog;
 
 namespace ImageMaker.AdminViewModels.ViewModels.Factories
 {

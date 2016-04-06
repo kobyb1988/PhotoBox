@@ -5,6 +5,7 @@ using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using AutoMapper;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.AdminViewModels.Helpers;
@@ -19,6 +20,7 @@ using ImageMaker.PatternProcessing.ImageProcessors;
 using ImageMaker.SDKData;
 using ImageMaker.SDKData.Enums;
 using ImageMaker.SDKData.Events;
+using NLog;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -29,6 +31,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private readonly IViewModelNavigator _navigator;
         private readonly SettingsProvider _settingsProvider;
         private readonly IMappingEngine _mappingEngine;
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         private RelayCommand _saveSettings;
         private RelayCommand _goBackCommand;
         private RelayCommand _takePhotoCommand;
@@ -58,6 +61,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private int _width;
         private int _height;
         private bool _sessionOpened;
+        private bool _takePhotoEnable;
+        private int _testPhotoTimeEllapsed;
 
         #region CameraSettins Properties
 
@@ -243,6 +248,12 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         #endregion
 
+        public int TestPhotoTimeEllapsed
+        {
+            get { return _testPhotoTimeEllapsed; }
+            set { Set(() => TestPhotoTimeEllapsed, ref _testPhotoTimeEllapsed, value); }
+        }
+
         public byte[] LiveViewImageStream
         {
             get { return _liveViewImageStream; }
@@ -299,14 +310,22 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             _cameraStreamSynchronize = new AutoResetEvent(false);
             StartLiveView();
-
+            TestPhotoTimeEllapsed = 0;
+            _takePhotoEnable = PreviewReady;
+            CommandManager.InvalidateRequerySuggested();
         }
 
-        private void StartLiveView()
+        private void StartLiveView(bool setupDefaultSettings=true)
         {
             _imageProcessor.StartLiveView();
             SetupRealPropertiesFromCamera();
 
+            if (setupDefaultSettings)
+                SetupSavedCameraSettings();
+        }
+
+        private void SetupSavedCameraSettings()
+        {
             var settings = _settingsProvider.GetCameraSettings();
             if (settings == null)
             {
@@ -424,29 +443,50 @@ namespace ImageMaker.AdminViewModels.ViewModels
         {
             try
             {
+                _takePhotoEnable = false;
+                CommandManager.InvalidateRequerySuggested();
+
+                _logger.Trace("Синхронизация потоков при фотографировании.");
+
                 _cameraStreamSynchronize.WaitOne();
+                _logger.Trace("Синхронизация потоков при фотографировании завершина.");
+
                 var copyLiveViewStream = LiveViewImageStream;
 
                 var stream = await _imageProcessor.TakeTestPictureAsync(copyLiveViewStream,
                     _mappingEngine.Map<CameraSettingsDto>(this));
 
+                _logger.Trace("Свойство Livview обнговилось значением {0}.", stream.Length);
+
                 LiveViewImageStream = stream;
-                await Task.Delay(5000);
+
+                for (int j = 5; j >= 0; j--)
+                {
+                    TestPhotoTimeEllapsed = j;
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                }
 
                 SetCameraSettings(SelectedAeMode, SelectedWhiteBalance,
                 SelectedAvValue, SelectedIsoSensitivity,
                 SelectedShutterSpeed);
 
-                StartLiveView();
+                _logger.Trace("Запуск LiveView");
+                StartLiveView(false);
 
+                _takePhotoEnable = true;
+                CommandManager.InvalidateRequerySuggested();
                 return stream;
             }
             catch (Exception ex)
             {
-                throw;
+                _takePhotoEnable = true;
+                MessageBox.Show("Упс, сфотографироваться не удалось.=(");
+                _logger.Error(ex, "Ошибка при фотографировании");
+                return await Task.FromResult(new byte[] { });
             }
 
         }
+
         private void SetCameraSettings(AEMode aeMode, WhiteBalance balance, ApertureValue apertureValue,
             CameraISOSensitivity cameraIsoSensitivity, ShutterSpeed shutterSpeed)
         {
@@ -518,7 +558,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
             StartLiveView();
             // Initialize();
         }
-
+        private bool TakePhotoCanExecute()
+        {
+            return _takePhotoEnable;
+        }
         public override void Dispose()
         {
             _imageProcessor.CameraErrorEvent -= ImageProcessorOnCameraErrorEvent;
@@ -540,7 +583,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
         public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 
         public RelayCommand TakePhotoCommand
-            => _takePhotoCommand ?? (_takePhotoCommand = new RelayCommand(async () => await TakePhoto()));
+            => _takePhotoCommand ?? (_takePhotoCommand = new RelayCommand(async () => await TakePhoto(), TakePhotoCanExecute));
+
+
 
         #endregion
     }

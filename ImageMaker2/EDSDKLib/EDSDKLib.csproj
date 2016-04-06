@@ -64,6 +64,8 @@
     <None Include="Resources\OLD\EDSDK_API.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\NEW\EDSDK.dll" />
+    <Content Include="Resources\NEW\EdsImage.dll" />
     <Content Include="Resources\OLD\EDSDK.dll" />
     <Content Include="Resources\OLD\EdsImage.dll" />
     <Content Include="Resources\OLD\Readme.txt" />
@@ -74,12 +76,11 @@
       <Name>ImageMaker.SDKData</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\NEW\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy "$(SolutionDir).\EDSDKLib\Resources\NEW\*.dll" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets" Condition="Exists('..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -88,6 +89,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\VVVV.EDSDK.2.14.0.1\build\net40\VVVV.EDSDK.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(SolutionDir).\EDSDKLib\Resources\NEW\*.dll" "$(SolutionDir)ImageMaker.View\bin\Debug\" /Y /I</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

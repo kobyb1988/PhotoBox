@@ -234,7 +234,7 @@
                                 ShowBackButton="True" 
                                 CornerAlign="BottomLeft,TopLeft"/>
 
-                        <Border Grid.Column="1"  Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}" CornerRadius="40" HorizontalAlignment="Center">
+                        <!--<Border Grid.Column="1"  Background="{DynamicResource {x:Static themes:ThemeManager.OtherBorderColorKey}}" CornerRadius="40" HorizontalAlignment="Center">
                             <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/take_picture.png">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
@@ -243,7 +243,7 @@
                                     <Point X="0.5" Y="0.5" />
                                 </Image.RenderTransformOrigin>
                             </Image>
-                        </Border>
+                        </Border>-->
                     </Grid>
                 </Border>
             </Grid>

@@ -8,7 +8,7 @@
              xmlns:converters="clr-namespace:ImageMaker.AdminView.Converters"
              xmlns:converters1="clr-namespace:ImageMaker.CommonView.Converters;assembly=ImageMaker.CommonView"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1400"
+             d:DesignHeight="800" d:DesignWidth="1400"
              d:DataContext="{d:DesignInstance viewModels:CameraSettingsExplorerViewModel}">
     <UserControl.Resources>
         <converters1:ByteArrayToImageConverter x:Key="ByteArrayToImageSourceConverter"/>
@@ -33,11 +33,25 @@
                 <RowDefinition Height="0.2*" />
             </Grid.RowDefinitions>
             <Image Source="../Resources/templates.png" Margin="12,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" />
-            <TextBlock Text="Настройки LiveView" Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
-            <customControls:RoundedButton Grid.Row="1" Grid.Column="1" Width="200" Foreground="#777777"  FontSize="15"
-                                          Content="Тестовое фото" Style="{StaticResource RoundedBtnStyle}" 
-                                          Background="#d7d7d7" Command="{Binding TakePhotoCommand}">
-            </customControls:RoundedButton>
+            <TextBlock Text="Настройки LiveView" Grid.Row="1" Grid.Column="0" Style="{StaticResource WhiteText30Style}" HorizontalAlignment="Center"/>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock  Text="Показ тестового снимка: " Style="{StaticResource WhiteText30Style}" />
+                <TextBlock  Text="{Binding TestPhotoTimeEllapsed,TargetNullValue=0,FallbackValue=0,StringFormat='{}{0} сек.'}" Style="{StaticResource WhiteText30Style}" />
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=TestPhotoTimeEllapsed}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=TestPhotoTimeEllapsed}" Value="5">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>
+            
             <Border Grid.Row="2" Grid.Column="0" Padding="25,5">
                 <Grid Width="280" HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
@@ -98,13 +112,13 @@
                            Foreground="White" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Image Grid.Row="2" Grid.Column="1" Margin="0,10,0,0"
                 Source="{Binding Path=LiveViewImageStream, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ByteArrayToImageSourceConverter}}" Visibility="{Binding PreviewReady,Converter={converters1:BoolToVisibleConverter}}" Stretch="Uniform" Height="400">
-                   <!--Source="C:\Users\Алексей\Pictures\IMG_25022016_192656.png">-->
+            <!--Source="C:\Users\Алексей\Pictures\IMG_25022016_192656.png">-->
             </Image>
             <Border Padding="10" Grid.Row="3" Grid.Column="1">
                 <Grid  Height="85">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.25*"/>
-                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.3*"/>
                         <ColumnDefinition Width="0.25*"/>
                     </Grid.ColumnDefinitions>
                     <customControls:BlueButton Command="{Binding Path=GoBackCommand}"
@@ -116,7 +130,26 @@
                                 InnerCornerRadius="60"
                                 Content="Назад" 
                                 ShowBackButton="True" 
-                                CornerAlign="BottomLeft,TopLeft"/>
+                                CornerAlign="BottomLeft,TopLeft" Margin="0,0,20,0"/>
+
+
+                    <customControls:RoundedButton Grid.Column="1" Width="200" Foreground="White"  FontSize="15"
+                                           Style="{StaticResource RoundedBtnWithCustomContentStyle}" 
+                                          Background="{StaticResource DefBrush}" Command="{Binding TakePhotoCommand}">
+                        <customControls:RoundedButton.Content>
+                            <Border Grid.Column="1" CornerRadius="40" HorizontalAlignment="Center" >
+                                <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/take_picture.png">
+                                    <Image.RenderTransform>
+                                        <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
+                                    </Image.RenderTransform>
+                                    <Image.RenderTransformOrigin>
+                                        <Point X="0.5" Y="0.5" />
+                                    </Image.RenderTransformOrigin>
+                                </Image>
+                            </Border>
+                        </customControls:RoundedButton.Content>
+                    </customControls:RoundedButton>
+               
                     <customControls:BlueButton Command="{Binding Path=SaveSettings}"
                                 CornerRadius="40"
                                 InnerCornerRadius="60"
@@ -124,10 +157,10 @@
                                 HorizontalAlignment="Stretch"
                                 Grid.Column="2"
                                 CornerAlign="TopRight,BottomRight"
-                                Content="Сохранить"/>
+                                Content="Сохранить" Margin="20,0,0,0"/>
                 </Grid>
             </Border>
-            <TextBlock Text="Настройки фотографии" Grid.Row="1" Grid.Column="2" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <TextBlock Text="Настройки фотографии" Grid.Row="1" Grid.Column="2" Style="{StaticResource WhiteText30Style}" HorizontalAlignment="Center"/>
             <Border Grid.Row="2" Grid.Column="2" Padding="25,5">
                 <Grid Width="280" HorizontalAlignment="Left">
                     <Grid.RowDefinitions>

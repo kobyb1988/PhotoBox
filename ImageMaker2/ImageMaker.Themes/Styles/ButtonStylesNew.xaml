@@ -300,13 +300,67 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type customControls:RoundedButton}" x:Key="RoundedBtnWithCustomContentStyle">
+    
+    <Style TargetType="{x:Type Button}" x:Key="MainBtnStyle">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Foreground" Value="#FFFFFF" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Padding" Value="0,0" />
         <Setter Property="Tag" Value="True"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        x:Name="root"
+                        CornerRadius="20"
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+                        <TextBlock
+                            Padding="{TemplateBinding Padding}"
+                                FontSize="{TemplateBinding FontSize}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource TextToUpperConverter}">
+                                    <Binding Path="Content" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <!--<Condition Property="IsPressed" Value="False"/>-->
+                                <!--<Condition Property="IsMouseOver" Value="True"/>-->
+                                <Condition Property="IsEnabled" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="root" Property="UIElement.Opacity" Value="0.4" />
+
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="DarkGray" />
+                            <Setter Property="BorderBrush" Value="DarkGray"/>
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{Binding ElementName=tempRect, Path=Fill}" />
+                        </MultiTrigger>-->
+                        <!--<Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{Binding ElementName=tempRect, Path=Fill}" />
+                        </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type customControls:RoundedButton}" x:Key="RoundedBtnWithCustomContentStyle" BasedOn="{StaticResource MainBtnStyle}">
         <Setter Property="CornerRadius" Value="20" />
         <Setter Property="Template">
             <Setter.Value>
@@ -322,16 +376,19 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsPressed" Value="False"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
+                                <!--<Condition Property="IsPressed" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>-->
+                                <Condition Property="IsEnabled" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="root" Property="UIElement.Opacity" Value="0.4" />
+                            <!--<Setter TargetName="root" Property="Background" Value="DarkGray" />
+                            <Setter TargetName="root" Property="BorderBrush" Value="DarkGray"/>-->
 
                         </MultiTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
+                        <!--<Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="DarkGray" />
                             <Setter Property="BorderBrush" Value="DarkGray"/>
-                        </Trigger>
+                        </Trigger>-->
                         <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="False"/>
@@ -386,66 +443,9 @@
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>       
-    </Style>
-    <Style TargetType="{x:Type Button}" x:Key="MainBtnStyle">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="Padding" Value="0,0" />
-        <Setter Property="Tag" Value="True"></Setter>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border 
-                        x:Name="root"
-                        CornerRadius="20"
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Background="{TemplateBinding Background}">
-                        <TextBlock
-                            Padding="{TemplateBinding Padding}"
-                                FontSize="{TemplateBinding FontSize}"
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
-                            <TextBlock.Text>
-                                <MultiBinding Converter="{StaticResource TextToUpperConverter}">
-                                    <Binding Path="Content" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                    <Binding Path="Tag" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-
-                        </TextBlock>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsPressed" Value="False"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="root" Property="UIElement.Opacity" Value="0.4" />
-
-                        </MultiTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="DarkGray" />
-                            <Setter Property="BorderBrush" Value="DarkGray"/>
-                        </Trigger>
-                        <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsPressed" Value="False"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{Binding ElementName=tempRect, Path=Fill}" />
-                        </MultiTrigger>-->
-                        <!--<Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{Binding ElementName=tempRect, Path=Fill}" />
-                        </Trigger>-->
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
         </Setter>
     </Style>
+
     <!--<Style TargetType="{x:Type local:CustomButton}" x:Key="BaseCustomBtnStyle">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
