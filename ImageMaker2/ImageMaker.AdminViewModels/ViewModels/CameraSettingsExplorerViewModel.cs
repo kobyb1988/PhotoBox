@@ -450,14 +450,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 _logger.Trace("Синхронизация потоков при фотографировании.");
 
                 _cameraStreamSynchronize.WaitOne();
-                _logger.Trace("Синхронизация потоков при фотографировании завершина.");
+                _logger.Trace("Синхронизация потоков при фотографировании завершена.");
 
                 var copyLiveViewStream = LiveViewImageStream;
 
                 var stream = await _imageProcessor.TakeTestPictureAsync(copyLiveViewStream,
                     _mappingEngine.Map<CameraSettingsDto>(this));
 
-                _logger.Trace("Свойство Livview обнговилось значением {0}.", stream.Length);
+                _logger.Trace("Свойство Liveview обновилось значением {0}.", stream.Length);
 
                 LiveViewImageStream = stream;
 
