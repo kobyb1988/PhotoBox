@@ -77,6 +77,7 @@ namespace ImageMaker.ViewModels.ViewModels
             _imageProcessor.ImageChanged += ImageProcessorOnStreamChanged;
             _imageProcessor.ImageNumberChanged += ImageProcessorOnImageNumberChanged;
 
+            Capturing = false;
 
             _imageProcessor.InitializeProcessor();
             OpenSession();
