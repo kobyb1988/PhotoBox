@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Async;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.PatternProcessing;
 using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.PatternProcessing.ImageProcessors;
@@ -48,6 +48,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private bool _sessionOpened;
         private bool _takingPicture;
+        private bool _capturing;
         private bool _isLiveViewOn;
         private int _counter;
 
@@ -127,7 +128,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         public override void Dispose()
         {
-            _logger.Trace("Отчистка");
+            _logger.Trace("Очистка");
 
             _imageProcessor.TimerElapsed -= ImageProcessorOnTimerElapsed;
             _imageProcessor.CameraErrorEvent -= ImageProcessorOnCameraErrorEvent;
@@ -143,6 +144,9 @@ namespace ImageMaker.ViewModels.ViewModels
         private void ImageProcessorOnTimerElapsed(object sender, int tick)
         {
             Counter = tick;
+
+            //костыль. камера падает, если возвращаться назад во время фотографирования
+            Capturing = Counter == 0;
         }
 
         private void ImageProcessorOnCameraErrorEvent(object sender, CameraEventBase cameraErrorInfo)
@@ -160,11 +164,12 @@ namespace ImageMaker.ViewModels.ViewModels
                 case CameraEventType.Error:
                     _logger.Error("Пришло событие ошибки CameraEventType.Error");
 
+                    var oldCameraStatus = TakingPicture;
                     TakingPicture = false;
                     SetWindowStatus(true);
                     UpdateCommands();
 
-                    ErrorEvent ev = cameraErrorInfo as ErrorEvent;
+                    var ev = cameraErrorInfo as ErrorEvent;
                     if (ev != null && ev.ErrorCode == ReturnValue.TakePictureAutoFocusNG)
                     {
                         _dialogService.ShowInfo("Не удалось сфокусироваться. Пожалуйста, повторите попытку.");
@@ -172,7 +177,12 @@ namespace ImageMaker.ViewModels.ViewModels
                         Initialize();
                     }
                     if (ev != null && ev.ErrorCode == ReturnValue.NotSupported)
+                    {
+                        //не убирать. пропадёт отсчёт
+                        //camera is still in previous state, just some setting parameter is not supported
+                        TakingPicture = oldCameraStatus;
                         return;
+                    }
                     else
                     {
                         // _dialogService.ShowInfo("Упс... Что-то пошло не так =(");//TODO разобраться как перезапустить камеру
@@ -211,7 +221,7 @@ namespace ImageMaker.ViewModels.ViewModels
                     _logger.Trace("Начало фотографирования:Синхронизация закончена");
 
                     var copyLiveViewStream = LiveViewImageStream;
-                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    await Task.Delay(TimeSpan.FromSeconds(2), token);
                     var stream = await _imageProcessor.TakePictureAsync(copyLiveViewStream,
                         _settings, token);
 
@@ -307,6 +317,11 @@ namespace ImageMaker.ViewModels.ViewModels
             set { Set(() => Counter, ref _counter, value); }
         }
 
+        public bool Capturing
+        {
+            get { return _capturing; }
+            set { Set(() => Capturing, ref _capturing, value); }
+        }
 
         public bool TakingPicture
         {
@@ -322,10 +337,7 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public bool NotTakingPicture
-        {
-            get { return !TakingPicture; }
-        }
+        public bool NotTakingPicture => !TakingPicture;
 
         public int Width
         {
@@ -383,9 +395,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
 
         public IList<uint> FocusPoints
-        {
-            get { return _focusPoints ?? (_focusPoints = Enum.GetValues(typeof(LiveViewDriveLens)).OfType<uint>().ToList()); }
-        }
+            => _focusPoints ?? (_focusPoints = Enum.GetValues(typeof (LiveViewDriveLens)).OfType<uint>().ToList());
 
         public RelayCommand<uint> SetFocusCommand
         {
@@ -397,8 +407,11 @@ namespace ImageMaker.ViewModels.ViewModels
         }
 
         public RelayCommand GoBackCommand
+            => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack, CanGoBack));
+
+        private bool CanGoBack()
         {
-            get { return _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack)); }
+            return !Capturing;
         }
 
         public RelayCommand OpenSessionCommand

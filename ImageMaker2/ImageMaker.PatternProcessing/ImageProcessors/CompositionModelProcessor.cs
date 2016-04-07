@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 using ImageMaker.Camera;
 using ImageMaker.Entities;
 using ImageMaker.PatternProcessing.Dto;
@@ -106,6 +108,8 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 RaiseImageNumberChanged(i + 1);
 
                 await Task.Delay(TimeSpan.FromSeconds(1), token);
+
+                Application.Current.Dispatcher.Invoke(CommandManager.InvalidateRequerySuggested);
 
                 for (var j = 5; j >= 0; j--)
                 {
