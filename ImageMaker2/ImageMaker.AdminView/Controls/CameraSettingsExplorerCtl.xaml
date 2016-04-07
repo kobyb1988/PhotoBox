@@ -133,7 +133,7 @@
                                 CornerAlign="BottomLeft,TopLeft" Margin="0,0,20,0"/>
 
 
-                    <customControls:RoundedButton Grid.Column="1" Width="200" Foreground="White"  FontSize="15"
+                    <customControls:RoundedButton Grid.Column="1" Width="200"  FontSize="15"
                                            Style="{StaticResource RoundedBtnWithCustomContentStyle}" 
                                           Background="{StaticResource DefBrush}" Command="{Binding TakePhotoCommand}">
                         <customControls:RoundedButton.Content>
@@ -149,7 +149,7 @@
                             </Border>
                         </customControls:RoundedButton.Content>
                     </customControls:RoundedButton>
-               
+                    
                     <customControls:BlueButton Command="{Binding Path=SaveSettings}"
                                 CornerRadius="40"
                                 InnerCornerRadius="60"

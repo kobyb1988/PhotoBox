@@ -27,6 +27,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
     public class CameraSettingsExplorerViewModel : BaseViewModel
     {
         #region Fields and Properties
+        internal static Lazy<StackStorage> Stack = new Lazy<StackStorage>();
         static AutoResetEvent _cameraStreamSynchronize;
         private readonly IViewModelNavigator _navigator;
         private readonly SettingsProvider _settingsProvider;

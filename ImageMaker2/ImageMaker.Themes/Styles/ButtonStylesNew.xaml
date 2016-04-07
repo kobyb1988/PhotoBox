@@ -97,7 +97,7 @@
                             <Condition Property="IsPressed" Value="False"/>
                             <Condition Property="IsMouseOver" Value="True"/>
                         </MultiTrigger.Conditions>
-                        <!--<Setter TargetName="overlay" Property="UIElement.Opacity" Value="0.2" />-->
+                        <!--<Setter TargetName="overlay" Property="UIElement.Opacity" Value="0.4" />-->
 
                     </MultiTrigger>
                     <Trigger Property="IsEnabled" Value="False">
@@ -334,9 +334,9 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <!--<Condition Property="IsPressed" Value="False"/>-->
-                                <!--<Condition Property="IsMouseOver" Value="True"/>-->
-                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsPressed" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <!--<Condition Property="IsEnabled" Value="False"/>-->
                             </MultiTrigger.Conditions>
                             <Setter TargetName="root" Property="UIElement.Opacity" Value="0.4" />
 
@@ -376,19 +376,18 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <!--<Condition Property="IsPressed" Value="False"/>
-                                <Condition Property="IsMouseOver" Value="True"/>-->
-                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsPressed" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="root" Property="UIElement.Opacity" Value="0.4" />
                             <!--<Setter TargetName="root" Property="Background" Value="DarkGray" />
                             <Setter TargetName="root" Property="BorderBrush" Value="DarkGray"/>-->
 
                         </MultiTrigger>
-                        <!--<Trigger Property="IsEnabled" Value="False">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="DarkGray" />
                             <Setter Property="BorderBrush" Value="DarkGray"/>
-                        </Trigger>-->
+                        </Trigger>
                         <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="False"/>
