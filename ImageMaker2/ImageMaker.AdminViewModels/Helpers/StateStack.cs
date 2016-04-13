@@ -117,7 +117,7 @@ namespace ImageMaker.AdminViewModels.Helpers
         }
     }
 
-    public class Chain : IStack
+    public class  Chain : IStack
     {
         private readonly List<IStack> _items = new List<IStack>();
  

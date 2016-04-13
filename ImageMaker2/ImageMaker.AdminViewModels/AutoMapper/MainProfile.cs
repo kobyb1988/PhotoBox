@@ -5,6 +5,7 @@ using System.Linq;
 using System.Monads;
 using AutoMapper;
 using ImageMaker.AdminViewModels.ViewModels;
+using ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;
 using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.Common.Dto;
 using ImageMaker.Common.Enums;
@@ -19,7 +20,7 @@ namespace ImageMaker.AdminViewModels.AutoMapper
     {
         protected override void Configure()
         {
-            CreateMap<CameraSettingsExplorerViewModel, CameraSettingsDto>();
+            CreateMap<CameraSettingsViewModel, CameraSettingsDto>();
             CreateMap<AppSettingsExplorerViewModel, AppSettingsDto>()
                 .ForMember(x => x.DateEnd, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateEnd.GetCurrentTime().Hours, c.DateEnd.GetCurrentTime().Minutes, 0)))
                 .ForMember(x => x.DateStart, x => x.ResolveUsing(c => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, c.DateStart.GetCurrentTime().Hours, c.DateStart.GetCurrentTime().Minutes, 0)));

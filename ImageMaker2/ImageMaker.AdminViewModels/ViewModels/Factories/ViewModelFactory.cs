@@ -4,6 +4,7 @@ using AutoMapper;
 using ImageMaker.AdminViewModels.Helpers;
 using ImageMaker.AdminViewModels.Providers;
 using ImageMaker.AdminViewModels.Services;
+using ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;
 using ImageMaker.AdminViewModels.ViewModels.Images;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
@@ -176,22 +177,24 @@ namespace ImageMaker.AdminViewModels.ViewModels.Factories
         private readonly IViewModelNavigator _navigator;
         private readonly CompositionModelProcessor _imageProcessor;
         private readonly IMappingEngine _mappingEngine;
+        private readonly IDialogService _dialogService;
 
         public CameraSettingsExplorerViewModelFactory(
             SettingsProvider settingsProvider,
             IViewModelNavigator navigator,
             CompositionModelProcessor imageProcessor,
-            IMappingEngine mappingEngine)
+            IMappingEngine mappingEngine,IDialogService dialogService)
         {
             _settingsProvider = settingsProvider;
             _navigator = navigator;
             _imageProcessor = imageProcessor;
             _mappingEngine = mappingEngine;
+            _dialogService = dialogService;
         }
 
         protected override CameraSettingsExplorerViewModel GetViewModel(object param)
         {
-            return new CameraSettingsExplorerViewModel(_navigator, _settingsProvider, _imageProcessor,_mappingEngine);
+            return new CameraSettingsExplorerViewModel(_navigator, _settingsProvider, _imageProcessor,_mappingEngine, _dialogService);
         }
     }
 

@@ -6,7 +6,8 @@
                     xmlns:dialogs1="clr-namespace:ImageMaker.CommonView.Controls.Dialogs;assembly=ImageMaker.CommonView"
                     xmlns:oldCtrls="clr-namespace:ImageMaker.AdminView.Controls.OldCtrls"
                     xmlns:moduleManageCtls="clr-namespace:ImageMaker.AdminView.Controls.ModuleManageCtls"
-                    xmlns:appSettingsCtls="clr-namespace:ImageMaker.AdminView.Controls.AppSettingsCtls">
+                    xmlns:appSettingsCtls="clr-namespace:ImageMaker.AdminView.Controls.AppSettingsCtls"
+                    xmlns:camerSettingsExplorer="clr-namespace:ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;assembly=ImageMaker.AdminViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
         <controls:WelcomeCtl />
@@ -40,7 +41,7 @@
         <appSettingsCtls:AppSettingsExplorerCtl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:CameraSettingsExplorerViewModel}">
+    <DataTemplate DataType="{x:Type camerSettingsExplorer:CameraSettingsExplorerViewModel}">
         <controls:CameraSettingsExplorerCtl />
     </DataTemplate>
 

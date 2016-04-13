@@ -175,9 +175,9 @@ namespace ImageMaker.Camera
         {
             CameraHandler.StopLiveView();
 
-            var res = new byte[] {};
+            var res = new byte[] { };
 
-            CameraHandler.TakePhoto(result => { res= result; }, SelectedCamera); //todo test comment
+            CameraHandler.TakePhoto(result => { res = result; }, SelectedCamera); //todo test comment
 
             return res;
         }
@@ -197,7 +197,7 @@ namespace ImageMaker.Camera
             else
             {
                 CameraHandler.StopLiveView();
-                OnStreamChanged(new byte[] {});
+                OnStreamChanged(new byte[] { });
             }
         }
 
@@ -214,7 +214,8 @@ namespace ImageMaker.Camera
 
         public void SetSetting(uint settingId, uint settingValue)
         {
-            CameraHandler.SetSetting(settingId, settingValue, SelectedCamera);
+            if (SelectedCamera != null)
+                CameraHandler.SetSetting(settingId, settingValue, SelectedCamera);
         }
 
         #region Subroutines

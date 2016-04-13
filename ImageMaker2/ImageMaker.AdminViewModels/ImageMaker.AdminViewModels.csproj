@@ -105,7 +105,8 @@
     <Compile Include="Services\SessionService.cs" />
     <Compile Include="ViewModels\AllSessionsViewModel.cs" />
     <Compile Include="ViewModels\AppSettingsExplorerViewModel.cs" />
-    <Compile Include="ViewModels\CameraSettingsExplorerViewModel.cs" />
+    <Compile Include="ViewModels\CamerSettingsExplorer\CameraSettingsExplorerViewModel.cs" />
+    <Compile Include="ViewModels\CamerSettingsExplorer\CameraSettingsViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\CompositionsEditorViewModel.cs" />

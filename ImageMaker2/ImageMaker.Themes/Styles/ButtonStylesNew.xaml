@@ -388,6 +388,10 @@
                             <Setter Property="Background" Value="DarkGray" />
                             <Setter Property="BorderBrush" Value="DarkGray"/>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{StaticResource DefBrush}"/>
+                            <Setter Property="BorderBrush" Value="{x:Null}"/>
+                        </Trigger>
                         <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="False"/>

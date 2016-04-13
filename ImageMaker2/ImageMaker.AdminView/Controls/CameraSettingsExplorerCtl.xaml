@@ -7,9 +7,10 @@
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
              xmlns:converters="clr-namespace:ImageMaker.AdminView.Converters"
              xmlns:converters1="clr-namespace:ImageMaker.CommonView.Converters;assembly=ImageMaker.CommonView"
+             xmlns:camerSettingsExplorer="clr-namespace:ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;assembly=ImageMaker.AdminViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1400"
-             d:DataContext="{d:DesignInstance viewModels:CameraSettingsExplorerViewModel}">
+             d:DataContext="{d:DesignInstance camerSettingsExplorer:CameraSettingsExplorerViewModel}">
     <UserControl.Resources>
         <converters1:ByteArrayToImageConverter x:Key="ByteArrayToImageSourceConverter"/>
     </UserControl.Resources>
@@ -66,40 +67,40 @@
                     </Grid.Resources>
 
                     <StackPanel Orientation="Vertical"  Grid.Column="0">
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=AEModeValues}" 
-                                SelectedValue="{Binding Path=SelectedAeMode}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.AEModeValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedAeMode}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key" Height="70"
                                 Title="Режим&#10;съемки"
                                 >
                         </customControls:CustomComboBox>
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=ExposureValues}" 
-                                SelectedValue="{Binding Path=SelectedCompensation}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.ExposureValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedCompensation}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key" Height="70"
                                 Title="Экспо-&#10;коррекция"
                                 />
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=WhiteBalanceValues}" 
-                                SelectedValue="{Binding Path=SelectedWhiteBalance}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.WhiteBalanceValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedWhiteBalance}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key" Height="70"
                                 Title="Баланс &#10;белого"
                                 />
 
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=ISOValues}" 
-                                SelectedValue="{Binding Path=SelectedIsoSensitivity}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.ISOValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedIsoSensitivity}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="ISO" Height="70"
                                />
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=AvValues}" 
-                                SelectedValue="{Binding Path=SelectedAvValue}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.AvValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedAvValue}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Диафрагма" Height="70"
                                 />
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=ShutterSpeedValues}" 
-                                SelectedValue="{Binding Path=SelectedShutterSpeed}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.ShutterSpeedValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedShutterSpeed}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Выдержка" Height="70"
@@ -132,10 +133,10 @@
                                 ShowBackButton="True" 
                                 CornerAlign="BottomLeft,TopLeft" Margin="0,0,20,0"/>
 
-
+                    
                     <customControls:RoundedButton Grid.Column="1" Width="200"  FontSize="15"
                                            Style="{StaticResource RoundedBtnWithCustomContentStyle}" 
-                                          Background="{StaticResource DefBrush}" Command="{Binding TakePhotoCommand}">
+                                           Command="{Binding TakePhotoCommand}">
                         <customControls:RoundedButton.Content>
                             <Border Grid.Column="1" CornerRadius="40" HorizontalAlignment="Center" >
                                 <Image Source="pack://application:,,,/ImageMaker.Themes;component/Resources/take_picture.png">
@@ -174,40 +175,40 @@
                     </Grid.Resources>
 
                     <StackPanel Orientation="Vertical"   Grid.Column="0">
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=AEModeValues}" 
-                                SelectedValue="{Binding Path=SelectedPhotoAeMode}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.AEModeValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedPhotoAeMode}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key" Height="70"
                                 Title="Режим&#10;съемки"
                                 >
                         </customControls:CustomComboBox>
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=ExposureValues}" 
-                                SelectedValue="{Binding Path=SelectedPhotoCompensation}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.ExposureValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedPhotoCompensation}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key" Height="70"
                                 Title="Экспо-&#10;коррекция"
                                 />
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=WhiteBalanceValues}" 
-                                SelectedValue="{Binding Path=SelectedPhotoWhiteBalance}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.WhiteBalanceValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedPhotoWhiteBalance}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key" Height="70"
                                 Title="Баланс &#10;белого"
                                 />
 
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=ISOValues}" 
-                                SelectedValue="{Binding Path=SelectedPhotoIsoSensitivity}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.ISOValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedPhotoIsoSensitivity}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="ISO" Height="70"
                                />
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=AvValues}" 
-                                SelectedValue="{Binding Path=SelectedPhotoAvValue}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.AvValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedPhotoAvValue}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Диафрагма" Height="70"
                                 />
-                        <customControls:CustomComboBox ItemsSource="{Binding Path=ShutterSpeedValues}" 
-                                SelectedValue="{Binding Path=SelectedPhotoShutterSpeed}"
+                        <customControls:CustomComboBox ItemsSource="{Binding Path=CameraSettings.ShutterSpeedValues}" 
+                                SelectedValue="{Binding Path=CameraSettings.SelectedPhotoShutterSpeed}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 Title="Выдержка" Height="70"

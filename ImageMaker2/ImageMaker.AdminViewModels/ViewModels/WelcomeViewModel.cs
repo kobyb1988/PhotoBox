@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using GalaSoft.MvvmLight.CommandWpf;
+using ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Factories;

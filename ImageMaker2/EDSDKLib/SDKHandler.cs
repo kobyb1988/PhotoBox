@@ -1151,7 +1151,6 @@ namespace EDSDKLib
             {
                 //SendSDKCommand((cam) =>
                 //{
-                var s = MainCamera.Ref;
                 if (camera.Ref != IntPtr.Zero)
                 {
                     int propsize;
