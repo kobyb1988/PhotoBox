@@ -13,6 +13,7 @@ using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using NLog;
 using System.Windows.Threading;
+using ImageMaker.AdminViewModels.ViewModels.Passwords;
 using ImageMaker.Common.Enums;
 using ImageMaker.CommonViewModels.Providers;
 

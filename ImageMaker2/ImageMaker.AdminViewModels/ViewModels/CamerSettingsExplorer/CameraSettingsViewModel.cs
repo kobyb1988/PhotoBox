@@ -368,8 +368,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
             _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)SelectedAeMode);
             _imageProcessor.SetSetting((uint)PropertyId.WhiteBalance, (uint)SelectedWhiteBalance);
             _imageProcessor.SetSetting((uint)PropertyId.Av, (uint)SelectedAvValue);
-                _logger.Trace("Синхронизация потоков при фотографировании завершена.");
-                _logger.Trace("Свойство Liveview обновилось значением {0}.", stream.Length);
+                
             //_imageProcessor.SetSetting((uint)PropertyId.ExposureCompensation, (uint)));
             _imageProcessor.SetSetting((uint)PropertyId.ISOSpeed, (uint)SelectedIsoSensitivity);
             _imageProcessor.SetSetting((uint)PropertyId.Tv, (uint)SelectedShutterSpeed);

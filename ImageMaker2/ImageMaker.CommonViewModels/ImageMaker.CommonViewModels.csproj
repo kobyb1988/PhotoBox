@@ -79,6 +79,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Async\AsyncCommand.cs" />
@@ -92,6 +93,11 @@
     <Compile Include="Behaviors\IPassword.cs" />
     <Compile Include="Behaviors\IWindowContainer.cs" />
     <Compile Include="Behaviors\ShowWindowEventArgs.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\DelegateCommandExtensions.cs" />
+    <Compile Include="Commands\INotifyPropertyChangedWithRaise.cs" />
+    <Compile Include="Commands\NotifyPropertyChangedBaseExtensions.cs" />
+    <Compile Include="Commands\ThreadTools.cs" />
     <Compile Include="DragDrop\IDragable.cs" />
     <Compile Include="DragDrop\IDropable.cs" />
     <Compile Include="DragDrop\IResizable.cs" />

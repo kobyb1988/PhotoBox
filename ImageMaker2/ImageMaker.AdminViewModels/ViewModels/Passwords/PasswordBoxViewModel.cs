@@ -1,14 +1,10 @@
-﻿using GalaSoft.MvvmLight.Command;
-using ImageMaker.CommonViewModels.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
+using GalaSoft.MvvmLight.Command;
+using ImageMaker.CommonViewModels.ViewModels;
 
-namespace ImageMaker.AdminViewModels.ViewModels
+namespace ImageMaker.AdminViewModels.ViewModels.Passwords
 {
     public class PasswordBoxViewModel : BaseViewModel
     {
@@ -27,7 +23,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
                     return;
                 _password = value;
                 RaisePropertyChanged();
-
+                RemoveChar.RaiseCanExecuteChanged();
             }
             get
             {
@@ -51,7 +47,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand _touchPasswordBox;
         public RelayCommand TouchPasswordBox { get { return _touchPasswordBox ?? (_touchPasswordBox = new RelayCommand(TouchPasswordBoxAction)); } }
         private RelayCommand _removeChar;
-        public RelayCommand RemoveChar { get { return _removeChar ?? (_removeChar = new RelayCommand(RemoveCharAction)); } }
+        public RelayCommand RemoveChar { get { return _removeChar ?? (_removeChar = new RelayCommand(RemoveCharAction,IsPasswordTyped)); } }
 
         private void TouchPasswordBoxAction()
         {
@@ -63,7 +59,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
                     other.IsShow = Visibility.Collapsed;
                 }
             }
+            RemoveChar.RaiseCanExecuteChanged();
         }
+
+        private bool IsPasswordTyped()
+        {
+            return !string.IsNullOrEmpty(Password);
+        }
+
         private void RemoveCharAction()
         {
             if (Password.Length == 0)

@@ -5,7 +5,7 @@ using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 
-namespace ImageMaker.AdminViewModels.ViewModels
+namespace ImageMaker.AdminViewModels.ViewModels.Passwords
 {
     public class PasswordPromptViewModel : BaseViewModel, IPassword
     {

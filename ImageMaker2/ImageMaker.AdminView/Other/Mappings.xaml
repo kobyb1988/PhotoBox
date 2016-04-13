@@ -7,13 +7,14 @@
                     xmlns:oldCtrls="clr-namespace:ImageMaker.AdminView.Controls.OldCtrls"
                     xmlns:moduleManageCtls="clr-namespace:ImageMaker.AdminView.Controls.ModuleManageCtls"
                     xmlns:appSettingsCtls="clr-namespace:ImageMaker.AdminView.Controls.AppSettingsCtls"
-                    xmlns:camerSettingsExplorer="clr-namespace:ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;assembly=ImageMaker.AdminViewModels">
+                    xmlns:camerSettingsExplorer="clr-namespace:ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;assembly=ImageMaker.AdminViewModels"
+                    xmlns:passwords="clr-namespace:ImageMaker.AdminViewModels.ViewModels.Passwords;assembly=ImageMaker.AdminViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
         <controls:WelcomeCtl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:PasswordPromptViewModel}">
+    <DataTemplate DataType="{x:Type passwords:PasswordPromptViewModel}">
         <controls:PasswordPromptCtl />
     </DataTemplate>
     
@@ -73,7 +74,7 @@
         <controls:ColorSelectionCtl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:ChangePasswordViewModel}">
+    <DataTemplate DataType="{x:Type passwords:ChangePasswordViewModel}">
         <controls:ChangePasswordCtl />
     </DataTemplate>
 

@@ -388,7 +388,7 @@
                             <Setter Property="Background" Value="DarkGray" />
                             <Setter Property="BorderBrush" Value="DarkGray"/>
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
+                        <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Background" Value="{StaticResource DefBrush}"/>
                             <Setter Property="BorderBrush" Value="{x:Null}"/>
                         </Trigger>

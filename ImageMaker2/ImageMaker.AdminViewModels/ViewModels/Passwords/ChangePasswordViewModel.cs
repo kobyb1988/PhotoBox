@@ -1,15 +1,11 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System;
+using GalaSoft.MvvmLight.Command;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ImageMaker.AdminViewModels.ViewModels
+namespace ImageMaker.AdminViewModels.ViewModels.Passwords
 {
     public class ChangePasswordViewModel : BaseViewModel
     {

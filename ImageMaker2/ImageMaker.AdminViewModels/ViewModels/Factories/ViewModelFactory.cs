@@ -6,6 +6,7 @@ using ImageMaker.AdminViewModels.Providers;
 using ImageMaker.AdminViewModels.Services;
 using ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer;
 using ImageMaker.AdminViewModels.ViewModels.Images;
+using ImageMaker.AdminViewModels.ViewModels.Passwords;
 using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels.Factories;
