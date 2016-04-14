@@ -163,8 +163,6 @@ namespace ImageMaker.ViewModels.ViewModels
                     UpdateCommands();
                     break;
                 case CameraEventType.Error:
-                    _logger.Error("Пришло событие ошибки CameraEventType.Error");
-
                     var oldCameraStatus = TakingPicture;
                     TakingPicture = false;
                     SetWindowStatus(true);
@@ -179,6 +177,7 @@ namespace ImageMaker.ViewModels.ViewModels
                     }
                     if (ev != null && ev.ErrorCode == ReturnValue.NotSupported)
                     {
+                        _logger.Trace("Пришло событие ошибки CameraEventType.Error, Type: NotSupported");
                         //не убирать. пропадёт отсчёт
                         //camera is still in previous state, just some setting parameter is not supported
                         TakingPicture = oldCameraStatus;
@@ -186,8 +185,8 @@ namespace ImageMaker.ViewModels.ViewModels
                     }
                     else
                     {
+                        _logger.Error($"Пришло событие ошибки CameraEventType.Error, Type: {ev?.ErrorCode}");
                         // _dialogService.ShowInfo("Упс... Что-то пошло не так =(");//TODO разобраться как перезапустить камеру
-
                     }
                     GoBack();
 
