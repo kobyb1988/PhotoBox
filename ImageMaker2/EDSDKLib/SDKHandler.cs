@@ -1335,6 +1335,7 @@ namespace EDSDKLib
             if (_dispose || _block)
                 return false;
 
+            
             sdkCommand();
             return true;
         }
@@ -1511,9 +1512,20 @@ namespace EDSDKLib
 
             ItemDownloaded += eventHandler;
 
+
             //send command to camera
-            SendSDKCommand((cam) => WrapCommand(() => _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(cam.Ref,
-                                (uint)CameraCommand.TakePicture, 0))), camera);
+            SendSDKCommand((cam) => WrapCommand(() =>
+            {
+                
+                Debug.WriteLine("{0}   {1}", MainCamera.Ref, cam.Ref);
+
+                var thread = new Thread(()=>_returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(MainCamera.Ref,
+                    (uint)CameraCommand.TakePicture, 0)));
+                thread.SetApartmentState(ApartmentState.STA);
+                thread.Start();
+
+                ;
+            }), camera);
         }
 
         private void QueueItem(Action<Camera> queueAction, Camera camera, PriorityValue priority)
