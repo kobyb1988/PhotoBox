@@ -53,6 +53,10 @@ namespace ImageMaker.Data.Repositories
         void AddCompositions(IEnumerable<Composition> compositions);
 
         void Commit();
+
+        void SetLastPhotoTimeCurrentSession(long photoTime);
+
+        long? GetLastPhotoTimeCurrentSession();
     }
 
     public class ImageRepository : RepositoryBase<ImageContext>, IImageRepository
@@ -270,6 +274,19 @@ namespace ImageMaker.Data.Repositories
         public void AddCompositions(IEnumerable<Composition> compositions)
         {
             Add(compositions);
+        }
+
+        public void SetLastPhotoTimeCurrentSession(long photoTime)
+        {
+            var currentSession = GetActiveSession();
+            if(currentSession !=null)
+                currentSession.LastPhotoTime = photoTime;
+        }
+
+        public long? GetLastPhotoTimeCurrentSession()
+        {
+            var activeSession = GetActiveSession();
+            return activeSession != null ? activeSession.LastPhotoTime : null;
         }
     }
 

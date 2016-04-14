@@ -107,10 +107,10 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
             _imageProcessor.InitializeProcessor();
             _cameraStreamSynchronize = new AutoResetEvent(false);
             TestPhotoTimeEllapsed = 0;
-            _takePhotoEnable = PreviewReady;
             CommandManager.InvalidateRequerySuggested();
 
             OpenSession();
+            _takePhotoEnable = PreviewReady;
             if (!_sessionOpened)
                 return;
 
@@ -188,10 +188,10 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                 var stream = await _imageProcessor.TakeTestPictureAsync(copyLiveViewStream,
                     _mappingEngine.Map<CameraSettingsDto>(CameraSettings));
 
-                _logger.Trace("Свойство Liveview обновилось значением {0}.", stream.Length);
+                _logger.Trace("Свойство LiveView обновилось значением {0}.", stream.Length);
                 LiveViewImageStream = stream;
 
-                for (int j = 5; j >= 0; j--)
+                for (var j = 5; j >= 0; j--)
                 {
                     TestPhotoTimeEllapsed = j;
                     await Task.Delay(TimeSpan.FromSeconds(1));

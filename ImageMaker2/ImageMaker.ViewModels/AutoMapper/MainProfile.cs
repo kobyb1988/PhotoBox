@@ -36,7 +36,7 @@ namespace ImageMaker.ViewModels.AutoMapper
             //    .ReverseMap();
 
             CreateMap<InstagramMessageDto, InstagramImageViewModel>()
-                .ConvertUsing(x => new InstagramImageViewModel(x.Data, x.Width, x.Height, x.Name,x.FullName,x.ProfilePictureData,x.UrlAvatar ));
+                .ConvertUsing(x => new InstagramImageViewModel(x.Data, x.Width, x.Height, x.Name,x.FullName,x.ProfilePictureData,x.UrlAvatar,x.UserName ));
         }
 
         private IEnumerable<TemplateImageData> FromTemplate(Template template)
