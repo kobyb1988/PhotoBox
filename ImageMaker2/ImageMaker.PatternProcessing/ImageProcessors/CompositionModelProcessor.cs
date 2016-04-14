@@ -67,7 +67,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
         public async Task<byte[]> TakeTestPictureAsync(byte[] liveViewImageStream, CameraSettingsDto settings)
         {
-            SetCameraSettings(AEMode.Bulb, settings.SelectedPhotoWhiteBalance,
+            SetCameraSettings(settings.SelectedAeMode, settings.SelectedPhotoWhiteBalance,
              settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
              settings.SelectedPhotoShutterSpeed);
 
