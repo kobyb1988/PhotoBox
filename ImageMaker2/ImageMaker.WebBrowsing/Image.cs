@@ -34,6 +34,9 @@ namespace ImageMaker.WebBrowsing
         [JsonProperty("profilepictureObject")]
         public string UrlAvatar { get; set; }
 
+        [JsonProperty("username")]
+        public string UserName { set; get; }
+
         [JsonProperty("profilepicturedata")]
         public byte [] ProfilePictureData { get; set; }
     }

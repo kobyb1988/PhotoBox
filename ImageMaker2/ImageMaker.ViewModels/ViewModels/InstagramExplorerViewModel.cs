@@ -165,7 +165,9 @@ namespace ImageMaker.ViewModels.ViewModels
 
             else
             {
-                imageData = _imageUtils.GetCaptureForInstagramControl(_checkedImage.Data, _checkedImage.FullName, DateTime.Now, _checkedImage.ProfilePictureData);
+                //если раземер имени превышает допустимое значение то мы обрезаем его
+                var imageName = _checkedImage.FullName.Length < 23 ? _checkedImage.FullName : (_checkedImage.UserName.Length < 23 ? _checkedImage.UserName : (_checkedImage.UserName.Substring(0, 20) + "..."));
+                imageData = _imageUtils.GetCaptureForInstagramControl(_checkedImage.Data, imageName, DateTime.Now, _checkedImage.ProfilePictureData);
             }
             print(imageData);
 
@@ -216,7 +218,7 @@ namespace ImageMaker.ViewModels.ViewModels
             foreach (var image in imageResponce.Return(x => x.Images, Enumerable.Empty<WebBrowsing.Image>()))
             {
                 InstagramImageViewModel viewModel = new InstagramImageViewModel(image.Data,
-                    image.Width, image.Height, image.Url, image.FullName, image.ProfilePictureData, image.UrlAvatar);
+                    image.Width, image.Height, image.Url, image.FullName, image.ProfilePictureData, image.UrlAvatar, image.UserName);
                 _images.Add(viewModel);
             }
 

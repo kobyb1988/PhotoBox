@@ -19,6 +19,7 @@ namespace InstagramImagePrinter
 {
     public class MonitoringService
     {
+        public static string EventTarget = "InstagramPrinter";
         private readonly MessageAdapter _messageAdapter;
         private readonly InstagramExplorer _instagramExplorer;
         private readonly ImageUtils _imageUtils;
@@ -37,7 +38,7 @@ namespace InstagramImagePrinter
             ImageUtils imageUtils,
             IImageRepository imageRep)
         {
-
+            
             _messageAdapter = messageAdapter;
             _instagramExplorer = instagramExplorer;
             _imageUtils = imageUtils;
@@ -66,44 +67,57 @@ namespace InstagramImagePrinter
         //TODO передать токен для отмены ниже по стеку
         public void StartMonitoring(CancellationTokenSource tokenSource, DateTime startDate, DateTime endDate, string hashTag, Action stopService)
         {
+            EventLog.WriteEntry(EventTarget, string.Format("Monitoring start with pararams: startData - {0} endDate - {1} HashTag - #{2}", startDate, endDate, hashTag), EventLogEntryType.Information);
+            endDate = new DateTime(_startTime.Year, _startTime.Month, _startTime.Day, endDate.Hour, endDate.Minute, endDate.Second);
             var thread = new Thread(() =>
            {
-
                var printed = new List<string>();
                string nextUrl = null;
                while (!tokenSource.IsCancellationRequested)
                {
-                   if (DateTime.Now.Ticks >= endDate.Ticks)
-                       break;
-
-                   Task.Delay(TimeSpan.FromSeconds(10)).Wait();
-
-                   ImageResponse result = string.IsNullOrEmpty(nextUrl)
-                        ? _instagramExplorer.GetImagesByHashTag(hashTag, "", tokenSource.Token, 1).Result
-                        : _instagramExplorer.GetImagesFromUrl(nextUrl, tokenSource.Token).Result;
-
-                   nextUrl = result.Return(x => x.NextUrl, null);
-
-                   foreach (var image in result.Images)
+                   try
                    {
-                       if (image.CreatedTime < startDate.Ticks)
+
+                       if (DateTime.Now.Ticks >= endDate.Ticks)
+                           break;
+
+                       Task.Delay(TimeSpan.FromSeconds(10)).Wait();
+
+                       ImageResponse result = string.IsNullOrEmpty(nextUrl)
+                            ? _instagramExplorer.GetImagesByHashTag(hashTag, "", tokenSource.Token).Result
+                            : _instagramExplorer.GetImagesFromUrl(nextUrl, tokenSource.Token).Result;
+
+                       nextUrl = result.Return(x => x.NextUrl, null);
+                       long? lastPhotoTime = _imageRep.GetLastPhotoTimeCurrentSession();
+
+                       foreach (var image in result.Images)
                        {
-                           nextUrl = null;
+                           if (image.CreatedTime < _startTime.Ticks || image.CreatedTime <= lastPhotoTime)
+                           {
+                               nextUrl = null;
+                               printed.Add(image.Url);
+                           }
+                           if (printed.Contains(image.Url))
+                           {
+                               continue;
+                           }
+                           _imageRep.SetLastPhotoTimeCurrentSession(image.CreatedTime);
+                           _imageRep.Commit();
                            printed.Add(image.Url);
+                           //если раземер имени превышает допустимое значение то мы обрезаем его
+                           var imageName = image.FullName.Length < 23 ? image.FullName : (image.UserName.Length < 23 ? image.UserName : (image.UserName.Substring(0, 20) + "..."));
+                           var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, imageName, DateTime.Now, image.ProfilePictureData);
+                           image.Data = imageData;
+                           _messageAdapter.ProcessImages(new List<Image> { image }, _printerName);
                        }
 
-                       if (printed.Contains(image.Url))
-                           continue;
-
-                       printed.Add(image.Url);
-                       var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, image.FullName, DateTime.Now, image.ProfilePictureData);
-
-                       image.Data = imageData;
-                       _messageAdapter.ProcessImages(new List<Image> { image }, _printerName);
+                   }
+                   catch (Exception ex)
+                   {
+                       EventLog.WriteEntry(EventTarget, string.Format("Error process image:{0}\n{1}", ex.Message, ex.StackTrace), EventLogEntryType.Information);
                    }
                }
-
-
+               EventLog.WriteEntry(EventTarget, "Monitoring stop", EventLogEntryType.Information);
                stopService();
            });
             thread.SetApartmentState(ApartmentState.STA);

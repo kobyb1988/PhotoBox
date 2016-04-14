@@ -32,11 +32,14 @@ namespace ImageMaker.InstagramMonitoring
             try
             {
                 MonitoringService service = MonitoringService.Create();
+                Thread.Sleep(10000);
                 _tokenSource = new CancellationTokenSource();
                  service.StartMonitoring(_tokenSource,()=>Stop());
+                EventLog.WriteEntry(MonitoringService.EventTarget, "Service start", EventLogEntryType.Information);
             }
             catch (Exception e)
             {
+                EventLog.WriteEntry(MonitoringService.EventTarget, "Service start fail:" + e.Message + "\nStack trace:" + e.StackTrace,EventLogEntryType.Error);
                 //File.WriteAllText(path, e.Message);
             }
         }
