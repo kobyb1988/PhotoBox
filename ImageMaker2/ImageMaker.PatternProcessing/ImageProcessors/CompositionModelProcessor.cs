@@ -77,7 +77,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 var res = await _imageProcessor.DoTakePictureAsync();
                 return res;
             });
-
+            StopLiveView();
             return picture;
         }
 

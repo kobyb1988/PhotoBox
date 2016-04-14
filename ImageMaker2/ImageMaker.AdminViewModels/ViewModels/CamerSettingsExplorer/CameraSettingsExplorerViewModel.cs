@@ -203,7 +203,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                 StartLiveView(false);
 
                 _takePhotoEnable = true;
-                CommandManager.InvalidateRequerySuggested();
+                TakePhotoCommand.RaiseCanExecuteChanged();
                 return stream;
             }
             catch (Exception ex)
