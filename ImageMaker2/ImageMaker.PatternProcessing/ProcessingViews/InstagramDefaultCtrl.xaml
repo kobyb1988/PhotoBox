@@ -43,13 +43,13 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="100,5,461,5"  Source="pack://application:,,,/ImageMaker.Themes;component/Resources/avatarDesignMode.jpg" Grid.ColumnSpan="2">
+            <Image x:Name="AvatarImg" Height="150" Width="150" Margin="100,5,20,5"  Source="pack://application:,,,/ImageMaker.Themes;component/Resources/avatarDesignMode.jpg">
                 <Image.Clip>
                     <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
                 </Image.Clip>
             </Image>
-            <TextBlock x:Name="PublishAuthorTxt" Grid.Row="0" Grid.Column="1" Margin="250,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF0A5183" FontWeight="Bold" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
-                        TextAlignment="Left" TextWrapping="Wrap" Text="Alexey Palatkin"/>
+            <TextBlock x:Name="PublishAuthorTxt" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF0A5183" FontWeight="Bold" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
+                        TextAlignment="Left" TextWrapping="Wrap" Text="Alexey Palatkin ABSCSAS"/>
             <TextBlock x:Name="TimeUpdateTxt" Grid.Row="0" Grid.Column="2" Margin="0,0,100,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FFA3A3A3" FontSize="56" FontFamily="Arial" LineStackingStrategy="BlockLineHeight"
                         TextAlignment="Left" TextWrapping="Wrap" Text="3min"/>
 

@@ -18,6 +18,8 @@ namespace ImageMaker.Entities
 
         public DateTime? EndTime { get; set; }
 
+        public long? LastPhotoTime { set; get; }
+
         public virtual ICollection<Image> Images { get; set; }
     }
 }

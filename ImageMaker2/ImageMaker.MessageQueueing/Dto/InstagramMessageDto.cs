@@ -12,6 +12,8 @@ namespace ImageMaker.MessageQueueing.Dto
 
         public int Height { get; set; }
 
+        public string UserName { set; get; }
+
         public string Name { get; set; }
 
         public string FullName { get; set; }

@@ -41,6 +41,7 @@ namespace ImageMaker.WebBrowsing
                         JObject userObject = JObject.FromObject(new
                         {
                             fullname = string.IsNullOrEmpty(fullName) ? userDataToken.SelectToken("username").Value<string>() : fullName,
+                            username = userDataToken.SelectToken("username").Value<string>()
                         });
                         long created = tokenData.SelectToken("created_time").Value<long>();
                         var dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -74,7 +75,8 @@ namespace ImageMaker.WebBrowsing
             }
             catch (OperationCanceledException ex)
             {
-                //TODO запись в лог   
+                //TODO запись в лог
+                EventLog.WriteEntry("InstagramService", ex.Message, EventLogEntryType.Warning);   
                 return default(ImageResponse);
             }
 

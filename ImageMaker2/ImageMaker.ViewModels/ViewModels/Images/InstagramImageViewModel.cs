@@ -11,8 +11,9 @@ namespace ImageMaker.ViewModels.ViewModels.Images
     {
         private bool _isChecked;
 
-        public InstagramImageViewModel(byte[] data, int width, int height, string name, string fullName, byte[] profilePictureData, string urlAvatar)
+        public InstagramImageViewModel(byte[] data, int width, int height, string name, string fullName, byte[] profilePictureData, string urlAvatar, string userName)
         {
+            UserName = userName;
             Name = name;
             Height = height;
             Width = width;
@@ -21,6 +22,8 @@ namespace ImageMaker.ViewModels.ViewModels.Images
             ProfilePictureData = profilePictureData;
             UrlAvatar = urlAvatar;
         }
+
+        public string UserName { set; get; }
 
         public byte[] Data { get; private set; }
 
