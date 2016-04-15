@@ -121,7 +121,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (Math.Abs(_overlayOpacity - value) < 0.001)
                     return;
-
+                if (Stack.IsValueCreated)
+                {
+                    Stack.Value.Do(Template);
+                }
                 _overlayOpacity = value;
                 RaisePropertyChanged();
             }
