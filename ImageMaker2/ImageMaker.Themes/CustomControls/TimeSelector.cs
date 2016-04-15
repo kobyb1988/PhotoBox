@@ -189,7 +189,7 @@ namespace ImageMaker.Themes.CustomControls
         private void Decrease()
         {
             Time.SubtractMinute();
-          //  OnPropertyChanged("Time");
+            //OnPropertyChanged("Time");
         }
 
         private bool CanIncrease()
@@ -202,7 +202,7 @@ namespace ImageMaker.Themes.CustomControls
         private void Increase()
         {
             Time.AddMinute();
-      //      OnPropertyChanged("Time");
+            //OnPropertyChanged("Time");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

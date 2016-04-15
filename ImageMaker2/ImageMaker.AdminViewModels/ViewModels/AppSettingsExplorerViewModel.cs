@@ -11,6 +11,7 @@ using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.CommonViewModels.ViewModels.Settings;
 using ImageMaker.Themes.CustomControls;
 using ImageMaker.Utils.Services;
+using System.ComponentModel;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {
@@ -36,11 +37,32 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private readonly byte _maxAvailableCopies;
         private bool _instaPrinterVisible;
         private bool _selfyPrinterVisible;
+        private bool _isSaveEnable;
 
+        public bool IsSaveEnable
+        {
+            get
+            {
+                return _isSaveEnable;
+            }
+            set
+            {
+                _isSaveEnable = value;
+                SaveSettings.RaiseCanExecuteChanged();
+                RaisePropertyChanged(() => IsSaveEnable);
+            }
+        }
         public byte MaxPrinterCopies
         {
             get { return _maxPrinterCopies; }
-            set { Set(() => MaxPrinterCopies, ref _maxPrinterCopies, value); }
+            set
+            {
+                if (_maxPrinterCopies == value)
+                    return;
+                _maxPrinterCopies = value;
+                IsSaveEnable = true;
+                RaisePropertyChanged(() => MaxPrinterCopies);
+            }
         }
 
 
@@ -51,7 +73,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_dateStart == value)
                     return;
-
+                IsSaveEnable = true;
                 _dateStart = value;
                 RaisePropertyChanged();
             }
@@ -94,7 +116,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_printerName == value)
                     return;
-
+                IsSaveEnable = true;
                 _printerName = value;
                 RaisePropertyChanged();
             }
@@ -107,7 +129,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_hashTag == value)
                     return;
-
+                IsSaveEnable = true;
                 _hashTag = value;
                 RaisePropertyChanged();
             }
@@ -120,7 +142,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_dateEnd == value)
                     return;
-
+                IsSaveEnable = true;
                 _dateEnd = value;
                 RaisePropertyChanged();
             }
@@ -181,21 +203,28 @@ namespace ImageMaker.AdminViewModels.ViewModels
                 return;
             }
 
-            PrinterName = settings.PrinterName;
-            HashTag = settings.HashTag;
-            MaxPrinterCopies = settings.MaxPrinterCopies;
-
+            _printerName = settings.PrinterName;
+            _hashTag = settings.HashTag;
+            _maxPrinterCopies = settings.MaxPrinterCopies;
+            _showPrinterOnStartup = settings.ShowPrinterOnStartup;
             // var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(_dateStart.GetCurrentTime());
 
             _dateStart = new Hour(TimeSpan.FromHours(settings.DateStart.Hour).Add(TimeSpan.FromMinutes(settings.DateStart.Minute)));
             _dateEnd = new Hour(TimeSpan.FromHours(settings.DateEnd.Hour).Add(TimeSpan.FromMinutes(settings.DateEnd.Minute)));
-
+            /*Из-за того что само время меняется в другом классе*/
+            _dateStart.PropertyChanged += OnTimePropertyChange;
+            _dateEnd.PropertyChanged += OnTimePropertyChange;
             RaisePropertyChanged(() => DateStart);
             RaisePropertyChanged(() => DateEnd);
+            RaisePropertyChanged(() => PrinterName);
+            RaisePropertyChanged(() => HashTag);
+            RaisePropertyChanged(() => MaxPrinterCopies);
+            RaisePropertyChanged(() => ShowPrinterOnStartup);
+        }
 
-            ShowPrinterOnStartup = settings.ShowPrinterOnStartup;
-
-
+        private void OnTimePropertyChange(object sender, PropertyChangedEventArgs e)
+        {
+            IsSaveEnable = true;
         }
 
         private void GoBack()
@@ -212,7 +241,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_showPrinterOnStartup == value)
                     return;
-
+                IsSaveEnable = true;
                 _showPrinterOnStartup = value;
                 RaisePropertyChanged();
             }
@@ -225,9 +254,10 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _settingsProvider.SaveAppSettings(_mappingEngine.Map<AppSettingsDto>(this));
             var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Add(_dateStart.GetCurrentTime());
             _schedulerService.StartInstagramMonitoring(dt);
+            IsSaveEnable = false;
         }
 
-        public RelayCommand SaveSettings => _saveSettings ?? (_saveSettings = new RelayCommand(Save));
+        public RelayCommand SaveSettings => _saveSettings ?? (_saveSettings = new RelayCommand(Save, () => IsSaveEnable));
 
         public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));
 

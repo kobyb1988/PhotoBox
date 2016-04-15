@@ -59,12 +59,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="IntegrationTests\MonitoringServiceTests.cs" />
     <Compile Include="IntegrationTests\PrinterTest.cs" />
     <Compile Include="IntegrationTests\SmtpClient.cs" />
     <Compile Include="IntegrationTests\TaskSchedulerTests.cs" />
-    <Compile Include="IntegrationTests\MonitoringServiceTests.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

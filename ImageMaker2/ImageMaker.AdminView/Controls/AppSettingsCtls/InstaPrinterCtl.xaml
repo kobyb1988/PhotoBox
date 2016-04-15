@@ -25,7 +25,7 @@
                                 TitleFontSize="12"
                                 CornerRadius="30"/>
         <customControls:TimeSelector Height="70"
-                                Time="{Binding Path=DateEnd}"
+                                Time="{Binding Path=DateEnd, UpdateSourceTrigger=PropertyChanged}"
                                 Grid.Row="2" 
                                 InnerCornerRadius="25,25,0,0"
                                 Title="Конец&#10;печати:"
@@ -57,7 +57,7 @@
                                             Padding="5"
                                             BorderBrush="Transparent"
                                             FontSize="30"
-                                            Text="{Binding Path=HashTag}"/>
+                                            Text="{Binding Path=HashTag, UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
             </Grid>
         </Border >
