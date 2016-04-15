@@ -33,7 +33,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="0.2*" />
             </Grid.RowDefinitions>
-            <Image Source="../Resources/templates.png" Margin="12,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" />
+            <!-- TODO Поменять надпись на соответствующую -->
+            <!--<Image Source="../Resources/templates.png" Margin="12,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" />-->
+            <Image Source="../Resources/logo-small.png" Margin="12,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" />
             <TextBlock Text="Настройки LiveView" Grid.Row="1" Grid.Column="0" Style="{StaticResource WhiteText30Style}" HorizontalAlignment="Center"/>
 
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
