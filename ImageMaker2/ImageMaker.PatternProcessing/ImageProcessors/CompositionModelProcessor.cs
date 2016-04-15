@@ -67,7 +67,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
         public async Task<byte[]> TakeTestPictureAsync(byte[] liveViewImageStream, CameraSettingsDto settings)
         {
-            SetCameraSettings(AEMode.Bulb, settings.SelectedPhotoWhiteBalance,
+            SetCameraSettings(settings.SelectedAeMode, settings.SelectedPhotoWhiteBalance,
              settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
              settings.SelectedPhotoShutterSpeed);
 
@@ -77,7 +77,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 var res = await _imageProcessor.DoTakePictureAsync();
                 return res;
             });
-
+            StopLiveView();
             return picture;
         }
 
@@ -153,7 +153,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         private void SetCameraSettings(AEMode aeMode, WhiteBalance balance, ApertureValue apertureValue,
             CameraISOSensitivity cameraIsoSensitivity, ShutterSpeed shutterSpeed)
         {
-            _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)aeMode);
+            //_imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)aeMode); TODO Не поддерживается Eos 1100
             _imageProcessor.SetSetting((uint)PropertyId.WhiteBalance, (uint)balance);
             _imageProcessor.SetSetting((uint)PropertyId.Av, (uint)apertureValue);
             //_imageProcessor.SetSetting((uint)PropertyId.ExposureCompensation, (uint)));

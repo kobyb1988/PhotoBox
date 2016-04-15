@@ -143,7 +143,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                     return;
 
                 _selectedAeMode = value;
-                _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)_selectedAeMode);
+                //   _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)_selectedAeMode); TODO Не поддерживается.
                 PushState();
                 RaisePropertyChanged();
             }
@@ -365,7 +365,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
 
         public void SetCameraSettings()
         {
-            _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)SelectedAeMode);
+            //  _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)SelectedAeMode); TODO Не поддерживается.
             _imageProcessor.SetSetting((uint)PropertyId.WhiteBalance, (uint)SelectedWhiteBalance);
             _imageProcessor.SetSetting((uint)PropertyId.Av, (uint)SelectedAvValue);
                 

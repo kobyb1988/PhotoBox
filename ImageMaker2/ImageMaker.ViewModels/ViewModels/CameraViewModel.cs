@@ -90,7 +90,7 @@ namespace ImageMaker.ViewModels.ViewModels
             {
                 _logger.Trace("Применение настроек для камеры");
 
-                _imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)_settings.SelectedAeMode);
+                //_imageProcessor.SetSetting((uint)PropertyId.AEMode, (uint)_settings.SelectedAeMode); TODO Не поддерживается.
                 _imageProcessor.SetSetting((uint)PropertyId.WhiteBalance, (uint)_settings.SelectedWhiteBalance);
                 _imageProcessor.SetSetting((uint)PropertyId.Av, (uint)_settings.SelectedAvValue);
                 _imageProcessor.SetSetting((uint)PropertyId.ExposureCompensation, (uint)_settings.SelectedCompensation);

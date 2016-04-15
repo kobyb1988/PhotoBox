@@ -140,19 +140,20 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
             else
             {
                 PreviewReady = true;
+                _takePhotoEnable = true;
                 _sessionOpened = true;
             }
         }
         private void GoBack()
         {
-            
+
             if (CameraSettings.CanUndo)
             {
                 bool result = _dialogService.ShowConfirmationDialog("При переходе все изменения будут потеряны. Продолжить?");
                 if (!result)
                     return;
 
-                CameraSettings.ResetChanges() ;
+                CameraSettings.ResetChanges();
             }
 
             CameraSettings.ClearChanges();
@@ -174,7 +175,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
             try
             {
                 _takePhotoEnable = false;
-                CommandManager.InvalidateRequerySuggested();
+                TakePhotoCommand.RaiseCanExecuteChanged();
 
                 _logger.Trace("Синхронизация потоков при фотографировании.");
 
@@ -183,6 +184,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
 
                 var copyLiveViewStream = LiveViewImageStream;
 
+                await Task.Delay(TimeSpan.FromSeconds(2));
                 var stream = await _imageProcessor.TakeTestPictureAsync(copyLiveViewStream,
                     _mappingEngine.Map<CameraSettingsDto>(CameraSettings));
 
@@ -201,7 +203,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                 StartLiveView(false);
 
                 _takePhotoEnable = true;
-                CommandManager.InvalidateRequerySuggested();
+                TakePhotoCommand.RaiseCanExecuteChanged();
                 return stream;
             }
             catch (Exception ex)
@@ -211,7 +213,6 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                 _logger.Error(ex, "Ошибка при фотографировании");
                 return await Task.FromResult(new byte[] { });
             }
-
         }
 
 
