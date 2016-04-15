@@ -123,7 +123,14 @@ namespace ImageMaker.AdminViewModels.ViewModels
                     return;
                 if (Stack.IsValueCreated)
                 {
-                    Stack.Value.Do(Template);
+                    try
+                    {
+                        Stack.Value.Do(Template);
+                    }
+                    catch
+                    {
+                    }
+                    
                 }
                 _overlayOpacity = value;
                 RaisePropertyChanged();

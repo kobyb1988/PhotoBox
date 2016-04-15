@@ -45,6 +45,24 @@ namespace ImageMaker.AdminViewModels.ViewModels
         private RelayCommand _selectBackgroundImageCommand;
         private RelayCommand _previewCommand;
 
+        private bool _isSettingsChange;
+
+        public bool IsSettingsChange
+        {
+            get
+            {
+                return _isSettingsChange;
+            }
+            set
+            {
+                if (_isSettingsChange == value)
+                    return;
+                _isSettingsChange = value;
+                SaveSettingsCommand.CanExecute(null);
+                RaisePropertyChanged(() => IsSettingsChange);
+            }
+        }
+
         public Visibility ShowMainPreview { set; get; }
         public Visibility ShowOtherPreview { set; get; }
 
@@ -72,22 +90,33 @@ namespace ImageMaker.AdminViewModels.ViewModels
             }
 
             if (settings.BackgroundImage != null)
-                MainWindowImage = new ImageViewModel(settings.BackgroundImage);
+                _mainWindowImage = new ImageViewModel(settings.BackgroundImage);
 
             if (settings.OtherBackgroundImage != null)
-                OtherWindowsImage = new ImageViewModel(settings.OtherBackgroundImage);
+                _otherWindowsImage = new ImageViewModel(settings.OtherBackgroundImage);
 
-            MainWindowBackgroundColor = settings.MainBackgroundColor;
-            MainWindowBorderColor = settings.MainBorderColor;
-            MainWindowForegroundColor = settings.MainForegroundColor;
+            _mainWindowBackgroundColor = settings.MainBackgroundColor;
+            _mainWindowBorderColor = settings.MainBorderColor;
+            _mainWindowForegroundColor = settings.MainForegroundColor;
 
-            OtherWindowsBackgroundColor = settings.OtherBackgroundColor;
-            OtherWindowsBorderColor = settings.OtherBorderColor;
-            OtherWindowsForegroundColor = settings.OtherForegroundColor;
-            OtherWindowsButtonColor = settings.OtherButtonColor;
-            OtherWindowsForegroundButtonColor = settings.OtherForegroundButtonColor;
-            OtherWindowsBackgroundCircleColor = settings.OtherBackgroundCircleColor;
-            
+            _otherWindowsBackgroundColor = settings.OtherBackgroundColor;
+            _otherWindowsBorderColor = settings.OtherBorderColor;
+            _otherWindowsForegroundColor = settings.OtherForegroundColor;
+            _otherWindowsButtonColor = settings.OtherButtonColor;
+            _otherWindowsForegroundButtonColor = settings.OtherForegroundButtonColor;
+            _otherWindowsBackgroundCircleColor = settings.OtherBackgroundCircleColor;
+
+            RaisePropertyChanged(() => MainWindowImage);
+            RaisePropertyChanged(() => OtherWindowsImage);
+            RaisePropertyChanged(() => MainWindowBackgroundColor);
+            RaisePropertyChanged(() => MainWindowBorderColor);
+            RaisePropertyChanged(() => MainWindowForegroundColor);
+            RaisePropertyChanged(() => OtherWindowsBackgroundColor);
+            RaisePropertyChanged(() => OtherWindowsBorderColor);
+            RaisePropertyChanged(() => OtherWindowsForegroundColor);
+            RaisePropertyChanged(() => OtherWindowsButtonColor);
+            RaisePropertyChanged(() => OtherWindowsForegroundButtonColor);
+            RaisePropertyChanged(() => OtherWindowsBackgroundCircleColor);
         }
 
         public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(GoPreview));
@@ -127,7 +156,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             OtherWindowsImage = viewModel;
         }
 
-        public RelayCommand SaveSettingsCommand => _saveSettingsCommand ?? (_saveSettingsCommand = new RelayCommand(SaveSettings));
+        public RelayCommand SaveSettingsCommand => _saveSettingsCommand ?? (_saveSettingsCommand = new RelayCommand(SaveSettings, () => IsSettingsChange));
 
         private void SaveSettings()
         {
@@ -138,7 +167,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             }
             else
                 _settingsProvider.SaveThemeSettings(_mappingEngine.Map<ThemeSettingsDto>(this));
-
+            IsSettingsChange = false;
         }
 
         private void SelectImage()
@@ -253,7 +282,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_mainWindowImage == value)
                     return;
-
+                IsSettingsChange = true;
                 _mainWindowImage = value;
                 RaisePropertyChanged();
             }
@@ -266,7 +295,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_otherWindowsImage == value)
                     return;
-
+                IsSettingsChange = true;
                 _otherWindowsImage = value;
                 RaisePropertyChanged();
             }
@@ -279,7 +308,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_mainWindowForegroundColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _mainWindowForegroundColor = value;
                 RaisePropertyChanged();
             }
@@ -292,7 +321,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_mainWindowBackgroundColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _mainWindowBackgroundColor = value;
                 RaisePropertyChanged();
             }
@@ -305,7 +334,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_mainWindowBorderColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _mainWindowBorderColor = value;
                 RaisePropertyChanged();
             }
@@ -318,7 +347,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_otherWindowsBackgroundColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _otherWindowsBackgroundColor = value;
                 RaisePropertyChanged();
             }
@@ -331,7 +360,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_otherWindowsForegroundColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _otherWindowsForegroundColor = value;
                 RaisePropertyChanged();
             }
@@ -344,7 +373,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_otherWindowsButtonColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _otherWindowsButtonColor = value;
                 RaisePropertyChanged();
             }
@@ -357,7 +386,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_otherWindowsBorderColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _otherWindowsBorderColor = value;
                 RaisePropertyChanged();
             }
@@ -370,7 +399,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_otherWindowsForegroundButtonColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _otherWindowsForegroundButtonColor = value;
                 RaisePropertyChanged();
             }
@@ -383,7 +412,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             {
                 if (_otherWindowsBackgroundCircleColor == value)
                     return;
-
+                IsSettingsChange = true;
                 _otherWindowsBackgroundCircleColor = value;
                 RaisePropertyChanged();
             }
