@@ -162,6 +162,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
                     _process = Process.Start(new ProcessStartInfo(CMain));
                     _process.ErrorDataReceived += ErorHandle;
                     _process.WaitForExit();
+                    RaiseRequestClose(WindowState.Visible);
                 }
                 catch (Exception ex)
                 {
