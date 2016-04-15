@@ -28,8 +28,9 @@
                     <RowDefinition Height="0.2*" />
                 </Grid.RowDefinitions>
                 <Border Padding="25">
-                    <Image Source="../../Resources/top.png" >
-                    </Image>
+                    <!-- TODO Поменять надпись на соответствующую -->
+                    <!--<Image Source="../../Resources/top.png"></Image>-->
+                    <Image Source="../../Resources/logo.png"></Image>
                 </Border>
                 <Border Grid.Row="1" Padding="20">
                     <Grid>
