@@ -299,8 +299,8 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void Save()
         {
-            if (Template.State != ItemState.Added)
-                Template.State = ItemState.Updated;
+            Template.State = Template.State != ItemState.Added ?
+                 ItemState.Updated : ItemState.UpdatedAdd;
 
             Template.CopyTo(_originalObject);
 

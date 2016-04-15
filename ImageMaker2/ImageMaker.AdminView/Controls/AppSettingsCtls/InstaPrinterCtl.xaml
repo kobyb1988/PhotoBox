@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ImageMaker.AdminView.Controls.AppSettingsCtls"
              xmlns:viewModels="clr-namespace:ImageMaker.AdminViewModels.ViewModels;assembly=ImageMaker.AdminViewModels"
              xmlns:customControls="clr-namespace:ImageMaker.Themes.CustomControls;assembly=ImageMaker.Themes"
+             xmlns:localCutomControls="clr-namespace:ImageMaker.AdminView.CustomControls"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:AppSettingsExplorerViewModel}"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -52,11 +53,13 @@
                                         FontSize="12"
                                         Foreground="#777777" />
                 <Border Grid.Column="1" CornerRadius="30" Background="#d7d7d7" Margin="3">
-                    <TextBox Background="Transparent" 
+                    <localCutomControls:PlaceholderTextBox Background="Transparent" 
                                             VerticalContentAlignment="Center"
                                             Padding="5"
                                             BorderBrush="Transparent"
                                             FontSize="30"
+                                            PlaceHolder="HashTag"
+                                            ToolTip="Хэтег вводится без занака #"
                                             Text="{Binding Path=HashTag, UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
             </Grid>

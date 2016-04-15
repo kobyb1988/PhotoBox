@@ -288,7 +288,7 @@
                         
                         <!--<CheckBox  Content="Вернуть первоначальную тему" IsChecked="{Binding IsBackToDefaultTheme}" Height="60"/>-->
                         <ToggleButton Grid.Row="3" IsChecked="{Binding Path=IsBackToDefaultTheme}"
-                                Content="Показывать кнопку печати" 
+                                Content="Вернуть первоначальную тему" 
                                 Style="{StaticResource ToggleBaseStyle}">
                             <ToggleButton.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2" />
@@ -372,7 +372,7 @@
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
-                        <customControls:ContentButton Grid.Row="1"
+                        <!--<customControls:ContentButton Grid.Row="1"
                                                       Grid.Column="1"
                             Title="Цвет 2:" 
                             HorizontalContentAlignment="Stretch"
@@ -477,8 +477,8 @@
                                     </Grid>
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
-                        </customControls:ContentButton>
-                        <customControls:ContentButton Grid.Row="2" Grid.Column="1"
+                        </customControls:ContentButton>-->
+                        <customControls:ContentButton Grid.Row="1" Grid.Column="1"
                                                       
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
@@ -533,7 +533,7 @@
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
-                        <customControls:ContentButton Grid.Row="3" 
+                        <customControls:ContentButton Grid.Row="2" 
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
                             Title="Цвет&#10;текста кнопок:" 
@@ -587,7 +587,7 @@
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
-                        <customControls:ContentButton Grid.Row="3" Grid.Column="1"
+                        <customControls:ContentButton Grid.Row="2" Grid.Column="1"
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
                             Title="Цвет&#10;круглых кнопок:" 
@@ -641,7 +641,7 @@
                                 </DataTemplate>
                             </customControls:ContentButton.ContentTemplate>
                         </customControls:ContentButton>
-                        <customControls:ContentButton Grid.Row="4"
+                        <customControls:ContentButton Grid.Row="3"
                             Title="Фоновая&#10;картинка:" 
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"

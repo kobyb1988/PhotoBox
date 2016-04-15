@@ -272,6 +272,7 @@
       <DependentUpon>WelcomeCtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\TestBindingConverter.cs" />
+    <Compile Include="CustomControls\PlaceholderTextBox.cs" />
     <Compile Include="CustomControls\UIntTextBox.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

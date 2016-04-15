@@ -158,7 +158,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             var removed = Children.Where(x => x.State == ItemState.Removed).ToList();
             removed.ForEach(x => Children.Remove(x));
 
-            var added = Children.Where(x => x.State == ItemState.Added).ToList();
+            var added = Children.Where(x => x.State == ItemState.Added || x.State == ItemState.UpdatedAdd).ToList();
             added.ForEach(x => x.State = ItemState.Unchanged);
 
             var updated = Children.Where(x => x.State == ItemState.Updated).ToList();
@@ -215,15 +215,17 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void GoBack()
         {
-            if (Children.Count(x => x.State != ItemState.Unchanged) > 0)
+            if (Children.Count(x => x.State == ItemState.Added) > 0)
             {
                 bool result =
                     _dialogService.ShowConfirmationDialog("При переходе все изменения будут потеряны. Продолжить?");
 
                 if (!result)
                     return;
+                else
+                    _navigator.NavigateBack(this);
             }
-
+            Save();
             _navigator.NavigateBack(this);
         }
 
