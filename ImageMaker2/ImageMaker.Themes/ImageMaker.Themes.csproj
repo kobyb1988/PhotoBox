@@ -272,13 +272,13 @@
     <Resource Include="Resources\InstagramLogotype.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\kia_footer.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\avatarDesignMode.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\kia_ss.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\sa_footer.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

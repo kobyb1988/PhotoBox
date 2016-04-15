@@ -68,7 +68,7 @@ namespace InstagramImagePrinter
         public void StartMonitoring(CancellationTokenSource tokenSource, DateTime startDate, DateTime endDate, string hashTag, Action stopService)
         {
             EventLog.WriteEntry(EventTarget, string.Format("Monitoring start with pararams: startData - {0} endDate - {1} HashTag - #{2}", startDate, endDate, hashTag), EventLogEntryType.Information);
-            endDate = new DateTime(_startTime.Year, _startTime.Month, _startTime.Day, endDate.Hour, endDate.Minute, endDate.Second);
+           // endDate = new DateTime(_startTime.Year, _startTime.Month, _startTime.Day, endDate.Hour, endDate.Minute, endDate.Second);
             var thread = new Thread(() =>
            {
                var printed = new List<string>();

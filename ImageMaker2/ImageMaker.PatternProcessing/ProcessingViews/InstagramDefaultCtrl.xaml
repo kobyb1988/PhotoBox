@@ -58,7 +58,7 @@
 
             <Border Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" >
                 <Border.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/kia_footer.jpg"/>
+                    <ImageBrush ImageSource="pack://application:,,,/ImageMaker.Themes;component/Resources/sa_footer.jpg"/>
                 </Border.Background>
                 <Grid Visibility="Hidden">
                     <Grid.ColumnDefinitions>
