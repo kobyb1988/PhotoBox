@@ -4,8 +4,7 @@ using System.Linq;
 using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Threading;
+using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Async;
 using ImageMaker.CommonViewModels.Providers;
@@ -169,12 +168,6 @@ namespace ImageMaker.ViewModels.ViewModels
                     UpdateCommands();
 
                     var ev = cameraErrorInfo as ErrorEvent;
-                    if (ev != null && ev.ErrorCode == ReturnValue.TakePictureAutoFocusNG)
-                    {
-                        _dialogService.ShowInfo("Не удалось сфокусироваться. Пожалуйста, повторите попытку.");
-                        Dispose();
-                        Initialize();
-                    }
                     if (ev != null && ev.ErrorCode == ReturnValue.NotSupported)
                     {
                         _logger.Trace("Пришло событие ошибки CameraEventType.Error, Type: NotSupported");
@@ -183,24 +176,50 @@ namespace ImageMaker.ViewModels.ViewModels
                         TakingPicture = oldCameraStatus;
                         return;
                     }
+                    if (ev != null && ev.ErrorCode == ReturnValue.TakePictureAutoFocusNG)
+                    {
+                        _dialogService.ShowInfo("Не удалось сфокусироваться. Пожалуйста, повторите попытку.");
+                    }
                     else
                     {
-                        _logger.Error($"Пришло событие ошибки CameraEventType.Error, Type: {ev?.ErrorCode}");
-                        // _dialogService.ShowInfo("Упс... Что-то пошло не так =(");//TODO разобраться как перезапустить камеру
+                        _dialogService.ShowInfo("Упс... Что-то пошло не так =(");
                     }
+                    _logger.Error($"Пришло событие ошибки CameraEventType.Error, Type: {ev?.ErrorCode}");
+                    
+                    //TODO разобраться как перезапустить камеру
                     GoBack();
-
                     break;
             }
         }
 
+        private int LiveViewImageStreamChanged { get; set; }
+
         private void ImageProcessorOnStreamChanged(object sender, ImageDto image)
         {
+            LiveViewImageStreamChanged++;
             Width = image.Width;
             Height = image.Height;
             LiveViewImageStream = image.ImageData;
             if (LiveViewImageStream.Length > 0)
                 _cameraStreamSynchronize.Set();
+        }
+
+        private void CheckLiveView()
+        {
+            //После того как в ImageProcessorOnCameraErrorEvent пришла ошибка и мы сделали GoBack
+            //Следующий запуск происходит без LiveView (следующие с LiveView)
+            Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(1));
+                if (LiveViewImageStream.Length == 0 && LiveViewImageStreamChanged == 1)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        _dialogService.ShowInfo("Упс... Камера не успела запуститься.");
+                        GoBack();
+                    });
+                }
+            });
         }
 
         private async Task<CompositionProcessingResult> TakePicture(CancellationToken token)
@@ -251,6 +270,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private void StartLiveView()
         {
             _imageProcessor.StartLiveView();
+            CheckLiveView();
             _isLiveViewOn = true;
             UpdateCommands();
         }
