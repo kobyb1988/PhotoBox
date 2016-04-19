@@ -1,4 +1,5 @@
-﻿using ImageMaker.CommonViewModels.Messenger;
+﻿using GalaSoft.MvvmLight.Threading;
+using ImageMaker.CommonViewModels.Messenger;
 using ImageMaker.CommonViewModels.ViewModels.Dialogs;
 using ImageMaker.CommonViewModels.ViewModels.Factories;
 
@@ -29,7 +30,7 @@ namespace ImageMaker.CommonViewModels.Services
         public bool ShowConfirmationDialog(string messageText)
         {
             ShowChildWindowMessage message = _messenger.CreateMessage<ShowChildWindowMessage>();
-            ConfirmDialogViewModel viewModel = (ConfirmDialogViewModel) _viewModelFactory.GetChild<ConfirmDialogViewModel>(messageText);
+            ConfirmDialogViewModel viewModel = (ConfirmDialogViewModel)_viewModelFactory.GetChild<ConfirmDialogViewModel>(messageText);
             message.Content = viewModel;
             message.IsDialog = true;
             _messenger.Send(message);
@@ -38,9 +39,12 @@ namespace ImageMaker.CommonViewModels.Services
 
         public void SetWindowCloseState(bool state)
         {
-            var message = _messenger.CreateMessage<WindowStateMessage>();
-            message.State = state;
-            _messenger.Send(message);
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                var message = _messenger.CreateMessage<WindowStateMessage>();
+                message.State = state;
+                _messenger.Send(message);
+            });
         }
 
         public bool ShowResultDialog(ResultBaseViewModel contentViewModel)
@@ -55,11 +59,14 @@ namespace ImageMaker.CommonViewModels.Services
 
         public void ShowInfo(string info)
         {
-            ShowChildWindowMessage message = _messenger.CreateMessage<ShowChildWindowMessage>();
-            InfoDialogViewModel viewModel = (InfoDialogViewModel)_viewModelFactory.GetChild<InfoDialogViewModel>(info);
-            message.Content = viewModel;
-            message.IsDialog = false;
-            _messenger.Send(message);
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                ShowChildWindowMessage message = _messenger.CreateMessage<ShowChildWindowMessage>();
+                InfoDialogViewModel viewModel = (InfoDialogViewModel)_viewModelFactory.GetChild<InfoDialogViewModel>(info);
+                message.Content = viewModel;
+                message.IsDialog = false;
+                _messenger.Send(message);
+            });
         }
     }
 }

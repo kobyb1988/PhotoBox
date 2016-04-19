@@ -13,6 +13,7 @@ using ImageMaker.PatternProcessing.Dto;
 using ImageMaker.SDKData;
 using ImageMaker.SDKData.Enums;
 using ImageMaker.SDKData.Events;
+using NLog;
 using Image = System.Drawing.Image;
 using Size = System.Drawing.Size;
 
@@ -20,6 +21,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 {
     public class CompositionModelProcessor
     {
+        private Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly Template _pattern;
         private readonly ImageProcessor _imageProcessor;
         private readonly ImageUtils _imageUtils;
@@ -73,7 +75,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
             byte[] picture = await Task.Run(async () =>
             {
-            //    await Task.Delay(500);//TODO Костыль, не понятно почему, но камере реально необходимо время, что бы свойства установились
+                //    await Task.Delay(500);//TODO Костыль, не понятно почему, но камере реально необходимо время, что бы свойства установились
                 var res = await _imageProcessor.DoTakePictureAsync();
                 return res;
             });
@@ -81,15 +83,9 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             return picture;
         }
 
-        public virtual async Task<CompositionProcessingResult> TakePictureAsync(byte[] liveViewImageStream, CameraSettingsDto settings, CancellationToken token)
+        public virtual async Task<CompositionProcessingResult> TakePictureAsync(Size liveViewImageStreamSize, CameraSettingsDto settings,
+            CancellationToken token)
         {
-            Size liveViewImageStreamSize;
-            using (var stream = new MemoryStream(liveViewImageStream))
-            {
-                var img = Image.FromStream(stream);
-                liveViewImageStreamSize = img.Size;
-            }
-
             return new CompositionProcessingResult(_pattern, await TakePictureInternal(liveViewImageStreamSize, settings, token));
         }
 
@@ -104,6 +100,8 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
             for (var i = 0; i < _pattern.Images.Count; i++)
             {
+                _logger.Trace($"Фото №{i}");
+
                 token.ThrowIfCancellationRequested();
                 RaiseImageNumberChanged(i + 1);
 
@@ -117,13 +115,17 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                     RaiseTimerElapsed(j1);
                     await Task.Delay(TimeSpan.FromSeconds(1), token);
                 }
+                _logger.Trace("Отсчёт закончен. Начало применения настроек для камеры.");
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     SetCameraSettings(settings.SelectedPhotoAeMode, settings.SelectedPhotoWhiteBalance,
                         settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
                         settings.SelectedPhotoShutterSpeed);
+                    _logger.Trace("Настройки для камеры применены.");
                 });
+
+                _logger.Trace("Команда с настройками для фото камере послана.");
 
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -135,14 +137,20 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
                 token.ThrowIfCancellationRequested();
                 //await Task.Delay(TimeSpan.FromSeconds(3), token); //todo
+                _logger.Trace("Фотография сделана. Начало применения настроек для LiveView");
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     SetCameraSettings(settings.SelectedAeMode, settings.SelectedWhiteBalance,
                         settings.SelectedAvValue, settings.SelectedIsoSensitivity,
                         settings.SelectedShutterSpeed);
+                    _logger.Trace("Настройки для камеры применены.");
                 });
+                _logger.Trace("Команда с настройками для LiveView камере послана.");
+
+                _logger.Trace("Стоп LiveView.");
                 StopLiveView();
+                _logger.Trace("Старт LiveView.");
                 StartLiveView();
             }
 

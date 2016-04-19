@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Monads;
 using System.Threading;
@@ -18,6 +20,7 @@ using ImageMaker.SDKData;
 using ImageMaker.SDKData.Enums;
 using ImageMaker.SDKData.Events;
 using NLog;
+using Size = System.Drawing.Size;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
@@ -50,6 +53,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private bool _capturing;
         private bool _isLiveViewOn;
         private int _counter;
+        private bool _liveViewIsReady;
 
         static AutoResetEvent _cameraStreamSynchronize;
         public CameraViewModel(
@@ -184,8 +188,8 @@ namespace ImageMaker.ViewModels.ViewModels
                     {
                         _dialogService.ShowInfo("Упс... Что-то пошло не так =(");
                     }
-                    _logger.Error($"Пришло событие ошибки CameraEventType.Error, Type: {ev?.ErrorCode}");
-                    
+                    _logger.Error($"Пришло событие ошибки CameraEventType.Error, Type: {ev?.ErrorCode} , Message: {ev?.Message.ToString()}");
+
                     //TODO разобраться как перезапустить камеру
                     GoBack();
                     break;
@@ -213,7 +217,7 @@ namespace ImageMaker.ViewModels.ViewModels
                 await Task.Delay(TimeSpan.FromSeconds(1));
                 if (LiveViewImageStream.Length == 0 && LiveViewImageStreamChanged == 1)
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    UiInvoke(() =>
                     {
                         _dialogService.ShowInfo("Упс... Камера не успела запуститься.");
                         GoBack();
@@ -224,47 +228,108 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private async Task<CompositionProcessingResult> TakePicture(CancellationToken token)
         {
-            return await Task.Run(async () =>
+            //return await Task.Run(async () =>
+            //{
+            //    try
+            //    {
+            //        _logger.Trace("Начало фотографирования");
+            //        TakingPicture = true;
+            //        UpdateCommands();
+
+            //        token.ThrowIfCancellationRequested();
+
+            //        //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
+            //        _logger.Trace("Начало фотографирования:Синхронизация LiveView");
+            //        _cameraStreamSynchronize.WaitOne();
+            //        _logger.Trace("Начало фотографирования:Синхронизация закончена");
+
+            //        var copyLiveViewStream = LiveViewImageStream;
+            //        await Task.Delay(TimeSpan.FromSeconds(2), token);
+            //        var stream = await _imageProcessor.TakePictureAsync(copyLiveViewStream,
+            //            _settings, token);
+
+            //        token.ThrowIfCancellationRequested();
+            //        _logger.Trace("Конец фотографирования");
+            //        //TakingPicture = false;
+            //        UpdateCommands();
+
+            //        SetWindowStatus(true);
+
+            //        _navigator.NavigateForward<CameraResultViewModel>(this, stream);
+            //        return stream;
+            //    }
+            //    catch (OperationCanceledException e)
+            //    {
+            //        return new CompositionProcessingResult(null, LiveViewImageStream);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _logger.Error(ex, "Ошибка фотографирования");
+            //        throw;
+            //    }
+
+            //}, token);
+            try
             {
-                try
+                _logger.Trace("Начало фотографирования");
+                TakingPicture = true;
+                UpdateCommands();
+
+                token.ThrowIfCancellationRequested();
+
+                //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
+
+                Size liveViewImageStreamSize;
+                await WaitLiveView(token);
+
+                _logger.Trace("Начало фотографирования:Синхронизация закончена");
+                token.ThrowIfCancellationRequested();
+                using (var liveViewStream = new MemoryStream(LiveViewImageStream))
                 {
-                    _logger.Trace("Начало фотографирования");
-                    TakingPicture = true;
-                    UpdateCommands();
-
-                    token.ThrowIfCancellationRequested();
-
-                    //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
-                    _logger.Trace("Начало фотографирования:Синхронизация LiveView");
-                    _cameraStreamSynchronize.WaitOne();
-                    _logger.Trace("Начало фотографирования:Синхронизация закончена");
-
-                    var copyLiveViewStream = LiveViewImageStream;
-                    await Task.Delay(TimeSpan.FromSeconds(2), token);
-                    var stream = await _imageProcessor.TakePictureAsync(copyLiveViewStream,
-                        _settings, token);
-
-                    token.ThrowIfCancellationRequested();
-                    _logger.Trace("Конец фотографирования");
-                    //TakingPicture = false;
-                    UpdateCommands();
-
-                    SetWindowStatus(true);
-
-                    _navigator.NavigateForward<CameraResultViewModel>(this, stream);
-                    return stream;
-                }
-                catch (OperationCanceledException e)
-                {
-                    return new CompositionProcessingResult(null, LiveViewImageStream);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex, "Ошибка фотографирования");
-                    throw;
+                    var img = Image.FromStream(liveViewStream);
+                    liveViewImageStreamSize = img.Size;
                 }
 
-            }, token);
+                _logger.Trace("Размеры картинки получены");
+
+                var stream = await _imageProcessor.TakePictureAsync(liveViewImageStreamSize,
+                    _settings, token);
+
+                token.ThrowIfCancellationRequested();
+                _logger.Trace("Конец фотографирования");
+                //TakingPicture = false;
+                UpdateCommands();
+
+                SetWindowStatus(true);
+
+                _navigator.NavigateForward<CameraResultViewModel>(this, stream);
+                return stream;
+            }
+            catch (OperationCanceledException e)
+            {
+                _logger.Trace(e, "Произошла отмена операции.");
+                return new CompositionProcessingResult(null, LiveViewImageStream);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Ошибка фотографирования");
+            }
+            _dialogService.ShowInfo("Камера не была готова, попробуйте ещё раз. =)");
+            GoBack();
+            return new CompositionProcessingResult(null, LiveViewImageStream);
+        }
+
+        private async Task WaitLiveView(CancellationToken token)
+        {
+            LiveViewIsReady = false;
+            await Task.Delay(TimeSpan.FromSeconds(2), token);
+            _logger.Trace("Начало фотографирования:Синхронизация LiveView");
+            while (!_cameraStreamSynchronize.WaitOne(0))
+            {
+                await Task.Delay(TimeSpan.FromSeconds(2), token);
+            }
+            LiveViewIsReady = true;
+
         }
 
         private void StartLiveView()
@@ -330,7 +395,11 @@ namespace ImageMaker.ViewModels.ViewModels
             _navigator.NavigateBack(this);
         }
 
-
+        public bool LiveViewIsReady
+        {
+            get { return _liveViewIsReady; }
+            set { Set(() => LiveViewIsReady, ref _liveViewIsReady, value); }
+        }
         public int Counter
         {
             get { return _counter; }
@@ -415,7 +484,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
 
         public IList<uint> FocusPoints
-            => _focusPoints ?? (_focusPoints = Enum.GetValues(typeof (LiveViewDriveLens)).OfType<uint>().ToList());
+            => _focusPoints ?? (_focusPoints = Enum.GetValues(typeof(LiveViewDriveLens)).OfType<uint>().ToList());
 
         public RelayCommand<uint> SetFocusCommand
         {

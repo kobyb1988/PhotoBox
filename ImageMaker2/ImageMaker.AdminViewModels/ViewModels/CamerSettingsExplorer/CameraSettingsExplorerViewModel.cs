@@ -115,6 +115,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                 return;
 
             StartLiveView();
+            CameraSettings.ClearChanges();
         }
 
         private void StartLiveView(bool setupDefaultSettings = true)
@@ -166,7 +167,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
 
         private void Save()
         {
-            CameraSettings.ClearStackChanged();
+            CameraSettings.ClearChanges();
             _settingsProvider.SaveCameraSettings(_mappingEngine.Map<CameraSettingsDto>(CameraSettings));
         }
 
@@ -230,12 +231,23 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                     var ev = cameraErrorInfo as ErrorEvent;
                     if (ev != null && ev.ErrorCode == ReturnValue.TakePictureAutoFocusNG)
                     {
-                        //_dialogService.ShowInfo("Не удалось сфокусироваться. Пожалуйста, повторите попытку.");
-                        Dispose();
-                        Initialize();
+                        _dialogService.ShowInfo("Не удалось сфокусироваться. Пожалуйста, повторите попытку.");
+                        //Dispose();
+                        //Initialize();
+                        //TODO Временное решение, вообще надо оставлять на этой же View
+                        GoBack();
+                        //_imageProcessor.StopLiveView();
+                        //_imageProcessor.StartLiveView();
+                        //_takePhotoEnable = true;
                     }
                     if (ev != null && ev.ErrorCode == ReturnValue.NotSupported)
                         return;
+                    else
+                    {
+                        _dialogService.ShowInfo("Упс... Что-то пошло не так =(");
+                    }
+                    _logger.Error($"Пришло событие ошибки CameraEventType.Error, Type: {ev?.ErrorCode} , Message: {ev?.Message.ToString()}");
+                    GoBack();
                     break;
             }
         }

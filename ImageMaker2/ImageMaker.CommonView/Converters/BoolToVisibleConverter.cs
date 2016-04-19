@@ -10,7 +10,7 @@ namespace ImageMaker.CommonView.Converters
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Visibility notVisibleState = Visibility.Hidden;
-            if (parameter != null && parameter.ToString().ToLower() == "Collapsed")
+            if (parameter != null && parameter.ToString().ToLower() == "collapsed")
                 notVisibleState = Visibility.Collapsed;
 
             if (value == DependencyProperty.UnsetValue || value == null) return notVisibleState;

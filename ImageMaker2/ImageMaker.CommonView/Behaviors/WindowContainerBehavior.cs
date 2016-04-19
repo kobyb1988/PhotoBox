@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interactivity;
+using GalaSoft.MvvmLight.Threading;
 using ImageMaker.CommonView.Helpers;
 using ImageMaker.CommonView.Windows;
 using ImageMaker.CommonViewModels.Behaviors;
@@ -19,19 +20,23 @@ namespace ImageMaker.CommonView.Behaviors
                 if (container != null)
                     container.ShowWindow += (sender, args) =>
                     {
-                        var window = new DialogChildWindow { DataContext = args.Context };
-                        window.Owner = this.AssociatedObject;
-
-                        window.Loaded += (o, eventArgs) => Application.Current.Dispatcher.BeginInvoke(new Action(() => window.SetWindowCloseStatus(false)));
-
-                        if (args.IsDialog)
+                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
                         {
-                            window.ShowDialog();
-                        }
-                        else
-                        {
-                            window.Show();
-                        }
+                            var window = new DialogChildWindow { DataContext = args.Context };
+                            window.Owner = this.AssociatedObject;
+
+                            window.Loaded += (o, eventArgs) => Application.Current.Dispatcher.BeginInvoke(
+                                         new Action(() => window.SetWindowCloseStatus(false)));
+
+                            if (args.IsDialog)
+                            {
+                                window.ShowDialog();
+                            }
+                            else
+                            {
+                                window.Show();
+                            }
+                        });
                     };
             };
         }

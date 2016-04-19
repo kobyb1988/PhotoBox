@@ -23,6 +23,9 @@ namespace EDSDKLib
 {
     public class SDKHandler : IDisposable
     {
+        private static object threadLock = new object();
+
+
         #region Variables
 
         /// <summary>
@@ -179,7 +182,9 @@ namespace EDSDKLib
             {
                 Debug.WriteLine("queue: {0}", _actionFactory.Count);
                 Debug.WriteLine("Terminatinng SDK");
-                EdsdkInvokes.TerminateSDK();
+
+                lock (threadLock) { EdsdkInvokes.TerminateSDK(); }
+
                 _actionFactory.Clear();
             };
 
@@ -364,16 +369,22 @@ namespace EDSDKLib
 
                 MainCamera = newCamera;
 
+                //subscribe to the camera events (for the SDK)
                 _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetCameraStateEventHandler(
-                    newCamera.Ref, (uint)StateEvent.All, SDKStateEvent, IntPtr.Zero));
+                  newCamera.Ref, (uint)StateEvent.All, SDKStateEvent, IntPtr.Zero));
                 _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetObjectEventHandler(newCamera.Ref,
                     (uint)ObjectEvent.All, SDKObjectEvent, IntPtr.Zero));
                 _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyEventHandler(newCamera.Ref,
                     (uint)PropertyEvent.All, SDKPropertyEvent, IntPtr.Zero));
-                //open a session
-                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.OpenSession(newCamera.Ref));
 
-                //subscribe to the camera events (for the SDK)
+                StartInSTASyncThread(() =>
+                {
+                    //open a session
+                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.OpenSession(newCamera.Ref));
+                });
+
+
+
 
                 ImageSaveDirectory =
                     System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
@@ -1128,13 +1139,17 @@ namespace EDSDKLib
             {
                 SendSDKCommand((cam) =>
                 {
-                    int propsize;
-                    DataType proptype;
-                    //get size of property
+                    StartInSTASyncThread(() =>
+                    {
+                        int propsize;
+                        DataType proptype;
+                        //get size of property
 
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertySize(cam.Ref, PropID, 0, out proptype, out propsize));
-                    //set given property
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyData(cam.Ref, PropID, 0, propsize, Value));
+                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertySize(cam.Ref, PropID, 0, out proptype, out propsize));
+                        //set given property
+                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyData(cam.Ref, PropID, 0, propsize, Value));
+                    });
+
                 }, camera);
             }
             else { throw new ArgumentNullException("Camera or camera reference is null/zero"); }
@@ -1151,15 +1166,18 @@ namespace EDSDKLib
             {
                 //SendSDKCommand((cam) =>
                 //{
-                if (camera.Ref != IntPtr.Zero)
+                if (MainCamera != null && MainCamera.Ref != IntPtr.Zero)
                 {
-                    int propsize;
-                    DataType proptype;
-                    //get size of property
+                    StartInSTASyncThread(() =>
+                    {
+                        int propsize;
+                        DataType proptype;
+                        //get size of property
 
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertySize(camera.Ref, PropID, 0, out proptype, out propsize));
-                    //set given property
-                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyData(camera.Ref, PropID, 0, propsize, Value));
+                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.GetPropertySize(MainCamera.Ref, PropID, 0, out proptype, out propsize));
+                        //set given property
+                        _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetPropertyData(MainCamera.Ref, PropID, 0, propsize, Value));
+                    });
                 }
                 else { throw new ArgumentNullException("Camera or camera reference is null/zero"); }
                 //}, camera, PriorityValue.Critical);
@@ -1298,9 +1316,9 @@ namespace EDSDKLib
                         DequeueItem();
                     }, camera, PriorityValue.Normal);
                 }
-
                 SetSetting((uint)PropertyId.LiveViewOutputDevice,
-                    (uint)(LVoff ? LiveViewOutputDevice.Computer : LiveViewOutputDevice.Camera), camera);
+                  (uint)(LVoff ? LiveViewOutputDevice.Computer : LiveViewOutputDevice.Camera), camera);
+
             }, token, TaskCreationOptions.None,
                 TaskScheduler.Default
                 ).ContinueWith(t =>
@@ -1308,8 +1326,11 @@ namespace EDSDKLib
                     if (!CameraSessionOpen)
                         QueueItem((cam) =>
                         {
-                            _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.CloseSession(cam.Ref));
-                            _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.Release(cam.Ref));
+                            StartInSTASyncThread(() =>
+                            {
+                                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.CloseSession(cam.Ref));
+                                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.Release(cam.Ref));
+                            });
                             DequeueItem();
                         }, camera, PriorityValue.Critical);
 
@@ -1335,8 +1356,8 @@ namespace EDSDKLib
             if (_dispose || _block)
                 return false;
 
-            
             sdkCommand();
+
             return true;
         }
 
@@ -1516,15 +1537,14 @@ namespace EDSDKLib
             //send command to camera
             SendSDKCommand((cam) => WrapCommand(() =>
             {
-                
+
                 Debug.WriteLine("{0}   {1}", MainCamera.Ref, cam.Ref);
 
-                var thread = new Thread(()=>_returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(MainCamera.Ref,
-                    (uint)CameraCommand.TakePicture, 0)));
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Start();
-
-                ;
+                StartInSTASyncThread(() =>
+                {
+                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SendCommand(MainCamera.Ref,
+                        (uint)CameraCommand.TakePicture, 0));
+                });
             }), camera);
         }
 
@@ -1583,7 +1603,10 @@ namespace EDSDKLib
             //set the values to camera
             SendSDKCommand((cam) =>
             {
-                _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetCapacity(cam.Ref, capacity));
+                StartInSTASyncThread(() =>
+                {
+                    _returnValueManager.HandleFunctionReturnValue(EdsdkInvokes.SetCapacity(cam.Ref, capacity));
+                });
                 //DequeueItem();
             }, camera);
         }
@@ -1756,5 +1779,20 @@ namespace EDSDKLib
         #endregion
 
         #endregion
+
+        private void StartInSTASyncThread(Action action)
+        {
+            action();
+            //var thread = new Thread(() =>
+            //{
+            //    lock (threadLock)
+            //    {
+            //        action();
+            //    }
+
+            //});
+            //thread.SetApartmentState(ApartmentState.STA);
+            //thread.Start();
+        }
     }
 }

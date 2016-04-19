@@ -7,6 +7,7 @@ using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.PatternProcessing;
 using ImageMaker.Utils.Services;
 using System.IO;
+using NLog;
 
 namespace ImageMaker.ViewModels.ViewModels
 {
@@ -16,6 +17,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private readonly ImagePrinter _printer;
         private readonly ImageService _imageService;
         private readonly string _printerName;
+        private Logger _logger = LogManager.GetCurrentClassLogger();
 
         public CameraResultViewModel(
             IViewModelNavigator navigator, 
@@ -48,7 +50,7 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private void GoBack()
         {
-            _navigator.NavigateBack(this);
+            _navigator.NavigateForward<SelectPatternViewModel>(this, null);
         }
 
         private RelayCommand _printImageCommand;
@@ -66,11 +68,15 @@ namespace ImageMaker.ViewModels.ViewModels
         {
             get { return _image; }
             set {
-                Set(() => Image, ref _image, value);
+                if (value != null)
+                {
+                    Set(() => Image, ref _image, value);
 
-                var image = System.Drawing.Image.FromStream(new MemoryStream(Image));
-                _width = image.Width;
-                _height = image.Height;
+                    var image = System.Drawing.Image.FromStream(new MemoryStream(Image));
+                    _width = image.Width;
+                    _height = image.Height;
+                }
+                else _logger.Trace("Попытка сохранить в объект Image null.");
             }
         }
 

@@ -392,7 +392,6 @@ namespace ImageMaker.AdminViewModels.ViewModels.CamerSettingsExplorer
                 Stack.Value.Clear();
         }
 
-        public void ClearStackChanged() => Stack.Value.Clear();
         public void UndoChanges() => Stack.Value.Undo();
         public void RedoChanges() => Stack.Value.Redo();
         public void ResetChanges() => Stack.Value.Reset();
