@@ -177,7 +177,9 @@ namespace ImageMaker.AdminViewModels.ViewModels
             foreach (var child in Children)
             {
                 child.IsInstaPrinterTemplate = child.IsChecked && !child.IsInstaPrinterTemplate;
-                child.State=ItemState.Updated;
+
+                if (child.State == ItemState.Unchanged)
+                    child.State = ItemState.Updated;
             }
             CheckItem();
         }
@@ -209,7 +211,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void Filter(FilterEventArgs args)
         {
-            var item = (CheckableTemplateViewModel) args.Item;
+            var item = (CheckableTemplateViewModel)args.Item;
             args.Accepted = item.State != ItemState.Removed;
         }
 
@@ -244,7 +246,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
             _updatedTemplate = new CheckableTemplateViewModel(name, 500, 500, 0,
                 Enumerable.Empty<TemplateImageViewModel>(),
-                TemplateEditorViewModel.CreateDefaultBackground(), null,false);
+                TemplateEditorViewModel.CreateDefaultBackground(), null, false);
 
             _updatedTemplate.IsDefaultBackground = true;
             _navigator.NavigateForward<TemplateEditorViewModel>(this, _updatedTemplate);

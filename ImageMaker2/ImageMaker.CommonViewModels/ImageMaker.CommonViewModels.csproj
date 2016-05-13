@@ -110,6 +110,7 @@
     <Compile Include="Ninject\NinjectBaseModule.cs" />
     <Compile Include="Ninject\NinjectBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\PatternViewModelProvider.cs" />
     <Compile Include="Providers\SettingsProvider.cs" />
     <Compile Include="Services\CommunicationManager.cs" />
     <Compile Include="Services\DialogService.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="ViewModels\Images\ImageViewModel.cs" />
     <Compile Include="ViewModels\Navigation\ViewModelStorage.cs" />
     <Compile Include="ViewModels\Settings\AppSettingsDto.cs" />
+    <Compile Include="ViewModels\TemplateViewModel.cs" />
     <Compile Include="ViewModels\Validation\ICustomValidationRule.cs" />
     <Compile Include="ViewModels\Navigation\IViewModelNavigator.cs" />
     <Compile Include="ViewModels\Navigation\ViewModelNavigator.cs" />

@@ -72,13 +72,14 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
             SetCameraSettings(settings.SelectedAeMode, settings.SelectedPhotoWhiteBalance,
              settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
              settings.SelectedPhotoShutterSpeed);
+            byte[] picture = await _imageProcessor.DoTakePictureAsync();
 
-            byte[] picture = await Task.Run(async () =>
-            {
-                //    await Task.Delay(500);//TODO Костыль, не понятно почему, но камере реально необходимо время, что бы свойства установились
-                var res = await _imageProcessor.DoTakePictureAsync();
-                return res;
-            });
+            //byte[] picture = await Task.Run(async () =>
+            //{
+            //    //    await Task.Delay(500);//TODO Костыль, не понятно почему, но камере реально необходимо время, что бы свойства установились
+            //    var res = await _imageProcessor.DoTakePictureAsync();
+            //    return res;
+            //});
             StopLiveView();
             return picture;
         }
@@ -86,13 +87,13 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
         public virtual async Task<CompositionProcessingResult> TakePictureAsync(Size liveViewImageStreamSize, CameraSettingsDto settings,
             CancellationToken token)
         {
-            return new CompositionProcessingResult(_pattern, await TakePictureInternal(liveViewImageStreamSize, settings, token));
+            return new CompositionProcessingResult(_pattern, await Run(liveViewImageStreamSize, settings, token));
         }
 
-        protected async Task<byte[]> TakePictureInternal(Size liveViewImageStreamSize, CameraSettingsDto settings, CancellationToken token)
-        {
-            return await Task.Run(() => Run(liveViewImageStreamSize, settings, token), token);
-        }
+        //protected async Task<byte[]> TakePictureInternal(Size liveViewImageStreamSize, CameraSettingsDto settings, CancellationToken token)
+        //{
+        //    return await Task.Run(() => Run(liveViewImageStreamSize, settings, token), token);
+        //}
 
         private async Task<byte[]> Run(Size liveViewImageStreamSize, CameraSettingsDto settings, CancellationToken token)
         {
@@ -107,7 +108,7 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
 
                 await Task.Delay(TimeSpan.FromSeconds(1), token);
 
-                Application.Current.Dispatcher.Invoke(CommandManager.InvalidateRequerySuggested);
+                CommandManager.InvalidateRequerySuggested();
 
                 for (var j = 5; j >= 0; j--)
                 {
@@ -117,15 +118,11 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 }
                 _logger.Trace("Отсчёт закончен. Начало применения настроек для камеры.");
 
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    SetCameraSettings(settings.SelectedPhotoAeMode, settings.SelectedPhotoWhiteBalance,
-                        settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
-                        settings.SelectedPhotoShutterSpeed);
-                    _logger.Trace("Настройки для камеры применены.");
-                });
 
-                _logger.Trace("Команда с настройками для фото камере послана.");
+                SetCameraSettings(settings.SelectedPhotoAeMode, settings.SelectedPhotoWhiteBalance,
+                    settings.SelectedPhotoAvValue, settings.SelectedPhotoIsoSensitivity,
+                    settings.SelectedPhotoShutterSpeed);
+                _logger.Trace("Настройки для камеры применены.");
 
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -139,14 +136,10 @@ namespace ImageMaker.PatternProcessing.ImageProcessors
                 //await Task.Delay(TimeSpan.FromSeconds(3), token); //todo
                 _logger.Trace("Фотография сделана. Начало применения настроек для LiveView");
 
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    SetCameraSettings(settings.SelectedAeMode, settings.SelectedWhiteBalance,
-                        settings.SelectedAvValue, settings.SelectedIsoSensitivity,
-                        settings.SelectedShutterSpeed);
-                    _logger.Trace("Настройки для камеры применены.");
-                });
-                _logger.Trace("Команда с настройками для LiveView камере послана.");
+                SetCameraSettings(settings.SelectedAeMode, settings.SelectedWhiteBalance,
+                    settings.SelectedAvValue, settings.SelectedIsoSensitivity,
+                    settings.SelectedShutterSpeed);
+                _logger.Trace("Настройки для камеры применены.");
 
                 _logger.Trace("Стоп LiveView.");
                 StopLiveView();

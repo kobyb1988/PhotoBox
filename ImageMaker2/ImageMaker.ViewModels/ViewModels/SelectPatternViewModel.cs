@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.Common.Extensions;
+using ImageMaker.CommonViewModels.Providers;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
 using ImageMaker.ViewModels.Providers;
@@ -23,6 +28,7 @@ namespace ImageMaker.ViewModels.ViewModels
         private bool _isBusyLoading;
         private ICollectionView _patternsView;
         private TemplateViewModel _selectedPattern;
+        private bool _cameraVMInitializing;
 
         public SelectPatternViewModel(
             IViewModelNavigator navigator,
@@ -40,7 +46,7 @@ namespace ImageMaker.ViewModels.ViewModels
                 return;
 
             IsBusyLoading = true;
-            Task.Factory.StartNew(() => _patternViewModelProvider.GetPatternsAsync().Result)
+            Task.Factory.StartNew(() => _patternViewModelProvider.GetPatternsAsync().Result.Where(x=>!x.IsInstaPrinterTemplate))
                 .ContinueWith(t =>
                 {
                     t.Result.CopyTo(Patterns);
@@ -59,11 +65,27 @@ namespace ImageMaker.ViewModels.ViewModels
             {
                 if (_selectedPattern == value)
                     return;
-                
+
                 _selectedPattern = value;
                 RaisePropertyChanged();
                 if (value != null)
-                    _navigator.NavigateForward<CameraViewModel>(this, SelectedPattern);
+                {
+                    StartCamera();
+                }
+            }
+        }
+
+
+        public bool CameraVMInitializing
+        {
+            get { return _cameraVMInitializing; }
+            set
+            {
+                if (_cameraVMInitializing == value)
+                    return;
+
+                _cameraVMInitializing = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -78,6 +100,27 @@ namespace ImageMaker.ViewModels.ViewModels
                 _isBusyLoading = value;
                 RaisePropertyChanged();
             }
+        }
+
+        private void StartCamera()
+        {
+            CameraVMInitializing = true;
+           DoEvents();
+            _navigator.NavigateForward<CameraViewModel>(this, SelectedPattern);
+            CameraVMInitializing = false;
+
+        }
+
+        public static void DoEvents()
+        {
+            DispatcherFrame outerFrame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke((SendOrPostCallback)delegate (object arg)
+            {
+                DispatcherFrame innerFrame = arg as DispatcherFrame;
+                innerFrame.Continue = false;
+            }, DispatcherPriority.Background, outerFrame);
+
+            Dispatcher.PushFrame(outerFrame);
         }
 
         public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack));

@@ -56,6 +56,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
             _imageLoadService = imageLoadService;
             _originalObject = template;
             Template = _originalObject.Copy();
+            
             Init();
         }
 

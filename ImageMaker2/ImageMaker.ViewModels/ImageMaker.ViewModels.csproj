@@ -100,7 +100,6 @@
     <Compile Include="ViewModels\CameraViewModel.cs" />
     <Compile Include="ViewModels\Images\CompositionViewModel.cs" />
     <Compile Include="ViewModels\Images\InstagramImageViewModel.cs" />
-    <Compile Include="ViewModels\Images\TemplateViewModel.cs" />
     <Compile Include="ViewModels\ImportPatternsViewModel.cs" />
     <Compile Include="ViewModels\InstagramExplorerViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs">
@@ -110,7 +109,6 @@
     <Compile Include="ViewModels\PatternManageViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternDataViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternViewModel.cs" />
-    <Compile Include="Providers\PatternViewModelProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PrinterActivityViewerViewModel.cs" />
     <Compile Include="ViewModels\SelectActivityViewModel.cs" />

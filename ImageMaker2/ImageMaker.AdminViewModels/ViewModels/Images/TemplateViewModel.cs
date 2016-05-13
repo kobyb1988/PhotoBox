@@ -48,7 +48,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public void AddNewChild()
         {
-            var child = new TemplateImageViewModel(Width, Height);
+            var child = new TemplateImageViewModel(Width, Height,IsInstaPrinterTemplate);
             Children.Add(child);
             child.Index = Children.IndexOf(child) + 1;
         }

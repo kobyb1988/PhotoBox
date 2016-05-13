@@ -7,6 +7,7 @@ using System.Monads;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using ImageMaker.CommonViewModels.Async;
 using ImageMaker.CommonViewModels.Providers;
@@ -85,7 +86,11 @@ namespace ImageMaker.ViewModels.ViewModels
             _imageProcessor.InitializeProcessor();
             OpenSession();
             if (!_sessionOpened)
+            {
+                _dialogService.ShowInfo("Камера не готова, попробуйте ещё раз.");
+                _logger.Trace("Неудачная поптыка открытия сессии");
                 return;
+            }
 
             _settings = _settingsProvider.GetCameraSettings();
 
@@ -228,47 +233,6 @@ namespace ImageMaker.ViewModels.ViewModels
 
         private async Task<CompositionProcessingResult> TakePicture(CancellationToken token)
         {
-            //return await Task.Run(async () =>
-            //{
-            //    try
-            //    {
-            //        _logger.Trace("Начало фотографирования");
-            //        TakingPicture = true;
-            //        UpdateCommands();
-
-            //        token.ThrowIfCancellationRequested();
-
-            //        //_imageProcessor.ImageChanged -= ImageProcessorOnStreamChanged;
-            //        _logger.Trace("Начало фотографирования:Синхронизация LiveView");
-            //        _cameraStreamSynchronize.WaitOne();
-            //        _logger.Trace("Начало фотографирования:Синхронизация закончена");
-
-            //        var copyLiveViewStream = LiveViewImageStream;
-            //        await Task.Delay(TimeSpan.FromSeconds(2), token);
-            //        var stream = await _imageProcessor.TakePictureAsync(copyLiveViewStream,
-            //            _settings, token);
-
-            //        token.ThrowIfCancellationRequested();
-            //        _logger.Trace("Конец фотографирования");
-            //        //TakingPicture = false;
-            //        UpdateCommands();
-
-            //        SetWindowStatus(true);
-
-            //        _navigator.NavigateForward<CameraResultViewModel>(this, stream);
-            //        return stream;
-            //    }
-            //    catch (OperationCanceledException e)
-            //    {
-            //        return new CompositionProcessingResult(null, LiveViewImageStream);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        _logger.Error(ex, "Ошибка фотографирования");
-            //        throw;
-            //    }
-
-            //}, token);
             try
             {
                 _logger.Trace("Начало фотографирования");
@@ -461,7 +425,7 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
-        public IAsyncCommand TakePictureCommand
+        public ICommand TakePictureCommand
         {
             get
             {
@@ -472,6 +436,7 @@ namespace ImageMaker.ViewModels.ViewModels
             }
         }
 
+     
         #region unused
 
 

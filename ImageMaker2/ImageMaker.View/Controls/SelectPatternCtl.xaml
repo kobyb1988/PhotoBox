@@ -54,7 +54,7 @@
                 </Border>
 
                 <Border Grid.Row="1">
-                    <Grid>
+                    <Grid x:Name="patternGrid">
                         <Grid.Resources>
                             <DataTemplate x:Key="tmpl" DataType="{x:Type images:CompositionViewModel}">
                                 <ToggleButton ClickMode="Release">
@@ -188,9 +188,10 @@
                         </ListBox>
                         <spinningWheel:SpinningWheel IsSpinning="{Binding Path=IsBusyLoading}"
                                 Visibility="{Binding Path=IsBusyLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Text="Запуск камеры..." FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=CameraVMInitializing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </Grid>
                 </Border>
-                <Border Padding="0" Grid.Row="2">
+                <Border Padding="0" Grid.Row="2"  >
                     <Grid Width="890" Height="85">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.25*"/>

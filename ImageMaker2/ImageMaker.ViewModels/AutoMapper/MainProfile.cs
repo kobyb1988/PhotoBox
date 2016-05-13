@@ -3,6 +3,7 @@ using System.Linq;
 using System.Monads;
 using AutoMapper;
 using ImageMaker.CommonViewModels;
+using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 using ImageMaker.Entities;
 using ImageMaker.MessageQueueing.Dto;

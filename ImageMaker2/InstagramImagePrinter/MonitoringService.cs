@@ -38,7 +38,7 @@ namespace InstagramImagePrinter
             ImageUtils imageUtils,
             IImageRepository imageRep)
         {
-            
+
             _messageAdapter = messageAdapter;
             _instagramExplorer = instagramExplorer;
             _imageUtils = imageUtils;
@@ -48,7 +48,10 @@ namespace InstagramImagePrinter
                 throw new InvalidOperationException();
 
             _hashTag = settings.HashTag;
-            _startTime = imageRep.GetActiveSession(includeImages: false).StartTime;
+            var startSessionTime = imageRep.GetActiveSession(includeImages: false);
+            if (startSessionTime == null)
+                imageRep.StartSession();
+            _startTime = startSessionTime?.StartTime ?? DateTime.Now;
             _endTime = settings.DateEnd;
             _printerName = settings.PrinterName;
         }
@@ -70,58 +73,56 @@ namespace InstagramImagePrinter
             EventLog.WriteEntry(EventTarget, string.Format("Monitoring start with pararams: startData - {0} endDate - {1} HashTag - #{2}", startDate, endDate, hashTag), EventLogEntryType.Information);
             endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, endDate.Hour, endDate.Minute, endDate.Second);
             var thread = new Thread(() =>
-           {
-               var printed = new List<string>();
-               string nextUrl = null;
-               while (!tokenSource.IsCancellationRequested)
-               {
-                   try
-                   {
+            {
+                var printed = new List<string>();
+                string nextUrl = null;
+                while (!tokenSource.IsCancellationRequested)
+                {
+                    try
+                    {
 
-                       if (DateTime.Now.Ticks >= endDate.Ticks)
-                           break;
+                        if (DateTime.Now.Ticks >= endDate.Ticks)
+                            break;
+                        Task.Delay(TimeSpan.FromSeconds(5)).Wait();
 
-                       Task.Delay(TimeSpan.FromSeconds(10)).Wait();
+                        ImageResponse result = string.IsNullOrEmpty(nextUrl)
+                             ? _instagramExplorer.GetImagesByHashTag(hashTag, "", tokenSource.Token).Result
+                             : _instagramExplorer.GetImagesFromUrl(nextUrl, tokenSource.Token).Result;
 
-                       ImageResponse result = string.IsNullOrEmpty(nextUrl)
-                            ? _instagramExplorer.GetImagesByHashTag(hashTag, "", tokenSource.Token).Result
-                            : _instagramExplorer.GetImagesFromUrl(nextUrl, tokenSource.Token).Result;
+                        nextUrl = result.Return(x => x.NextUrl, null);
+                        long? lastPhotoTime = _imageRep.GetLastPhotoTimeCurrentSession();
 
-                       nextUrl = result.Return(x => x.NextUrl, null);
-                       long? lastPhotoTime = _imageRep.GetLastPhotoTimeCurrentSession();
+                        foreach (var image in result.Images)
+                        {
+                            if (image.CreatedTime < _startTime.Ticks || image.CreatedTime <= lastPhotoTime)
+                            {
+                                nextUrl = null;
+                                printed.Add(image.Url);
+                            }
+                            if (printed.Contains(image.Url))
+                            {
+                                continue;
+                            }
+                            _imageRep.SetLastPhotoTimeCurrentSession(image.CreatedTime);
+                            _imageRep.Commit();
+                            printed.Add(image.Url);
 
-                       foreach (var image in result.Images)
-                       {
-                           if (image.CreatedTime < _startTime.Ticks || image.CreatedTime <= lastPhotoTime)
-                           {
-                               nextUrl = null;
-                               printed.Add(image.Url);
-                           }
-                           if (printed.Contains(image.Url))
-                           {
-                               continue;
-                           }
-                           _imageRep.SetLastPhotoTimeCurrentSession(image.CreatedTime);
-                           _imageRep.Commit();
-                           printed.Add(image.Url);
-                           //если раземер имени превышает допустимое значение то мы обрезаем его
-                           var imageName = image.FullName.Length < 23 ? image.FullName : (image.UserName.Length < 23 ? image.UserName : (image.UserName.Substring(0, 20) + "..."));
-                           var imageData = _imageUtils.GetCaptureForInstagramControl(image.Data, imageName, DateTime.Now, image.ProfilePictureData);
-                           image.Data = imageData;
-                           _messageAdapter.ProcessImages(new List<Image> { image }, _printerName);
-                       }
+                            _messageAdapter.Print(image, _printerName);
+                        }
 
-                   }
-                   catch (Exception ex)
-                   {
-                       EventLog.WriteEntry(EventTarget, string.Format("Error process image:{0}\n{1}", ex.Message, ex.StackTrace), EventLogEntryType.Information);
-                   }
-               }
-               EventLog.WriteEntry(EventTarget, "Monitoring stop", EventLogEntryType.Information);
-               stopService();
-           });
+                    }
+                    catch (Exception ex)
+                    {
+                        EventLog.WriteEntry(EventTarget, string.Format("Error process image:{0}\n{1}", ex.Message, ex.StackTrace), EventLogEntryType.Information);
+                    }
+                }
+                EventLog.WriteEntry(EventTarget, "Monitoring stop", EventLogEntryType.Information);
+                stopService();
+            });
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
+
+
     }
 }

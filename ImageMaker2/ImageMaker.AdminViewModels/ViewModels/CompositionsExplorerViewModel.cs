@@ -12,6 +12,7 @@ using ImageMaker.Common.Extensions;
 using ImageMaker.CommonViewModels.Services;
 using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.CommonViewModels.ViewModels.Navigation;
+using TemplateViewModel = ImageMaker.AdminViewModels.ViewModels.Images.TemplateViewModel;
 
 namespace ImageMaker.AdminViewModels.ViewModels
 {

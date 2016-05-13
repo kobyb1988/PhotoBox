@@ -175,6 +175,7 @@ namespace ImageMaker.AdminViewModels.ViewModels
 
         private void ErorHandle(object sender, DataReceivedEventArgs e)
         {
+            StartMain();
             LogManager.GetCurrentClassLogger().Error(e.Data);
         }
 

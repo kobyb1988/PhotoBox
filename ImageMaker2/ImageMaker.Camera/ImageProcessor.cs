@@ -96,8 +96,6 @@ namespace ImageMaker.Camera
                 return;
 
             Terminate();
-
-
             CameraHandler.Dispose();
         }
 

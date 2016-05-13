@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ImageMaker.CommonViewModels;
-using ImageMaker.CommonViewModels.ViewModels;
+﻿using System.Collections.Generic;
 using ImageMaker.CommonViewModels.ViewModels.Images;
 
-namespace ImageMaker.ViewModels.ViewModels.Images
+namespace ImageMaker.CommonViewModels.ViewModels
 {
     public class TemplateViewModel : BaseViewModel
     {

@@ -17,8 +17,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         private bool _isSelected;
         private int _index;
 
-        public TemplateImageViewModel(double x, double y, double width, double height, int id, double parentWidth, double parentHeight) 
-            : this(parentWidth, parentHeight)
+        public TemplateImageViewModel(double x, double y, double width, double height, int id, double parentWidth, double parentHeight, bool isInstaPrinterImage)
+            : this(parentWidth, parentHeight, isInstaPrinterImage)
         {
             Id = id;
             _x = x;
@@ -26,17 +26,29 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             _width = width;
             //_height = height;
             _height = GetCorrectHeight(_width);
+            //if (_isInstaPrinterImage)
+            //    _height = _width;
         }
 
-        public TemplateImageViewModel(double parentWidth, double parentHeight)
+        public TemplateImageViewModel(double parentWidth, double parentHeight, bool isInstaPrinterImage)
         {
+            _isInstaPrinterImage = isInstaPrinterImage;
+
             _parentHeight = parentHeight;
             _parentWidth = parentWidth;
+            if (IsInstaPrinterImage)
+                _parentHeight = parentWidth;
             _x = 0;
             _y = 0;
             _width = 0.1;
             //_height = 0.1;
             _height = GetCorrectHeight(_width);
+
+            //if (_isInstaPrinterImage)
+            //{
+            //    _width = 0.1;
+            //    _height = 0.1;
+            //}
         }
 
         public double X
@@ -47,7 +59,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
                 if (Math.Abs(_x - value) < double.Epsilon)
                     return;
 
-                
+
                 PushState();
 
                 _x = value;
@@ -64,7 +76,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
                 if (Math.Abs(_y - value) < double.Epsilon)
                     return;
 
-                
+
                 PushState();
 
                 _y = value;
@@ -80,7 +92,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             {
                 if (Math.Abs(_width - value) < double.Epsilon)
                     return;
-                
+
                 PushState();
 
                 _width = value;
@@ -98,7 +110,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
                 if (Math.Abs(_height - value) < double.Epsilon)
                     return;
 
-                
+
                 PushState();
                 _height = value;
                 Width = GetCorrectWidth(_height);
@@ -121,6 +133,8 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
         }
 
         public int Id { get; private set; }
+        private bool _isInstaPrinterImage;
+        public bool IsInstaPrinterImage { get { return _isInstaPrinterImage; } }
 
         private void PushState()
         {
@@ -144,10 +158,10 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         public TemplateImageViewModel Copy()
         {
-            var viewModel = new TemplateImageViewModel(X, Y, Width, Height, Id, _parentWidth, _parentHeight)
-                            {
-                                _isSelected = IsSelected
-                            };
+            var viewModel = new TemplateImageViewModel(X, Y, Width, Height, Id, _parentWidth, _parentHeight, _isInstaPrinterImage)
+            {
+                _isSelected = IsSelected
+            };
 
             return viewModel;
         }
@@ -161,6 +175,7 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             to._width = Width;
             to._height = Height;
             to._isSelected = IsSelected;
+            to._isInstaPrinterImage = IsInstaPrinterImage;
             to.Id = Id;
 
             to.UpdateProperties();
@@ -204,21 +219,21 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             //не двигается левый верхний угол
             if (Math.Abs(offsetX) < double.Epsilon && Math.Abs(offsetY) < double.Epsilon)
             {
-                tmpW = Width + deltaX/_parentWidth;
+                tmpW = Width + deltaX / _parentWidth;
                 //tmpH = Height + deltaY/_parentHeight;
                 tmpH = GetCorrectHeight(tmpW);
             }
             //не двигается левый нижний угол
             else if (Math.Abs(offsetX) < double.Epsilon)
             {
-                tmpW = Width + deltaX/_parentWidth;
+                tmpW = Width + deltaX / _parentWidth;
                 tmpH = GetCorrectHeight(tmpW);
                 tmpY = tmpRightY - tmpH;
             }
             //не двигается правый верхний угол
             else if (Math.Abs(offsetY) < double.Epsilon)
             {
-                tmpH = Height + deltaY/_parentHeight;
+                tmpH = Height + deltaY / _parentHeight;
                 tmpW = GetCorrectWidth(tmpH);
                 tmpX = tmpRightX - tmpW;
             }
@@ -227,14 +242,14 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
             {
                 if (Math.Abs(offsetX) > double.Epsilon)
                 {
-                    tmpX = X + offsetX/_parentWidth;
+                    tmpX = X + offsetX / _parentWidth;
                     tmpW = tmpRightX - tmpX;
                     tmpH = GetCorrectHeight(tmpW);
                     tmpY = tmpRightY - tmpH;
                 }
                 else
                 {
-                    tmpY = Y + offsetY/_parentHeight;
+                    tmpY = Y + offsetY / _parentHeight;
                     tmpH = tmpRightY - tmpY;
                     tmpW = GetCorrectWidth(tmpH);
                     tmpX = tmpRightX - tmpW;
@@ -281,13 +296,15 @@ namespace ImageMaker.AdminViewModels.ViewModels.Images
 
         private double GetCorrectHeight(double width)
         {
+
             //default camera resolution is 1056w x 704h
-            return (width*_parentWidth/1056.0*704)/_parentHeight;
+            return (width * _parentWidth / 1056.0 * 704) / _parentHeight;
         }
         private double GetCorrectWidth(double height)
         {
+
             //default camera resolution is 1056w x 704h
-            return (height*_parentHeight/704.0*1056)/_parentWidth;
+            return (height * _parentHeight / 704.0 * 1056) / _parentWidth;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ImageMaker.Utils.Services
 
         public void Print(byte[] buffer, string printerName, int copies = 1)
         {
-            copies = 1;
+            
             if (string.IsNullOrEmpty(printerName))
                 return;
 
@@ -49,7 +49,7 @@ namespace ImageMaker.Utils.Services
         {
             try
             {
-                copies = 1;
+                
                 using (var stream = new MemoryStream(buffer))
                 {
                     _image = Image.FromStream(stream);
@@ -111,7 +111,7 @@ namespace ImageMaker.Utils.Services
             {
                 try
                 {
-                    copies = 1;
+                    
                     using (var stream = new MemoryStream(buffer))
                     {
                         _image = Image.FromStream(stream);
@@ -202,7 +202,7 @@ namespace ImageMaker.Utils.Services
 
             // Draw the printable area rectangle in PURPLE
             Rectangle printedPrintableArea = Rectangle.Truncate(realPrintableArea);
-            g.DrawImage(_image, new Rectangle(0, 0, printedPrintableArea.Width-7, printedPrintableArea.Height-7), new Rectangle(0, 0, _image.Width, _image.Height), GraphicsUnit.Pixel);
+            g.DrawImage(_image, new Rectangle(6, 6, printedPrintableArea.Width-13, printedPrintableArea.Height-13), new Rectangle(0, 0, _image.Width, _image.Height), GraphicsUnit.Pixel);
             //g.DrawRectangle(Pens.Purple, printedPrintableArea);
 
             //// Grab a copy of our "soft margins" (configured printer settings)

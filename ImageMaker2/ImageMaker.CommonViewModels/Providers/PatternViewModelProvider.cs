@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using ImageMaker.CommonViewModels.ViewModels;
 using ImageMaker.Data.Repositories;
-using ImageMaker.ViewModels.ViewModels.Images;
 
-namespace ImageMaker.ViewModels.Providers
+namespace ImageMaker.CommonViewModels.Providers
 {
     public class PatternViewModelProvider
     {
@@ -20,7 +20,9 @@ namespace ImageMaker.ViewModels.Providers
 
         public IEnumerable<TemplateViewModel> GetPatterns()
         {
-            return _imageDataProvider.GetCompositions().Select(_mappingEngine.Map<TemplateViewModel>);
+            var result =  _imageDataProvider.GetTemplates();
+            return result.Select(_mappingEngine.Map<TemplateViewModel>);
+            //return _imageDataProvider.GetCompositions().Select(_mappingEngine.Map<TemplateViewModel>);
         }
 
         public async Task<IEnumerable<TemplateViewModel>> GetPatternsAsync()

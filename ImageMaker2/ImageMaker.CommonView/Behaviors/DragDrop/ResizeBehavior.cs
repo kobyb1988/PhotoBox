@@ -23,6 +23,12 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
             if (resizable == null)
                 return;
 
+            if (resizable.IsInstaPrinterImage)
+            {
+                ResizeProporcional(resizable,dragDeltaEventArgs);
+                return;
+            }
+
             double deltaX = 0,
                 deltaY = 0,
                 offsetX = 0,
@@ -111,6 +117,39 @@ namespace ImageMaker.CommonView.Behaviors.DragDrop
             {
                 deltaX = dragDeltaEventArgs.VerticalChange;
                 deltaY = dragDeltaEventArgs.VerticalChange;
+            }
+
+            resizable.Resize(deltaX, deltaY, offsetX, offsetY);
+        }
+
+        private void ResizeProporcional(IResizable resizable, DragDeltaEventArgs dragDeltaEventArgs)
+        {
+            double deltaX = 0;
+            double deltaY = 0;
+            double offsetX = 0;
+            double offsetY = 0;
+            if ((ResizeDirection & Direction.Right) == Direction.Right || (ResizeDirection & Direction.Left) == Direction.Left)
+            {
+                deltaX = dragDeltaEventArgs.HorizontalChange;
+                offsetX = dragDeltaEventArgs.HorizontalChange;
+
+                deltaX = -dragDeltaEventArgs.HorizontalChange;
+                deltaY = dragDeltaEventArgs.HorizontalChange;
+                offsetY = dragDeltaEventArgs.HorizontalChange;
+
+                deltaY = -dragDeltaEventArgs.HorizontalChange;
+            }
+
+            if ((ResizeDirection & Direction.Bottom) == Direction.Bottom || (ResizeDirection & Direction.Top) == Direction.Top)
+            {
+                deltaX = dragDeltaEventArgs.VerticalChange;
+                offsetX = dragDeltaEventArgs.VerticalChange;
+
+                deltaX = -dragDeltaEventArgs.VerticalChange;
+                deltaY = dragDeltaEventArgs.VerticalChange;
+                offsetY = dragDeltaEventArgs.VerticalChange;
+
+                deltaY = -dragDeltaEventArgs.VerticalChange;
             }
 
             resizable.Resize(deltaX, deltaY, offsetX, offsetY);
